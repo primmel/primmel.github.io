@@ -1,0 +1,145 @@
+# Measurement
+
+Primmel supports quantitative monitoring via the **measurement**
+primitive. Measurements are how a model becomes *numerically* testable:
+they declare the values that `validate_measurement` expressions and
+gateway `condition`s evaluate against.
+
+## Measurement types
+
+```text
+measurement MoistureReading {
+  type DATALIST
+  description "Per-batch moisture readings in percent by mass"
+}
+
+measurement MaxMoisture {
+  type DERIVED
+  definition "[MoistureReading].max"
+  description "Highest moisture reading across all batches"
+}
+
+measurement RequiredGrade {
+  type TEXT
+  description "Contractual freshness grade (A, B, or C)"
+}
+
+measurement RequiredMaxMoisture {
+  type TABLE_REFERENCE
+  definition "FreshnessGradeTable,1,0,2"
+  description "Maximum moisture percent for the required grade"
+}
+
+measurement ContractThreshold {
+  type NUMERIC
+  description "Contractual maximum moisture percent"
+}
+```
+
+| `type` | Meaning |
+| --- | --- |
+| `DATALIST` | A list of raw readings (e.g. one per batch). |
+| `DERIVED` | A value computed from another measurement via `[Other].max`, `.min`, `.average`, `.count`. |
+| `TEXT` | A free-form text value. |
+| `NUMERIC` | A single numeric value. |
+| `TABLE_REFERENCE` | A value looked up in a `table` by `TableName,row_query,column_index`. |
+
+## DERIVED expressions
+
+A `DERIVED` measurement references other measurements with the
+`[MeasurementName]` syntax:
+
+```text
+measurement MaxMoisture {
+  type DERIVED
+  definition "[MoistureReading].max"
+}
+
+measurement AvgMoisture {
+  type DERIVED
+  definition "[MoistureReading].average"
+}
+
+measurement TotalTestedBatchCount {
+  type DERIVED
+  definition "[MoistureReading].count"
+}
+```
+
+Supported aggregates: `.max`, `.min`, `.average`, `.count`.
+
+## TABLE_REFERENCE lookups
+
+A `TABLE_REFERENCE` measurement looks up a cell in a declared `table`:
+
+```text
+table FreshnessGradeTable {
+  title "Freshness grade lookup"
+  columns "3"
+  data {
+    "grade" "threshold_pct" "description"
+    "A"     "10"             "Premium freshness"
+    "B"     "11"             "Standard freshness"
+    "C"     "12"             "Acceptable freshness"
+  }
+}
+
+measurement RequiredMaxMoisture {
+  type TABLE_REFERENCE
+  definition "FreshnessGradeTable,1,0,2"
+  description "Maximum moisture percent for the required grade"
+}
+```
+
+The `definition` syntax is `TableName,row_query,column_index`. The
+runtime uses the row query to find the right row and the column index
+to pick the cell.
+
+## Where measurements are evaluated
+
+### `validate_measurement` on a process
+
+```text
+process TestMoisture {
+  modality SHALL
+  validate_measurement {
+    "[MaxMoisture] <= 12"
+    "[MinMoisture] >= 8"
+    "[MaxMoisture] <= [RequiredMaxMoisture]"
+  }
+  reference_data_registry {
+    RoastBatchRegistry
+  }
+}
+```
+
+Each expression is a predicate over measurements. The process passes
+its compliance check if and only if all of them hold.
+
+### Gateway edge `condition`
+
+```text
+Edge3 {
+  from MoistureGateway
+  to Pass
+  description "Moisture is within the required threshold"
+  condition "[MaxMoisture] <= [RequiredMaxMoisture]"
+}
+Edge5 {
+  from MoistureGateway
+  to Fail
+  description "default"
+}
+```
+
+The runtime evaluates each non-default edge's `condition` in order; the
+first one that holds is taken. If none hold, the `"default"` edge is
+taken.
+
+## Where to see it in action
+
+- [Example 04: Compliance and measurement](/docs/examples/compliance-and-measurement) &mdash;
+  the dedicated walkthrough, including all five measurement types.
+- [Implementation package](/docs/examples/implementation-package) &mdash;
+  measurements at production scale with actual readings in a `.pws`
+  workspace.

@@ -1,0 +1,9 @@
+namespace: AcmeCoffeeProgramme
+version: v1.0.0-dev1
+registries:
+  BeanLotRegistry:
+    data_class: BeanLot#data
+  RoastBatchRegistry:
+    data_class: RoastBatch#data
+  SupplierRegistry:
+    data_class: SupplierApproval#data

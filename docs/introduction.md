@@ -1,0 +1,149 @@
+# Introduction
+
+## What is Primmel?
+
+**Primmel** is a domain-specific language for representing SMART
+standards in an **executable** form.
+
+Where a traditional standard is a static document that humans must read
+and interpret, a Primmel-modelled standard is a structured artifact
+whose process flows, data requirements, and evidential requirements are
+defined precisely enough that a computer can validate them, query them,
+and reason about them.
+
+Primmel was developed jointly by **Ribose** and **BSI** for the BSI
+SMART program and is now the basis of **OIML SMART**. It is the public
+successor to (and rename of) the language originally called MMEL; see
+[About Primmel](/about) for the full origin story.
+
+## The four pillars
+
+A Primmel model combines four kinds of primitives in one file:
+
+| Pillar | What it describes | Closest cousin |
+| --- | --- | --- |
+| **Data** | Records, fields, references, registries | UML class diagrams |
+| **Process** | Start/end events, gateways, subprocesses | BPMN |
+| **Compliance** | Requirements with RFC 2119 modality | ISO compliance language |
+| **Measurement** | Numeric, datalist, derived values | KPI dashboards |
+
+And three kinds of cross-cutting artifacts:
+
+- **Mappings** &mdash; declare how an implementation model aligns to a
+  reference model, element by element.
+- **References** &mdash; cite external document clauses (`.prd` extracts,
+  PDF clauses, etc.) that provisions trace back to.
+- **Approvals** &mdash; bind a step to an approver role and an approval
+  record registry.
+
+## File types
+
+A Primmel workspace is made of four kinds of artifacts:
+
+| Extension | Kind | Purpose |
+| --- | --- | --- |
+| `.prl` | File | A model &mdash; the core artifact. Plain text, UTF-8. |
+| `.prd` | File | Primmel Document &mdash; clause-level extracts of a source standard. |
+| `.prm` | File | Primmel Map &mdash; a JSON mapping between two models (e.g. implementation ↔ reference). |
+| `.pws` | Directory | Primmel Workspace &mdash; actual records produced when a model runs. One YAML file per record, organised into subdirectories per data registry, with a `manifest.yaml` at the root. |
+
+## Anatomy of a model
+
+Every `.prl` file begins with the same header:
+
+```text
+root HelloWorld
+
+version "v1.0.0-dev1"
+
+metadata {
+  title "Minimal Primmel model"
+  schema "Primmel 0.1"
+  edition "1"
+  author "Primmel project"
+  shortname "HelloWorld"
+  namespace "HelloWorld"
+}
+```
+
+The `root` declaration names the top-level subprocess. The `metadata`
+block identifies the model. After the header, declarations follow in any
+order &mdash; `role`, `process`, `provision`, `class`, `data_registry`,
+`measurement`, `reference`, `note`, `link`, `table`, `figure`,
+`approval`, `start_event`, `end_event`, `exclusive_gateway`,
+`subprocess`, `map_profile`.
+
+Here is the smallest valid model:
+
+```text
+root HelloWorld
+
+version "v1.0.0-dev1"
+
+metadata {
+  title "Minimal Primmel model"
+  schema "Primmel 0.1"
+  edition "1"
+  author "Primmel project"
+  shortname "HelloWorld"
+  namespace "HelloWorld"
+}
+
+role Greeter { name "Greeter" }
+
+start_event Start1 { }
+end_event   End1 { }
+
+process Greet {
+  name "Greet the world"
+  actor Greeter
+}
+
+subprocess Root {
+  elements {
+    Start1 { x 0  y 0 }
+    Greet  { x 0  y 100 }
+    End1   { x 0  y 200 }
+  }
+  process_flow {
+    Edge1 { from Start1 to Greet }
+    Edge2 { from Greet  to End1 }
+  }
+  data { }
+}
+```
+
+::: tip
+The full source for this model is in the examples corpus:
+[`01-minimal-model.prl`](/docs/examples/files/01-minimal-model.prl).
+:::
+
+## What you write, what tooling sees
+
+A `.prl` file is plain text. Open it in any editor. But because it is
+*structured*, tooling can extract:
+
+- **A diagram** &mdash; render the subprocess as a flowchart using the
+  `x`/`y` coordinates and the `process_flow` edges.
+- **A data schema** &mdash; compile every `class#data` and its fields
+  into a form a database or API can validate against.
+- **A compliance matrix** &mdash; list every `provision`, its
+  `modality`, the `reference` it traces back to, and the processes that
+  `validate_provision` it.
+- **A test harness** &mdash; evaluate `validate_measurement` expressions
+  against actual records in a `.pws` workspace file.
+- **A mapping table** &mdash; given a `.prm` file, render a side-by-side
+  view of an implementation model and its parent standard.
+
+This is what *executable standard* means in practice.
+
+## Where to go next
+
+- [A First Model](/docs/first-model) &mdash; build the minimal model
+  from scratch, line by line.
+- [Examples](/docs/examples/) &mdash; the curated example corpus, each
+  file dissected.
+- [Data primitives](/docs/data-model), [process primitives](/docs/process-model),
+  [compliance](/docs/compliance), [measurement](/docs/measurement),
+  [mapping](/docs/mapping) &mdash; focused reference for each pillar.
+- The canonical specification &mdash; [primmel.org/spec](https://www.primmel.org/spec/).

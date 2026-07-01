@@ -1,0 +1,17 @@
+{
+  "name": "Primmel",
+  "short_name": "Primmel",
+  "description": "Executable standards modelling for SMART standards.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

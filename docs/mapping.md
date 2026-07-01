@@ -1,0 +1,141 @@
+# Mapping
+
+A Primmel **mapping** declares how an implementation model aligns to a
+reference (standard) model, element by element. Mapping is what makes
+Primmel's *single source of truth, extensible* story work in practice:
+
+- A standards publisher publishes a **reference model**.
+- Each adopting organisation publishes an **implementation model**.
+- A mapping connects the two, element by element.
+- An auditor follows the mapping to locate evidence in any adopting
+  organisation.
+
+## Two ways to express the same mapping
+
+Primmel supports both an in-model declaration and a standalone JSON
+file. They are equivalent.
+
+### `map_profile` inside the `.prl` file
+
+```text
+map_profile OCS {
+  mapping {
+    from SourceBeans
+    to OCS#SourceBeans
+  }
+  mapping {
+    from AcmeRoastAndLog
+    to OCS#LogRoast
+  }
+  mapping {
+    from TestBatchMoisture
+    to OCS#VerifyQuality
+  }
+}
+```
+
+### Standalone `.prm` JSON file
+
+```json
+{
+  "@context": "https://bsi-ribose-smart.org",
+  "@type": "Primmel_MAP",
+  "id": "AcmeCoffeeProgramme",
+  "mapSet": {
+    "OCS": {
+      "id": "OCS",
+      "mappings": {
+        "AcmeRoastAndLog": {
+          "OCS#LogRoast": {
+            "description": "Acme combines roasting and logging into a single step, satisfying OCS's separate log requirement as a side effect.",
+            "justification": "Acme's roasting system writes the batch record automatically when the roaster confirms batch completion."
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The `.prm` form lets the mapping carry richer metadata
+(`description`, `justification`) per pair, and lets the mapping be
+maintained and versioned independently of the model.
+
+## The cross-model aliasing pattern
+
+For mappings to work, the implementation model needs to reference
+elements defined in the standard model. This is done with the
+**`Namespace#ElementID`** aliasing pattern:
+
+```text
+process OCS#SourceBeans {            // standard-namespace declaration
+  name "Source beans"
+}
+
+provision OCS#Provision4-2-1 {       // standard-namespace provision
+  condition "The organization shall source beans only from approved suppliers"
+  reference {
+    OCS#Ref4-2
+  }
+}
+
+process SourceBeans {                // Acme's local implementation
+  name "Source beans from approved supplier"
+  validate_provision {
+    OCS#Provision4-2-1              // ← references the imported provision
+  }
+}
+```
+
+The `OCS#` prefix is the namespace marker. These aliased declarations
+are *local copies* in the implementation model &mdash; the prefix is
+just a convention that says *"this element came from the OCS standard"*.
+
+## Reference layering
+
+An implementation model typically declares **both** local references
+and standard-namespace references that point at the same underlying
+clause:
+
+```text
+reference OCS-doc-4-2 {              // local alias
+  document "Office Coffee Standard (OCS) (fictional)"
+  clause "4.2"
+  title "Bean sourcing"
+}
+
+reference OCS#Ref4-2 {               // standard-namespace alias
+  document "Office Coffee Standard (OCS) (fictional)"
+  clause "4.2"
+  title "Bean sourcing"
+}
+```
+
+Local provisions cite the local alias (`OCS-doc-4-2`); imported
+standard provisions cite the standard-namespace alias (`OCS#Ref4-2`).
+Both resolve to the same clause in the source `.prd` extract.
+
+## Why mapping matters
+
+Without mapping, a standard exists in one place and each organisation's
+compliance evidence exists in another place, with no structural
+connection. Auditors and integrators must read both sides and
+reconstruct the alignment in their heads.
+
+With mapping:
+
+- An auditor can ask *"which Acme process implements OCS 4.2, and where
+  is its evidence?"* and get a structural answer.
+- A standards publisher can ask *"which organisations have mapped to
+  clause 4.4, and which haven't?"* across the whole ecosystem.
+- An integrator can render a side-by-side view of standard and
+  implementation, with the alignment made explicit.
+
+This is what *single source of truth, extensible* looks like in
+practice.
+
+## Where to see it in action
+
+- [Implementation package](/docs/examples/implementation-package) &mdash;
+  the full Acme → OCS mapping in both `.prl` and `.prm` form, with
+  cross-model aliasing throughout.

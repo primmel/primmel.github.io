@@ -1,0 +1,304 @@
+/* Primmel Brand Styles */
+
+:root {
+  /* Ensō brushstroke: deep indigo ink */
+  --primmel-indigo: #1e3a8a;
+  --primmel-indigo-light: #3b82f6;
+  --primmel-indigo-bright: #60a5fa;
+
+  /* Contained square: warm amber */
+  --primmel-amber: #f59e0b;
+  --primmel-amber-light: #fbbf24;
+
+  /* VitePress theme overrides */
+  --vp-c-brand-1: var(--primmel-indigo-light);
+  --vp-c-brand-2: var(--primmel-indigo);
+  --vp-c-brand-3: var(--primmel-indigo);
+  --vp-c-brand-soft: rgba(59, 130, 246, 0.14);
+
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #fff;
+  --vp-button-brand-bg: var(--primmel-indigo);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: #fff;
+  --vp-button-brand-hover-bg: var(--primmel-indigo-light);
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: #fff;
+  --vp-button-brand-active-bg: var(--primmel-indigo);
+}
+
+.dark {
+  --vp-c-brand-1: #60a5fa;
+  --vp-c-brand-2: #93c5fd;
+  --vp-c-brand-3: #bfdbfe;
+  --vp-c-brand-soft: rgba(96, 165, 250, 0.14);
+
+  --vp-button-brand-bg: #60a5fa;
+  --vp-button-brand-hover-bg: #93c5fd;
+}
+
+/* Nav logo height for wide logos */
+:root {
+  --vp-nav-logo-height: 40px;
+}
+
+/* ---------- Hero ---------- */
+.home-hero {
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+}
+
+.home-hero-logo {
+  max-width: 220px;
+  margin: 0 auto 1.5rem;
+}
+
+.home-hero h1 {
+  font-size: 3.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(
+    135deg,
+    var(--primmel-indigo) 0%,
+    var(--primmel-indigo-light) 50%,
+    var(--primmel-amber) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.home-hero .tagline {
+  font-size: 1.375rem;
+  color: var(--vp-c-text-2);
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+/* ---------- Section ---------- */
+.section {
+  margin: 4rem auto;
+  max-width: 1100px;
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--vp-c-text-1);
+}
+
+.section-description {
+  color: var(--vp-c-text-2);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  max-width: 720px;
+}
+
+/* ---------- Feature grid ---------- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  padding: 1.75rem;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.feature-card:hover {
+  border-color: var(--primmel-indigo-bright);
+  transform: translateY(-2px);
+}
+
+.feature-card h3 {
+  color: var(--primmel-indigo);
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.dark .feature-card h3 {
+  color: var(--primmel-indigo-bright);
+}
+
+.feature-card p {
+  color: var(--vp-c-text-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ---------- Logo showcase (about page) ---------- */
+.logo-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.logo-card {
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.logo-card.light-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 1px solid #cbd5e1;
+}
+
+.logo-card.dark-card {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
+}
+
+.logo-card-header {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.light-card .logo-card-header { color: #475569; }
+.dark-card .logo-card-header { color: #94a3b8; }
+
+.logo-display {
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ---------- About hero ---------- */
+.about-hero {
+  text-align: center;
+  padding: 3rem 0 2rem;
+}
+
+.about-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--primmel-indigo) 0%,
+    var(--primmel-indigo-light) 60%,
+    var(--primmel-amber) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-hero .tagline {
+  font-size: 1.2rem;
+  color: var(--vp-c-text-2);
+  margin-top: 0.5rem;
+}
+
+/* ---------- Logo breakdown ---------- */
+.logo-breakdown {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--vp-c-bg-soft);
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.logo-breakdown img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+}
+
+.logo-breakdown .description h3 {
+  margin-top: 0;
+}
+
+/* ---------- Use cases grid ---------- */
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.use-case-card {
+  padding: 1.75rem;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+}
+
+.use-case-card h4 {
+  color: var(--primmel-indigo);
+  margin: 0 0 0.5rem;
+}
+
+.dark .use-case-card h4 {
+  color: var(--primmel-indigo-bright);
+}
+
+.use-case-card p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* ---------- Torch legend (about page) ---------- */
+.torch-legend {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 1rem 1.5rem;
+  margin: 2rem 0;
+  align-items: center;
+}
+
+.torch-swatch {
+  width: 56px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.torch-legend strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--vp-c-text-1);
+}
+
+.torch-legend span {
+  color: var(--vp-c-text-2);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ---------- Tip / custom block accent ---------- */
+.vp-doc .custom-block.tip {
+  border-color: var(--primmel-indigo-bright);
+}
+
+/* ---------- Footer ---------- */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-divider) !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .home-hero h1 { font-size: 2.25rem; }
+  .home-hero .tagline { font-size: 1.1rem; }
+  .logo-breakdown { grid-template-columns: 1fr; text-align: center; }
+  .logo-breakdown img { margin: 0 auto; }
+}
