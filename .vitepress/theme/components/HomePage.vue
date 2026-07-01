@@ -1,48 +1,29 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 
-const { site } = useData()
+const { site, theme } = useData()
 
 const features = [
-  {
-    num: '01',
-    title: 'Executable Standards',
-    body: 'Logic, process requirements, and data requirements expressed in a language a computer can read and run — not just a document humans have to interpret.',
-  },
-  {
-    num: '02',
-    title: 'Single Source of Truth',
-    body: 'One canonical model per standard. Auditors, implementers, and certifiers all read from the same artifact, eliminating drift between document, code, and evidence.',
-  },
-  {
-    num: '03',
-    title: 'Mapping & Extension',
-    body: 'Map your own processes and controls onto the elements of any Primmel-modelled standard. Reuse, extend, and specialise without forking the source.',
-  },
-  {
-    num: '04',
-    title: 'Process & Data Primitives',
-    body: 'Built-in primitives for classes, processes, gateways, provisions, and measurements — what BPMN and UML wish they had for standards work.',
-  },
-  {
-    num: '05',
-    title: 'Evidence Built In',
-    body: 'Every requirement carries evidential hooks. Auditors locate compliance evidence by following the model, not by digging through folders.',
-  },
-  {
-    num: '06',
-    title: 'Open & Vendor-Neutral',
-    body: 'A public language, available for any standards organisation to adopt. Built on the legacy of the BSI SMART and OIML SMART programmes.',
-  },
+  { num: '01', title: 'Executable Standards', body: 'Logic, process requirements, and data requirements expressed in a language a computer can read and run — not just a document humans have to interpret.' },
+  { num: '02', title: 'Single Source of Truth', body: 'One canonical model per standard. Auditors, implementers, and certifiers all read from the same artifact, eliminating drift between document, code, and evidence.' },
+  { num: '03', title: 'Mapping & Extension',  body: 'Map your own processes and controls onto the elements of any Primmel-modelled standard. Reuse, extend, and specialise without forking the source.' },
+  { num: '04', title: 'Process & Data Primitives', body: 'Built-in primitives for classes, processes, gateways, provisions, and measurements — what BPMN and UML wish they had for standards work.' },
+  { num: '05', title: 'Evidence Built In', body: 'Every requirement carries evidential hooks. Auditors locate compliance evidence by following the model, not by digging through folders.' },
+  { num: '06', title: 'Open & Vendor-Neutral', body: 'A public language, available for any standards organisation to adopt. Built on the legacy of the BSI SMART and OIML SMART programmes.' },
 ]
 
 const pillars = [
-  { num: '01', name: 'Define',  role: 'Reference publisher' },
+  { num: '01', name: 'Define',    role: 'Reference publisher' },
   { num: '02', name: 'Implement', role: 'The digital twin' },
-  { num: '03', name: 'Adopt',   role: 'Statement of Applicability' },
-  { num: '04', name: 'Operate', role: 'Evidence on the ground' },
-  { num: '05', name: 'Audit',   role: 'Compliance verdict' },
+  { num: '03', name: 'Adopt',     role: 'Statement of Applicability' },
+  { num: '04', name: 'Operate',   role: 'Evidence on the ground' },
+  { num: '05', name: 'Audit',     role: 'Compliance verdict' },
 ]
+
+const today = new Date()
+const isoToday = today.toISOString().slice(0, 10)
+const issueYear = today.getFullYear()
+const issueMonth = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][today.getMonth()]
 </script>
 
 <template>
@@ -50,36 +31,53 @@ const pillars = [
 
     <!-- ─────────────────────── HERO ─────────────────────── -->
     <section class="home-hero">
-      <img
-        class="home-hero-logo light-only"
-        src="/primmel-logo-light.svg"
-        alt="Primmel"
-      />
-      <img
-        class="home-hero-logo dark-only"
-        src="/primmel-logo-dark.svg"
-        alt="Primmel"
-      />
 
-      <p class="eyebrow">An executable language for SMART standards</p>
+      <div class="hero-main">
+        <img
+          class="home-hero-logo light-only"
+          src="/primmel-logo-light.svg"
+          alt="Primmel"
+        />
+        <img
+          class="home-hero-logo dark-only"
+          src="/primmel-logo-dark.svg"
+          alt="Primmel"
+        />
 
-      <h1>
-        Standards,<br />
-        <em>instantly</em> executable.
-      </h1>
+        <p class="eyebrow">An executable language for SMART standards</p>
 
-      <p class="tagline">
-        Not a static reference, but a
-        <strong>runnable program</strong> — process flows, data
-        requirements, and evidential hooks in a single machine-readable
-        form. Maintained by Ribose with BSI, OIML, and the standards
-        community.
-      </p>
+        <h1>
+          Standards,<br />
+          <em>instantly</em><br />
+          executable.
+        </h1>
 
-      <div class="actions">
-        <a class="VPButton brand" href="/docs/introduction">Read the introduction</a>
-        <a class="VPButton alt" href="/docs/examples/">Browse the examples</a>
+        <p class="tagline">
+          Not a static reference, but a
+          <strong>runnable program</strong> — process flows, data
+          requirements, and evidential hooks in a single
+          machine-readable form.
+        </p>
+
+        <div class="actions">
+          <a class="VPButton brand" href="/docs/introduction">Read the introduction</a>
+          <a class="VPButton alt" href="/docs/examples/">Browse the examples</a>
+        </div>
       </div>
+
+      <dl class="hero-marginalia">
+        <dt>Issue</dt>
+        <dd>{{ issueYear }} · Vol {{ issueMonth }}</dd>
+        <dt>Schema</dt>
+        <dd>Primmel 0.1</dd>
+        <dt>Origin</dt>
+        <dd>Ribose · BSI SMART</dd>
+        <dt>Adopted by</dt>
+        <dd>OIML SMART</dd>
+        <dt>Today</dt>
+        <dd>{{ isoToday }}</dd>
+      </dl>
+
     </section>
 
     <!-- ──────────────── THE FIVE PILLARS ────────────────── -->
@@ -147,13 +145,9 @@ const pillars = [
 </template>
 
 <style scoped>
-.primmel-home {
-  width: 100%;
-}
-
+.primmel-home { width: 100%; }
 .dark-only { display: none; }
 .light-only { display: inline-block; }
-
 .dark .dark-only { display: inline-block; }
 .dark .light-only { display: none; }
 </style>
