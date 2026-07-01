@@ -45,6 +45,11 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/primmel' },
     ],
 
+    editLink: {
+      pattern: 'https://github.com/primmel/primmel.github.io/edit/main/:path',
+      text: 'Edit this page on GitHub',
+    },
+
     footer: {
       message: 'An open source project of <a href="https://www.ribose.com">Ribose</a>',
       copyright: 'Copyright © 2026 Ribose',

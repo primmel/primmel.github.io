@@ -1492,3 +1492,274 @@ h1, h2, h3, h4 {
 .specimen .com     { color: var(--primmel-rule-strong); font-style: italic; }
 .specimen .id      { color: var(--primmel-ink); }
 .specimen .punc    { color: var(--primmel-rule-strong); }
+
+/* ════════════════════════════════════════════════════════
+   SIGNATURE FLEURON — bottom-of-doc brand mark
+   ════════════════════════════════════════════════════════ */
+
+.doc-fleuron {
+  max-width: 760px;
+  margin: 4rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--primmel-rule);
+  color: var(--primmel-amber);
+}
+.doc-fleuron svg {
+  display: block;
+  width: 240px;
+  height: 24px;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+/* ════════════════════════════════════════════════════════
+   EDIT-LINK (doc-footer) — colophon styling
+   ════════════════════════════════════════════════════════ */
+
+.VPDocFooter .edit-info {
+  font-family: var(--primmel-body) !important;
+  font-size: 0.82rem !important;
+  margin-bottom: 1.5rem !important;
+}
+.VPDocFooter .edit-link-button {
+  font-family: var(--primmel-body) !important;
+  font-size: 0.82rem !important;
+  color: var(--primmel-amber) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.VPDocFooter .edit-link-button:hover {
+  border-bottom-color: var(--primmel-amber);
+}
+.VPDocFooter .edit-link-button .vt-doc-edit-icon {
+  width: 14px !important;
+  height: 14px !important;
+  margin-right: 0.4rem !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   RIGHT-SIDE OUTLINE — numbered, italic, hairline marker
+   ════════════════════════════════════════════════════════ */
+
+.VPDocOutlineItem {
+  --vp-c-text-2: var(--primmel-ink);
+}
+.VPDocOutlineItem .content {
+  font-family: var(--primmel-body) !important;
+}
+.VPDocAsideOutline .title {
+  font-family: var(--primmel-body) !important;
+  font-size: 0.7rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.18em !important;
+  color: var(--primmel-amber) !important;
+  padding-bottom: 0.75rem !important;
+  border-bottom: 1px solid var(--primmel-rule) !important;
+}
+.VPDocOutlineItem ul {
+  list-style: none;
+  padding: 0 !important;
+  counter-reset: outline-counter;
+}
+.VPDocOutlineItem ul li {
+  counter-increment: outline-counter;
+}
+.VPDocOutlineItem .outline-link {
+  font-family: var(--primmel-body) !important;
+  font-size: 0.83rem !important;
+  line-height: 1.55 !important;
+  padding: 0.35rem 0.75rem 0.35rem 2rem !important;
+  color: var(--vp-c-text-2) !important;
+  position: relative;
+  border-left: 1px solid transparent !important;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.VPDocOutlineItem .outline-link::before {
+  content: '§' counter(outline-counter);
+  position: absolute;
+  left: 0;
+  font-family: var(--primmel-display) !important;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--primmel-rule-strong);
+  letter-spacing: 0;
+  width: 1.5rem;
+}
+.VPDocOutlineItem .outline-link:hover {
+  color: var(--primmel-ink) !important;
+}
+.VPDocOutlineItem .outline-link.is-active {
+  color: var(--primmel-amber) !important;
+  border-left-color: var(--primmel-amber) !important;
+  font-weight: 500;
+}
+.VPDocOutlineItem .outline-link.is-active::before {
+  color: var(--primmel-amber);
+}
+
+/* Nested outline items get tighter numbering */
+.VPDocOutlineItem ul ul {
+  counter-reset: none;
+  margin-left: 0 !important;
+}
+.VPDocOutlineItem ul ul li { counter-increment: none; }
+.VPDocOutlineItem ul ul .outline-link::before {
+  content: '·';
+  font-family: var(--primmel-display);
+  font-style: normal;
+  font-size: 1rem;
+  color: var(--primmel-rule-strong);
+}
+
+/* ════════════════════════════════════════════════════════
+   PAGE TRANSITIONS — fade + slight rise (editorial page-turn)
+   ════════════════════════════════════════════════════════ */
+
+.VPDoc.has-sidebar > .container > .content,
+.VPDoc {
+  /* Override VitePress's default page transition timing */
+}
+
+/* Customize the named transitions VitePress uses */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease !important;
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(4px);
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-2px);
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.2s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) !important;
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+/* ════════════════════════════════════════════════════════
+   PILLAR GRID — refined hover with sliding arrow
+   ════════════════════════════════════════════════════════ */
+
+.pillars-grid .pillar {
+  overflow: hidden;
+}
+.pillars-grid .pillar::after {
+  /* Sliding amber arrow that appears on hover */
+  content: '→';
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1rem;
+  font-family: var(--primmel-display);
+  font-size: 1.4rem;
+  color: var(--primmel-amber);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.pillars-grid .pillar:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+.pillars-grid .pillar:hover .num {
+  color: var(--primmel-amber);
+}
+.pillars-grid .pillar .name {
+  transition: color 0.2s ease;
+}
+.pillars-grid .pillar:hover .name {
+  color: var(--primmel-indigo);
+}
+.dark .pillars-grid .pillar:hover .name {
+  color: var(--primmel-indigo-light);
+}
+
+/* ════════════════════════════════════════════════════════
+   FEATURE-CARD hover — slide-in chapter number color change
+   ════════════════════════════════════════════════════════ */
+
+.feature-card::before {
+  transition: color 0.18s ease;
+}
+.feature-card:hover::before {
+  color: var(--primmel-amber);
+}
+.feature-card h3 {
+  transition: color 0.18s ease;
+}
+.feature-card:hover h3 {
+  color: var(--primmel-indigo);
+}
+.dark .feature-card:hover h3 {
+  color: var(--primmel-indigo-light);
+}
+
+/* ════════════════════════════════════════════════════════
+   MOBILE NAV — editorial full-screen overlay
+   ════════════════════════════════════════════════════════ */
+
+.VPNavBarMenu .menu,
+.VPNavBar .menu-mask {
+  background: var(--primmel-paper) !important;
+}
+.dark .VPNavBar .menu-mask {
+  background: rgba(10, 15, 31, 0.92) !important;
+}
+
+@media (max-width: 768px) {
+  .VPNav .VPNavBar.has-menu .menu {
+    background: var(--primmel-paper);
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   CODE BLOCK — style the inline scrollbar
+   ════════════════════════════════════════════════════════ */
+
+.vp-doc div[class*='language-'] pre::-webkit-scrollbar {
+  height: 6px;
+}
+.vp-doc div[class*='language-'] pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+.vp-doc div[class*='language-'] pre::-webkit-scrollbar-thumb {
+  background: var(--primmel-rule-strong);
+  border: none;
+  border-radius: 3px;
+}
+
+/* ════════════════════════════════════════════════════════
+   ANCHOR LINKS — hover-only '#' for headlines
+   ════════════════════════════════════════════════════════ */
+
+.vp-doc .header-anchor {
+  color: var(--primmel-amber) !important;
+  opacity: 0 !important;
+  text-decoration: none !important;
+  margin-left: 0.4rem !important;
+  font-family: var(--primmel-mono) !important;
+  font-weight: 400 !important;
+  transition: opacity 0.15s ease;
+}
+.vp-doc h1:hover .header-anchor,
+.vp-doc h2:hover .header-anchor,
+.vp-doc h3:hover .header-anchor,
+.vp-doc h4:hover .header-anchor {
+  opacity: 1 !important;
+}
