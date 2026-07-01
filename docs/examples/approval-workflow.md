@@ -1,7 +1,7 @@
 # Approval workflow
 
 ::: tip Source file
-[`05-approval-workflow.prl`](/docs/examples/files/05-approval-workflow.prl)
+[`05-approval-workflow.prl`](/examples/files/05-approval-workflow.prl)
 :::
 
 This example introduces the `approval` step &mdash; a specialised

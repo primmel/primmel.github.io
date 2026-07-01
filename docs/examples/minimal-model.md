@@ -1,7 +1,7 @@
 # Minimal model
 
 ::: tip Source file
-[`01-minimal-model.prl`](/docs/examples/files/01-minimal-model.prl)
+[`01-minimal-model.prl`](/examples/files/01-minimal-model.prl)
 :::
 
 This is the smallest valid Primmel model that contains a real

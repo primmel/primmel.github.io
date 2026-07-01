@@ -74,7 +74,7 @@ it.
 - [Example 02: Data and registries](/docs/examples/data-and-registries)
   &mdash; a small org's implementation of a roastery logbook, with no
   reference to any standard.
-- [Implementation package &mdash; `acme-coffee-programme.prl`](/docs/examples/files/06-implementation-package/acme-coffee-programme.prl)
+- [Implementation package &mdash; `acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl)
   &mdash; Acme's full digital twin, before/after adopting the OCS
   standard. The implementation existed as the org's operational model;
   the standard was overlaid on it.

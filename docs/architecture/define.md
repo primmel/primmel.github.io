@@ -79,7 +79,7 @@ implementation model:
 
 ## Where to see it in action
 
-- [Example 06: Implementation package &mdash; `ocs-standard.prd`](/docs/examples/files/06-implementation-package/ocs-standard.prd)
+- [Example 06: Implementation package &mdash; `ocs-standard.prd`](/examples/files/06-implementation-package/ocs-standard.prd)
   is the source standard's `.prd` extract. The matching `acme-coffee-programme.prl`
   (in the same directory) shows how the standard's namespace is
   imported by an adopter.

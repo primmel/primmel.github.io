@@ -1,7 +1,7 @@
 # Data and registries
 
 ::: tip Source file
-[`02-data-and-registries.prl`](/docs/examples/files/02-data-and-registries.prl)
+[`02-data-and-registries.prl`](/examples/files/02-data-and-registries.prl)
 :::
 
 This example introduces the data side of Primmel. It models a small

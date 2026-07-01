@@ -97,7 +97,7 @@ simpler uniform-stroke arc &mdash; the tapered path doesn't read at
 - `package-lock.json` is gitignored by project convention (matching the
   lutaml.github.io pattern). Don't commit it.
 - The `docs/` directory holds the curated example corpus. Each
-  `.prl`/`.prd`/`.prm`/`.pws` file under `docs/examples/files/` has a
+  `.prl`/`.prd`/`.prm`/`.pws` file under `public/examples/files/` has a
   dedicated walkthrough under `docs/examples/`. Don't duplicate spec
   content here; link to it instead. Static file extensions
   (`.prl`, `.prd`, `.prm`, `.pws`, `.yaml`, `.yml`) are whitelisted in

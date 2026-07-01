@@ -6,7 +6,7 @@ larger real-world models.
 
 ::: tip You can follow along
 The complete file is in the examples corpus:
-[`01-minimal-model.prl`](/docs/examples/files/01-minimal-model.prl).
+[`01-minimal-model.prl`](/examples/files/01-minimal-model.prl).
 Open it in another tab.
 :::
 
