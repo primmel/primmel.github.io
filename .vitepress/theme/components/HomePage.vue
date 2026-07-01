@@ -8,8 +8,13 @@ const { site } = useData()
   <div class="primmel-home">
     <section class="home-hero">
       <img
-        class="home-hero-logo"
+        class="home-hero-logo light-only"
         src="/primmel-logo-light.svg"
+        alt="Primmel"
+      />
+      <img
+        class="home-hero-logo dark-only"
+        src="/primmel-logo-dark.svg"
         alt="Primmel"
       />
       <h1>{{ site.title }}</h1>
@@ -109,4 +114,10 @@ const { site } = useData()
 .VPButton + .VPButton {
   margin-left: 0.75rem;
 }
+
+.dark-only { display: none; }
+.light-only { display: inline-block; }
+
+:global(html.dark) .dark-only { display: inline-block; }
+:global(html.dark) .light-only { display: none; }
 </style>
