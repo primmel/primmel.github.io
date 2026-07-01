@@ -118,6 +118,6 @@ const { site } = useData()
 .dark-only { display: none; }
 .light-only { display: inline-block; }
 
-:global(html.dark) .dark-only { display: inline-block; }
-:global(html.dark) .light-only { display: none; }
+.dark .dark-only { display: inline-block; }
+.dark .light-only { display: none; }
 </style>
