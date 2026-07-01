@@ -27,10 +27,10 @@ with invented content suitable for public distribution.
 
 | File | Purpose |
 | --- | --- |
-| [`ocs-standard.prd`](/docs/examples/files/06-implementation-package/ocs-standard.prd) | The source standard. Clause-level content extracted into Primmel Document format, including `NOTE` and `EXAMPLE` annotations. |
-| [`acme-coffee-programme.prl`](/docs/examples/files/06-implementation-package/acme-coffee-programme.prl) | Acme's implementation model. Local processes interleave with `OCS#`-prefixed aliases imported from the standard. |
-| [`acme-to-ocs.prm`](/docs/examples/files/06-implementation-package/acme-to-ocs.prm) | JSON mapping from Acme processes to OCS processes. Mirrors the `map_profile OCS { ... }` block in the model. |
-| [`sample-workspace.pws/`](/docs/examples/files/06-implementation-package/sample-workspace.pws/manifest.yaml) | A workspace directory: bean lots, roast batches, and an approved supplier as actual YAML records, one file per record. |
+| [`ocs-standard.prd`](/examples/files/06-implementation-package/ocs-standard.prd) | The source standard. Clause-level content extracted into Primmel Document format, including `NOTE` and `EXAMPLE` annotations. |
+| [`acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl) | Acme's implementation model. Local processes interleave with `OCS#`-prefixed aliases imported from the standard. |
+| [`acme-to-ocs.prm`](/examples/files/06-implementation-package/acme-to-ocs.prm) | JSON mapping from Acme processes to OCS processes. Mirrors the `map_profile OCS { ... }` block in the model. |
+| [`sample-workspace.pws/`](/examples/files/06-implementation-package/sample-workspace.pws/manifest.yaml) | A workspace directory: bean lots, roast batches, and an approved supplier as actual YAML records, one file per record. |
 
 ## How the four files fit together
 
@@ -338,10 +338,10 @@ the result is a structural compliance verdict.
 
 If you are reading the package files for the first time:
 
-1. Start with [`ocs-standard.prd`](/docs/examples/files/06-implementation-package/ocs-standard.prd).
+1. Start with [`ocs-standard.prd`](/examples/files/06-implementation-package/ocs-standard.prd).
    Note the clause numbers (`4.1`, `4.2`, `4.3`, `4.4`) &mdash; these
    are what everything else traces back to.
-2. Open [`acme-coffee-programme.prl`](/docs/examples/files/06-implementation-package/acme-coffee-programme.prl).
+2. Open [`acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl).
    Find each `reference OCS-doc-4-N` declaration and match it to a `.prd`
    clause.
 3. Find each `provision OCS#Provision*` declaration. These are Acme's
@@ -349,12 +349,12 @@ If you are reading the package files for the first time:
    validate against the standard.
 4. Find each Acme process. Every one carries `validate_provision { ... }`
    listing the provisions (both local and `OCS#`) it must satisfy.
-5. Open [`acme-to-ocs.prm`](/docs/examples/files/06-implementation-package/acme-to-ocs.prm).
+5. Open [`acme-to-ocs.prm`](/examples/files/06-implementation-package/acme-to-ocs.prm).
    Each Acme process maps to an `OCS#`-prefixed process with a
    `description` and `justification`.
-6. Open [`sample-workspace.pws/`](/docs/examples/files/06-implementation-package/sample-workspace.pws/manifest.yaml).
+6. Open [`sample-workspace.pws/`](/examples/files/06-implementation-package/sample-workspace.pws/manifest.yaml).
    It's a directory. Pick any batch file (e.g.
-   [`RoastBatchRegistry/b-2026-001.yaml`](/docs/examples/files/06-implementation-package/sample-workspace.pws/RoastBatchRegistry/b-2026-001.yaml)).
+   [`RoastBatchRegistry/b-2026-001.yaml`](/examples/files/06-implementation-package/sample-workspace.pws/RoastBatchRegistry/b-2026-001.yaml)).
    Its `attributes` map onto the fields of `class RoastBatch#data` &mdash;
    that is the record shape `LogEveryRoastBatch` requires Acme to maintain.
 

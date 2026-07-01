@@ -20,7 +20,7 @@ else.
 
 - Demonstrates: model header, `role`, `start_event`, `end_event`,
   `process`, `subprocess`, `process_flow`.
-- File: [`01-minimal-model.prl`](/docs/examples/files/01-minimal-model.prl)
+- File: [`01-minimal-model.prl`](/examples/files/01-minimal-model.prl)
 
 ### 2. [Data and registries](/docs/examples/data-and-registries)
 
@@ -31,7 +31,7 @@ and a *helper class* (no suffix, embedded inside other classes).
 - Demonstrates: `enum`, `class#data`, helper class,
   `reference(Target#data)` fields, untyped fields, `data_registry`,
   process `output` writes, process `reference_data_registry` reads.
-- File: [`02-data-and-registries.prl`](/docs/examples/files/02-data-and-registries.prl)
+- File: [`02-data-and-registries.prl`](/examples/files/02-data-and-registries.prl)
 
 ### 3. [Process flow](/docs/examples/process-flow)
 
@@ -42,7 +42,7 @@ model. Shows how `start_event`s, `timer_event`s, and
 - Demonstrates: multi-page subprocesses, multiple `start_event`s,
   `timer_event` (`WAIT` and `REPEAT`), self-connection loop,
   `exclusive_gateway` with labelled branches and `"default"` fallback.
-- File: [`03-process-flow.prl`](/docs/examples/files/03-process-flow.prl)
+- File: [`03-process-flow.prl`](/examples/files/03-process-flow.prl)
 
 ### 4. [Compliance and measurement](/docs/examples/compliance-and-measurement)
 
@@ -54,7 +54,7 @@ machine-readable conditions.
   `table`, `measurement` (`DATALIST`, `DERIVED`, `TEXT`,
   `TABLE_REFERENCE`, `NUMERIC`), `validate_provision`,
   `validate_measurement`, gateway edge with `condition`.
-- File: [`04-compliance-and-measurement.prl`](/docs/examples/files/04-compliance-and-measurement.prl)
+- File: [`04-compliance-and-measurement.prl`](/examples/files/04-compliance-and-measurement.prl)
 
 ### 5. [Approval workflow](/docs/examples/approval-workflow)
 
@@ -64,7 +64,7 @@ signed approval is written.
 
 - Demonstrates: `approval` with `approve_by`, `approval_record`,
   role-typed fields.
-- File: [`05-approval-workflow.prl`](/docs/examples/files/05-approval-workflow.prl)
+- File: [`05-approval-workflow.prl`](/examples/files/05-approval-workflow.prl)
 
 ### 6. [Implementation package](/docs/examples/implementation-package)
 
@@ -76,7 +76,7 @@ mapping, and a `.pws` workspace with real records.
 - Demonstrates: the full Primmel workflow &mdash; `.prl` + `.prd` +
   `.prm` + `.pws` working together, with `OCS#ElementID` cross-model
   aliasing.
-- Files: [`06-implementation-package/`](/docs/examples/files/06-implementation-package/ocs-standard.prd)
+- Files: [`06-implementation-package/`](/examples/files/06-implementation-package/ocs-standard.prd)
 
 ## How to read a `.prl` file
 

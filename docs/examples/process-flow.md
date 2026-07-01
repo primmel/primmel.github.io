@@ -1,7 +1,7 @@
 # Process flow
 
 ::: tip Source file
-[`03-process-flow.prl`](/docs/examples/files/03-process-flow.prl)
+[`03-process-flow.prl`](/examples/files/03-process-flow.prl)
 :::
 
 This example models an order-fulfillment flow with two **subprocess

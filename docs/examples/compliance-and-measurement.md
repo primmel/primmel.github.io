@@ -1,7 +1,7 @@
 # Compliance and measurement
 
 ::: tip Source file
-[`04-compliance-and-measurement.prl`](/docs/examples/files/04-compliance-and-measurement.prl)
+[`04-compliance-and-measurement.prl`](/examples/files/04-compliance-and-measurement.prl)
 :::
 
 This example is where Primmel stops being just a flowchart tool and

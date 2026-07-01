@@ -115,7 +115,7 @@ subprocess Root {
 
 ::: tip
 The full source for this model is in the examples corpus:
-[`01-minimal-model.prl`](/docs/examples/files/01-minimal-model.prl).
+[`01-minimal-model.prl`](/examples/files/01-minimal-model.prl).
 :::
 
 ## What you write, what tooling sees
