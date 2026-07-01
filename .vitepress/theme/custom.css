@@ -926,3 +926,444 @@ h1, h2, h3, h4 {
   background: rgba(217, 119, 6, 0.32);
   color: var(--primmel-paper);
 }
+
+/* ════════════════════════════════════════════════════════
+   CODE BLOCK CHROME — language badge, paper-friendly theme
+   ════════════════════════════════════════════════════════ */
+
+.vp-doc div[class*='language-'] {
+  position: relative;
+  margin: 1.75rem 0;
+}
+.vp-doc div[class*='language-']::before {
+  /* Editorial language label, top-left, like a magazine code-listing caption */
+  content: attr(data-language);
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  font-family: var(--primmel-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--primmel-amber);
+  background: var(--primmel-surface-2);
+  border-right: 1px solid var(--primmel-rule);
+  border-bottom: 1px solid var(--primmel-rule);
+  padding: 0.35rem 0.75rem;
+  z-index: 1;
+}
+.vp-doc div[class*='language-'] pre {
+  margin: 0;
+  padding-top: 2.5rem;
+}
+.vp-doc div[class*='language-'] .copy {
+  top: 0.4rem !important;
+  right: 0.4rem !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 1px !important;
+  background: transparent !important;
+  border: 1px solid var(--primmel-rule);
+}
+.vp-doc div[class*='language-'] .copy:hover {
+  border-color: var(--primmel-amber);
+}
+.vp-doc div[class*='language-'] .copy .copy-icon { stroke: var(--primmel-amber); }
+
+/* Paper-friendly syntax theme override.
+   VitePress uses Shiki; we tint the tokens toward indigo/amber/ink. */
+.vp-doc .shiki,
+.vp-doc .shiki span {
+  color: var(--primmel-ink) !important;
+  background: transparent !important;
+}
+.vp-doc .shiki span[style*='color:#79C0FF'],  /* variables/properties */
+.vp-doc .shiki span[style*='color:#79c0ff'] {
+  color: var(--primmel-indigo-mid) !important;
+}
+.vp-doc .shiki span[style*='color:#A5D6FF'],  /* strings */
+.vp-doc .shiki span[style*='color:#a5d6ff'] {
+  color: #6b7a3a !important;  /* olive, sits well on paper */
+}
+.vp-doc .shiki span[style*='color:#FF7B72'],  /* keywords */
+.vp-doc .shiki span[style*='color:#ff7b72'] {
+  color: var(--primmel-amber) !important;
+  font-weight: 500;
+}
+.vp-doc .shiki span[style*='color:#D2A8FF'],  /* literals/builtins */
+.vp-doc .shiki span[style*='color:#d2a8ff'] {
+  color: var(--primmel-indigo) !important;
+  font-style: italic;
+}
+.vp-doc .shiki span[style*='color:#FFA657'],  /* numbers/attrs */
+.vp-doc .shiki span[style*='color:#ffa657'] {
+  color: #8a5a14 !important;
+}
+.vp-doc .shiki span[style*='color:#8B949E'],  /* comments */
+.vp-doc .shiki span[style*='color:#8b949e'] {
+  color: var(--primmel-rule-strong) !important;
+  font-style: italic;
+}
+.vp-doc .shiki span[style*='color:#7EE787'],  /* decorators */
+.vp-doc .shiki span[style*='color:#7ee787'] {
+  color: #4f7340 !important;
+}
+.dark .vp-doc .shiki span[style*='color:#A5D6FF'],
+.dark .vp-doc .shiki span[style*='color:#a5d6ff'] {
+  color: #c2b34a !important;
+}
+.dark .vp-doc .shiki span[style*='color:#8B949E'],
+.dark .vp-doc .shiki span[style*='color:#8b949e'] {
+  color: #6a6856 !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   DOC CHROME — prev/next, last-updated, breadcrumbs
+   ════════════════════════════════════════════════════════ */
+
+.vp-doc .pager-link {
+  border: 1px solid var(--primmel-rule) !important;
+  border-radius: 1px !important;
+  padding: 1rem 1.25rem !important;
+  transition: border-color 0.18s ease, background 0.18s ease !important;
+}
+.vp-doc .pager-link:hover {
+  border-color: var(--primmel-amber) !important;
+  background: var(--primmel-surface-2) !important;
+}
+.vp-doc .pager-link .label {
+  font-family: var(--primmel-body) !important;
+  font-size: 0.7rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.16em !important;
+  color: var(--primmel-amber) !important;
+}
+.vp-doc .pager-link .title {
+  font-family: var(--primmel-display) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.VPLastUpdated {
+  font-family: var(--primmel-body) !important;
+  font-size: 0.8rem !important;
+  color: var(--vp-c-text-3) !important;
+  letter-spacing: 0.02em !important;
+}
+.VPLastUpdated .value {
+  font-family: var(--primmel-mono) !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase;
+  font-size: 0.78rem !important;
+}
+
+/* Page footer — colophon-like */
+.VPDocFooter {
+  border-top: 1px solid var(--primmel-rule) !important;
+  padding-top: 2rem !important;
+  margin-top: 4rem !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   BLOCKQUOTES, HR, KBD — inline editorial elements
+   ════════════════════════════════════════════════════════ */
+
+.vp-doc blockquote {
+  font-family: var(--primmel-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--primmel-ink);
+  border-left: 2px solid var(--primmel-amber);
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  margin: 2rem 0;
+  background: transparent;
+}
+.vp-doc blockquote p { font-size: inherit; line-height: inherit; }
+
+.vp-doc hr {
+  border: none;
+  margin: 4rem 0;
+  height: 1px;
+  background: var(--primmel-rule);
+  position: relative;
+}
+.vp-doc hr::after {
+  content: '✦';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--primmel-display);
+  font-style: italic;
+  color: var(--primmel-amber);
+  background: var(--primmel-paper);
+  padding: 0 0.75rem;
+  font-size: 1rem;
+}
+
+.vp-doc kbd {
+  font-family: var(--primmel-mono);
+  font-size: 0.82em;
+  background: var(--primmel-surface-2);
+  border: 1px solid var(--primmel-rule-strong);
+  border-bottom-width: 2px;
+  border-radius: 2px;
+  padding: 0.1em 0.45em;
+  color: var(--primmel-ink);
+}
+
+/* ════════════════════════════════════════════════════════
+   DOC PAGE-LOAD MOTION — staggered reveal
+   ════════════════════════════════════════════════════════ */
+
+@keyframes primmel-doc-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.vp-doc h1,
+.vp-doc > div > p:first-of-type,
+.vp-doc > div > h2 {
+  animation: primmel-doc-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.vp-doc h1 { animation-delay: 0.05s; }
+.vp-doc > div > p:first-of-type { animation-delay: 0.15s; }
+.vp-doc > div > h2 { animation-delay: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-logo,
+  .home-hero .eyebrow,
+  .home-hero h1,
+  .home-hero .tagline,
+  .home-hero .actions,
+  .vp-doc h1,
+  .vp-doc > div > p:first-of-type,
+  .vp-doc > div > h2 {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   PRINT — render docs like a real standard
+   ════════════════════════════════════════════════════════ */
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+  body::before { display: none !important; }
+
+  .VPNav, .VPSidebar, .VPDocAside, .VPDocFooter,
+  .VPBackdrop, .VPLocalSearchBox, .VPDocOutline {
+    display: none !important;
+  }
+
+  .VPDoc.HasSidebar .content {
+    padding: 0 !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .VPContent {
+    background: #fff !important;
+  }
+
+  .vp-doc {
+    font-family: 'Times New Roman', serif !important;
+    color: #000 !important;
+  }
+  .vp-doc h1, .vp-doc h2, .vp-doc h3 {
+    font-family: 'Times New Roman', serif !important;
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+  .vp-doc h1 {
+    font-size: 22pt !important;
+    border-bottom: 1px solid #000 !important;
+  }
+  .vp-doc h2 {
+    font-size: 14pt !important;
+    border-top: 1px solid #999 !important;
+    margin-top: 1.5em;
+  }
+  .vp-doc a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  .vp-doc pre, .vp-doc code {
+    font-family: 'Courier New', monospace !important;
+    background: #f5f5f5 !important;
+    color: #000 !important;
+  }
+  .vp-doc pre {
+    border: 1px solid #ccc !important;
+    page-break-inside: avoid;
+  }
+  .vp-doc pre, .vp-doc table, .vp-doc blockquote {
+    page-break-inside: avoid;
+  }
+
+  /* Drop caps and amber accents go to grayscale */
+  .vp-doc > p:first-of-type::first-letter {
+    color: #000 !important;
+  }
+  .vp-doc hr::after {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   HERO — push bigger, asymmetric, with marginalia
+   ════════════════════════════════════════════════════════ */
+
+.home-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 2rem;
+  align-items: start;
+  padding: 6rem 2rem 5rem !important;
+}
+
+.home-hero .hero-main { min-width: 0; }
+
+.home-hero .hero-marginalia {
+  /* Right-column marginalia — issue number, publication meta, etc. */
+  font-family: var(--primmel-mono);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--vp-c-text-3);
+  padding-top: 1rem;
+  border-left: 1px solid var(--primmel-rule);
+  padding-left: 1.5rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.home-hero .hero-marginalia dt {
+  font-family: var(--primmel-body);
+  font-weight: 500;
+  color: var(--primmel-amber);
+  margin-top: 1.2rem;
+  letter-spacing: 0.14em;
+}
+.home-hero .hero-marginalia dt:first-child { margin-top: 0; }
+.home-hero .hero-marginalia dd {
+  font-family: var(--primmel-mono);
+  margin: 0.2rem 0 0 0;
+  color: var(--primmel-ink);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.78rem;
+}
+
+.home-hero h1 {
+  font-size: clamp(3.6rem, 11vw, 7.5rem) !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.05em !important;
+}
+
+@media (max-width: 900px) {
+  .home-hero {
+    grid-template-columns: 1fr !important;
+  }
+  .home-hero .hero-marginalia {
+    border-left: none !important;
+    border-top: 1px solid var(--primmel-rule);
+    padding-left: 0 !important;
+    padding-top: 1.5rem !important;
+    margin-top: 2rem;
+  }
+  .home-hero h1 { font-size: clamp(2.8rem, 12vw, 4.5rem) !important; }
+}
+
+/* ════════════════════════════════════════════════════════
+   404 PAGE
+   ════════════════════════════════════════════════════════ */
+
+.not-found {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 8rem 2rem;
+  text-align: left;
+}
+.not-found .nf-eyebrow {
+  font-family: var(--primmel-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--primmel-amber);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.not-found .nf-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--primmel-amber);
+}
+.not-found h1 {
+  font-family: var(--primmel-display);
+  font-weight: 350;
+  font-size: clamp(4rem, 12vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin: 0 0 1.5rem;
+  color: var(--primmel-ink);
+}
+.not-found h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--primmel-indigo);
+}
+.dark .not-found h1 em { color: var(--primmel-indigo-light); }
+.not-found p {
+  font-family: var(--primmel-serif);
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--vp-c-text-2);
+  margin: 0 0 2.5rem;
+  max-width: 540px;
+}
+.not-found .nf-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ════════════════════════════════════════════════════════
+   SUBTLE — scrollbar, focus ring
+   ════════════════════════════════════════════════════════ */
+
+::selection { /* defined above */ }
+
+:focus-visible {
+  outline: 2px solid var(--primmel-amber);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* Custom scrollbar — thin, indigo on warm paper */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--primmel-paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primmel-rule-strong);
+  border: 2px solid var(--primmel-paper);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primmel-amber);
+}
