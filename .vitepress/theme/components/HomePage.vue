@@ -80,6 +80,37 @@ const issueMonth = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII
 
     </section>
 
+    <!-- ──────────── SPECIMEN — what the language looks like ────────── -->
+    <section class="section">
+      <p class="section-eyebrow">Specimen</p>
+      <h2 class="section-title">
+        A standard, set in code.
+      </h2>
+      <p class="section-description">
+        Every clause of every standard becomes a typed, computable
+        artefact. Provisions, processes, data registries, and
+        evidence &mdash; in one file, in plain text.
+      </p>
+
+      <pre class="specimen"><span class="kw">provision</span> <span class="id">MoistureWithinRange</span> {
+  <span class="kw">condition</span> <span class="str">"Moisture shall be between 8% and 12% by mass"</span>
+  <span class="kw">modality</span> <span class="typ">SHALL</span>
+  <span class="kw">reference</span> { BFS-4-2 }
+}
+
+<span class="kw">measurement</span> <span class="id">MaxMoisture</span> {
+  <span class="kw">type</span> <span class="typ">DERIVED</span>
+  <span class="kw">definition</span> <span class="str">"[MoistureReading].max"</span>
+}
+
+<span class="kw">process</span> <span class="id">TestMoisture</span> {
+  <span class="kw">actor</span> <span class="id">QA</span>
+  <span class="kw">modality</span> <span class="typ">SHALL</span>
+  <span class="kw">validate_provision</span> { MoistureWithinRange }
+  <span class="kw">validate_measurement</span> { <span class="str">"[MaxMoisture] &lt;= 12"</span> }
+}</pre>
+    </section>
+
     <!-- ──────────────── THE FIVE PILLARS ────────────────── -->
     <section class="section">
       <p class="section-eyebrow">The architecture</p>
