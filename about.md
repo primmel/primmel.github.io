@@ -21,69 +21,59 @@ certifiers, and regulators who follow.
 
 ### The Logo
 
-The Primmel logo is an **open brush circle (ensō)** enclosing a single
-**small square**. It is drawn from classical Tao philosophy.
+The Primmel logo is a custom-drawn mark &mdash; a stylised monogram with
+tonal shading, rendered as a single piece of vector art.
 
 <div class="logo-breakdown">
-  <img src="/primmel-logo-icon-light.svg" alt="Primmel logo icon" />
+  <img src="/primmel-logo-light.svg" alt="Primmel logo icon" />
   <div class="description">
-    <h3>The Ensō &mdash; the Open Way</h3>
+    <h3>A Single Mark</h3>
     <p>
-      The outer brush circle is an <em>ensō</em>: a single stroke,
-      deliberately left open. In the Tao Te Ching, the usefulness of a
-      vessel is its <em>emptiness</em>, not its form (ch. 11). The
-      opening in the circle is the door through which new things enter.
-      A standard that cannot be extended is dead; the open ensō marks
-      Primmel as a language meant to be lived in, not merely cited.
+      The logo is one composition, not an assembly of separate glyphs.
+      Its stem, bowl, and shading are all part of the same drawing.
+      This mirrors Primmel's promise: one model, one source of truth,
+      no seams between document and code.
     </p>
-    <h3>The Square &mdash; the Uncarved Block</h3>
+    <h3>Tonal Shading</h3>
     <p>
-      Within the circle sits a single small square &mdash; the
-      <em>uncarved block</em> (樸, <em>pǔ</em>) of Taoist thought. It is
-      the original, undefined potential from which all forms are cut. In
-      Primmel terms: the primitive, the foundational element, the
-      smallest unit a model is built from. One block, contained,
-      complete.
+      The mark is built from hundreds of tonal paths, giving it a
+      sculpted, light-cast quality. This is a deliberate contrast with
+      the flat, geometric icons typical of developer-tooling brands.
+      Primmel is for standards work &mdash; serious, crafted, lasting.
     </p>
-    <h3>Round Heaven, Square Earth</h3>
+    <h3>Indigo &mdash; the Brand Colour</h3>
     <p>
-      The composition draws from the ancient Chinese cosmology of
-      <em>tiān yuán dì fāng</em> (天圓地方): heaven is round, earth is
-      square. The round heaven is the way &mdash; infinite, dynamic,
-      executable. The square earth is the defined, the stable, the
-      standard. The model exists in the space where these two meet.
-    </p>
-    <h3>The Single Brushstroke</h3>
-    <p>
-      The ensō is drawn in one continuous, tapered movement &mdash;
-      <em>wú wéi</em> (無為), effortless action. No seam, no joint, no
-      assembled parts. It is the visual counterpart of Primmel's
-      promise: one model, one source of truth, no seams between
-      document and code.
+      The logo is rendered in Primmel's signature indigo. On light
+      backgrounds, dark tonal values map to deep indigo
+      (<code>#1e3a8a</code>) and lift toward white. On dark
+      backgrounds, the same values are inverted and tinted toward sky
+      (<code>#93c5fd</code>), so the mark stays luminous against dark
+      surfaces.
     </p>
   </div>
 </div>
 
 ### Light & Dark Mode Logos
 
-The Primmel logo adapts to light and dark backgrounds by lifting the
-saturation of its indigo brushstroke, while the contained square
-retains its warm amber:
+The same mark is rendered two ways: deep indigo on light backgrounds,
+sky indigo on dark. Both variants are generated from the same source
+artefact by tonal mapping, so the mark's character is preserved across
+themes:
 
 <div class="logo-showcase">
   <div class="logo-card light-card">
     <div class="logo-card-header">Light Mode</div>
     <img
-      src="/primmel-logo-full-light.svg"
-      alt="Primmel full logo — light mode"
+      src="/primmel-logo-light.svg"
+      alt="Primmel logo — light mode"
       class="logo-display"
     />
   </div>
   <div class="logo-card dark-card">
     <div class="logo-card-header">Dark Mode</div>
     <img
-      src="/primmel-logo-full-dark.svg"
-      alt="Primmel full logo — dark mode"
+      src="/primmel-logo-dark.svg"
+      alt="Primmel logo — dark mode"
       class="logo-display"
     />
   </div>
@@ -128,21 +118,21 @@ retains its warm amber:
 
 ### The Colors
 
-The Primmel palette pairs a deep indigo brushstroke with a single warm
-amber accent:
+The Primmel palette is built around indigo, the brand colour that ties
+the mark, the chrome, and the documentation together:
 
 <div class="torch-legend">
   <div class="torch-swatch indigo"></div>
-  <div><strong>Indigo &mdash; #1e3a8a</strong><span>The ink of the ensō. Deep, formal, contemplative &mdash; the colour of a standard taken seriously.</span></div>
+  <div><strong>Indigo &mdash; #1e3a8a</strong><span>The light-mode mark. Deep, formal, contemplative &mdash; the colour of a standard taken seriously.</span></div>
 
   <div class="torch-swatch indigo-light"></div>
-  <div><strong>Sky Indigo &mdash; #60a5fa</strong><span>The dark-mode brushstroke. Lifts the ink so the line stays luminous against dark backgrounds.</span></div>
+  <div><strong>Sky Indigo &mdash; #93c5fd</strong><span>The dark-mode mark. Lifts the tonal values so the mark stays luminous against dark surfaces.</span></div>
 
-  <div class="torch-swatch amber"></div>
-  <div><strong>Amber &mdash; #f59e0b</strong><span>The contained square. Warm where the ink is cool, earth where heaven is round.</span></div>
+  <div class="torch-swatch slate"></div>
+  <div><strong>Slate &mdash; #0f172a</strong><span>The dark-mode background anchor. The darkest tonal values in the mark resolve to slate on dark themes so they fade into the surface.</span></div>
 
-  <div class="torch-swatch void"></div>
-  <div><strong>The Void &mdash; #ffffff / transparent</strong><span>The empty centre of the ensō. The part of the vessel that makes it useful &mdash; not a colour, but the absence the rest implies.</span></div>
+  <div class="torch-swatch paper"></div>
+  <div><strong>Paper &mdash; #ffffff</strong><span>The light-mode background. The lightest tonal values in the mark resolve to white on light themes.</span></div>
 </div>
 
 <style scoped>
@@ -159,14 +149,9 @@ amber accent:
   border-radius: 6px;
 }
 .torch-swatch.indigo { background: #1e3a8a; }
-.torch-swatch.indigo-light { background: #60a5fa; }
-.torch-swatch.amber { background: #f59e0b; }
-.torch-swatch.void {
-  background:
-    linear-gradient(135deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%),
-    repeating-conic-gradient(#e2e8f0 0 25%, #fff 0 50%) 0 0 / 12px 12px;
-  border: 1px solid #cbd5e1;
-}
+.torch-swatch.indigo-light { background: #93c5fd; }
+.torch-swatch.slate { background: #0f172a; }
+.torch-swatch.paper { background: #ffffff; border: 1px solid #cbd5e1; }
 .torch-legend strong {
   display: block;
   margin-bottom: 0.15rem;

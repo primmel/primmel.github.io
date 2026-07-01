@@ -43,13 +43,13 @@ The Primmel logo set lives in `public/`:
 
 | File | Purpose |
 | --- | --- |
-| `primmel-logo-icon-light.svg` | Square icon, light background |
-| `primmel-logo-icon-dark.svg` | Square icon, dark background |
-| `primmel-logo-full-light.svg` | Mark + wordmark, light |
-| `primmel-logo-full-dark.svg` | Mark + wordmark, dark |
+| `primmel-logo.svg` | Source logo (600×600, greyscale designer original) |
+| `primmel-logo-light.svg` | Light-mode tint (deep indigo on white) |
+| `primmel-logo-dark.svg` | Dark-mode tint (sky indigo on slate) |
+| `primmel-logo.pdf` | PDF version of the source logo |
 | `favicon.svg` | Favicon, scales to 16×16 |
 | `site.webmanifest` | PWA manifest |
 
-The mark is an **open brush circle (ensō) enclosing a small amber
-square** &mdash; drawn from classical Tao philosophy (round heaven,
-square earth). See [About Primmel](/about) for the full breakdown.
+The mark is a custom-drawn Primmel monogram with tonal shading;
+the light and dark variants are tinted toward indigo for theme
+adaptation. See [About Primmel](/about) for the full breakdown.

@@ -9,7 +9,7 @@ const { site } = useData()
     <section class="home-hero">
       <img
         class="home-hero-logo"
-        src="/primmel-logo-icon-light.svg"
+        src="/primmel-logo-light.svg"
         alt="Primmel"
       />
       <h1>{{ site.title }}</h1>

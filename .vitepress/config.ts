@@ -20,10 +20,10 @@ export default defineConfig({
 
   themeConfig: {
     logo: {
-      light: '/primmel-logo-full-light.svg',
-      dark: '/primmel-logo-full-dark.svg',
+      light: '/primmel-logo-light.svg',
+      dark: '/primmel-logo-dark.svg',
     },
-    siteTitle: false,
+    siteTitle: 'Primmel',
 
     nav: [
       { text: 'Introduction', link: '/docs/introduction' },
