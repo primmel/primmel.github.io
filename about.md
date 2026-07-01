@@ -79,43 +79,6 @@ themes:
   </div>
 </div>
 
-<style scoped>
-.logo-showcase {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-.logo-card {
-  padding: 2.5rem 2rem;
-  border-radius: 12px;
-  text-align: center;
-}
-.logo-card-header {
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.light-card {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border: 1px solid #cbd5e1;
-}
-.light-card .logo-card-header { color: #475569; }
-.dark-card {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  border: 1px solid #334155;
-}
-.dark-card .logo-card-header { color: #94a3b8; }
-.logo-display {
-  max-width: 280px;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-</style>
-
 ### The Colors
 
 The Primmel palette is built around indigo, the brand colour that ties
@@ -134,35 +97,6 @@ the mark, the chrome, and the documentation together:
   <div class="torch-swatch paper"></div>
   <div><strong>Paper &mdash; #ffffff</strong><span>The light-mode background. The lightest tonal values in the mark resolve to white on light themes.</span></div>
 </div>
-
-<style scoped>
-.torch-legend {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 1rem 1.5rem;
-  margin: 2rem 0;
-  align-items: center;
-}
-.torch-swatch {
-  width: 56px;
-  height: 32px;
-  border-radius: 6px;
-}
-.torch-swatch.indigo { background: #1e3a8a; }
-.torch-swatch.indigo-light { background: #93c5fd; }
-.torch-swatch.slate { background: #0f172a; }
-.torch-swatch.paper { background: #ffffff; border: 1px solid #cbd5e1; }
-.torch-legend strong {
-  display: block;
-  margin-bottom: 0.15rem;
-  color: var(--vp-c-text-1);
-}
-.torch-legend span {
-  color: var(--vp-c-text-2);
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-</style>
 
 ## Origin Story
 
@@ -252,34 +186,6 @@ This is what *single source of truth, extensible* looks like in practice.
     <p>Bind Primmel models to real systems: data registries, process engines, compliance trackers.</p>
   </div>
 </div>
-
-<style scoped>
-.use-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-.use-case-card {
-  padding: 1.75rem;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-}
-.use-case-card h4 {
-  color: #1e3a8a;
-  margin: 0 0 0.5rem;
-}
-:global(.dark) .use-case-card h4 {
-  color: #60a5fa;
-}
-.use-case-card p {
-  margin: 0;
-  color: var(--vp-c-text-2);
-  font-size: 0.95rem;
-  line-height: 1.55;
-}
-</style>
 
 ## Primitives at a Glance
 
