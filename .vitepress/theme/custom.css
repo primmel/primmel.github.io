@@ -401,7 +401,6 @@ em { font-style: italic; }
   border-bottom: 1px solid var(--primmel-rule);
   vertical-align: top;
 }
-.vp-doc table tr:last-child td { border-bottom: none; }
 .vp-doc table tr:hover td { background: var(--primmel-surface-2); }
 
 /* ── Custom blocks: color-coded by intent ──────────────── */
@@ -484,6 +483,12 @@ em { font-style: italic; }
   font-family: var(--primmel-mono) !important;
   font-weight: 400 !important;
   transition: opacity 0.12s ease;
+}
+/* Hide the '#' pseudo-element VitePress injects via ::before.
+   Setting opacity:0 on the parent anchor doesn't hide the ::before. */
+.vp-doc .header-anchor::before {
+  display: none !important;
+  content: '' !important;
 }
 .vp-doc h1:hover .header-anchor,
 .vp-doc h2:hover .header-anchor,
