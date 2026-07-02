@@ -136,6 +136,6 @@ practice.
 
 ## Where to see it in action
 
-- [Implementation package](/docs/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) &mdash;
   the full Acme → OCS mapping in both `.prl` and `.prm` form, with
   cross-model aliasing throughout.

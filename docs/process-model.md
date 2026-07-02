@@ -49,7 +49,7 @@ timer_event RestockTimer {
 | `REPEAT` | Fire on a recurring schedule, regardless of flow position. |
 
 `REPEAT` timers are typically wired in a loop to model recurring
-processes (see [timer loop pattern](/docs/examples/process-flow#pattern-timer-loops)).
+processes (see [timer loop pattern](/examples/process-flow#pattern-timer-loops)).
 
 ### `exclusive_gateway`
 
@@ -98,7 +98,7 @@ approval ApproveNewRoast {
 
 A specialised process that requires sign-off. Distinct from `process`
 because it carries an `approve_by` clause and an `approval_record`
-registry. See [approval workflow](/docs/examples/approval-workflow).
+registry. See [approval workflow](/examples/approval-workflow).
 
 ### `subprocess`
 
@@ -130,11 +130,11 @@ A model with multiple subprocesses names them like pages.
 
 ## Where to see it in action
 
-- [Example 01: Minimal model](/docs/examples/minimal-model) &mdash; the
+- [Example 01: Minimal model](/examples/minimal-model) &mdash; the
   smallest valid subprocess.
-- [Example 03: Process flow](/docs/examples/process-flow) &mdash;
+- [Example 03: Process flow](/examples/process-flow) &mdash;
   gateways, timers, multi-page subprocesses.
-- [Example 05: Approval workflow](/docs/examples/approval-workflow) &mdash;
+- [Example 05: Approval workflow](/examples/approval-workflow) &mdash;
   the `approval` primitive.
-- [Implementation package](/docs/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) &mdash;
   four subprocesses on one model, with a recurring timer loop.

@@ -105,13 +105,13 @@ process's inputs.
 
 ## Where to see it in action
 
-- [Implementation package walkthrough](/docs/examples/implementation-package)
+- [Implementation package walkthrough](/examples/implementation-package)
   &mdash; the showcase, including a populated `sample-workspace.pws/`
   directory in the example corpus.
 
 ## After operating
 
-The workspace is the input to [Audit](/docs/architecture/audit).
+The workspace is the input to [Audit](/architecture/audit).
 Auditors need the workspace (or a subset of it) to verify that the
 mapping the organisation declared actually corresponds to evidence on
 the ground.

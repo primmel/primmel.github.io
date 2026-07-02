@@ -139,7 +139,7 @@ Two gateways, each with a labelled branch and a `"default"` branch:
 
 The `"default"` description marks the edge taken when no other condition
 matches. (This model uses human-readable descriptions only; the
-[compliance example](/docs/examples/compliance-and-measurement) shows
+[compliance example](/examples/compliance-and-measurement) shows
 gateway edges with machine-readable `condition` expressions.)
 
 ### RestockFlow: the timer loop
@@ -182,7 +182,7 @@ Edge2 { from SomeProcess          to Timer }
 Edge3 { from Timer                to SomeProcess }   // ← the loop
 ```
 
-The same shape appears in the [implementation package](/docs/examples/implementation-package)
+The same shape appears in the [implementation package](/examples/implementation-package)
 for `ReviewSuppliers → SupplierReviewTimer → ReviewSuppliers`.
 
 ## Pattern: default edges
@@ -196,9 +196,9 @@ fallback.
 ## What this example leaves out
 
 - **Compliance** &mdash; no `provision` or `modality`. Added in
-  [compliance and measurement](/docs/examples/compliance-and-measurement).
+  [compliance and measurement](/examples/compliance-and-measurement).
 - **Data** &mdash; the `data { }` blocks are empty. Data appears in
-  [data and registries](/docs/examples/data-and-registries).
+  [data and registries](/examples/data-and-registries).
 - **Machine-readable conditions** &mdash; edges use only `description`.
   Conditions are added in
-  [compliance and measurement](/docs/examples/compliance-and-measurement).
+  [compliance and measurement](/examples/compliance-and-measurement).

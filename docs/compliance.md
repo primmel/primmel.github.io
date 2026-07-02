@@ -148,8 +148,8 @@ process TestMoisture {
 
 ## Where to see it in action
 
-- [Example 04: Compliance and measurement](/docs/examples/compliance-and-measurement) &mdash;
+- [Example 04: Compliance and measurement](/examples/compliance-and-measurement) &mdash;
   the dedicated walkthrough, including gateway conditions.
-- [Implementation package](/docs/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) &mdash;
   provisions cross-referenced across standard (`OCS#`) and implementation
   namespaces, plus a `.prd` source extract.

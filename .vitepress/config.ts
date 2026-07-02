@@ -8,7 +8,7 @@ export default defineConfig({
 
   ignoreDeadLinks: [
     /\.(prl|prd|prm|pws|yaml|yml)$/,
-    /^\/docs\/examples\/files\/.*\/$/,  // workspace directories
+    /^\/examples\/files\/.*\/$/,  // workspace directories
   ],
 
   head: [
@@ -18,13 +18,12 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
     ['meta', { name: 'theme-color', content: '#1e3a8a' }],
-    // Typography: Hanken Grotesk (single sans for all readable text),
-    // JetBrains Mono (code blocks only). No serif, no mono at display.
+    // Typography: Fraunces (display serif), IBM Plex Sans (body), JetBrains Mono (code)
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap'
+      href: 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap'
     }],
   ],
 
@@ -36,9 +35,10 @@ export default defineConfig({
     siteTitle: 'Primmel',
 
     nav: [
-      { text: 'Introduction', link: '/docs/introduction' },
+      { text: 'Architecture', link: '/architecture/' },
+      { text: 'Examples', link: '/examples/' },
+      { text: 'Docs', link: '/docs/introduction' },
       { text: 'Specification', link: 'https://www.primmel.org/spec/' },
-      { text: 'Examples', link: '/docs/examples/' },
       { text: 'About', link: '/about' },
     ],
 
@@ -57,35 +57,39 @@ export default defineConfig({
     },
 
     sidebar: {
+      '/architecture/': [
+        {
+          text: 'Architecture',
+          items: [
+            { text: 'Overview', link: '/architecture/' },
+            { text: '1. Define', link: '/architecture/define' },
+            { text: '2. Implement', link: '/architecture/implement' },
+            { text: '3. Adopt', link: '/architecture/adopt' },
+            { text: '4. Operate', link: '/architecture/operate' },
+            { text: '5. Audit', link: '/architecture/audit' },
+          ],
+        },
+      ],
+      '/examples/': [
+        {
+          text: 'Examples',
+          items: [
+            { text: 'Overview', link: '/examples/' },
+            { text: '1. Minimal Model', link: '/examples/minimal-model' },
+            { text: '2. Data & Registries', link: '/examples/data-and-registries' },
+            { text: '3. Process Flow', link: '/examples/process-flow' },
+            { text: '4. Compliance & Measurement', link: '/examples/compliance-and-measurement' },
+            { text: '5. Approval Workflow', link: '/examples/approval-workflow' },
+            { text: '6. Implementation Package', link: '/examples/implementation-package' },
+          ],
+        },
+      ],
       '/docs/': [
         {
           text: 'Getting Started',
           items: [
             { text: 'Introduction', link: '/docs/introduction' },
             { text: 'A First Model', link: '/docs/first-model' },
-          ],
-        },
-        {
-          text: 'Architecture',
-          items: [
-            { text: 'Overview', link: '/docs/architecture/' },
-            { text: '1. Define', link: '/docs/architecture/define' },
-            { text: '2. Implement', link: '/docs/architecture/implement' },
-            { text: '3. Adopt', link: '/docs/architecture/adopt' },
-            { text: '4. Operate', link: '/docs/architecture/operate' },
-            { text: '5. Audit', link: '/docs/architecture/audit' },
-          ],
-        },
-        {
-          text: 'Examples',
-          items: [
-            { text: 'Overview', link: '/docs/examples/' },
-            { text: '1. Minimal Model', link: '/docs/examples/minimal-model' },
-            { text: '2. Data & Registries', link: '/docs/examples/data-and-registries' },
-            { text: '3. Process Flow', link: '/docs/examples/process-flow' },
-            { text: '4. Compliance & Measurement', link: '/docs/examples/compliance-and-measurement' },
-            { text: '5. Approval Workflow', link: '/docs/examples/approval-workflow' },
-            { text: '6. Implementation Package', link: '/docs/examples/implementation-package' },
           ],
         },
         {

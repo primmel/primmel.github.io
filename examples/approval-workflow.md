@@ -137,6 +137,6 @@ own first-class treatment:
 
 - **Compliance** &mdash; no `provision` or `modality` on the approval.
   Combined with `validate_provision` in
-  [compliance and measurement](/docs/examples/compliance-and-measurement).
+  [compliance and measurement](/examples/compliance-and-measurement).
 - **Cross-model aliasing** &mdash; see the
-  [implementation package](/docs/examples/implementation-package).
+  [implementation package](/examples/implementation-package).

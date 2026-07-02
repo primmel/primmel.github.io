@@ -71,7 +71,7 @@ it.
 
 ## Where to see it in action
 
-- [Example 02: Data and registries](/docs/examples/data-and-registries)
+- [Example 02: Data and registries](/examples/data-and-registries)
   &mdash; a small org's implementation of a roastery logbook, with no
   reference to any standard.
 - [Implementation package &mdash; `acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl)
@@ -84,5 +84,5 @@ it.
 The implementation model is maintained continuously &mdash; whenever the
 org's actual processes change, the implementation changes too. When the
 org decides to take up a reference model, it moves to the
-[Adopt](/docs/architecture/adopt) pillar. The day-to-day running of
-the implementation is the [Operate](/docs/architecture/operate) pillar.
+[Adopt](/architecture/adopt) pillar. The day-to-day running of
+the implementation is the [Operate](/architecture/operate) pillar.

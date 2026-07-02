@@ -138,8 +138,8 @@ taken.
 
 ## Where to see it in action
 
-- [Example 04: Compliance and measurement](/docs/examples/compliance-and-measurement) &mdash;
+- [Example 04: Compliance and measurement](/examples/compliance-and-measurement) &mdash;
   the dedicated walkthrough, including all five measurement types.
-- [Implementation package](/docs/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) &mdash;
   measurements at production scale with actual readings in a `.pws`
   workspace.
