@@ -1,29 +1,20 @@
 <script setup lang="ts">
-import { useData } from 'vitepress'
-
-const { site, theme } = useData()
-
 const features = [
-  { num: '01', title: 'Executable Standards', body: 'Logic, process requirements, and data requirements expressed in a language a computer can read and run — not just a document humans have to interpret.' },
-  { num: '02', title: 'Single Source of Truth', body: 'One canonical model per standard. Auditors, implementers, and certifiers all read from the same artifact, eliminating drift between document, code, and evidence.' },
-  { num: '03', title: 'Mapping & Extension',  body: 'Map your own processes and controls onto the elements of any Primmel-modelled standard. Reuse, extend, and specialise without forking the source.' },
-  { num: '04', title: 'Process & Data Primitives', body: 'Built-in primitives for classes, processes, gateways, provisions, and measurements — what BPMN and UML wish they had for standards work.' },
-  { num: '05', title: 'Evidence Built In', body: 'Every requirement carries evidential hooks. Auditors locate compliance evidence by following the model, not by digging through folders.' },
-  { num: '06', title: 'Open & Vendor-Neutral', body: 'A public language, available for any standards organisation to adopt. Built on the legacy of the BSI SMART and OIML SMART programmes.' },
+  { num: '01', title: 'Executable standards', body: 'Process requirements and data requirements expressed in a language a computer can read and run — not just a document humans have to interpret.' },
+  { num: '02', title: 'Single source of truth', body: 'One canonical model per standard. Auditors, implementers, and certifiers all read from the same artefact, eliminating drift between document, code, and evidence.' },
+  { num: '03', title: 'Mapping and extension',  body: 'Map your own processes and controls onto the elements of any Primmel-modelled standard. Reuse, extend, and specialise without forking the source.' },
+  { num: '04', title: 'Process and data primitives', body: 'Built-in primitives for classes, processes, gateways, provisions, and measurements — what BPMN and UML wish they had for standards work.' },
+  { num: '05', title: 'Evidence built in', body: 'Every requirement carries evidential hooks. Auditors locate compliance evidence by following the model, not by digging through folders.' },
+  { num: '06', title: 'Open and vendor-neutral', body: 'A public language, available for any standards organisation to adopt. Built on the legacy of the BSI SMART and OIML SMART programmes.' },
 ]
 
 const pillars = [
-  { num: '01', name: 'Define',    role: 'Reference publisher' },
-  { num: '02', name: 'Implement', role: 'The digital twin' },
-  { num: '03', name: 'Adopt',     role: 'Statement of Applicability' },
-  { num: '04', name: 'Operate',   role: 'Evidence on the ground' },
-  { num: '05', name: 'Audit',     role: 'Compliance verdict' },
+  { num: '01', name: 'Define',    desc: 'A reference publisher — standards body, industry consortium, regulator, or any organisation — authors a reference model and publishes it for others to map to.' },
+  { num: '02', name: 'Implement', desc: 'An organisation maintains its own implementation model: a standing digital twin of its actual operations, existing whether or not any standard is in scope.' },
+  { num: '03', name: 'Adopt',     desc: 'The organisation takes up a reference model. It modifies the implementation as needed and declares mappings from implementation elements to reference elements.' },
+  { num: '04', name: 'Operate',   desc: 'The organisation runs the implementation in production. Each process execution produces records — the evidence of conformance on the ground.' },
+  { num: '05', name: 'Audit',     desc: 'An auditor follows the mapping from each reference requirement to its implementation elements, then to the operational evidence. A structural compliance verdict.' },
 ]
-
-const today = new Date()
-const isoToday = today.toISOString().slice(0, 10)
-const issueYear = today.getFullYear()
-const issueMonth = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][today.getMonth()]
 </script>
 
 <template>
@@ -31,108 +22,57 @@ const issueMonth = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII
 
     <!-- ─────────────────────── HERO ─────────────────────── -->
     <section class="home-hero">
+      <img
+        class="home-hero-logo light-only"
+        src="/primmel-logo-light.svg"
+        alt="Primmel"
+      />
+      <img
+        class="home-hero-logo dark-only"
+        src="/primmel-logo-dark.svg"
+        alt="Primmel"
+      />
 
-      <div class="hero-main">
-        <img
-          class="home-hero-logo light-only"
-          src="/primmel-logo-light.svg"
-          alt="Primmel"
-        />
-        <img
-          class="home-hero-logo dark-only"
-          src="/primmel-logo-dark.svg"
-          alt="Primmel"
-        />
+      <p class="eyebrow">An executable language for SMART standards</p>
 
-        <p class="eyebrow">An executable language for SMART standards</p>
+      <h1>Standards, instantly executable.</h1>
 
-        <h1>
-          Standards,<br />
-          <em>instantly</em><br />
-          executable.
-        </h1>
-
-        <p class="tagline">
-          Not a static reference, but a
-          <strong>runnable program</strong> — process flows, data
-          requirements, and evidential hooks in a single
-          machine-readable form.
-        </p>
-
-        <div class="actions">
-          <a class="VPButton brand" href="/docs/introduction">Read the introduction</a>
-          <a class="VPButton alt" href="/docs/examples/">Browse the examples</a>
-        </div>
-      </div>
-
-      <dl class="hero-marginalia">
-        <dt>Issue</dt>
-        <dd>{{ issueYear }} · Vol {{ issueMonth }}</dd>
-        <dt>Schema</dt>
-        <dd>Primmel 0.1</dd>
-        <dt>Origin</dt>
-        <dd>Ribose · BSI SMART</dd>
-        <dt>Adopted by</dt>
-        <dd>OIML SMART</dd>
-        <dt>Today</dt>
-        <dd>{{ isoToday }}</dd>
-      </dl>
-
-    </section>
-
-    <!-- ──────────── SPECIMEN — what the language looks like ────────── -->
-    <section class="section">
-      <p class="section-eyebrow">Specimen</p>
-      <h2 class="section-title">
-        A standard, set in code.
-      </h2>
-      <p class="section-description">
-        Every clause of every standard becomes a typed, computable
-        artefact. Provisions, processes, data registries, and
-        evidence &mdash; in one file, in plain text.
+      <p class="tagline">
+        Primmel is a typed, machine-readable language for representing
+        ISO, BSI, and OIML standards as
+        <strong>runnable programs</strong>. Process flows, data
+        requirements, and evidential hooks in one plain-text file.
       </p>
 
-      <pre class="specimen"><span class="kw">provision</span> <span class="id">MoistureWithinRange</span> {
-  <span class="kw">condition</span> <span class="str">"Moisture shall be between 8% and 12% by mass"</span>
-  <span class="kw">modality</span> <span class="typ">SHALL</span>
-  <span class="kw">reference</span> { BFS-4-2 }
-}
-
-<span class="kw">measurement</span> <span class="id">MaxMoisture</span> {
-  <span class="kw">type</span> <span class="typ">DERIVED</span>
-  <span class="kw">definition</span> <span class="str">"[MoistureReading].max"</span>
-}
-
-<span class="kw">process</span> <span class="id">TestMoisture</span> {
-  <span class="kw">actor</span> <span class="id">QA</span>
-  <span class="kw">modality</span> <span class="typ">SHALL</span>
-  <span class="kw">validate_provision</span> { MoistureWithinRange }
-  <span class="kw">validate_measurement</span> { <span class="str">"[MaxMoisture] &lt;= 12"</span> }
-}</pre>
+      <div class="actions">
+        <a class="VPButton brand" href="/docs/introduction">Read the introduction</a>
+        <a class="VPButton alt" href="/docs/examples/">Browse the examples</a>
+      </div>
     </section>
 
     <!-- ──────────────── THE FIVE PILLARS ────────────────── -->
     <section class="section">
-      <p class="section-eyebrow">The architecture</p>
+      <p class="section-eyebrow">Architecture</p>
       <h2 class="section-title">
-        Five pillars, one lifecycle.
+        Five activities, one lifecycle.
       </h2>
       <p class="section-description">
-        From the moment a reference model is published to the moment an
-        auditor hands down a verdict — five distinct activities, each
-        with its own actor and its own artefact. MECE by design.
+        From the moment a reference model is published to the moment
+        an auditor hands down a verdict — each activity has a distinct
+        actor and a distinct artefact.
       </p>
 
-      <nav class="pillars-grid">
+      <nav class="pillars-list">
         <a
           v-for="p in pillars"
           :key="p.name"
           class="pillar"
           :href="`/docs/architecture/${p.name.toLowerCase()}`"
         >
-          <span class="num">No. {{ p.num }}</span>
+          <span class="num">{{ p.num }}</span>
           <span class="name">{{ p.name }}</span>
-          <span class="role">{{ p.role }}</span>
+          <span class="desc">{{ p.desc }}</span>
+          <span class="arrow">→</span>
         </a>
       </nav>
     </section>
@@ -143,22 +83,18 @@ const issueMonth = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII
       <h2 class="section-title">
         A modelling language built for the work standards actually do.
       </h2>
-      <p class="section-description">
-        Primmel is a domain-specific language for turning SMART
-        standards into executable artefacts: process flows, data
-        requirements, and evidential requirements, in one
-        machine-readable form.
-      </p>
 
-      <div class="features-grid">
+      <div class="features-list">
         <article
           v-for="f in features"
           :key="f.num"
-          class="feature-card"
-          :data-num="`№ ${f.num}`"
+          class="feature"
         >
-          <h3>{{ f.title }}</h3>
-          <p>{{ f.body }}</p>
+          <span class="num">{{ f.num }}</span>
+          <div>
+            <h3>{{ f.title }}</h3>
+            <p>{{ f.body }}</p>
+          </div>
         </article>
       </div>
     </section>
@@ -166,8 +102,7 @@ const issueMonth = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII
     <!-- ──────────────────── FOOTER CTA ──────────────────── -->
     <section class="home-footer-cta">
       <h2>
-        From <em>BSI SMART</em> and <em>OIML SMART</em><br />
-        into the public record.
+        From BSI SMART and OIML SMART, into the public record.
       </h2>
       <a class="VPButton alt" href="/about">Read the story →</a>
     </section>
@@ -178,7 +113,7 @@ const issueMonth = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII
 <style scoped>
 .primmel-home { width: 100%; }
 .dark-only { display: none; }
-.light-only { display: inline-block; }
-.dark .dark-only { display: inline-block; }
+.light-only { display: block; }
+.dark .dark-only { display: block; }
 .dark .light-only { display: none; }
 </style>
