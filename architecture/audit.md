@@ -80,10 +80,10 @@ complete mapping is unmoored data.
 
 ## Where to see it in action
 
-- [Compliance and measurement example](/docs/examples/compliance-and-measurement)
+- [Compliance and measurement example](/examples/compliance-and-measurement)
   &mdash; the gateway edge `condition` expressions and
   `validate_measurement` blocks that an auditor would evaluate.
-- [Implementation package walkthrough](/docs/examples/implementation-package)
+- [Implementation package walkthrough](/examples/implementation-package)
   &mdash; the showcase that demonstrates both kinds of audit input.
 
 ## After auditing

@@ -111,7 +111,7 @@ process RoastBatch {
 
 ## Where to see it in action
 
-- [Example 02: Data and registries](/docs/examples/data-and-registries) &mdash;
+- [Example 02: Data and registries](/examples/data-and-registries) &mdash;
   the dedicated walkthrough.
-- [Implementation package](/docs/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) &mdash;
   data classes and registries at production scale.

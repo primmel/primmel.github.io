@@ -87,7 +87,7 @@ implementation model:
 ## After publishing
 
 Once published, the reference model enters the flow: an organisation's
-[Implement](/docs/architecture/implement) pillar may already have an
+[Implement](/architecture/implement) pillar may already have an
 implementation `.prl` for its own operations. When the organisation
 decides to take up this reference model, it moves to the
-[Adopt](/docs/architecture/adopt) pillar.
+[Adopt](/architecture/adopt) pillar.

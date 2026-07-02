@@ -198,8 +198,8 @@ referenced by it.
 ## What this example leaves out
 
 - **Compliance** &mdash; no `provision`, no `modality` on processes.
-  Added in [compliance and measurement](/docs/examples/compliance-and-measurement).
+  Added in [compliance and measurement](/examples/compliance-and-measurement).
 - **Branching** &mdash; the flow is a straight line. Branching is
-  added in [process flow](/docs/examples/process-flow).
+  added in [process flow](/examples/process-flow).
 - **Subject bindings** &mdash; provisions that evaluate against
-  registry records. Added in [compliance and measurement](/docs/examples/compliance-and-measurement).
+  registry records. Added in [compliance and measurement](/examples/compliance-and-measurement).

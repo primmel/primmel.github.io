@@ -141,7 +141,7 @@ This is what *executable standard* means in practice.
 
 - [A First Model](/docs/first-model) &mdash; build the minimal model
   from scratch, line by line.
-- [Examples](/docs/examples/) &mdash; the curated example corpus, each
+- [Examples](/examples/) &mdash; the curated example corpus, each
   file dissected.
 - [Data primitives](/docs/data-model), [process primitives](/docs/process-model),
   [compliance](/docs/compliance), [measurement](/docs/measurement),

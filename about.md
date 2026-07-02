@@ -239,7 +239,7 @@ Ready to model a standard in Primmel? Here's the path:
 2. **See a first model** &mdash; work through
    [A First Model](/docs/first-model).
 3. **Browse the examples** &mdash; real MMEL models converted to Primmel,
-   in [Examples](/docs/examples/).
+   in [Examples](/examples/).
 4. **Read the full specification** &mdash; at
    [primmel.org/spec](https://www.primmel.org/spec/).
 5. **Try a model** &mdash; load a model in your editor of choice and

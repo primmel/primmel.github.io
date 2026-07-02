@@ -12,7 +12,7 @@ models for standards like ISO 14971, ISO 13485, BS 20400, and MDSAP.
 
 Each example adds one new primitive group to the previous one.
 
-### 1. [Minimal model](/docs/examples/minimal-model)
+### 1. [Minimal model](/examples/minimal-model)
 
 The smallest valid Primmel model: a `root`, `version`, `metadata`, two
 roles, one process, start/end events, a single-page diagram. Nothing
@@ -22,7 +22,7 @@ else.
   `process`, `subprocess`, `process_flow`.
 - File: [`01-minimal-model.prl`](/examples/files/01-minimal-model.prl)
 
-### 2. [Data and registries](/docs/examples/data-and-registries)
+### 2. [Data and registries](/examples/data-and-registries)
 
 A roastery logbook. Introduces typed data classes, registries, and the
 distinction between a *data class* (`#data` suffix, can be registered)
@@ -33,7 +33,7 @@ and a *helper class* (no suffix, embedded inside other classes).
   process `output` writes, process `reference_data_registry` reads.
 - File: [`02-data-and-registries.prl`](/examples/files/02-data-and-registries.prl)
 
-### 3. [Process flow](/docs/examples/process-flow)
+### 3. [Process flow](/examples/process-flow)
 
 An order-fulfillment flow with two subprocess diagrams on the same
 model. Shows how `start_event`s, `timer_event`s, and
@@ -44,7 +44,7 @@ model. Shows how `start_event`s, `timer_event`s, and
   `exclusive_gateway` with labelled branches and `"default"` fallback.
 - File: [`03-process-flow.prl`](/examples/files/03-process-flow.prl)
 
-### 4. [Compliance and measurement](/docs/examples/compliance-and-measurement)
+### 4. [Compliance and measurement](/examples/compliance-and-measurement)
 
 A bean-freshness programme that ties quality provisions to derived
 measurements, with a gateway whose outgoing edges carry
@@ -56,7 +56,7 @@ machine-readable conditions.
   `validate_measurement`, gateway edge with `condition`.
 - File: [`04-compliance-and-measurement.prl`](/examples/files/04-compliance-and-measurement.prl)
 
-### 5. [Approval workflow](/docs/examples/approval-workflow)
+### 5. [Approval workflow](/examples/approval-workflow)
 
 A new-roast-profile sign-off. Introduces the `approval` step, the
 `approve_by` role, and the `approval_record` registry where each
@@ -66,7 +66,7 @@ signed approval is written.
   role-typed fields.
 - File: [`05-approval-workflow.prl`](/examples/files/05-approval-workflow.prl)
 
-### 6. [Implementation package](/docs/examples/implementation-package)
+### 6. [Implementation package](/examples/implementation-package)
 
 The showcase. A fictional Acme Corporation implements a fictional
 Office Coffee Standard (OCS). Four files work together: a `.prd`
@@ -119,7 +119,7 @@ process AcmeSourceBeans {
 ```
 
 This is how implementation models link their processes to standard-defined
-requirements. See the [implementation package](/docs/examples/implementation-package).
+requirements. See the [implementation package](/examples/implementation-package).
 
 ### Subject bindings (`subject#N`)
 
@@ -136,7 +136,7 @@ provision StandardMeetQuality {
 
 The `{ ... (Data) }` placeholder is replaced by the bound registry's
 records at evaluation time. See
-[compliance and measurement](/docs/examples/compliance-and-measurement)
+[compliance and measurement](/examples/compliance-and-measurement)
 and the implementation package.
 
 ### Gateway conditions
@@ -159,7 +159,7 @@ Edge5 {
 ```
 
 The edge marked `description "default"` is taken when no other condition
-matches. See [compliance and measurement](/docs/examples/compliance-and-measurement).
+matches. See [compliance and measurement](/examples/compliance-and-measurement).
 
 ### Timer loops
 
@@ -173,7 +173,7 @@ Edge3 { from SupplierReviewTimer to ReviewSuppliers }
 ```
 
 This reads as "review suppliers, wait the specified period, review
-again." See [process flow](/docs/examples/process-flow) and the
+again." See [process flow](/examples/process-flow) and the
 implementation package.
 
 ### Helper classes (without `#data`)
@@ -193,7 +193,7 @@ class RoastBatch#data {     // data class, can be linked to a registry
 }
 ```
 
-See [data and registries](/docs/examples/data-and-registries).
+See [data and registries](/examples/data-and-registries).
 
 ## Conventions used in these examples
 
