@@ -154,8 +154,8 @@ the corpus adds branches, data, and compliance on top of this skeleton.
 
 | Construct | Where it shows up |
 | --- | --- |
-| `class`, `enum`, `data_registry` | [Data and registries](/docs/examples/data-and-registries) |
-| `exclusive_gateway`, `timer_event` | [Process flow](/docs/examples/process-flow) |
-| `provision`, `measurement`, `note`, `table` | [Compliance and measurement](/docs/examples/compliance-and-measurement) |
-| `approval`, `approve_by` | [Approval workflow](/docs/examples/approval-workflow) |
-| `.prd`, `.prm`, `.pws` integration | [Implementation package](/docs/examples/implementation-package) |
+| `class`, `enum`, `data_registry` | [Data and registries](/examples/data-and-registries) |
+| `exclusive_gateway`, `timer_event` | [Process flow](/examples/process-flow) |
+| `provision`, `measurement`, `note`, `table` | [Compliance and measurement](/examples/compliance-and-measurement) |
+| `approval`, `approve_by` | [Approval workflow](/examples/approval-workflow) |
+| `.prd`, `.prm`, `.pws` integration | [Implementation package](/examples/implementation-package) |

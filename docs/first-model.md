@@ -35,7 +35,7 @@ metadata {
 | `root HelloWorld` | Names the top-level subprocess &mdash; the entry point of the model. |
 | `version "v1.0.0-dev1"` | Semantic version of the model itself. |
 | `metadata.schema` | The DSL schema identifier. `"Primmel 0.1"` is the current value. |
-| `metadata.namespace` | The model's namespace. Used when **other** models import this model's elements with the `Namespace#ElementID` pattern (see [the implementation package](/docs/examples/implementation-package)). |
+| `metadata.namespace` | The model's namespace. Used when **other** models import this model's elements with the `Namespace#ElementID` pattern (see [the implementation package](/examples/implementation-package)). |
 
 ## Roles
 
@@ -87,7 +87,7 @@ A real-world process usually also has:
 - `modality SHALL` / `SHOULD` / `MAY` &mdash; the compliance weight of
   the step.
 - `validate_provision { ... }` &mdash; the provisions this process must
-  satisfy. See [example 04](/docs/examples/compliance-and-measurement).
+  satisfy. See [example 04](/examples/compliance-and-measurement).
 - `reference_data_registry { ... }` &mdash; data registries this process
   reads from.
 - `output { ... }` &mdash; data registries this process writes to.
@@ -122,27 +122,27 @@ A subprocess has three blocks:
 
 The `Root` subprocess is the top-level flow. A model with multiple
 subprocesses names them like pages (`OrderFlow`, `QualityCheckFlow`,
-`SupplierReviewFlow`) &mdash; see [example 03](/docs/examples/process-flow)
-and the [implementation package](/docs/examples/implementation-package).
+`SupplierReviewFlow`) &mdash; see [example 03](/examples/process-flow)
+and the [implementation package](/examples/implementation-package).
 
 ## What this model lacks
 
 The minimal model is correct Primmel, but it does not exercise:
 
 - **Data** &mdash; no `class`, `enum`, or `data_registry`. Added in
-  [example 02](/docs/examples/data-and-registries).
+  [example 02](/examples/data-and-registries).
 - **Compliance** &mdash; no `provision` or `reference`. Added in
-  [example 04](/docs/examples/compliance-and-measurement).
+  [example 04](/examples/compliance-and-measurement).
 - **Branching** &mdash; no `exclusive_gateway`. Added in
-  [example 03](/docs/examples/process-flow).
+  [example 03](/examples/process-flow).
 - **Mapping** &mdash; no `map_profile` or `.prm` file. Added in the
-  [implementation package](/docs/examples/implementation-package).
+  [implementation package](/examples/implementation-package).
 
 That is what the rest of the example corpus adds, one primitive at a
 time.
 
 ## Next
 
-Open [the examples index](/docs/examples/) and pick the next file in the
+Open [the examples index](/examples/) and pick the next file in the
 reading order. Each example introduces one new primitive group, with the
 relevant lines highlighted and explained.

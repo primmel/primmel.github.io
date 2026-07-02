@@ -2,16 +2,16 @@
 
 ::: tip Where this fits
 The implementation package is a concrete demonstration of the
-[**Adopt**](/docs/architecture/adopt) pillar in the Primmel
+[**Adopt**](/architecture/adopt) pillar in the Primmel
 architecture. It is the activity of taking up a reference model (the
-OCS standard, defined by [Define](/docs/architecture/define)) by
+OCS standard, defined by [Define](/architecture/define)) by
 modifying an existing implementation model (already maintained under
-[Implement](/docs/architecture/implement)), and building the mapping
+[Implement](/architecture/implement)), and building the mapping
 that closes with a Statement of Applicability. The accompanying
 `sample-workspace.pws/` shows what the
-[**Operate**](/docs/architecture/operate) pillar produces; together
+[**Operate**](/architecture/operate) pillar produces; together
 with the mapping it is what an
-[**Audit**](/docs/architecture/audit) consumes.
+[**Audit**](/architecture/audit) consumes.
 :::
 
 This is the showcase example. A fictional **Acme Corporation**
@@ -34,21 +34,63 @@ with invented content suitable for public distribution.
 
 ## How the four files fit together
 
-```text
-  ocs-standard.prd        acme-coffee-programme.prl
-  (the source standard)   (Acme's implementation)
-         │                          │
-         │  referenced via          │  maps via
-         │  OCS-doc-4-N             │  map_profile + .prm
-         ▼                          ▼
-       reference { ... }       acme-to-ocs.prm
-                                (the mapping JSON)
-                                         │
-                                         │  validated against
-                                         ▼
-                                sample-workspace.pws
-                                (actual records)
-```
+<div class="diagram">
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pkg-title">
+  <title id="pkg-title">How the four implementation-package files fit together</title>
+  <defs>
+    <marker id="pkg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--primmel-rule-strong)"/>
+    </marker>
+  </defs>
+
+  <!-- prd (top-left) -->
+  <g transform="translate(40 40)">
+    <rect width="260" height="100" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-indigo)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PRD</text>
+    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">ocs-standard.prd</text>
+    <text x="20" y="75" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">The source standard.</text>
+    <text x="20" y="90" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Clause-level extracts.</text>
+  </g>
+
+  <!-- prl (top-right) -->
+  <g transform="translate(600 40)">
+    <rect width="260" height="100" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-indigo)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PRL</text>
+    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">acme-coffee-programme.prl</text>
+    <text x="20" y="75" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Acme's implementation.</text>
+    <text x="20" y="90" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Local + OCS# aliased elements.</text>
+  </g>
+
+  <!-- arrow prd → middle (referenced via) -->
+  <path d="M 300 90 Q 380 90 420 175" fill="none" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
+  <text x="330" y="105" font-family="var(--primmel-body)" font-size="11" font-style="italic" fill="var(--primmel-text-3)">referenced</text>
+
+  <!-- arrow prl → prm (maps via) -->
+  <path d="M 600 90 Q 540 130 460 175" fill="none" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
+  <text x="510" y="115" font-family="var(--primmel-body)" font-size="11" font-style="italic" fill="var(--primmel-text-3)">maps via</text>
+
+  <!-- prm (middle) -->
+  <g transform="translate(320 180)">
+    <rect width="260" height="100" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-burgundy)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PRM</text>
+    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">acme-to-ocs.prm</text>
+    <text x="20" y="75" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">The mapping JSON.</text>
+    <text x="20" y="90" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Each impl → reference element.</text>
+  </g>
+
+  <!-- arrow prm → pws (validated against) -->
+  <line x1="450" y1="285" x2="450" y2="320" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
+  <text x="460" y="305" font-family="var(--primmel-body)" font-size="11" font-style="italic" fill="var(--primmel-text-3)">validated against</text>
+
+  <!-- pws (bottom) -->
+  <g transform="translate(320 325)">
+    <rect width="260" height="80" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-olive)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PWS/  (directory)</text>
+    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">sample-workspace.pws/</text>
+    <text x="20" y="70" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Actual records. YAML, one file per record.</text>
+  </g>
+</svg>
+</div>
 
 The four file types each play a distinct role:
 

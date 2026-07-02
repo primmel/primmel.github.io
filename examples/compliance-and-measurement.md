@@ -53,7 +53,7 @@ short label. A reference is what a `provision` cites to justify its
 existence.
 
 In a real workspace, references typically point at clauses in a `.prd`
-file (source document content). See the [implementation package](/docs/examples/implementation-package)
+file (source document content). See the [implementation package](/examples/implementation-package)
 for that pattern.
 
 ## Provisions
@@ -281,9 +281,9 @@ auditor or test harness can replay against real data.
 
 - **Cross-model aliasing** &mdash; provisions live entirely inside this
   file. Cross-model aliasing is added in the
-  [implementation package](/docs/examples/implementation-package).
+  [implementation package](/examples/implementation-package).
 - **Workspace data** &mdash; the model declares measurements but does
   not carry any actual readings. Workspace data is added in the
-  [implementation package](/docs/examples/implementation-package).
+  [implementation package](/examples/implementation-package).
 - **Approval steps** &mdash; see
-  [approval workflow](/docs/examples/approval-workflow).
+  [approval workflow](/examples/approval-workflow).

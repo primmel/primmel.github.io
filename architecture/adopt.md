@@ -81,7 +81,7 @@ canonical artefact submitted to auditors.
 
 ## Where to see it in action
 
-- [Implementation package walkthrough](/docs/examples/implementation-package)
+- [Implementation package walkthrough](/examples/implementation-package)
   &mdash; the showcase. Acme adopts the OCS standard, modifies its
   implementation as needed, builds the mapping, and closes it.
 - [Mapping](/docs/mapping) &mdash; the dual forms of mapping in detail.
@@ -90,6 +90,6 @@ canonical artefact submitted to auditors.
 
 Once the Statement of Applicability holds, the organisation is in a
 position to be audited. Day-to-day running of the adopted processes is
-the [Operate](/docs/architecture/operate) pillar; the periodic
+the [Operate](/architecture/operate) pillar; the periodic
 verification that the mapping is still complete and the provisions still
-hold is the [Audit](/docs/architecture/audit) pillar.
+hold is the [Audit](/architecture/audit) pillar.
