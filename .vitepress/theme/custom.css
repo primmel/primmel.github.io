@@ -1,5 +1,5 @@
-/* Primmel — considered, multi-color, serif-led.
-   Fraunces display. IBM Plex Sans body. JetBrains Mono code.
+/* Primmel — considered, multi-color, sans-led.
+   Hanken Grotesk display + body. Spline Sans Mono code.
    Warm cream paper. Indigo, burgundy, ochre, olive accents. */
 
 :root {
@@ -33,9 +33,9 @@
   --primmel-rule-strong:  #b0a78a;
 
   /* ── Typography ───────────────────────────────────────── */
-  --primmel-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-  --primmel-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --primmel-mono:    'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --primmel-display: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --primmel-body:    'Hanken Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --primmel-mono:    'Spline Sans Mono', 'SF Mono', Menlo, Consolas, monospace;
 
   /* ── VitePress overrides ───────────────────────────────── */
   --vp-c-brand-1: var(--primmel-indigo);
@@ -157,7 +157,7 @@ body::before {
     radial-gradient(ellipse at 85% 80%, rgba(138, 171, 245, 0.06) 0, transparent 50%);
 }
 
-/* ── Headings: Fraunces serif ──────────────────────────── */
+/* ── Headings: sans (no serif) ──────────────────────────── */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--primmel-display);
@@ -224,7 +224,7 @@ strong { font-weight: 600; color: var(--primmel-ink); }
 
 em { font-style: italic; }
 
-/* ── Code: JetBrains Mono with multi-color tokens ─────── */
+/* ── Code: Spline Sans Mono with multi-color tokens ─────── */
 
 .vp-doc :not(pre) > code {
   font-family: var(--primmel-mono);
