@@ -1,7 +1,6 @@
 # About Primmel
 
 <div class="about-hero">
-  <h1>About Primmel</h1>
   <p class="tagline">Prime MMEL &mdash; the torch carried forward.</p>
 </div>
 
