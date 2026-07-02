@@ -9,11 +9,11 @@ const features = [
 ]
 
 const pillars = [
-  { num: '01', name: 'Define',    desc: 'A reference publisher — standards body, industry consortium, regulator, or any organisation — authors a reference model and publishes it for others to map to.' },
-  { num: '02', name: 'Implement', desc: 'An organisation maintains its own implementation model: a standing digital twin of its actual operations, existing whether or not any standard is in scope.' },
-  { num: '03', name: 'Adopt',     desc: 'The organisation takes up a reference model. It modifies the implementation as needed and declares mappings from implementation elements to reference elements.' },
-  { num: '04', name: 'Operate',   desc: 'The organisation runs the implementation in production. Each process execution produces records — the evidence of conformance on the ground.' },
-  { num: '05', name: 'Audit',     desc: 'An auditor follows the mapping from each reference requirement to its implementation elements, then to the operational evidence. A structural compliance verdict.' },
+  { num: '01', name: 'Define',    desc: 'A reference publisher — standards body, industry consortium, regulator, or any organisation — authors a reference model and publishes it for others to consume.' },
+  { num: '02', name: 'Reference', desc: 'Readers consume the published model: navigate the standard, run its test procedures, check dimensional and formula requirements, evaluate whether a product or process complies.' },
+  { num: '03', name: 'Implement', desc: 'An organisation maintains its digital twin, takes up a reference, customizes to satisfy it, and declares mappings. Closes when every reference element → ≥1 impl element (Statement of Applicability).' },
+  { num: '04', name: 'Operate',   desc: 'Operators run the implementation in production. Each process execution produces records — the evidence of conformance on the ground.' },
+  { num: '05', name: 'Audit',     desc: 'An auditor navigates the standard like readers, correlates through mappings to find the implementation, and views evidence like operators. A structural compliance verdict.' },
 ]
 </script>
 

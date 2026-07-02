@@ -2,7 +2,7 @@
 
 ::: tip Where this fits
 The implementation package is a concrete demonstration of the
-[**Adopt**](/architecture/adopt) pillar in the Primmel
+[**Adopt**](/architecture/implement) pillar in the Primmel
 architecture. It is the activity of taking up a reference model (the
 OCS standard, defined by [Define](/architecture/define)) by
 modifying an existing implementation model (already maintained under
