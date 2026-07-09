@@ -1,0 +1,10 @@
+import { getCollection } from 'astro:content';
+const arch = await getCollection('architecture');
+const ex = await getCollection('examples');
+const docs = await getCollection('docs');
+console.log('=== ARCH ===');
+arch.forEach(e => console.log(' ', e.slug, '|', e.data.title));
+console.log('=== EX ===');
+ex.forEach(e => console.log(' ', e.slug, '|', e.data.title));
+console.log('=== DOCS ===');
+docs.forEach(e => console.log(' ', e.slug, '|', e.data.title));

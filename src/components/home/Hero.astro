@@ -1,0 +1,130 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <img src="/primmel-logo-light.svg" class="logo light-only" alt="Primmel" width="80" height="80" />
+    <img src="/primmel-logo-dark.svg" class="logo dark-only" alt="Primmel" width="80" height="80" />
+
+    <p class="eyebrow">An executable language for SMART standards</p>
+
+    <h1>Standards,<br /><em>instantly</em> executable.</h1>
+
+    <p class="tagline">
+      Primmel is a typed, machine-readable language for representing
+      ISO, BSI, and OIML standards as <strong>runnable programs</strong>.
+      Process flows, data requirements, and evidential hooks in one
+      plain-text file.
+    </p>
+
+    <div class="actions">
+      <a href="/docs/introduction" class="btn-brand">Read the introduction</a>
+      <a href="/examples/" class="btn-alt">Browse the examples</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The five-pillar lifecycle">
+      <defs>
+        <linearGradient id="g-bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--c-surface)" />
+          <stop offset="100%" stop-color="var(--c-surface-2)" />
+        </linearGradient>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--c-rule-strong)" />
+        </marker>
+      </defs>
+      <rect x="8" y="8" width="464" height="464" rx="8" fill="url(#g-bg)" stroke="var(--c-rule)" stroke-width="1" />
+      <circle cx="240" cy="240" r="48" fill="none" stroke="var(--c-rule-strong)" stroke-width="1" stroke-dasharray="3 3" />
+      <text x="240" y="232" text-anchor="middle" font-family="var(--font-display)" font-size="14" font-style="italic" fill="var(--c-text-3)">lifecycle</text>
+      <text x="240" y="254" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--c-text-3)" letter-spacing="1.5">5 PILLARS</text>
+      <g stroke="var(--c-rule-strong)" stroke-width="1" fill="none" marker-end="url(#arr)">
+        <path d="M 275 75 Q 350 95 374 135" />
+        <path d="M 405 200 Q 410 285 354 335" />
+        <path d="M 294 380 Q 240 395 186 380" />
+        <path d="M 126 335 Q 70 285 75 200" />
+        <path d="M 106 135 Q 130 95 205 75" />
+      </g>
+      <g font-family="var(--font-display)" font-weight="400">
+        <g transform="translate(240 70)"><circle r="36" fill="var(--c-surface-2)" stroke="var(--c-indigo)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" fill="var(--c-burgundy)" font-family="var(--font-mono)">01</text><text y="14" text-anchor="middle" font-size="14" fill="var(--c-ink)">Define</text></g>
+        <g transform="translate(385 165)"><circle r="36" fill="var(--c-surface-2)" stroke="var(--c-indigo)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" fill="var(--c-burgundy)" font-family="var(--font-mono)">02</text><text y="14" text-anchor="middle" font-size="13" fill="var(--c-ink)">Reference</text></g>
+        <g transform="translate(330 360)"><circle r="36" fill="var(--c-surface-2)" stroke="var(--c-burgundy)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" fill="var(--c-burgundy)" font-family="var(--font-mono)">03</text><text y="14" text-anchor="middle" font-size="15" fill="var(--c-ink)">Implement</text></g>
+        <g transform="translate(150 360)"><circle r="36" fill="var(--c-surface-2)" stroke="var(--c-olive)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" fill="var(--c-burgundy)" font-family="var(--font-mono)">04</text><text y="14" text-anchor="middle" font-size="13" fill="var(--c-ink)">Operate</text></g>
+        <g transform="translate(95 165)"><circle r="36" fill="var(--c-surface-2)" stroke="var(--c-ochre)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" fill="var(--c-burgundy)" font-family="var(--font-mono)">05</text><text y="14" text-anchor="middle" font-size="15" fill="var(--c-ink)">Audit</text></g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 3rem;
+    align-items: center;
+  }
+  .logo { width: 80px; height: 80px; margin-bottom: 2rem; display: block; }
+  .light-only { display: inline; }
+  .dark-only { display: none; }
+  :global(.dark) .light-only { display: none; }
+  :global(.dark) .dark-only { display: inline; }
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--c-burgundy);
+    margin-bottom: 1.5rem;
+  }
+  :global(.dark) .eyebrow { color: var(--c-ochre); }
+  h1 {
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    margin: 0 0 1.5rem;
+  }
+  h1 em { font-style: italic; font-weight: 300; color: var(--c-indigo); }
+  :global(.dark) h1 em { color: var(--c-indigo); }
+  .tagline {
+    font-size: clamp(1.05rem, 1.4vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--c-text-2);
+    max-width: 500px;
+    margin: 0 0 2rem;
+  }
+  .tagline strong { font-weight: 600; color: var(--c-ink); }
+  .actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .btn-brand {
+    padding: 0.55rem 1.15rem;
+    border-radius: 4px;
+    background: var(--c-ink);
+    color: var(--c-surface);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--c-ink);
+    transition: all var(--dur-fast) ease;
+  }
+  .btn-brand:hover { background: var(--c-indigo); border-color: var(--c-indigo); }
+  :global(.dark) .btn-brand { background: var(--c-indigo); border-color: var(--c-indigo); color: var(--c-bg); }
+  .btn-alt {
+    padding: 0.55rem 1.15rem;
+    border-radius: 4px;
+    border: 1px solid var(--c-rule-strong);
+    color: var(--c-ink);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color var(--dur-fast) ease;
+  }
+  .btn-alt:hover { border-color: var(--c-ink); }
+  .hero-visual svg { width: 100%; height: auto; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; }
+    .hero-visual { order: -1; }
+  }
+</style>

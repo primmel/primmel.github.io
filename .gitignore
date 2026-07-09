@@ -1,4 +1,6 @@
 node_modules
+dist
+.astro
 .vitepress/cache
 .vitepress/dist
 package-lock.json
@@ -6,6 +8,4 @@ package-lock.json
 *.log
 .env
 .env.local
-# Workflow artifacts (debugging artifacts should never be committed)
-artifact.tar
 *.tar
