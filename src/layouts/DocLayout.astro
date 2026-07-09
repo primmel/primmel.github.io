@@ -1,0 +1,74 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SideBar from '../components/nav/SideBar.astro';
+import Outline from '../components/nav/Outline.astro';
+import Pager from '../components/ui/Pager.astro';
+import { deriveSidebar, getSiblings } from '../lib/navigation';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  collection: string;
+  slug: string;
+  headings?: MarkdownHeading[];
+}
+
+const { title, description, collection, slug, headings = [] } = Astro.props;
+const sidebarGroups = await deriveSidebar(collection);
+const siblings = await getSiblings(collection, slug);
+const editUrl = `https://github.com/primmel/primmel.github.io/edit/main/src/content/${collection}/${slug}.md`;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="doc-layout">
+    <SideBar groups={sidebarGroups} activeHref={`/${collection}/${slug}`} />
+    <main class="doc-main">
+      <article class="prose">
+        <slot />
+      </article>
+      <div class="doc-footer">
+        <a href={editUrl} class="edit-link">Edit this page on GitHub</a>
+      </div>
+      <Pager prev={siblings.prev} next={siblings.next} />
+    </main>
+    <Outline headings={headings} />
+  </div>
+</BaseLayout>
+
+<style>
+  .doc-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr) 220px;
+    gap: 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    min-height: calc(100vh - 120px);
+  }
+  .doc-main {
+    max-width: 760px;
+    padding: 2rem 0 4rem;
+  }
+  .doc-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--c-rule);
+  }
+  .edit-link {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--c-indigo);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) ease;
+  }
+  .edit-link:hover { border-bottom-color: var(--c-indigo); }
+  @media (max-width: 1024px) {
+    .doc-layout { grid-template-columns: 260px minmax(0, 1fr); }
+    .outline { display: none; }
+  }
+  @media (max-width: 768px) {
+    .doc-layout { grid-template-columns: 1fr; padding: 0 1.5rem; }
+    .sidebar { display: none; }
+  }
+</style>
