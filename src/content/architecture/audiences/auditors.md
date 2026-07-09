@@ -1,0 +1,132 @@
+---
+title: "Auditors"
+audience: "auditors"
+pillar: "audit"
+side: "application"
+sidebar:
+  section: "Audiences"
+  order: 5
+  label: "Auditors"
+---
+
+# Auditors
+
+::: tip CORRESPONDING PILLAR
+[Auditors](/architecture/audiences/auditors) drive the
+[**Audit**](/architecture/audit) pillar. They verify conformance by
+navigating the standard like readers, correlating through `.prm`
+mappings to find implementation elements, and viewing `.pws/`
+evidence like operators.
+:::
+
+## Who they are
+
+Auditors are the people who **verify conformance** against a reference
+model by following the structural chain from requirement to evidence.
+Common auditor types:
+
+- **External auditors** &mdash; certification-body auditors (BSI
+  auditors for ISO certification, OIML-appointed assessors, etc.).
+- **Internal auditors** &mdash; org staff performing first-party
+  audits ahead of external ones.
+- **Regulators** &mdash; market-surveillance or sector regulators
+  checking that certified organisations remain compliant.
+- **Customer auditors** &mdash; procurement teams auditing suppliers
+  against standards their supply chain requires.
+- **Second-party assessors** &mdash; industry bodies or large buyers
+  performing assessments on member organisations.
+
+## What they're trying to accomplish
+
+For each requirement in the reference model, an auditor follows three
+steps:
+
+1. **Navigate the standard** &mdash; using reader-style spec-browser
+   capability, find the requirement being audited.
+2. **Correlate through the mapping** &mdash; the auditor's distinct
+   skill: follow the `.prm` from the reference element to its mapped
+   implementation element(s).
+3. **View the evidence** &mdash; using operator-style workspace-browser
+   capability, look at the `.pws/` records the implementation
+   produces, and evaluate `validate_provision` /
+   `validate_measurement` against them.
+
+The output is a **compliance verdict** &mdash; per requirement,
+passing or failing &mdash; with a traceable evidence path from
+standard clause to workspace record.
+
+## The auditor inherits from readers and operators
+
+This is the structural insight. Auditors do not have a wholly new
+capability set; they **combine** two existing capability sets and add
+one distinct skill:
+
+| Capability | Source | What it lets the auditor do |
+| --- | --- | --- |
+| Standard navigation | [Readers](/architecture/audiences/readers) | Find provisions, processes, and references in the published `.prl` |
+| Evidence viewing | [Operators](/architecture/audiences/operators) | Read `.pws/` records; follow references between them |
+| **Correlation via `.prm`** | **Auditor's own** | **Follow the mapping from a reference element to its implementation element(s)** |
+
+Tools built for Readers and Operators can be **reused** by Auditors
+without modification. The Auditor-specific tool is the mapping
+navigator &mdash; a tool that, given a reference element, finds the
+implementation element(s) it maps to and the workspace records those
+elements produce.
+
+## Artifacts they consume / produce
+
+| Artifact | Role |
+| --- | --- |
+| Reference `.prl` | Consumed &mdash; the standard being audited against |
+| Optional `.prd` | Consumed &mdash; the source clause text |
+| Implementation `.prl` | Consumed &mdash; the org's digital twin |
+| `.prm` mapping | Consumed &mdash; how each reference element maps to impl element(s) |
+| `.pws/` workspace | Consumed &mdash; the actual records produced by running the org |
+| Compliance verdict + evidence trace | Produced &mdash; the audit deliverable |
+
+## Tools they use
+
+- **Spec browsers** &mdash; *borrowed from Readers*; navigate the
+  reference model.
+- **Workspace browsers** &mdash; *borrowed from Operators*; navigate
+  the `.pws/` directory, follow record references.
+- **Mapping navigators** &mdash; *auditor-specific*; given a reference
+  element, walk the `.prm` to find implementation element(s) and their
+  evidence.
+- **Provision evaluators** &mdash; run `validate_provision` and
+  `validate_measurement` expressions against workspace records to
+  produce pass/fail verdicts.
+- **Audit report generators** &mdash; produce the compliance verdict
+  document with traceable evidence paths.
+
+## A worked example
+
+An auditor verifying Acme against the OCS standard would:
+
+1. Open the OCS reference model in a spec browser. Navigate to
+   clause 4.2 (*Bean sourcing*). Find `OCS#Provision4-2-1` ("The
+   organization shall source beans only from approved suppliers").
+2. Open Acme's `acme-to-ocs.prm` in a mapping navigator. See that
+   `OCS#Provision4-2-1` is mapped to Acme's `SourceBeans` process
+   (via the `validate_provision` binding in the implementation `.prl`).
+3. Open Acme's `sample-workspace.pws/` workspace. See that
+   `SupplierRegistry/sup-001.yaml` shows Highland Beans Co. was
+   approved on 2026-01-05 by `operations.manager@acme.example`. See
+   that `BeanLotRegistry/lot-2026-001.yaml` references that supplier.
+4. **Verdict**: the requirement is satisfied &mdash; beans were sourced
+   from an approved supplier.
+
+Each step uses a different capability. Step 1 uses reader-style
+navigation. Step 3 uses operator-style evidence viewing. Step 2 &mdash;
+the auditor's distinct skill &mdash; correlates via the `.prm`.
+
+## See also
+
+- [**Audit** pillar](/architecture/audit) &mdash; the architectural
+  activity this audience drives.
+- [Readers](/architecture/audiences/readers) &mdash; whose capability set Auditors
+  inherit (standard navigation).
+- [Operators](/architecture/audiences/operators) &mdash; whose capability set
+  Auditors inherit (evidence viewing).
+- [Implementers](/architecture/audiences/implementers) &mdash; who built the
+  implementation and mapping Auditors verify.

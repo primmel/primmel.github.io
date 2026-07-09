@@ -1,0 +1,53 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+const { headings } = Astro.props;
+const h2s = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{h2s.length > 0 && (
+  <aside class="outline">
+    <h2 class="outline-heading">On this page</h2>
+    <ul>
+      {h2s.map(h => (
+        <li class={h.depth === 3 ? 'nested' : ''}>
+          <a href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
+
+<style>
+  .outline {
+    padding: 2rem 0 2rem 1.5rem;
+    border-left: 1px solid var(--c-rule);
+    font-family: var(--font-body);
+  }
+  .outline-heading {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-burgundy);
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--c-rule);
+    margin-bottom: 0.5rem;
+  }
+  :global(.dark) .outline-heading { color: var(--c-ochre); }
+  .outline ul { list-style: none; padding: 0; margin: 0; }
+  .outline a {
+    display: block;
+    padding: 0.2rem 0;
+    font-size: 0.83rem;
+    color: var(--c-text-2);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color var(--dur-fast) ease;
+  }
+  .outline a:hover { color: var(--c-ink); }
+  .outline .nested a { padding-left: 1rem; font-size: 0.8rem; }
+</style>

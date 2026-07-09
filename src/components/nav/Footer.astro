@@ -1,0 +1,31 @@
+---
+import { SITE } from '../../consts';
+---
+
+<footer class="footer">
+  <div class="footer-container">
+    <p class="footer-message">An open source project of <a href="https://www.ribose.com">Ribose</a></p>
+    <p class="footer-copyright">Copyright © {new Date().getFullYear()} Ribose</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--c-rule);
+    background: var(--c-bg);
+  }
+  .footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  .footer-message a { color: var(--c-indigo); }
+  .footer-copyright { color: var(--c-text-3); }
+  @media (max-width: 768px) {
+    .footer-container { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+import type { NavItem } from '../../lib/navigation';
+
+interface Props {
+  prev: NavItem | null;
+  next: NavItem | null;
+}
+const { prev, next } = Astro.props;
+---
+
+{(prev || next) && (
+  <nav class="pager">
+    {prev && (
+      <a href={prev.href} class="pager-link prev">
+        <span class="label">Previous</span>
+        <span class="title">{prev.label}</span>
+      </a>
+    )}
+    {next && (
+      <a href={next.href} class="pager-link next">
+        <span class="label">Next</span>
+        <span class="title">{next.label}</span>
+      </a>
+    )}
+  </nav>
+)}
+
+<style>
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .pager-link {
+    display: block;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--c-rule);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease;
+  }
+  .pager-link:hover {
+    border-color: var(--c-indigo-mid);
+    background: var(--c-surface-2);
+  }
+  .pager-link.next { text-align: right; }
+  .label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-burgundy);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+  :global(.dark) .label { color: var(--c-ochre); }
+  .title {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--c-ink);
+  }
+</style>

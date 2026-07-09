@@ -1,0 +1,86 @@
+---
+import { SITE } from '../../consts';
+import ThemeToggle from '../ui/ThemeToggle.astro';
+---
+
+<header class="nav-bar">
+  <div class="nav-container">
+    <a href="/" class="nav-title">
+      <img src="/primmel-logo-light.svg" class="logo light-only" alt="Primmel" width="28" height="28" />
+      <img src="/primmel-logo-dark.svg" class="logo dark-only" alt="Primmel" width="28" height="28" />
+      <span>{SITE.title}</span>
+    </a>
+    <nav class="nav-links">
+      {SITE.nav.map(item => (
+        <a href={item.href}>{item.text}</a>
+      ))}
+    </nav>
+    <div class="nav-actions">
+      <ThemeToggle />
+      <a href={SITE.github} aria-label="GitHub" target="_blank" rel="noopener">↗</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav-bar {
+    border-bottom: 1px solid var(--c-rule);
+    background: var(--c-bg);
+    backdrop-filter: saturate(140%) blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .nav-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--c-ink);
+  }
+  .logo { width: 28px; height: 28px; }
+  .light-only { display: inline; }
+  .dark-only { display: none; }
+  :global(.dark) .light-only { display: none; }
+  :global(.dark) .dark-only { display: inline; }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    flex: 1;
+  }
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--c-text-2);
+    text-decoration: none;
+    transition: color var(--dur-fast) ease;
+  }
+  .nav-links a:hover { color: var(--c-ink); }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav-actions a {
+    color: var(--c-text-2);
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-container { padding: 0 1.5rem; }
+  }
+</style>

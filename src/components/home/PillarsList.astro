@@ -1,0 +1,160 @@
+---
+import { PILLARS, FEATURES } from '../../consts';
+
+import Hero from '../home/Hero.astro';
+---
+
+<section class="section">
+  <p class="eyebrow">Architecture</p>
+  <h2 class="section-title">Five activities, one lifecycle.</h2>
+  <p class="section-desc">
+    From the moment a reference model is published to the moment an
+    auditor hands down a verdict — each activity has a distinct actor
+    and a distinct artifact.
+  </p>
+  <nav class="pillars-list">
+    {PILLARS.map(p => (
+      <a href={p.href} class="pillar">
+        <span class="num">{p.num}</span>
+        <span class="name">{p.name}</span>
+        <span class="desc">{p.desc}</span>
+        <span class="arrow">→</span>
+      </a>
+    ))}
+  </nav>
+</section>
+
+<section class="section">
+  <p class="eyebrow">Why Primmel</p>
+  <h2 class="section-title">A modelling language built for the work standards actually do.</h2>
+  <div class="features-list">
+    {FEATURES.map(f => (
+      <article class="feature">
+        <span class="num">{f.num}</span>
+        <div>
+          <h3>{f.title}</h3>
+          <p>{f.body}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="footer-cta">
+  <h2>From BSI SMART and OIML SMART, into the public record.</h2>
+  <a href="/about" class="cta-button">Read the story →</a>
+</section>
+
+<style>
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    border-top: 1px solid var(--c-rule);
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--c-burgundy);
+    margin-bottom: 1.5rem;
+  }
+  :global(.dark) .eyebrow { color: var(--c-ochre); }
+  .section-title {
+    font-size: clamp(1.85rem, 3.4vw, 2.6rem);
+    font-weight: 400;
+    margin: 0 0 1.25rem;
+    max-width: 720px;
+  }
+  .section-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--c-text-2);
+    max-width: 620px;
+    margin: 0 0 2.5rem;
+  }
+  .pillars-list { margin-top: 1rem; border-top: 1px solid var(--c-rule); }
+  .pillar {
+    display: grid;
+    grid-template-columns: 100px 200px 1fr auto;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--c-rule);
+    text-decoration: none;
+    color: inherit;
+    transition: background var(--dur-fast) ease;
+  }
+  .pillar:hover { background: var(--c-surface-2); }
+  .pillar:hover .name { color: var(--c-indigo); }
+  .pillar:hover .arrow { transform: translateX(4px); color: var(--c-burgundy); }
+  .num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--c-burgundy);
+    line-height: 1;
+  }
+  .name {
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: var(--c-ink);
+    transition: color var(--dur-fast) ease;
+  }
+  .desc { font-size: 0.97rem; color: var(--c-text-2); line-height: 1.6; }
+  .arrow {
+    font-size: 1.4rem;
+    color: var(--c-text-3);
+    transition: transform var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+  @media (max-width: 900px) {
+    .pillar { grid-template-columns: 60px 1fr; gap: 1.25rem; }
+    .num { font-size: 2rem; }
+    .name { font-size: 1.3rem; grid-column: 2; }
+    .desc { grid-column: 2; }
+    .arrow { display: none; }
+  }
+  .features-list { margin-top: 1rem; }
+  .feature {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--c-rule);
+  }
+  .feature:first-child { border-top: 1px solid var(--c-rule); }
+  .feature .num {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--c-burgundy);
+    padding-top: 0.1rem;
+  }
+  .feature h3 { font-size: 1.15rem; margin: 0 0 0.4rem; }
+  .feature p { font-size: 0.95rem; color: var(--c-text-2); margin: 0; }
+  .footer-cta {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+    border-top: 1px solid var(--c-rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+  .footer-cta h2 { font-size: clamp(1.65rem, 3vw, 2.25rem); font-weight: 400; margin: 0; max-width: 640px; }
+  .cta-button {
+    padding: 0.55rem 1.15rem;
+    border: 1px solid var(--c-rule-strong);
+    border-radius: 4px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--c-ink);
+    transition: border-color var(--dur-fast) ease;
+  }
+  .cta-button:hover { border-color: var(--c-ink); }
+  @media (max-width: 720px) {
+    .footer-cta { grid-template-columns: 1fr; }
+  }
+</style>

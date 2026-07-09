@@ -1,0 +1,27 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  wide?: boolean;
+}
+const { title, description, wide = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <main class:list={['page-main', { wide }]}>
+    <slot />
+  </main>
+</BaseLayout>
+
+<style>
+  .page-main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+  .page-main.wide {
+    max-width: 1200px;
+  }
+</style>
