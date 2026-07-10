@@ -1,0 +1,126 @@
+---
+---
+
+<button class="search-btn" id="search-btn" aria-label="Search">
+  <span>Search</span>
+  <kbd>⌘K</kbd>
+</button>
+<div class="search-modal" id="search-modal" hidden>
+  <div class="search-modal-inner">
+    <div id="pagefind-search"></div>
+    <button class="search-close" id="search-close" aria-label="Close search">&times;</button>
+  </div>
+</div>
+
+<script is:inline>
+  let pagefindLoaded = false;
+
+  function openSearch() {
+    var modal = document.getElementById('search-modal');
+    if (!modal) return;
+    modal.hidden = false;
+    modal.style.display = 'flex';
+
+    if (!pagefindLoaded) {
+      pagefindLoaded = true;
+
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/pagefind/pagefind-ui.css';
+      document.head.appendChild(link);
+
+      var script = document.createElement('script');
+      script.src = '/pagefind/pagefind-ui.js';
+      script.onload = function() {
+        if (window.PagefindUI) {
+          new window.PagefindUI({
+            element: '#pagefind-search',
+            showSubResults: true,
+          });
+        }
+      };
+      document.body.appendChild(script);
+    }
+  }
+
+  function closeSearch() {
+    var modal = document.getElementById('search-modal');
+    if (modal) {
+      modal.hidden = true;
+      modal.style.display = 'none';
+    }
+  }
+
+  document.getElementById('search-btn')?.addEventListener('click', openSearch);
+  document.getElementById('search-close')?.addEventListener('click', closeSearch);
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      var modal = document.getElementById('search-modal');
+      if (modal && modal.hidden) openSearch();
+      else closeSearch();
+    }
+    if (e.key === 'Escape') closeSearch();
+  });
+</script>
+
+<style>
+  .search-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.85rem;
+    color: var(--c-text-3);
+    background: var(--c-surface);
+    border: 1px solid var(--c-rule);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color var(--dur-fast) ease;
+  }
+  .search-btn:hover { border-color: var(--c-indigo-mid); }
+  .search-btn kbd {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.05rem 0.3rem;
+    background: var(--c-surface-2);
+    border: 1px solid var(--c-rule-strong);
+    border-radius: 2px;
+  }
+  .search-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+  .search-modal[hidden] { display: none !important; }
+  .search-modal-inner {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    background: var(--c-bg);
+    border: 1px solid var(--c-rule-strong);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  }
+  .search-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
+    line-height: 1;
+    border: none;
+    background: transparent;
+    color: var(--c-text-3);
+    cursor: pointer;
+  }
+  .search-close:hover { color: var(--c-ink); }
+</style>

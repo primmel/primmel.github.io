@@ -1,6 +1,7 @@
 ---
 import { SITE } from '../../consts';
 import ThemeToggle from '../ui/ThemeToggle.astro';
+import SearchButton from '../ui/SearchButton.astro';
 ---
 
 <header class="nav-bar">
@@ -16,6 +17,7 @@ import ThemeToggle from '../ui/ThemeToggle.astro';
       ))}
     </nav>
     <div class="nav-actions">
+      <SearchButton />
       <ThemeToggle />
       <a href={SITE.github} aria-label="GitHub" target="_blank" rel="noopener">↗</a>
     </div>
