@@ -25,12 +25,21 @@ const pagePath = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '').replac
 const ogImage = pagePath ? `/og/${pagePath}.png` : '/og/index.png';
 const canonicalUrl = `${SITE.url}${Astro.url.pathname}`;
 
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.author,
+  url: 'https://www.ribose.com',
+  logo: `${SITE.url}/primmel-logo-light.svg`,
+};
+
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: SITE.title,
   url: SITE.url,
   description: SITE.description,
+  publisher: { '@type': 'Organization', name: SITE.author },
 };
 
 const articleSchema = {
@@ -71,6 +80,7 @@ const primarySchema = schema === 'article' ? articleSchema : websiteSchema;
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#1e3a8a" />
   <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
   <link rel="canonical" href={canonicalUrl} />
   <meta property="og:type" content={schema === 'article' ? 'article' : 'website'} />
   <meta property="og:title" content={title} />
@@ -81,6 +91,7 @@ const primarySchema = schema === 'article' ? articleSchema : websiteSchema;
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content={ogImage} />
   <script is:inline set:html={JSON.stringify(primarySchema)} type="application/ld+json" />
+  <script is:inline set:html={JSON.stringify(organizationSchema)} type="application/ld+json" />
   {breadcrumbs && (
     <script is:inline set:html={JSON.stringify(breadcrumbs)} type="application/ld+json" />
   )}

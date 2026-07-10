@@ -1,20 +1,14 @@
 ---
-import { getCollection, render } from 'astro:content';
-import { estimateReadingTime } from '../../lib/reading-time';
 import { COLLECTIONS } from '../../lib/collections';
+import { getCollectionSlugs, renderEntry } from '../../lib/page-helpers';
 import DocLayout from '../../layouts/DocLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection(COLLECTIONS.architecture);
-  return entries.map(entry => ({
-    params: { slug: entry.id === 'index' ? undefined : entry.id },
-    props: { entry },
-  })).filter(p => p.params.slug !== undefined);
+  return getCollectionSlugs(COLLECTIONS.architecture);
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
-const readingTime = entry.body ? estimateReadingTime(entry.body) : undefined;
+const { Content, headings, readingTime } = await renderEntry(entry);
 ---
 
 <DocLayout

@@ -1,32 +1,25 @@
 ---
-import { getCollection, render } from 'astro:content';
-import { estimateReadingTime } from '../../lib/reading-time';
-import { parseModelFlows, parseModelTree } from '../../lib/model-parser';
 import { COLLECTIONS } from '../../lib/collections';
+import { getCollectionSlugs, renderEntry } from '../../lib/page-helpers';
+import { parseModelFlows, parseModelTree } from '../../lib/model-parser';
 import DocLayout from '../../layouts/DocLayout.astro';
 import ModelSummary from '../../components/ui/ModelSummary.astro';
 import ProcessFlowDiagram from '../../components/diagrams/ProcessFlowDiagram.astro';
 import ModelBrowserVue from '../../components/ui/ModelBrowser.vue';
 
 export async function getStaticPaths() {
-  const entries = await getCollection(COLLECTIONS.examples);
-  return entries
-    .filter(entry => entry.id !== 'index')
-    .map(entry => ({
-      params: { slug: entry.id },
-      props: { entry },
-    }));
+  return getCollectionSlugs(COLLECTIONS.examples);
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
-const readingTime = entry.body ? estimateReadingTime(entry.body) : undefined;
-const sourceFile = entry.data.sourceFile as string | undefined;
+const { Content, headings, readingTime } = await renderEntry(entry);
+const data = entry.data as { title: string; sourceFile?: string };
+const sourceFile = data.sourceFile;
 const flows = sourceFile ? await parseModelFlows(sourceFile) : [];
 const modelTree = sourceFile ? await parseModelTree(sourceFile) : null;
 ---
 
-<DocLayout title={entry.data.title} collection={COLLECTIONS.examples} slug={entry.id} headings={headings}
+<DocLayout title={data.title} collection={COLLECTIONS.examples} slug={entry.id} headings={headings}
   readingTime={readingTime}>
   {sourceFile && <ModelSummary file={sourceFile} />}
   {flows.length > 0 && (
