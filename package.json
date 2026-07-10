@@ -11,6 +11,8 @@
     "check": "astro check",
     "check:links": "node scripts/validate-links.mjs",
     "check:a11y": "node scripts/accessibility-audit.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:visual": "npx playwright test"
   },
   "dependencies": {
@@ -30,8 +32,10 @@
     "vue": "^3.5.39"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^4.1.10"
   }
 }

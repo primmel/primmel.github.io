@@ -1,10 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import { estimateReadingTime } from '../../lib/reading-time';
+import { COLLECTIONS } from '../../lib/collections';
 import DocLayout from '../../layouts/DocLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('architecture');
+  const entries = await getCollection(COLLECTIONS.architecture);
   return entries.map(entry => ({
     params: { slug: entry.id === 'index' ? undefined : entry.id },
     props: { entry },
@@ -18,7 +19,7 @@ const readingTime = entry.body ? estimateReadingTime(entry.body) : undefined;
 
 <DocLayout
   title={entry.data.title}
-  collection="architecture"
+  collection={COLLECTIONS.architecture}
   slug={entry.id}
   headings={headings}
   readingTime={readingTime}

@@ -4,12 +4,13 @@ import SideBar from '../components/nav/SideBar.astro';
 import Outline from '../components/nav/Outline.astro';
 import Pager from '../components/ui/Pager.astro';
 import { deriveSidebar, getSiblings } from '../lib/navigation';
+import type { CollectionName } from '../lib/collections';
 import type { MarkdownHeading } from 'astro';
 
 interface Props {
   title: string;
   description?: string;
-  collection: string;
+  collection: CollectionName;
   slug: string;
   headings?: MarkdownHeading[];
   readingTime?: string;
@@ -21,7 +22,7 @@ const siblings = await getSiblings(collection, slug);
 const editUrl = `https://github.com/primmel/primmel.github.io/edit/main/src/content/${collection}/${slug}.md`;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schema="article">
   <div class="sidebar-backdrop"></div>
   <div class="doc-layout">
     <SideBar groups={sidebarGroups} activeHref={`/${collection}/${slug}`} />

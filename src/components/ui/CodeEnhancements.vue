@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 onMounted(() => {
   addCopyButtons()
   setupScrollSpy()

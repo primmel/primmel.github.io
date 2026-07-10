@@ -2,13 +2,14 @@
 import { getCollection, render } from 'astro:content';
 import { estimateReadingTime } from '../../lib/reading-time';
 import { parseModelFlows, parseModelTree } from '../../lib/model-parser';
+import { COLLECTIONS } from '../../lib/collections';
 import DocLayout from '../../layouts/DocLayout.astro';
 import ModelSummary from '../../components/ui/ModelSummary.astro';
 import ProcessFlowDiagram from '../../components/diagrams/ProcessFlowDiagram.astro';
 import ModelBrowserVue from '../../components/ui/ModelBrowser.vue';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('examples');
+  const entries = await getCollection(COLLECTIONS.examples);
   return entries
     .filter(entry => entry.id !== 'index')
     .map(entry => ({
@@ -25,7 +26,7 @@ const flows = sourceFile ? await parseModelFlows(sourceFile) : [];
 const modelTree = sourceFile ? await parseModelTree(sourceFile) : null;
 ---
 
-<DocLayout title={entry.data.title} collection="examples" slug={entry.id} headings={headings}
+<DocLayout title={entry.data.title} collection={COLLECTIONS.examples} slug={entry.id} headings={headings}
   readingTime={readingTime}>
   {sourceFile && <ModelSummary file={sourceFile} />}
   {flows.length > 0 && (

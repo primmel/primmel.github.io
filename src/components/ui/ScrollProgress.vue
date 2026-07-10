@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 const progress = ref(0)
 
 function update() {
@@ -25,7 +27,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="fixed top-0 left-0 h-0.5 z-50 pointer-events-none transition-[width] duration-75 ease-linear bg-burgundy dark:bg-ochre"
+    class="scroll-progress fixed top-0 left-0 h-0.5 z-50 pointer-events-none transition-[width] duration-75 ease-linear bg-burgundy dark:bg-ochre"
     :style="{ width: progress + '%' }"
     aria-hidden="true"
   />
