@@ -14,6 +14,18 @@ export interface ModelStats {
   enums: number;
   measurements: number;
   subprocesses: number;
+  forms: number;
+  subforms: number;
+  symbols: number;
+  calculations: number;
+  stateMachines: number;
+  terms: number;
+  notes: number;
+  tables: number;
+  figures: number;
+  links: number;
+  mapProfiles: number;
+  viewProfiles: number;
   root: string;
   namespace: string;
 }
@@ -116,6 +128,18 @@ interface PrimmeModel {
   enums?: PrimmeElementBase[];
   vars?: PrimmeElementBase[];
   pages?: SubprocessPage[];
+  forms?: PrimmeElementBase[];
+  subforms?: PrimmeElementBase[];
+  symbols?: PrimmeElementBase[];
+  calculations?: PrimmeElementBase[];
+  stateMachines?: PrimmeElementBase[];
+  terms?: PrimmeElementBase[];
+  notes?: PrimmeElementBase[];
+  tables?: PrimmeElementBase[];
+  figures?: PrimmeElementBase[];
+  links?: PrimmeElementBase[];
+  mapProfiles?: PrimmeElementBase[];
+  viewProfiles?: PrimmeElementBase[];
 }
 
 interface RawComponent {
@@ -253,6 +277,18 @@ export async function parseModelFile(publicPath: string): Promise<ModelStats | n
     enums: model.enums?.length ?? 0,
     measurements: model.vars?.length ?? 0,
     subprocesses: model.pages?.length ?? 0,
+    forms: model.forms?.length ?? 0,
+    subforms: model.subforms?.length ?? 0,
+    symbols: model.symbols?.length ?? 0,
+    calculations: model.calculations?.length ?? 0,
+    stateMachines: model.stateMachines?.length ?? 0,
+    terms: model.terms?.length ?? 0,
+    notes: model.notes?.length ?? 0,
+    tables: model.tables?.length ?? 0,
+    figures: model.figures?.length ?? 0,
+    links: model.links?.length ?? 0,
+    mapProfiles: model.mapProfiles?.length ?? 0,
+    viewProfiles: model.viewProfiles?.length ?? 0,
     root: model.root ?? '',
     namespace: model.meta?.namespace ?? '',
   };
@@ -327,6 +363,46 @@ function buildModelTree(model: PrimmeModel): ModelTree {
   if (model.vars?.length) {
     groups.push(buildGroup('Measurements', model.vars, (v) => ({
       id: v.id, label: v.id,
+    })));
+  }
+  if (model.forms?.length) {
+    groups.push(buildGroup('Forms', model.forms, (f) => ({
+      id: f.id, label: f.id,
+    })));
+  }
+  if (model.subforms?.length) {
+    groups.push(buildGroup('Subforms', model.subforms, (s) => ({
+      id: s.id, label: s.id,
+    })));
+  }
+  if (model.symbols?.length) {
+    groups.push(buildGroup('Symbols', model.symbols, (s) => ({
+      id: s.id, label: s.id,
+    })));
+  }
+  if (model.calculations?.length) {
+    groups.push(buildGroup('Calculations', model.calculations, (c) => ({
+      id: c.id, label: c.id,
+    })));
+  }
+  if (model.stateMachines?.length) {
+    groups.push(buildGroup('State Machines', model.stateMachines, (s) => ({
+      id: s.id, label: s.id,
+    })));
+  }
+  if (model.terms?.length) {
+    groups.push(buildGroup('Terms', model.terms, (t) => ({
+      id: t.id, label: t.id,
+    })));
+  }
+  if (model.refs?.length) {
+    groups.push(buildGroup('References', model.refs, (r) => ({
+      id: r.id, label: r.id,
+    })));
+  }
+  if (model.mapProfiles?.length) {
+    groups.push(buildGroup('Map Profiles', model.mapProfiles, (m) => ({
+      id: m.id, label: m.id,
     })));
   }
 
