@@ -1,7 +1,7 @@
 ---
 import { SITE } from '../../consts';
-import ThemeToggle from '../ui/ThemeToggle.astro';
-import SearchButton from '../ui/SearchButton.astro';
+import ThemeToggleVue from '../ui/ThemeToggle.vue';
+import SearchButtonVue from '../ui/SearchButton.vue';
 ---
 
 <header class="nav-bar">
@@ -17,9 +17,9 @@ import SearchButton from '../ui/SearchButton.astro';
       ))}
     </nav>
     <div class="nav-actions">
-      <SearchButton />
-      <ThemeToggle />
-      <a href={SITE.github} aria-label="GitHub" target="_blank" rel="noopener">↗</a>
+      <SearchButtonVue client:idle />
+      <ThemeToggleVue client:load />
+      <a href={SITE.github} aria-label="GitHub" target="_blank" rel="noopener">&#8599;</a>
     </div>
   </div>
 </header>

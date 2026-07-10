@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import vue from '@astrojs/vue';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://www.primmel.org',
@@ -8,6 +10,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     mdx(),
+    vue(),
   ],
   markdown: {
     syntaxHighlight: 'shiki',
@@ -16,8 +19,6 @@ export default defineConfig({
     },
   },
   vite: {
-    css: {
-      transformer: 'lightningcss',
-    },
+    plugins: [tailwindcss()],
   },
 });
