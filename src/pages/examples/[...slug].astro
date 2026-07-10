@@ -1,6 +1,7 @@
 ---
+import { render } from 'astro:content';
 import { COLLECTIONS } from '../../lib/collections';
-import { getCollectionSlugs, renderEntry } from '../../lib/page-helpers';
+import { getCollectionSlugs, computeReadingTime } from '../../lib/page-helpers';
 import { parseModelFlows, parseModelTree } from '../../lib/model-parser';
 import DocLayout from '../../layouts/DocLayout.astro';
 import ModelSummary from '../../components/ui/ModelSummary.astro';
@@ -12,7 +13,8 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings, readingTime } = await renderEntry(entry);
+const { Content, headings } = await render(entry);
+const readingTime = computeReadingTime(entry.body);
 const data = entry.data as { title: string; sourceFile?: string };
 const sourceFile = data.sourceFile;
 const flows = sourceFile ? await parseModelFlows(sourceFile) : [];

@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { SITE } from '../consts';
 ---
 
 <PageLayout title="404" description="Page not found.">
@@ -11,10 +12,26 @@ import PageLayout from '../layouts/PageLayout.astro';
       been moved, renamed, or removed — or it never existed in the
       first place.
     </p>
+
     <div class="nf-actions">
       <a href="/" class="btn-brand">Return home</a>
       <a href="/docs/introduction" class="btn-alt">Read the introduction</a>
     </div>
+
+    <div class="nf-quick-links">
+      <p class="nf-section-label">Or browse:</p>
+      <nav class="nf-links">
+        <a href="/architecture/">Architecture</a>
+        <a href="/examples/">Examples</a>
+        <a href="/docs/introduction">Docs</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+
+    <p class="nf-report">
+      Think this is a bug?
+      <a href={`${SITE.github}/primmel.github.io/issues/new`} target="_blank" rel="noopener">Report an issue &rarr;</a>
+    </p>
   </div>
 </PageLayout>
 
@@ -32,6 +49,7 @@ import PageLayout from '../layouts/PageLayout.astro';
     color: var(--color-burgundy);
     margin-bottom: 1.25rem;
   }
+  :global(.dark) .nf-eyebrow { color: var(--color-ochre); }
   h1 {
     font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 400;
@@ -51,7 +69,9 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-weight: 500;
     text-decoration: none;
     border: 1px solid var(--color-ink);
+    transition: background var(--dur-fast) ease;
   }
+  .btn-brand:hover { background: var(--color-indigo); border-color: var(--color-indigo); }
   .btn-alt {
     padding: 0.55rem 1.15rem;
     border-radius: 4px;
@@ -60,5 +80,43 @@ import PageLayout from '../layouts/PageLayout.astro';
     font-size: 0.92rem;
     font-weight: 500;
     text-decoration: none;
+    transition: border-color var(--dur-fast) ease;
+  }
+  .btn-alt:hover { border-color: var(--color-ink); }
+  .nf-quick-links {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-rule);
+  }
+  .nf-section-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-3);
+    margin: 0 0 0.75rem;
+  }
+  .nf-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .nf-links a {
+    color: var(--color-indigo);
+    text-decoration: underline;
+    text-decoration-color: var(--color-rule-strong);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: text-decoration-color var(--dur-fast) ease;
+  }
+  .nf-links a:hover { text-decoration-color: var(--color-indigo); }
+  .nf-report {
+    margin-top: 2.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-3);
+  }
+  .nf-report a {
+    color: var(--color-indigo);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>
