@@ -1,8 +1,0 @@
-@media print {
-  body { background: #fff !important; color: #000 !important; font-size: 10.5pt; }
-  body::before { display: none !important; }
-  .nav-bar, .sidebar, .outline, .footer, .scroll-progress { display: none !important; }
-  .doc-main { padding: 0 !important; max-width: none !important; }
-  a { color: #000 !important; text-decoration: underline; }
-  pre { border: 1px solid #ccc !important; page-break-inside: avoid; }
-}
