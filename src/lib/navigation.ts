@@ -59,3 +59,34 @@ export async function getSiblings(
     next: index >= 0 && index < all.length - 1 ? all[index + 1] : null,
   };
 }
+
+export async function getCollectionSlugs(collection: CollectionName) {
+  const entries = await getCollection(collection);
+  return entries
+    .filter(entry => entry.id !== 'index')
+    .map(entry => ({
+      params: { slug: entry.id },
+      props: { entry },
+    }));
+}
+
+export interface PillarInfo {
+  num: string;
+  name: string;
+  href: string;
+  desc: string;
+}
+
+export async function derivePillars(): Promise<PillarInfo[]> {
+  const entries = await getCollection('architecture');
+  return entries
+    .filter((entry): entry is typeof entry & { data: { pillar: string; summary: string; sidebar: { order: number; label: string } } } =>
+      entry.data.pillar !== undefined && entry.data.summary !== undefined && entry.data.sidebar !== undefined)
+    .sort((a, b) => a.data.sidebar.order - b.data.sidebar.order)
+    .map((entry) => ({
+      num: String(entry.data.sidebar.order).padStart(2, '0'),
+      name: entry.data.sidebar.label,
+      href: `/architecture/${entry.id}`,
+      desc: entry.data.summary,
+    }));
+}

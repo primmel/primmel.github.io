@@ -1,6 +1,7 @@
 ---
 title: "Define — author a reference model"
 pillar: "define"
+summary: "A reference publisher authors a reference model and publishes it for others to consume."
 sidebar:
   section: "Architecture"
   order: 1

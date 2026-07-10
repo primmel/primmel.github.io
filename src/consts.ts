@@ -13,14 +13,6 @@ export const SITE = {
   ],
 } as const;
 
-export const PILLARS = [
-  { num: '01', name: 'Define',    href: '/architecture/define',    desc: 'A reference publisher authors a reference model and publishes it for others to consume.' },
-  { num: '02', name: 'Reference', href: '/architecture/reference', desc: 'Readers consume the published model: navigate the standard, run test procedures, check dimensional and formula requirements.' },
-  { num: '03', name: 'Implement', href: '/architecture/implement', desc: 'Maintain the digital twin, take up a reference, customize to satisfy it, declare mappings. Close when every reference element maps to >=1 impl element.' },
-  { num: '04', name: 'Operate',   href: '/architecture/operate',   desc: 'Operators run the implementation in production. Each process execution produces records — the evidence of conformance.' },
-  { num: '05', name: 'Audit',     href: '/architecture/audit',     desc: 'An auditor navigates the standard like readers, correlates through mappings, views evidence like operators. A structural compliance verdict.' },
-] as const;
-
 export const FEATURES = [
   { num: '01', title: 'Executable standards', body: 'Process requirements and data requirements expressed in a language a computer can read and run — not just a document humans have to interpret.' },
   { num: '02', title: 'Single source of truth', body: 'One canonical model per standard. Auditors, implementers, and certifiers all read from the same artifact.' },

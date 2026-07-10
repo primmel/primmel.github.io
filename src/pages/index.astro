@@ -2,9 +2,12 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/home/Hero.astro';
 import PillarsList from '../components/home/PillarsList.astro';
+import { derivePillars } from '../lib/navigation';
+
+const pillars = await derivePillars();
 ---
 
 <PageLayout title="Primmel" description="Executable standards modelling for SMART standards." wide>
   <Hero />
-  <PillarsList />
+  <PillarsList pillars={pillars} />
 </PageLayout>

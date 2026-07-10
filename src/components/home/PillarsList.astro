@@ -1,5 +1,11 @@
 ---
-import { PILLARS, FEATURES } from '../../consts';
+import { FEATURES } from '../../consts';
+import type { PillarInfo } from '../../lib/navigation';
+
+interface Props {
+  pillars: PillarInfo[];
+}
+const { pillars } = Astro.props;
 ---
 
 <section class="section">
@@ -11,7 +17,7 @@ import { PILLARS, FEATURES } from '../../consts';
     and a distinct artifact.
   </p>
   <nav class="pillars-list">
-    {PILLARS.map(p => (
+    {pillars.map(p => (
       <a href={p.href} class="pillar">
         <span class="num">{p.num}</span>
         <span class="name">{p.name}</span>

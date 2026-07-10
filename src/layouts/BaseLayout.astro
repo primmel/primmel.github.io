@@ -8,6 +8,7 @@ import '@fontsource/spline-sans-mono/500.css';
 import '../styles/app.css';
 import { ClientRouter } from 'astro:transitions';
 import { SITE } from '../consts';
+import { buildSeoData, type SchemaType } from '../lib/structured-data';
 import NavBar from '../components/nav/NavBar.astro';
 import Footer from '../components/nav/Footer.astro';
 import ScrollProgressVue from '../components/ui/ScrollProgress.vue';
@@ -16,53 +17,11 @@ import CodeEnhancementsVue from '../components/ui/CodeEnhancements.vue';
 interface Props {
   title: string;
   description?: string;
-  schema?: 'website' | 'article';
+  schema?: SchemaType;
 }
 
 const { title, description = SITE.description, schema = 'website' } = Astro.props;
-const fullTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
-const pagePath = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '-');
-const ogImage = pagePath ? `/og/${pagePath}.png` : '/og/index.png';
-const canonicalUrl = `${SITE.url}${Astro.url.pathname}`;
-
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: SITE.author,
-  url: 'https://www.ribose.com',
-  logo: `${SITE.url}/primmel-logo-light.svg`,
-};
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: SITE.title,
-  url: SITE.url,
-  description: SITE.description,
-  publisher: { '@type': 'Organization', name: SITE.author },
-};
-
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'TechArticle',
-  headline: title,
-  description,
-  url: canonicalUrl,
-  publisher: { '@type': 'Organization', name: SITE.author },
-};
-
-const breadcrumbs = pagePath
-  ? {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
-        { '@type': 'ListItem', position: 2, name: title, item: canonicalUrl },
-      ],
-    }
-  : null;
-
-const primarySchema = schema === 'article' ? articleSchema : websiteSchema;
+const seo = buildSeoData({ title, description, url: Astro.url, schemaType: schema });
 ---
 
 <!DOCTYPE html>
@@ -71,7 +30,7 @@ const primarySchema = schema === 'article' ? articleSchema : websiteSchema;
   <ClientRouter />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>{fullTitle}</title>
+  <title>{seo.fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -80,21 +39,18 @@ const primarySchema = schema === 'article' ? articleSchema : websiteSchema;
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#1e3a8a" />
   <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
-  <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
-  <link rel="canonical" href={canonicalUrl} />
+  <link rel="canonical" href={seo.canonicalUrl} />
   <meta property="og:type" content={schema === 'article' ? 'article' : 'website'} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:site_name" content={SITE.title} />
-  <meta property="og:image" content={ogImage} />
-  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={seo.ogImage} />
+  <meta property="og:url" content={seo.canonicalUrl} />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={ogImage} />
-  <script is:inline set:html={JSON.stringify(primarySchema)} type="application/ld+json" />
-  <script is:inline set:html={JSON.stringify(organizationSchema)} type="application/ld+json" />
-  {breadcrumbs && (
-    <script is:inline set:html={JSON.stringify(breadcrumbs)} type="application/ld+json" />
-  )}
+  <meta name="twitter:image" content={seo.ogImage} />
+  {seo.jsonLdScripts.map((s) => (
+    <script is:inline set:html={JSON.stringify(s)} type="application/ld+json"></script>
+  ))}
   <script is:inline>
     const t = localStorage.getItem('theme') ?? 'auto';
     const d = t === 'dark' || (t === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);

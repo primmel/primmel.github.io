@@ -1,6 +1,7 @@
 ---
 title: "Audit — verify conformance against a reference"
 pillar: "audit"
+summary: "An auditor navigates the standard like readers, correlates through mappings, views evidence like operators. A structural compliance verdict."
 side: "application"
 sidebar:
   section: "Architecture"

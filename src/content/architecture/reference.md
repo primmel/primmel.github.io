@@ -1,6 +1,7 @@
 ---
 title: "Reference — read, interact, and evaluate"
 pillar: "reference"
+summary: "Readers consume the published model: navigate the standard, run test procedures, check dimensional and formula requirements."
 side: "reference"
 sidebar:
   section: "Architecture"

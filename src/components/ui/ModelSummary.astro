@@ -1,11 +1,10 @@
 ---
-import { parseModelFile, type ModelStats } from '../../lib/model-parser';
+import type { ModelStats } from '../../lib/model-parser';
 
 interface Props {
-  file: string;
+  stats: ModelStats | null;
 }
-const { file } = Astro.props;
-const stats: ModelStats | null = await parseModelFile(file);
+const { stats } = Astro.props;
 ---
 
 {stats && (
