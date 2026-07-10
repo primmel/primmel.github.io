@@ -24,7 +24,7 @@ const editUrl = `https://github.com/primmel/primmel.github.io/edit/main/src/cont
 <BaseLayout title={title} description={description}>
   <div class="doc-layout">
     <SideBar groups={sidebarGroups} activeHref={`/${collection}/${slug}`} />
-    <main class="doc-main">
+    <main class="doc-main" id="main-content">
       {readingTime && <p class="reading-time">{readingTime}</p>}
       <article class="prose">
         <slot />
