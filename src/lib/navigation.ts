@@ -21,7 +21,7 @@ export async function deriveSidebar(collection: string): Promise<NavGroup[]> {
     if (!groups[sb.section]) groups[sb.section] = [];
     groups[sb.section].push({
       label: sb.label,
-      href: `/${collection}/${entry.id}`,
+      href: entry.id === 'index' ? `/${collection}/` : `/${collection}/${entry.id}`,
       order: sb.order,
     });
   }
