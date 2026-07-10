@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface TreeNode {
   id: string
   label: string

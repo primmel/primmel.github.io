@@ -1,4 +1,5 @@
 import { getCollection } from 'astro:content';
+import type { CollectionName } from './collections';
 
 export interface NavItem {
   label: string;
@@ -11,17 +12,30 @@ export interface NavGroup {
   items: NavItem[];
 }
 
-export async function deriveSidebar(collection: string): Promise<NavGroup[]> {
-  const entries = await getCollection(collection as any);
+interface SidebarMeta {
+  section: string;
+  order: number;
+  label: string;
+}
+
+interface CollectionEntryData {
+  sidebar?: SidebarMeta;
+}
+
+export async function deriveSidebar(collection: CollectionName): Promise<NavGroup[]> {
+  const entries = await getCollection(collection);
   const groups: Record<string, NavItem[]> = {};
 
   for (const entry of entries) {
-    const sb = (entry.data as any).sidebar;
+    const sb = (entry.data as CollectionEntryData).sidebar;
     if (!sb) continue;
     if (!groups[sb.section]) groups[sb.section] = [];
+    const href = entry.id === 'index'
+      ? `/${collection}/`
+      : `/${collection}/${entry.id}`;
     groups[sb.section].push({
       label: sb.label,
-      href: entry.id === 'index' ? `/${collection}/` : `/${collection}/${entry.id}`,
+      href,
       order: sb.order,
     });
   }
@@ -34,7 +48,7 @@ export async function deriveSidebar(collection: string): Promise<NavGroup[]> {
 }
 
 export async function getSiblings(
-  collection: string,
+  collection: CollectionName,
   slug: string
 ): Promise<{ prev: NavItem | null; next: NavItem | null }> {
   const groups = await deriveSidebar(collection);

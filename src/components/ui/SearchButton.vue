@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 const isOpen = ref(false)
 const pagefindLoaded = ref(false)
 
