@@ -28,6 +28,9 @@ export async function GET(context: { site: URL }) {
     site: context.site,
     items: all.map(entry => ({
       title: entry.data.title,
+      description: entry.body
+        ? entry.body.replace(/[#*`>\-]/g, '').replace(/\n+/g, ' ').trim().slice(0, 200) + '…'
+        : undefined,
       pubDate: getGitDate(entry.collection, entry.id),
       link: `/${entry.collection}/${entry.id}/`,
     })),

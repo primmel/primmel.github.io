@@ -24,6 +24,15 @@ const stats: ModelStats | null = await parseModelFile(file);
       {stats.approvals > 0 && <div class="stat"><span class="stat-num">{stats.approvals}</span><span class="stat-label">approvals</span></div>}
       {stats.enums > 0 && <div class="stat"><span class="stat-num">{stats.enums}</span><span class="stat-label">enums</span></div>}
       {stats.subprocesses > 0 && <div class="stat"><span class="stat-num">{stats.subprocesses}</span><span class="stat-label">subprocesses</span></div>}
+      {stats.forms > 0 && <div class="stat"><span class="stat-num">{stats.forms}</span><span class="stat-label">forms</span></div>}
+      {stats.subforms > 0 && <div class="stat"><span class="stat-num">{stats.subforms}</span><span class="stat-label">subforms</span></div>}
+      {stats.symbols > 0 && <div class="stat"><span class="stat-num">{stats.symbols}</span><span class="stat-label">symbols</span></div>}
+      {stats.calculations > 0 && <div class="stat"><span class="stat-num">{stats.calculations}</span><span class="stat-label">calculations</span></div>}
+      {stats.stateMachines > 0 && <div class="stat"><span class="stat-num">{stats.stateMachines}</span><span class="stat-label">state machines</span></div>}
+      {stats.terms > 0 && <div class="stat"><span class="stat-num">{stats.terms}</span><span class="stat-label">terms</span></div>}
+      {stats.mapProfiles > 0 && <div class="stat"><span class="stat-num">{stats.mapProfiles}</span><span class="stat-label">map profiles</span></div>}
+      {stats.tables > 0 && <div class="stat"><span class="stat-num">{stats.tables}</span><span class="stat-label">tables</span></div>}
+      {stats.figures > 0 && <div class="stat"><span class="stat-num">{stats.figures}</span><span class="stat-label">figures</span></div>}
     </div>
     <dl class="model-meta">
       <dt>root</dt><dd><code>{stats.root}</code></dd>
