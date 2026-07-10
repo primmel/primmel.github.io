@@ -1,7 +1,7 @@
 {
   "name": "primmel.github.io",
   "version": "2.0.0",
-  "description": "Primmel \u2014 executable standards modelling for SMART standards",
+  "description": "Primmel — executable standards modelling for SMART standards",
   "type": "module",
   "private": true,
   "scripts": {
@@ -13,9 +13,14 @@
   "dependencies": {
     "@astrojs/mdx": "^7.0.2",
     "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vue": "^7.0.1",
     "@primmel/primmel": "^1.2.0",
+    "@tailwindcss/vite": "^4.3.2",
+    "@vitejs/plugin-vue": "^6.0.7",
     "astro": "^7.0.7",
-    "pagefind": "^1.5.2"
+    "pagefind": "^1.5.2",
+    "tailwindcss": "^4.3.2",
+    "vue": "^3.5.39"
   },
   "devDependencies": {
     "typescript": "^5.7.3"
