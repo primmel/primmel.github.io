@@ -1,55 +1,39 @@
 # Primmel Website
 
-[![Deploy Pages](https://github.com/primmel/primmel.github.io/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/primmel/primmel.github.io/actions/workflows/deploy-pages.yml)
+[![Deploy](https://github.com/primmel/primmel.github.io/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/primmel/primmel.github.io/actions/workflows/deploy-pages.yml)
 
-Source for [primmel.org](https://www.primmel.org), built with [VitePress](https://vitepress.dev/).
+Source for [primmel.org](https://www.primmel.org), built with [Astro 7](https://astro.build/).
 
 ## Development
 
 ```bash
-npm install     # Install dependencies
-npm run dev     # Start development server
-npm run build   # Build for production
-npm run preview # Preview production build
+npm install
+npm run dev      # Start development server at localhost:4321
+npm run build    # Build for production (outputs to dist/)
+npm run preview  # Preview the production build
+npm run check    # TypeScript + Astro type checking
 ```
 
 ## Project layout
 
-- `index.md` — home page (renders `<HomePage />` from the theme)
-- `about.md` — about page, name & logo breakdown
-- `docs/`
-  - `introduction.md` — overview of the four pillars and file types
-  - `first-model.md` — line-by-line walkthrough of the minimal model
-  - `examples/` — the curated example corpus
-    - `index.md` — overview, reading order, pattern catalogue
-    - `minimal-model.md`, `data-and-registries.md`, `process-flow.md`,
-      `compliance-and-measurement.md`, `approval-workflow.md` — one
-      per example file
-    - `implementation-package.md` — the showcase
-    - `files/` — the raw `.prl`, `.prd`, `.prm`, `.pws`, and
-      `.yaml` files (and the `.pws/` workspace directories), served as static assets
-  - `data-model.md`, `process-model.md`, `compliance.md`,
-    `measurement.md`, `mapping.md` — topical reference for each
-    pillar
-- `public/` — static assets (logos, favicon, manifest)
-- `.vitepress/config.ts` — site config, navigation, sidebar
-- `.vitepress/theme/custom.css` — brand styles (Primmel palette)
-- `.vitepress/theme/components/HomePage.vue` — home page component
-- `.vitepress/theme/index.ts` — theme entry, registers HomePage
+- `src/pages/` — File-based routes (index, about, 404, architecture, examples, docs)
+- `src/content/` — Typed markdown content in 3 collections
+- `src/layouts/` — BaseLayout, DocLayout, PageLayout (OCP hierarchy)
+- `src/components/` — NavBar, SideBar, Outline, Pager, ScrollProgress, ThemeToggle, Hero, PillarsList
+- `src/styles/` — Modular CSS: tokens, base, code, tables, components, print
+- `src/lib/` — Navigation derivation logic
+- `src/consts.ts` — Site-wide constants (single source of truth)
+- `public/` — Static assets (logos, favicons, example .prl/.prd/.prm/.pws files)
+- `TODO.astro/` — Remaining work items
 
-## Brand assets
+## Content collections
 
-The Primmel logo set lives in `public/`:
+All content lives in typed Astro Content Collections with Zod schemas:
 
-| File | Purpose |
-| --- | --- |
-| `primmel-logo.svg` | Source logo (600×600, greyscale designer original) |
-| `primmel-logo-light.svg` | Light-mode tint (deep indigo on white) |
-| `primmel-logo-dark.svg` | Dark-mode tint (sky indigo on slate) |
-| `primmel-logo.pdf` | PDF version of the source logo |
-| `favicon.svg` | Favicon, scales to 16×16 |
-| `site.webmanifest` | PWA manifest |
+| Collection | Pages | Schema |
+| --- | --- | --- |
+| `architecture` | 11 | title, pillar, audience, side, sidebar |
+| `examples` | 7 | title, demonstrates, sourceFile, sidebar |
+| `docs` | 7 | title, sidebar |
 
-The mark is a custom-drawn Primmel monogram with tonal shading;
-the light and dark variants are tinted toward indigo for theme
-adaptation. See [About Primmel](/about) for the full breakdown.
+The sidebar is **derived** from collection frontmatter — no hardcoded nav arrays.
