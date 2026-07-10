@@ -1,6 +1,7 @@
 ---
 title: "Implement — maintain the digital twin, adopt, and map"
 pillar: "implement"
+summary: "Maintain the digital twin, take up a reference, customize to satisfy it, declare mappings. Close when every reference element maps to >=1 impl element."
 side: "application"
 sidebar:
   section: "Architecture"

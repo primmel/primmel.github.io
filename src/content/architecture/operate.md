@@ -1,6 +1,7 @@
 ---
 title: "Operate — run the implementation, produce evidence"
 pillar: "operate"
+summary: "Operators run the implementation in production. Each process execution produces records — the evidence of conformance."
 side: "application"
 sidebar:
   section: "Architecture"

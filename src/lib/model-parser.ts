@@ -1,5 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { createRequire } from 'node:module';
+
+// ── Public types (used by components and tests) ──
 
 export interface ModelStats {
   roles: number;
@@ -70,38 +73,44 @@ export interface ModelTree {
   groups: ModelTreeGroup[];
 }
 
-interface PrimmeElementBase {
+export interface ParsedModel {
+  stats: ModelStats;
+  flows: SubprocessFlow[];
+  tree: ModelTree;
+}
+
+// ── Internal: unified model shape (both adapters produce this) ──
+
+interface ElementBase {
   id: string;
   name?: string;
   label?: string;
 }
 
-interface PrimmeEvent extends PrimmeElementBase {
+interface EventElement extends ElementBase {
   eventType: 'start' | 'end' | 'timer';
   type?: string;
 }
 
-interface PrimmeProcess extends PrimmeElementBase {
+interface ProcessElement extends ElementBase {
   modality: string;
   actor?: { id: string } | null;
 }
 
-interface PrimmeGateway extends PrimmeElementBase {
-  label?: string;
+interface GatewayElement extends ElementBase {
   gatewayType?: string;
 }
 
-type PrimmeElement = PrimmeEvent | PrimmeProcess | PrimmeGateway | PrimmeElementBase;
+type ModelElement = ElementBase | EventElement | ProcessElement | GatewayElement;
 
 interface SubprocessComponent {
   name: string;
-  element: PrimmeElement | null;
+  element: ModelElement | null;
   x: number;
   y: number;
 }
 
 interface SubprocessEdge {
-  id: string;
   from: SubprocessComponent | null;
   to: SubprocessComponent | null;
   description: string;
@@ -113,320 +122,39 @@ interface SubprocessPage {
   edges: SubprocessEdge[];
 }
 
-interface PrimmeModel {
-  meta?: { title?: string; namespace?: string; edition?: string };
-  root?: string;
-  roles?: PrimmeElementBase[];
-  processes?: PrimmeProcess[];
-  provisions?: PrimmeElementBase[];
-  dataclasses?: PrimmeElementBase[];
-  regs?: PrimmeElementBase[];
-  events?: PrimmeEvent[];
-  gateways?: PrimmeGateway[];
-  refs?: PrimmeElementBase[];
-  approvals?: PrimmeElementBase[];
-  enums?: PrimmeElementBase[];
-  vars?: PrimmeElementBase[];
-  pages?: SubprocessPage[];
-  forms?: PrimmeElementBase[];
-  subforms?: PrimmeElementBase[];
-  symbols?: PrimmeElementBase[];
-  calculations?: PrimmeElementBase[];
-  stateMachines?: PrimmeElementBase[];
-  terms?: PrimmeElementBase[];
-  notes?: PrimmeElementBase[];
-  tables?: PrimmeElementBase[];
-  figures?: PrimmeElementBase[];
-  links?: PrimmeElementBase[];
-  mapProfiles?: PrimmeElementBase[];
-  viewProfiles?: PrimmeElementBase[];
+interface UnifiedModel {
+  meta: { title?: string; namespace?: string; edition?: string };
+  root: string;
+  roles: ElementBase[];
+  processes: ProcessElement[];
+  provisions: ElementBase[];
+  dataclasses: ElementBase[];
+  regs: ElementBase[];
+  events: EventElement[];
+  gateways: GatewayElement[];
+  refs: ElementBase[];
+  approvals: ElementBase[];
+  enums: ElementBase[];
+  vars: ElementBase[];
+  pages: SubprocessPage[];
+  forms: ElementBase[];
+  subforms: ElementBase[];
+  symbols: ElementBase[];
+  calculations: ElementBase[];
+  stateMachines: ElementBase[];
+  terms: ElementBase[];
+  notes: ElementBase[];
+  tables: ElementBase[];
+  figures: ElementBase[];
+  links: ElementBase[];
+  mapProfiles: ElementBase[];
+  viewProfiles: ElementBase[];
 }
 
-interface RawComponent {
-  name: string;
-  element: PrimmeElement | null;
-  x: number;
-  y: number;
-  _relations?: { element: string };
-}
+// ── Seam: ModelSource ──
 
-interface RawEdge {
-  id: string;
-  from: unknown;
-  to: unknown;
-  description: string;
-  _relations?: { from: string; to: string };
-}
-
-interface RawSubprocessPage {
-  id: string;
-  childs: unknown[];
-  _relations?: {
-    childs: RawComponent[];
-    edges: RawEdge[];
-  };
-}
-
-interface RawParseContext {
-  root?: string;
-  metadata?: { title?: string; namespace?: string; edition?: string };
-  roles?: Record<string, PrimmeElementBase>;
-  processes?: Record<string, PrimmeProcess>;
-  events?: Record<string, PrimmeEvent>;
-  gateways?: Record<string, PrimmeGateway>;
-  dataClasses?: Record<string, PrimmeElementBase>;
-  registers?: Record<string, PrimmeElementBase>;
-  enums?: Record<string, PrimmeElementBase>;
-  provisions?: Record<string, PrimmeElementBase>;
-  approvals?: Record<string, PrimmeElementBase>;
-  variables?: Record<string, PrimmeElementBase>;
-  pages?: Record<string, RawSubprocessPage>;
-}
-
-interface LoadModule {
-  load: (content: string) => PrimmeModel;
-}
-
-interface ParseModule {
-  default: (content: string, config: unknown, options: unknown) => RawParseContext;
-}
-
-interface ConfigModule {
-  PARSER_CONFIG: unknown;
-}
-
-function classifyElement(element: PrimmeElement | null): NodeType {
-  if (!element) return 'unknown';
-  if ('eventType' in element) {
-    if (element.eventType === 'start') return 'start';
-    if (element.eventType === 'end') return 'end';
-    if (element.eventType === 'timer' || 'type' in element) return 'timer';
-  }
-  if ('modality' in element) return 'process';
-  if ('label' in element || 'gatewayType' in element) return 'gateway';
-  return 'unknown';
-}
-
-function deriveLabel(element: PrimmeElement | null, name: string): string {
-  if (!element) return name;
-  if (element.label) return element.label;
-  if (element.name) return element.name;
-  return name;
-}
-
-function extractFlow(page: SubprocessPage): SubprocessFlow {
-  const nodes: FlowNode[] = page.childs
-    .filter((c): c is SubprocessComponent & { element: PrimmeElement } => c.element !== null)
-    .map((c) => ({
-      id: c.name,
-      label: deriveLabel(c.element, c.name),
-      type: classifyElement(c.element),
-      x: c.x ?? 0,
-      y: c.y ?? 0,
-    }));
-
-  const nodeIds = new Set(nodes.map(n => n.id));
-  const edges: FlowEdge[] = page.edges
-    .filter((e): e is SubprocessEdge & { from: SubprocessComponent; to: SubprocessComponent } =>
-      e.from !== null && e.to !== null)
-    .filter((e) => nodeIds.has(e.from.name) && nodeIds.has(e.to.name))
-    .map((e) => ({
-      from: e.from.name,
-      to: e.to.name,
-      label: e.description ?? '',
-    }));
-
-  return { id: page.id ?? '', nodes, edges };
-}
-
-function buildGroup<T>(
-  label: string,
-  items: T[],
-  map: (item: T) => ModelTreeNode,
-): ModelTreeGroup {
-  return { label, items: items.map(map) };
-}
-
-async function loadModel(publicPath: string): Promise<PrimmeModel | null> {
-  try {
-    const dynamicImport = (await import('@primmel/primmel')) as unknown as Partial<LoadModule>;
-    const load = dynamicImport.load;
-    if (!load) return null;
-    const fullPath = resolve('public', publicPath.replace(/^\//, ''));
-    const content = readFileSync(fullPath, 'utf8');
-    return load(content);
-  } catch {
-    return null;
-  }
-}
-
-export async function parseModelFile(publicPath: string): Promise<ModelStats | null> {
-  const model = await loadModel(publicPath);
-  if (!model) return null;
-
-  return {
-    roles: model.roles?.length ?? 0,
-    processes: model.processes?.length ?? 0,
-    provisions: model.provisions?.length ?? 0,
-    dataClasses: model.dataclasses?.length ?? 0,
-    registries: model.regs?.length ?? 0,
-    events: model.events?.length ?? 0,
-    gateways: model.gateways?.length ?? 0,
-    references: model.refs?.length ?? 0,
-    approvals: model.approvals?.length ?? 0,
-    enums: model.enums?.length ?? 0,
-    measurements: model.vars?.length ?? 0,
-    subprocesses: model.pages?.length ?? 0,
-    forms: model.forms?.length ?? 0,
-    subforms: model.subforms?.length ?? 0,
-    symbols: model.symbols?.length ?? 0,
-    calculations: model.calculations?.length ?? 0,
-    stateMachines: model.stateMachines?.length ?? 0,
-    terms: model.terms?.length ?? 0,
-    notes: model.notes?.length ?? 0,
-    tables: model.tables?.length ?? 0,
-    figures: model.figures?.length ?? 0,
-    links: model.links?.length ?? 0,
-    mapProfiles: model.mapProfiles?.length ?? 0,
-    viewProfiles: model.viewProfiles?.length ?? 0,
-    root: model.root ?? '',
-    namespace: model.meta?.namespace ?? '',
-  };
-}
-
-export async function parseModelFlows(publicPath: string): Promise<SubprocessFlow[]> {
-  const model = await loadModel(publicPath);
-  if (model?.pages?.length) {
-    const flows = model.pages
-      .filter((p) => p.childs?.length > 0)
-      .map(extractFlow);
-    if (flows.length > 0) return flows;
-  }
-  return parseModelFlowsRaw(publicPath);
-}
-
-export async function parseModelTree(publicPath: string): Promise<ModelTree | null> {
-  const model = await loadModel(publicPath);
-  if (model) return buildModelTree(model);
-  return parseModelTreeRaw(publicPath);
-}
-
-function buildModelTree(model: PrimmeModel): ModelTree {
-  const groups: ModelTreeGroup[] = [];
-
-  if (model.roles?.length) {
-    groups.push(buildGroup('Roles', model.roles, (r) => ({
-      id: r.id, label: r.name || r.id,
-    })));
-  }
-  if (model.processes?.length) {
-    groups.push(buildGroup('Processes', model.processes, (p) => ({
-      id: p.id, label: p.name || p.id,
-      detail: p.actor ? `actor: ${p.actor.id}` : undefined,
-    })));
-  }
-  if (model.events?.length) {
-    groups.push(buildGroup('Events', model.events, (e) => ({
-      id: e.id, label: e.id, detail: e.eventType,
-    })));
-  }
-  if (model.gateways?.length) {
-    groups.push(buildGroup('Gateways', model.gateways, (g) => ({
-      id: g.id, label: g.label || g.id,
-    })));
-  }
-  if (model.dataclasses?.length) {
-    groups.push(buildGroup('Data Classes', model.dataclasses, (d) => ({
-      id: d.id, label: d.id,
-    })));
-  }
-  if (model.regs?.length) {
-    groups.push(buildGroup('Registries', model.regs, (r) => ({
-      id: r.id, label: r.id,
-    })));
-  }
-  if (model.enums?.length) {
-    groups.push(buildGroup('Enums', model.enums, (e) => ({
-      id: e.id, label: e.id,
-    })));
-  }
-  if (model.provisions?.length) {
-    groups.push(buildGroup('Provisions', model.provisions, (p) => ({
-      id: p.id, label: p.id,
-    })));
-  }
-  if (model.approvals?.length) {
-    groups.push(buildGroup('Approvals', model.approvals, (a) => ({
-      id: a.id, label: a.id,
-    })));
-  }
-  if (model.vars?.length) {
-    groups.push(buildGroup('Measurements', model.vars, (v) => ({
-      id: v.id, label: v.id,
-    })));
-  }
-  if (model.forms?.length) {
-    groups.push(buildGroup('Forms', model.forms, (f) => ({
-      id: f.id, label: f.id,
-    })));
-  }
-  if (model.subforms?.length) {
-    groups.push(buildGroup('Subforms', model.subforms, (s) => ({
-      id: s.id, label: s.id,
-    })));
-  }
-  if (model.symbols?.length) {
-    groups.push(buildGroup('Symbols', model.symbols, (s) => ({
-      id: s.id, label: s.id,
-    })));
-  }
-  if (model.calculations?.length) {
-    groups.push(buildGroup('Calculations', model.calculations, (c) => ({
-      id: c.id, label: c.id,
-    })));
-  }
-  if (model.stateMachines?.length) {
-    groups.push(buildGroup('State Machines', model.stateMachines, (s) => ({
-      id: s.id, label: s.id,
-    })));
-  }
-  if (model.terms?.length) {
-    groups.push(buildGroup('Terms', model.terms, (t) => ({
-      id: t.id, label: t.id,
-    })));
-  }
-  if (model.refs?.length) {
-    groups.push(buildGroup('References', model.refs, (r) => ({
-      id: r.id, label: r.id,
-    })));
-  }
-  if (model.mapProfiles?.length) {
-    groups.push(buildGroup('Map Profiles', model.mapProfiles, (m) => ({
-      id: m.id, label: m.id,
-    })));
-  }
-
-  return {
-    title: model.meta?.title ?? model.root ?? '',
-    namespace: model.meta?.namespace ?? '',
-    version: model.meta?.edition ?? '',
-    groups,
-  };
-}
-
-async function loadRawParser(): Promise<{ parse: ParseModule['default']; config: ConfigModule['PARSER_CONFIG'] } | null> {
-  try {
-    const { createRequire } = await import('node:module');
-    const require = createRequire(import.meta.url);
-    const parseMod = require('@primmel/primmel/dist/src/ser-des/parse.js') as ParseModule;
-    const configMod = require('@primmel/primmel/dist/src/ser-des/config/index.js') as ConfigModule;
-    const parse = parseMod.default;
-    const config = configMod.PARSER_CONFIG;
-    if (!parse || !config) return null;
-    return { parse, config };
-  } catch {
-    return null;
-  }
+interface ModelSource {
+  getModel(publicPath: string): UnifiedModel | null;
 }
 
 function readModelContent(publicPath: string): string {
@@ -434,111 +162,283 @@ function readModelContent(publicPath: string): string {
   return readFileSync(fullPath, 'utf8');
 }
 
-async function parseModelFlowsRaw(publicPath: string): Promise<SubprocessFlow[]> {
-  const parser = await loadRawParser();
-  if (!parser) return [];
+const nodeRequire = createRequire(import.meta.url);
 
-  try {
-    const content = readModelContent(publicPath);
-    const ctx = parser.parse(content, parser.config, {});
+// ── Adapter 1: Resolved ──
 
-    const lookup: Record<string, PrimmeElement> = {};
-    const buckets: Array<[string, Record<string, PrimmeElementBase> | undefined]> = [
-      ['events', ctx.events],
-      ['processes', ctx.processes],
-      ['gateways', ctx.gateways],
-    ];
-    for (const [, bucket] of buckets) {
-      if (!bucket) continue;
-      for (const [id, val] of Object.entries(bucket)) {
-        lookup[id] = val;
+function createResolvedSource(): ModelSource {
+  return {
+    getModel(publicPath) {
+      try {
+        const mod = nodeRequire('@primmel/primmel') as { load?: (c: string) => unknown };
+        if (!mod.load) return null;
+        const raw = mod.load(readModelContent(publicPath)) as Record<string, unknown>;
+        return mapResolvedModel(raw);
+      } catch {
+        return null;
       }
-    }
-
-    const pages = ctx.pages ?? {};
-    return Object.values(pages)
-      .filter((page) => page._relations?.childs?.length)
-      .map((page) => extractRawFlow(page, lookup));
-  } catch {
-    return [];
-  }
+    },
+  };
 }
 
-function extractRawFlow(
-  page: RawSubprocessPage,
-  lookup: Record<string, PrimmeElement>,
-): SubprocessFlow {
-  const rawChilds = page._relations?.childs ?? [];
-  const rawEdges = page._relations?.edges ?? [];
-
-  const nodes: FlowNode[] = rawChilds.map((c) => {
-    const element = c._relations?.element ? lookup[c._relations.element] ?? null : null;
-    return {
-      id: c.name,
-      label: deriveLabel(element, c.name),
-      type: classifyElement(element),
-      x: c.x ?? 0,
-      y: c.y ?? 0,
-    };
-  });
-
-  const nodeIds = new Set(nodes.map(n => n.id));
-  const edges: FlowEdge[] = rawEdges
-    .filter((e) => e._relations?.from && e._relations?.to)
-    .filter((e) => nodeIds.has(e._relations!.from) && nodeIds.has(e._relations!.to))
-    .map((e) => ({
-      from: e._relations!.from,
-      to: e._relations!.to,
-      label: e.description ?? '',
-    }));
-
-  return { id: page.id ?? '', nodes, edges };
+function mapResolvedModel(raw: Record<string, unknown>): UnifiedModel {
+  const arr = <T>(key: string): T[] => (raw[key] as T[]) ?? [];
+  return {
+    meta: (raw.meta as UnifiedModel['meta']) ?? {},
+    root: (raw.root as string) ?? '',
+    roles: arr<ElementBase>('roles'),
+    processes: arr<ProcessElement>('processes'),
+    provisions: arr<ElementBase>('provisions'),
+    dataclasses: arr<ElementBase>('dataclasses'),
+    regs: arr<ElementBase>('regs'),
+    events: arr<EventElement>('events'),
+    gateways: arr<GatewayElement>('gateways'),
+    refs: arr<ElementBase>('refs'),
+    approvals: arr<ElementBase>('approvals'),
+    enums: arr<ElementBase>('enums'),
+    vars: arr<ElementBase>('vars'),
+    pages: (raw.pages as SubprocessPage[]) ?? [],
+    forms: arr<ElementBase>('forms'),
+    subforms: arr<ElementBase>('subforms'),
+    symbols: arr<ElementBase>('symbols'),
+    calculations: arr<ElementBase>('calculations'),
+    stateMachines: arr<ElementBase>('stateMachines'),
+    terms: arr<ElementBase>('terms'),
+    notes: arr<ElementBase>('notes'),
+    tables: arr<ElementBase>('tables'),
+    figures: arr<ElementBase>('figures'),
+    links: arr<ElementBase>('links'),
+    mapProfiles: arr<ElementBase>('mapProfiles'),
+    viewProfiles: arr<ElementBase>('viewProfiles'),
+  };
 }
 
-async function parseModelTreeRaw(publicPath: string): Promise<ModelTree | null> {
-  const parser = await loadRawParser();
-  if (!parser) return null;
+// ── Adapter 2: Raw (bypasses resolver bug) ──
 
+interface RawParseContext {
+  root?: string;
+  metadata?: { title?: string; namespace?: string; edition?: string };
+  roles?: Record<string, ElementBase>;
+  processes?: Record<string, ProcessElement>;
+  events?: Record<string, EventElement>;
+  gateways?: Record<string, GatewayElement>;
+  dataClasses?: Record<string, ElementBase>;
+  registers?: Record<string, ElementBase>;
+  enums?: Record<string, ElementBase>;
+  provisions?: Record<string, ElementBase>;
+  approvals?: Record<string, ElementBase>;
+  variables?: Record<string, ElementBase>;
+  pages?: Record<string, RawSubprocessPage>;
+}
+
+interface RawSubprocessPage {
+  id: string;
+  _relations?: { childs: RawComponent[]; edges: RawEdge[] };
+}
+
+interface RawComponent {
+  name: string;
+  x: number;
+  y: number;
+  _relations?: { element: string };
+}
+
+interface RawEdge {
+  description: string;
+  _relations?: { from: string; to: string };
+}
+
+function createRawSource(): ModelSource {
+  return {
+    getModel(publicPath) {
+      try {
+        const parser = loadRawParserModules();
+        if (!parser) return null;
+        const ctx = parser.parse(readModelContent(publicPath), parser.config, {});
+        return normalizeRawContext(ctx);
+      } catch {
+        return null;
+      }
+    },
+  };
+}
+
+function loadRawParserModules(): { parse: (c: string, cfg: unknown, o: unknown) => RawParseContext; config: unknown } | null {
   try {
-    const content = readModelContent(publicPath);
-    const ctx = parser.parse(content, parser.config, {});
-
-    const groups: ModelTreeGroup[] = [];
-
-    const bucketToGroup = (
-      bucket: Record<string, PrimmeElementBase> | undefined,
-      label: string,
-      map: (val: PrimmeElementBase, id: string) => ModelTreeNode,
-    ) => {
-      if (!bucket || Object.keys(bucket).length === 0) return;
-      const items = Object.entries(bucket).map(([id, val]) => map(val, id));
-      groups.push({ label, items });
+    const parseMod = nodeRequire('@primmel/primmel/dist/src/ser-des/parse.js') as {
+      default: (c: string, cfg: unknown, o: unknown) => RawParseContext;
     };
-
-    bucketToGroup(ctx.roles, 'Roles', (r, id) => ({ id, label: r.name || id }));
-    bucketToGroup(ctx.processes as Record<string, PrimmeElementBase> | undefined, 'Processes', (p, id) => ({
-      id, label: p.name || id,
-    }));
-    bucketToGroup(ctx.events as Record<string, PrimmeElementBase> | undefined, 'Events', (e, id) => ({
-      id, label: id, detail: (e as PrimmeEvent).eventType,
-    }));
-    bucketToGroup(ctx.gateways as Record<string, PrimmeElementBase> | undefined, 'Gateways', (g, id) => ({
-      id, label: g.label || id,
-    }));
-    bucketToGroup(ctx.dataClasses, 'Data Classes', (_d, id) => ({ id, label: id }));
-    bucketToGroup(ctx.registers, 'Registries', (_r, id) => ({ id, label: id }));
-    bucketToGroup(ctx.enums, 'Enums', (_e, id) => ({ id, label: id }));
-    bucketToGroup(ctx.provisions, 'Provisions', (_p, id) => ({ id, label: id }));
-    bucketToGroup(ctx.approvals, 'Approvals', (_a, id) => ({ id, label: id }));
-    bucketToGroup(ctx.variables, 'Measurements', (_v, id) => ({ id, label: id }));
-
-    return {
-      title: ctx.metadata?.title ?? ctx.root ?? '',
-      namespace: ctx.metadata?.namespace ?? '',
-      version: ctx.metadata?.edition ?? '',
-      groups,
+    const configMod = nodeRequire('@primmel/primmel/dist/src/ser-des/config/index.js') as {
+      PARSER_CONFIG: unknown;
     };
+    if (!parseMod.default || !configMod.PARSER_CONFIG) return null;
+    return { parse: parseMod.default, config: configMod.PARSER_CONFIG };
   } catch {
     return null;
   }
+}
+
+function normalizeRawContext(ctx: RawParseContext): UnifiedModel {
+  const values = <T>(b: Record<string, T> | undefined): T[] => (b ? Object.values(b) : []);
+
+  const lookup: Record<string, ModelElement> = {};
+  for (const bucket of [ctx.events, ctx.processes, ctx.gateways, ctx.roles]) {
+    if (!bucket) continue;
+    for (const [id, val] of Object.entries(bucket)) lookup[id] = val;
+  }
+
+  return {
+    meta: ctx.metadata ?? {},
+    root: ctx.root ?? '',
+    roles: values(ctx.roles),
+    processes: values(ctx.processes),
+    provisions: values(ctx.provisions),
+    dataclasses: values(ctx.dataClasses),
+    regs: values(ctx.registers),
+    events: values(ctx.events),
+    gateways: values(ctx.gateways),
+    refs: [],
+    approvals: values(ctx.approvals),
+    enums: values(ctx.enums),
+    vars: values(ctx.variables),
+    pages: Object.values(ctx.pages ?? {})
+      .filter((p) => p._relations?.childs?.length)
+      .map((p) => normalizeRawPage(p, lookup)),
+    forms: [], subforms: [], symbols: [], calculations: [],
+    stateMachines: [], terms: [], notes: [], tables: [],
+    figures: [], links: [], mapProfiles: [], viewProfiles: [],
+  };
+}
+
+function normalizeRawPage(page: RawSubprocessPage, lookup: Record<string, ModelElement>): SubprocessPage {
+  const rawChilds = page._relations?.childs ?? [];
+  const rawEdges = page._relations?.edges ?? [];
+
+  const components: SubprocessComponent[] = rawChilds.map((c) => ({
+    name: c.name,
+    element: c._relations?.element ? lookup[c._relations.element] ?? null : null,
+    x: c.x ?? 0,
+    y: c.y ?? 0,
+  }));
+
+  const compMap = new Map(components.map((c) => [c.name, c]));
+  const edges: SubprocessEdge[] = rawEdges
+    .filter((e) => e._relations?.from && e._relations?.to)
+    .map((e) => ({
+      from: compMap.get(e._relations!.from) ?? null,
+      to: compMap.get(e._relations!.to) ?? null,
+      description: e.description ?? '',
+    }));
+
+  return { id: page.id, childs: components, edges };
+}
+
+// ── Factory: try resolved, fall back to raw ──
+
+function resolveModel(publicPath: string): UnifiedModel | null {
+  return createResolvedSource().getModel(publicPath) ?? createRawSource().getModel(publicPath);
+}
+
+// ── Extraction (against UnifiedModel only) ──
+
+function classifyElement(element: ModelElement | null): NodeType {
+  if (!element) return 'unknown';
+  if ('eventType' in element) {
+    if (element.eventType === 'start') return 'start';
+    if (element.eventType === 'end') return 'end';
+    if (element.eventType === 'timer' || 'type' in element) return 'timer';
+  }
+  if ('modality' in element) return 'process';
+  if ('gatewayType' in element) return 'gateway';
+  return 'unknown';
+}
+
+function deriveLabel(element: ModelElement | null, fallback: string): string {
+  if (!element) return fallback;
+  return element.label || element.name || fallback;
+}
+
+function extractStats(model: UnifiedModel): ModelStats {
+  const len = (a: ElementBase[]) => a.length;
+  return {
+    roles: len(model.roles), processes: len(model.processes),
+    provisions: len(model.provisions), dataClasses: len(model.dataclasses),
+    registries: len(model.regs), events: len(model.events),
+    gateways: len(model.gateways), references: len(model.refs),
+    approvals: len(model.approvals), enums: len(model.enums),
+    measurements: len(model.vars), subprocesses: len(model.pages),
+    forms: len(model.forms), subforms: len(model.subforms),
+    symbols: len(model.symbols), calculations: len(model.calculations),
+    stateMachines: len(model.stateMachines), terms: len(model.terms),
+    notes: len(model.notes), tables: len(model.tables),
+    figures: len(model.figures), links: len(model.links),
+    mapProfiles: len(model.mapProfiles), viewProfiles: len(model.viewProfiles),
+    root: model.root, namespace: model.meta.namespace ?? '',
+  };
+}
+
+function extractFlows(model: UnifiedModel): SubprocessFlow[] {
+  return model.pages
+    .filter((p) => p.childs.length > 0)
+    .map((page) => {
+      const nodes: FlowNode[] = page.childs
+        .filter((c) => c.element)
+        .map((c) => ({
+          id: c.name,
+          label: deriveLabel(c.element, c.name),
+          type: classifyElement(c.element),
+          x: c.x, y: c.y,
+        }));
+      const nodeIds = new Set(nodes.map((n) => n.id));
+      const edges: FlowEdge[] = page.edges
+        .filter((e) => e.from && e.to && nodeIds.has(e.from.name) && nodeIds.has(e.to.name))
+        .map((e) => ({ from: e.from!.name, to: e.to!.name, label: e.description }));
+      return { id: page.id, nodes, edges };
+    });
+}
+
+function extractTree(model: UnifiedModel): ModelTree {
+  const groups: ModelTreeGroup[] = [];
+  const add = <T extends ElementBase>(items: T[], label: string, map: (i: T) => ModelTreeNode) => {
+    if (items.length > 0) groups.push({ label, items: items.map(map) });
+  };
+  add(model.roles, 'Roles', (r) => ({ id: r.id, label: r.name || r.id }));
+  add(model.processes, 'Processes', (p) => ({
+    id: p.id, label: p.name || p.id,
+    detail: p.actor ? `actor: ${p.actor.id}` : undefined,
+  }));
+  add(model.events, 'Events', (e) => ({ id: e.id, label: e.id, detail: e.eventType }));
+  add(model.gateways, 'Gateways', (g) => ({ id: g.id, label: g.label || g.id }));
+  add(model.dataclasses, 'Data Classes', (d) => ({ id: d.id, label: d.id }));
+  add(model.regs, 'Registries', (r) => ({ id: r.id, label: r.id }));
+  add(model.enums, 'Enums', (e) => ({ id: e.id, label: e.id }));
+  add(model.provisions, 'Provisions', (p) => ({ id: p.id, label: p.id }));
+  add(model.approvals, 'Approvals', (a) => ({ id: a.id, label: a.id }));
+  add(model.vars, 'Measurements', (v) => ({ id: v.id, label: v.id }));
+  add(model.forms, 'Forms', (f) => ({ id: f.id, label: f.id }));
+  add(model.subforms, 'Subforms', (s) => ({ id: s.id, label: s.id }));
+  add(model.symbols, 'Symbols', (s) => ({ id: s.id, label: s.id }));
+  add(model.calculations, 'Calculations', (c) => ({ id: c.id, label: c.id }));
+  add(model.stateMachines, 'State Machines', (s) => ({ id: s.id, label: s.id }));
+  add(model.terms, 'Terms', (t) => ({ id: t.id, label: t.id }));
+  add(model.refs, 'References', (r) => ({ id: r.id, label: r.id }));
+  add(model.mapProfiles, 'Map Profiles', (m) => ({ id: m.id, label: m.id }));
+  return {
+    title: model.meta.title ?? model.root,
+    namespace: model.meta.namespace ?? '',
+    version: model.meta.edition ?? '',
+    groups,
+  };
+}
+
+// ── Public API: one parse, three views ──
+
+export function parseModel(publicPath: string): ParsedModel | null {
+  const model = resolveModel(publicPath);
+  if (!model) return null;
+  return {
+    stats: extractStats(model),
+    flows: extractFlows(model),
+    tree: extractTree(model),
+  };
 }

@@ -15,6 +15,7 @@ const architecture = defineCollection({
     pillar: z.enum(['define', 'reference', 'implement', 'operate', 'audit']).optional(),
     audience: z.enum(['publishers', 'readers', 'implementers', 'operators', 'auditors']).optional(),
     side: z.enum(['reference', 'application']).optional(),
+    summary: z.string().optional(),
     sidebar: sidebarSchema,
   }),
 });
