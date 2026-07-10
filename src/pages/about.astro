@@ -1,0 +1,18 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import AboutContent from '../content/about.md';
+---
+
+<PageLayout title="About Primmel" description="Prime MMEL — the torch carried forward." wide>
+  <div class="about-content">
+    <AboutContent />
+  </div>
+</PageLayout>
+
+<style>
+  .about-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+</style>

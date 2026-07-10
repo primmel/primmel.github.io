@@ -21,92 +21,92 @@ sides consume.
   <title id="flow-title">Primmel's two sides: Reference and Application, branching off the published reference</title>
   <defs>
     <marker id="arr-arch" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="var(--primmel-rule-strong)"/>
+      <path d="M0 0 L10 5 L0 10 z" style="fill: var(--c-rule-strong)"/>
     </marker>
   </defs>
 
   <!-- DEFINE (top, ochre) -->
   <g transform="translate(310 20)">
-    <rect width="280" height="80" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-ochre)" stroke-width="1.5"/>
-    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">DEFINE  ·  PUBLISHER</text>
-    <text x="20" y="55" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">Author &amp; publish</text>
-    <text x="20" y="72" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">reference .prl + optional .prd extract</text>
+    <rect width="280" height="80" rx="6" style="fill: var(--c-surface)" style="stroke: var(--c-ochre)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--font-mono)" font-size="11" font-weight="500" style="fill: var(--c-burgundy)" letter-spacing="1.5">DEFINE  ·  PUBLISHER</text>
+    <text x="20" y="55" font-family="var(--font-display)" font-size="18" font-weight="500" style="fill: var(--c-ink)">Author &amp; publish</text>
+    <text x="20" y="72" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">reference .prl + optional .prd extract</text>
   </g>
 
   <!-- arrow down -->
-  <line x1="450" y1="105" x2="450" y2="135" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#arr-arch)"/>
+  <line x1="450" y1="105" x2="450" y2="135" style="stroke: var(--c-rule-strong)" stroke-width="1.5" marker-end="url(#arr-arch)"/>
 
   <!-- Published reference (middle, neutral) -->
   <g transform="translate(290 145)">
-    <rect width="320" height="60" rx="6" fill="var(--primmel-surface-2)" stroke="var(--primmel-rule-strong)" stroke-width="1.5" stroke-dasharray="4 3"/>
-    <text x="160" y="30" text-anchor="middle" font-family="var(--primmel-display)" font-size="15" font-style="italic" fill="var(--primmel-ink)">published reference model</text>
-    <text x="160" y="48" text-anchor="middle" font-family="var(--primmel-body)" font-size="11" fill="var(--primmel-text-3)">consumed by both sides</text>
+    <rect width="320" height="60" rx="6" style="fill: var(--c-surface-2)" style="stroke: var(--c-rule-strong)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="160" y="30" text-anchor="middle" font-family="var(--font-display)" font-size="15" font-style="italic" style="fill: var(--c-ink)">published reference model</text>
+    <text x="160" y="48" text-anchor="middle" font-family="var(--font-body)" font-size="11" style="fill: var(--c-text-3)">consumed by both sides</text>
   </g>
 
   <!-- Branch arrows -->
-  <path d="M 380 210 Q 200 240 130 280" fill="none" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#arr-arch)"/>
-  <path d="M 520 210 Q 700 240 770 280" fill="none" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#arr-arch)"/>
+  <path d="M 380 210 Q 200 240 130 280" fill="none" style="stroke: var(--c-rule-strong)" stroke-width="1.5" marker-end="url(#arr-arch)"/>
+  <path d="M 520 210 Q 700 240 770 280" fill="none" style="stroke: var(--c-rule-strong)" stroke-width="1.5" marker-end="url(#arr-arch)"/>
 
   <!-- REFERENCE side (left, indigo) -->
   <g transform="translate(30 290)">
-    <rect width="380" height="290" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-indigo)" stroke-width="1.5"/>
-    <text x="20" y="32" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">REFERENCE  ·  READERS</text>
-    <text x="20" y="58" font-family="var(--primmel-display)" font-size="22" font-weight="400" fill="var(--primmel-indigo)" font-style="italic">Read &middot; Interact &middot; Evaluate</text>
+    <rect width="380" height="290" rx="6" style="fill: var(--c-surface)" style="stroke: var(--c-indigo)" stroke-width="1.5"/>
+    <text x="20" y="32" font-family="var(--font-mono)" font-size="11" font-weight="500" style="fill: var(--c-burgundy)" letter-spacing="1.5">REFERENCE  ·  READERS</text>
+    <text x="20" y="58" font-family="var(--font-display)" font-size="22" font-weight="400" style="fill: var(--c-indigo)" font-style="italic">Read &middot; Interact &middot; Evaluate</text>
 
-    <g transform="translate(20 85)" font-family="var(--primmel-body)">
-      <text x="0" y="0" font-size="13" font-weight="600" fill="var(--primmel-ink)">Read</text>
-      <text x="0" y="18" font-size="12" fill="var(--primmel-text-2)">Navigate the standard's provisions, processes,</text>
-      <text x="0" y="33" font-size="12" fill="var(--primmel-text-2)">data classes, and references.</text>
+    <g transform="translate(20 85)" font-family="var(--font-body)">
+      <text x="0" y="0" font-size="13" font-weight="600" style="fill: var(--c-ink)">Read</text>
+      <text x="0" y="18" font-size="12" style="fill: var(--c-text-2)">Navigate the standard's provisions, processes,</text>
+      <text x="0" y="33" font-size="12" style="fill: var(--c-text-2)">data classes, and references.</text>
     </g>
 
-    <g transform="translate(20 145)" font-family="var(--primmel-body)">
-      <text x="0" y="0" font-size="13" font-weight="600" fill="var(--primmel-ink)">Interact</text>
-      <text x="0" y="18" font-size="12" fill="var(--primmel-text-2)">Run the test processes the model declares.</text>
-      <text x="0" y="33" font-size="12" fill="var(--primmel-text-2)">Evaluate formulas against sample inputs.</text>
+    <g transform="translate(20 145)" font-family="var(--font-body)">
+      <text x="0" y="0" font-size="13" font-weight="600" style="fill: var(--c-ink)">Interact</text>
+      <text x="0" y="18" font-size="12" style="fill: var(--c-text-2)">Run the test processes the model declares.</text>
+      <text x="0" y="33" font-size="12" style="fill: var(--c-text-2)">Evaluate formulas against sample inputs.</text>
     </g>
 
-    <g transform="translate(20 205)" font-family="var(--primmel-body)">
-      <text x="0" y="0" font-size="13" font-weight="600" fill="var(--primmel-ink)">Evaluate</text>
-      <text x="0" y="18" font-size="12" fill="var(--primmel-text-2)">Check whether a product, process, or dataset</text>
-      <text x="0" y="33" font-size="12" fill="var(--primmel-text-2)">meets the standard. Dimensional &amp; formula checks.</text>
+    <g transform="translate(20 205)" font-family="var(--font-body)">
+      <text x="0" y="0" font-size="13" font-weight="600" style="fill: var(--c-ink)">Evaluate</text>
+      <text x="0" y="18" font-size="12" style="fill: var(--c-text-2)">Check whether a product, process, or dataset</text>
+      <text x="0" y="33" font-size="12" style="fill: var(--c-text-2)">meets the standard. Dimensional &amp; formula checks.</text>
     </g>
   </g>
 
   <!-- APPLICATION side (right, burgundy) -->
   <g transform="translate(490 290)">
-    <rect width="380" height="290" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-burgundy)" stroke-width="1.5"/>
-    <text x="20" y="32" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">APPLICATION  ·  IMPLEMENTERS / OPERATORS / AUDITORS</text>
+    <rect width="380" height="290" rx="6" style="fill: var(--c-surface)" style="stroke: var(--c-burgundy)" stroke-width="1.5"/>
+    <text x="20" y="32" font-family="var(--font-mono)" font-size="11" font-weight="500" style="fill: var(--c-burgundy)" letter-spacing="1.5">APPLICATION  ·  IMPLEMENTERS / OPERATORS / AUDITORS</text>
 
-    <g transform="translate(20 60)" font-family="var(--primmel-body)">
-      <circle cx="8" cy="6" r="7" fill="var(--primmel-indigo)" opacity="0.15"/>
-      <text x="8" y="10" text-anchor="middle" font-family="var(--primmel-display)" font-size="11" fill="var(--primmel-indigo)" font-weight="500">3</text>
-      <text x="26" y="2" font-size="13" font-weight="600" fill="var(--primmel-ink)">Implement</text>
-      <text x="26" y="18" font-size="12" fill="var(--primmel-text-2)">Maintain the digital twin. Adopt, import, customize.</text>
-      <text x="26" y="33" font-size="12" fill="var(--primmel-text-2)">Map to references. Close Statement of Applicability.</text>
+    <g transform="translate(20 60)" font-family="var(--font-body)">
+      <circle cx="8" cy="6" r="7" style="fill: var(--c-indigo)" opacity="0.15"/>
+      <text x="8" y="10" text-anchor="middle" font-family="var(--font-display)" font-size="11" style="fill: var(--c-indigo)" font-weight="500">3</text>
+      <text x="26" y="2" font-size="13" font-weight="600" style="fill: var(--c-ink)">Implement</text>
+      <text x="26" y="18" font-size="12" style="fill: var(--c-text-2)">Maintain the digital twin. Adopt, import, customize.</text>
+      <text x="26" y="33" font-size="12" style="fill: var(--c-text-2)">Map to references. Close Statement of Applicability.</text>
     </g>
 
-    <g transform="translate(20 130)" font-family="var(--primmel-body)">
-      <circle cx="8" cy="6" r="7" fill="var(--primmel-olive)" opacity="0.15"/>
-      <text x="8" y="10" text-anchor="middle" font-family="var(--primmel-display)" font-size="11" fill="var(--primmel-olive)" font-weight="500">4</text>
-      <text x="26" y="2" font-size="13" font-weight="600" fill="var(--primmel-ink)">Operate</text>
-      <text x="26" y="18" font-size="12" fill="var(--primmel-text-2)">Run the implementation in production.</text>
-      <text x="26" y="33" font-size="12" fill="var(--primmel-text-2)">Store evidence as required (.pws/ YAML records).</text>
+    <g transform="translate(20 130)" font-family="var(--font-body)">
+      <circle cx="8" cy="6" r="7" style="fill: var(--c-olive)" opacity="0.15"/>
+      <text x="8" y="10" text-anchor="middle" font-family="var(--font-display)" font-size="11" style="fill: var(--c-olive)" font-weight="500">4</text>
+      <text x="26" y="2" font-size="13" font-weight="600" style="fill: var(--c-ink)">Operate</text>
+      <text x="26" y="18" font-size="12" style="fill: var(--c-text-2)">Run the implementation in production.</text>
+      <text x="26" y="33" font-size="12" style="fill: var(--c-text-2)">Store evidence as required (.pws/ YAML records).</text>
     </g>
 
-    <g transform="translate(20 200)" font-family="var(--primmel-body)">
-      <circle cx="8" cy="6" r="7" fill="var(--primmel-ochre)" opacity="0.15"/>
-      <text x="8" y="10" text-anchor="middle" font-family="var(--primmel-display)" font-size="11" fill="var(--primmel-ochre)" font-weight="500">5</text>
-      <text x="26" y="2" font-size="13" font-weight="600" fill="var(--primmel-ink)">Audit</text>
-      <text x="26" y="18" font-size="12" fill="var(--primmel-text-2)">Navigate like readers; view evidence like operators;</text>
-      <text x="26" y="33" font-size="12" fill="var(--primmel-text-2)">correlate via .prm. Compliance verdict + trace.</text>
+    <g transform="translate(20 200)" font-family="var(--font-body)">
+      <circle cx="8" cy="6" r="7" style="fill: var(--c-ochre)" opacity="0.15"/>
+      <text x="8" y="10" text-anchor="middle" font-family="var(--font-display)" font-size="11" style="fill: var(--c-ochre)" font-weight="500">5</text>
+      <text x="26" y="2" font-size="13" font-weight="600" style="fill: var(--c-ink)">Audit</text>
+      <text x="26" y="18" font-size="12" style="fill: var(--c-text-2)">Navigate like readers; view evidence like operators;</text>
+      <text x="26" y="33" font-size="12" style="fill: var(--c-text-2)">correlate via .prm. Compliance verdict + trace.</text>
     </g>
   </g>
 
   <!-- Inheritance callout: Auditor inherits from Reader + Operator -->
-  <path d="M 410 380 Q 450 380 490 380" fill="none" stroke="var(--primmel-ochre)" stroke-width="1.5" stroke-dasharray="3 3"/>
-  <text x="450" y="372" text-anchor="middle" font-family="var(--primmel-body)" font-size="10" font-style="italic" fill="var(--primmel-ochre)">inherits</text>
-  <path d="M 410 510 Q 450 510 490 510" fill="none" stroke="var(--primmel-ochre)" stroke-width="1.5" stroke-dasharray="3 3"/>
-  <text x="450" y="502" text-anchor="middle" font-family="var(--primmel-body)" font-size="10" font-style="italic" fill="var(--primmel-ochre)">inherits</text>
+  <path d="M 410 380 Q 450 380 490 380" fill="none" style="stroke: var(--c-ochre)" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="450" y="372" text-anchor="middle" font-family="var(--font-body)" font-size="10" font-style="italic" style="fill: var(--c-ochre)">inherits</text>
+  <path d="M 410 510 Q 450 510 490 510" fill="none" style="stroke: var(--c-ochre)" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="450" y="502" text-anchor="middle" font-family="var(--font-body)" font-size="10" font-style="italic" style="fill: var(--c-ochre)">inherits</text>
 
 </svg>
 </div>
