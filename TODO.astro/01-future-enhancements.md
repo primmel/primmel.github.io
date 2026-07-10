@@ -11,10 +11,13 @@
 - [x] @primmel/primmel parser (ModelSummary cards)
 - [x] Dark mode (no-flash init)
 - [x] Sitemap + robots.txt
-
-## Remaining — content
-- [ ] Reading time estimates on doc pages
-- [ ] JSON-LD TechArticle schema per page (not just WebSite)
+- [x] Reading time estimates
+- [x] Self-hosted fonts (@fontsource)
+- [x] Skip-to-content link (accessibility)
+- [x] ARIA current-page on sidebar links
+- [x] Lighthouse CI config (lighthouserc.json)
+- [x] Build-time link validation (scripts/validate-links.mjs)
+- [x] Navigation bug fix (index entries → section root)
 
 ## Remaining — design
 - [ ] Migrate Astro component scoped styles → Tailwind utilities
@@ -23,8 +26,8 @@
 
 ## Remaining — code quality
 - [ ] Visual regression testing (Playwright screenshots)
-- [ ] Accessibility audit (axe-core, keyboard nav, ARIA)
-- [ ] Performance budget (Lighthouse CI in GitHub Actions)
+- [ ] Full accessibility audit (axe-core automated scan)
+- [ ] Performance budget (Lighthouse CI — config done, needs LHCI token)
 
 ## Remaining — parser
 - [ ] Model-driven process flow SVGs (auto-generate from .prl)
@@ -32,5 +35,4 @@
 - [ ] Build-time link validation against parsed models
 
 ## Remaining — infrastructure
-- [ ] Self-host fonts (remove Google Fonts CDN dependency)
 - [ ] Image optimization (Astro <Image> component)

@@ -17,7 +17,7 @@ const { groups, activeHref } = Astro.props;
           <li>
             <a
               href={item.href}
-              class:list={['sidebar-link', { 'is-active': item.href === activeHref || item.href + '/' === activeHref }]}
+              class:list={['sidebar-link', { 'is-active': item.href === activeHref || item.href + '/' === activeHref }]} aria-current={item.href === activeHref || item.href + '/' === activeHref ? "page" : undefined}
             >
               {item.label}
             </a>

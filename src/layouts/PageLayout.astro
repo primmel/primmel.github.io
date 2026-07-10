@@ -10,7 +10,7 @@ const { title, description, wide = false } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class:list={['page-main', { wide }]}>
+  <main class:list={['page-main', { wide }]} id="main-content">
     <slot />
   </main>
 </BaseLayout>

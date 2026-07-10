@@ -1,4 +1,10 @@
 ---
+import '@fontsource/hanken-grotesk/400.css';
+import '@fontsource/hanken-grotesk/500.css';
+import '@fontsource/hanken-grotesk/600.css';
+import '@fontsource/hanken-grotesk/700.css';
+import '@fontsource/spline-sans-mono/400.css';
+import '@fontsource/spline-sans-mono/500.css';
 import '../styles/app.css';
 import { ClientRouter } from 'astro:transitions';
 import { SITE } from '../consts';
@@ -30,9 +36,6 @@ const fullTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#1e3a8a" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" />
   <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
   <script is:inline set:html={`{
     "@context": "https://schema.org",
@@ -47,6 +50,7 @@ const fullTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <ScrollProgressVue client:load />
   <CodeEnhancementsVue client:idle />
   <NavBar />
