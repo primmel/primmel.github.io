@@ -1,12 +1,12 @@
 {
   "name": "primmel.github.io",
   "version": "2.0.0",
-  "description": "Primmel — executable standards modelling for SMART standards",
+  "description": "Primmel \u2014 executable standards modelling for SMART standards",
   "type": "module",
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "check": "astro check"
   },
@@ -14,7 +14,8 @@
     "@astrojs/mdx": "^7.0.2",
     "@astrojs/sitemap": "^3.7.3",
     "@primmel/primmel": "^1.2.0",
-    "astro": "^7.0.7"
+    "astro": "^7.0.7",
+    "pagefind": "^1.5.2"
   },
   "devDependencies": {
     "typescript": "^5.7.3"
