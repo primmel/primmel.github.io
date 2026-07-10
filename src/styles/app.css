@@ -199,3 +199,5 @@ pre:hover .copy-btn { opacity: 1; }
   body::before { display: none !important; }
   .nav-bar, .sidebar, .outline, .footer, .scroll-progress { display: none !important; }
 }
+/* CSS containment for render performance */
+.doc-main, .sidebar, .outline { contain: layout; }
