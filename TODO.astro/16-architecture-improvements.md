@@ -1,17 +1,15 @@
-# 16 — Architecture improvements beyond migration
+# 16 — Architecture improvements
+
+## Status: NOT STARTED
 
 ## Goal
-Beyond the VitePress → Astro migration, these improvements make the codebase cleaner, more maintainable, and architecturally sound.
+Beyond the migration, these improvements make the codebase cleaner, faster, and more maintainable.
 
-## 1. Typed Primmel model objects
-
-Currently the site talks about Primmel models in prose. Create TypeScript types that model the Primmel language itself:
-
+## 1. Typed Primmel model (high impact)
+Create TypeScript interfaces that model the Primmel language itself:
 ```ts
 // src/lib/primmel-model.ts
-export type PrimmelFile = PrlFile | PrdFile | PrmFile | PwsDirectory;
-
-export interface PrlFile {
+export type PrlFile = {
   kind: 'prl';
   root: string;
   version: string;
@@ -19,70 +17,61 @@ export interface PrlFile {
   roles: Role[];
   processes: Process[];
   provisions: Provision[];
-  dataRegistries: DataRegistry[];
   // ...
-}
+};
 ```
+These types drive content validation, example file parsing, diagram generation.
 
-These types drive: content validation, example file parsing, diagram generation, spec pages.
-
-## 2. Model-driven diagramming
-
-Instead of hand-drawing SVGs for every process flow, create a `ProcessFlowDiagram` component that takes a parsed `.prl` subprocess and renders an SVG automatically:
-
+## 2. Model-driven diagramming (high impact)
+Instead of hand-drawing SVGs, create a `ProcessFlowDiagram.astro` that takes a parsed `.prl` subprocess and renders an SVG automatically:
 ```astro
----
-import { parsePrl, renderSubprocess } from '@lib/primmel-renderer';
-const model = parsePrl(entry.data.sourceFile);
----
 <ProcessFlowDiagram elements={model.subprocesses[0].elements} edges={model.subprocesses[0].edges} />
 ```
 
-This is model-driven: the diagram IS the model, not a separate artifact.
+## 3. Font loading optimization
+- Currently loading via Google Fonts `<link>` (blocking render)
+- Self-host fonts or use `font-display: swap` + `preload`
+- Consider subsetting to Latin-only for smaller payload
 
-## 3. Reading time estimates
+## 4. CSS containment for render performance
+- Add `contain: layout` to `.doc-main` and `.sidebar` 
+- Prevents style recalculation from cascading
 
-Use `reading-time` to add estimated read times to doc pages. Pure build-time computation, no runtime cost.
+## 5. Accessibility audit
+- [ ] Run `axe-core` on every page
+- [ ] Verify keyboard navigation (tab order, focus visible)
+- [ ] Add ARIA labels to interactive components
+- [ ] Check color contrast ratios (WCAG AA minimum)
+- [ ] Test screen reader flow
 
-## 4. Structured data (JSON-LD)
+## 6. Performance budget
+- [ ] Add Lighthouse CI to GitHub Actions
+- [ ] Fail PR if Lighthouse score drops below threshold (90+ performance)
+- [ ] Monitor bundle size (should be <10KB JS for most pages)
 
-Add schema.org JSON-LD to each page for SEO:
-- `TechArticle` for docs pages
-- `SoftwareSourceCode` for example files
-- `BreadcrumbList` for navigation context
+## 7. RSS feed
+- [ ] Install `@astrojs/rss`
+- [ ] Generate feed from content collections
+- [ ] Link from NavBar or Footer
 
-## 5. RSS feed
-
-`@astrojs/rss` generates a feed for content updates. Useful for tracking new example additions or spec changes.
-
-## 6. Content linting
-
-Markdown lint rules enforced at build time:
-- Maximum line length (120 chars)
-- No trailing whitespace
-- Heading hierarchy (no skipping levels)
-- Required frontmatter fields
-
-## 7. Visual regression testing
-
-Use Playwright to screenshot key pages on each PR. Compare against baseline. Catches CSS regressions.
-
-## 8. Accessibility audit
-
-Automated `axe-core` checks as part of the build. Manual keyboard navigation test per page.
-
-## 9. Performance budget
-
-Lighthouse CI on each PR. Fail if Lighthouse score drops below threshold.
-
-## 10. Documentation for the codebase itself
-
-A `CONTRIBUTING.md` that documents:
-- How to add a new doc page
-- How to add a new example file
+## 8. CONTRIBUTING.md
+Document:
+- How to add a new doc page (create .md in collection, add frontmatter)
 - How the content collection schema works
-- How navigation is derived
+- How navigation is derived (no manual config needed)
 - How to add a new diagram component
+- CSS architecture (tokens → base → code → tables → components → print)
+
+## 9. Visual regression testing
+- [ ] Install Playwright
+- [ ] Screenshot key pages on each PR
+- [ ] Compare against baseline
+- [ ] Catches CSS regressions automatically
+
+## 10. Image optimization
+- [ ] Use Astro's `<Image />` component for any raster images
+- [ ] Generate `srcset` for responsive images
+- [ ] Convert logos to AVIF/WebP with SVG fallback
 
 ## Prioritisation
 
@@ -90,16 +79,11 @@ A `CONTRIBUTING.md` that documents:
 | --- | --- | --- | --- |
 | Typed Primmel model | High | High | Phase 2 |
 | Model-driven diagrams | High | High | Phase 2 |
-| Reading time | Low | Low | Phase 1 |
-| JSON-LD | Medium | Low | Phase 1 |
-| RSS | Low | Low | Phase 1 |
-| Content linting | Medium | Low | Phase 1 |
-| Visual regression | High | Medium | Phase 2 |
-| Accessibility | High | Low | Phase 1 |
+| Font loading | Medium | Low | Phase 1 |
+| CSS containment | Low | Low | Phase 1 |
+| Accessibility audit | High | Medium | Phase 1 |
 | Performance budget | Medium | Low | Phase 1 |
+| RSS | Low | Low | Phase 1 |
 | CONTRIBUTING.md | Medium | Low | Phase 1 |
-
-## Acceptance criteria
-- Each item is tracked as a separate issue or TODO
-- Phase 1 items completed within the initial migration
-- Phase 2 items planned for post-migration enhancement
+| Visual regression | High | Medium | Phase 2 |
+| Image optimization | Low | Low | Phase 2 |

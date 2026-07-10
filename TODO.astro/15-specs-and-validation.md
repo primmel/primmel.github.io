@@ -1,68 +1,36 @@
 # 15 — Specs and validation
 
+## Status: NOT STARTED
+
 ## Goal
-Build-time content validation. Every page's frontmatter is schema-validated. Broken links are caught. Content is model-driven.
+Build-time content validation beyond Zod schemas. Catch broken links, verify content structure, add structured data.
 
-## Content schema validation
+## Tasks
 
-Astro Content Collections with Zod enforce frontmatter at build time:
-```ts
-// src/content/config.ts
-const docs = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    sidebar: z.object({
-      section: z.string(),
-      order: z.number(),
-      label: z.string(),
-    }),
-  }),
-});
-```
+### Link validation
+- [ ] Add a custom Astro integration or build script that validates:
+  - All internal markdown links (`[text](/path)`) point to existing pages
+  - All `.prl`/`.prd`/`.prm`/`.yaml` file links exist in `public/`
+  - All cross-collection references (pillar ↔ audience) are bidirectional
 
-`astro check` validates all content against schemas. `astro build` fails on violations.
+### robots.txt
+- [ ] Add `public/robots.txt` allowing all crawlers, pointing to sitemap
 
-## Link validation
+### JSON-LD structured data
+- [ ] Add `TechArticle` schema to doc pages
+- [ ] Add `BreadcrumbList` to navigation context
+- [ ] Add `WebSite` schema to home page
 
-Use `astro-expressive-code` or a custom integration to validate:
-- All internal links point to existing pages
-- All `.prl`/`.prd`/`.prm`/`.yaml` file links exist in `public/`
-- All cross-collection references (pillar ↔ audience) are bidirectional
+### Reading time
+- [ ] Install `reading-time` package
+- [ ] Add estimated read time to doc page headers (build-time computation)
 
-## Example file metadata
+### Example file metadata
+- [ ] Create typed registry for example files in `src/lib/examples-registry.ts`
+- [ ] Walkthrough pages reference files by ID, not raw path
 
-Create a typed registry for example files:
-
-```ts
-// src/lib/examples-registry.ts
-export interface ExampleFile {
-  path: string;       // '/examples/files/01-minimal-model.prl'
-  extension: 'prl' | 'prd' | 'prm' | 'pws' | 'yaml';
-  title: string;
-  description: string;
-}
-
-export const EXAMPLE_FILES: ExampleFile[] = [
-  { path: '/examples/files/01-minimal-model.prl', extension: 'prl', title: 'Minimal model', ... },
-  // ...
-];
-```
-
-Walkthrough pages reference files by ID, not by raw path — single source of truth for file metadata.
-
-## Primmel language spec pages
-
-The docs section should include formal specification pages (or links to the spec subsite) for:
-- `.prl` file format specification
-- `.prd` file format specification
-- `.prm` mapping format specification
-- `.pws` workspace format specification
-- Primmel DSL grammar (EBNF)
-
-These are the authoritative references; walkthrough examples demonstrate the spec in action.
-
-## Acceptance criteria
-- `astro check` passes with zero errors
-- `astro build` fails on broken links
-- Every example file has typed metadata
-- Spec pages exist or link to the spec subsite
+### Acceptance criteria
+- [ ] `npm run build` fails on broken links
+- [ ] `robots.txt` served at `/robots.txt`
+- [ ] JSON-LD present in page source
+- [ ] Reading time shown on doc pages
