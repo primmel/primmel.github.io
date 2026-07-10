@@ -1,9 +1,10 @@
 export function estimateReadingTime(text: string): string {
-  const words = text.trim().split(/\s+/).length;
-  const minutes = Math.max(1, Math.round(words / 200));
+  const minutes = Math.max(1, Math.round(wordCount(text) / 200));
   return `${minutes} min read`;
 }
 
 export function wordCount(text: string): number {
-  return text.trim().split(/\s+/).length;
+  const trimmed = text.trim();
+  if (trimmed === '') return 0;
+  return trimmed.split(/\s+/).length;
 }
