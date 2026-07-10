@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/mdx": "^7.0.2",
     "@astrojs/sitemap": "^3.7.3",
-    "@primmel/primmel": "file:../primmel-ts/packages/primmel",
+    "@primmel/primmel": "^1.2.0",
     "astro": "^7.0.7"
   },
   "devDependencies": {
