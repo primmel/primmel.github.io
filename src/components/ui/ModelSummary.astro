@@ -1,0 +1,98 @@
+---
+import { parseModelFile, type ModelStats } from '../../lib/model-parser';
+
+interface Props {
+  file: string;
+}
+const { file } = Astro.props;
+const stats: ModelStats | null = await parseModelFile(file);
+---
+
+{stats && (
+  <div class="model-summary">
+    <h4>Model summary</h4>
+    <div class="stats-grid">
+      <div class="stat"><span class="stat-num">{stats.roles}</span><span class="stat-label">roles</span></div>
+      <div class="stat"><span class="stat-num">{stats.processes}</span><span class="stat-label">processes</span></div>
+      {stats.provisions > 0 && <div class="stat"><span class="stat-num">{stats.provisions}</span><span class="stat-label">provisions</span></div>}
+      {stats.dataClasses > 0 && <div class="stat"><span class="stat-num">{stats.dataClasses}</span><span class="stat-label">data classes</span></div>}
+      {stats.registries > 0 && <div class="stat"><span class="stat-num">{stats.registries}</span><span class="stat-label">registries</span></div>}
+      {stats.events > 0 && <div class="stat"><span class="stat-num">{stats.events}</span><span class="stat-label">events</span></div>}
+      {stats.gateways > 0 && <div class="stat"><span class="stat-num">{stats.gateways}</span><span class="stat-label">gateways</span></div>}
+      {stats.measurements > 0 && <div class="stat"><span class="stat-num">{stats.measurements}</span><span class="stat-label">measurements</span></div>}
+      {stats.references > 0 && <div class="stat"><span class="stat-num">{stats.references}</span><span class="stat-label">references</span></div>}
+      {stats.approvals > 0 && <div class="stat"><span class="stat-num">{stats.approvals}</span><span class="stat-label">approvals</span></div>}
+      {stats.enums > 0 && <div class="stat"><span class="stat-num">{stats.enums}</span><span class="stat-label">enums</span></div>}
+      {stats.subprocesses > 0 && <div class="stat"><span class="stat-num">{stats.subprocesses}</span><span class="stat-label">subprocesses</span></div>}
+    </div>
+    <dl class="model-meta">
+      <dt>root</dt><dd><code>{stats.root}</code></dd>
+      <dt>namespace</dt><dd><code>{stats.namespace}</code></dd>
+    </dl>
+  </div>
+)}
+
+<style>
+  .model-summary {
+    margin: 1.5rem 0;
+    padding: 1.25rem 1.5rem;
+    background: var(--c-surface);
+    border: 1px solid var(--c-rule);
+    border-radius: 6px;
+  }
+  h4 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: var(--c-burgundy);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  :global(.dark) h4 { color: var(--c-ochre); }
+  .stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 0.15rem;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--c-ink);
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--c-text-3);
+  }
+  .model-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 0.75rem;
+    font-size: 0.82rem;
+    margin: 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--c-rule);
+  }
+  dt { color: var(--c-text-3); font-weight: 500; }
+  dd { margin: 0; }
+  dd code {
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    background: var(--c-surface-2);
+    border: 1px solid var(--c-rule);
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+    color: var(--c-burgundy);
+  }
+  :global(.dark) dd code { color: var(--c-ochre); }
+</style>

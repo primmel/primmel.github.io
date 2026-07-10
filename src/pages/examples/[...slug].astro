@@ -1,19 +1,24 @@
 ---
 import { getCollection, render } from 'astro:content';
 import DocLayout from '../../layouts/DocLayout.astro';
+import ModelSummary from '../../components/ui/ModelSummary.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('examples');
-  return entries.map(entry => ({
-    params: { slug: entry.id === 'index' ? undefined : entry.id },
-    props: { entry },
-  })).filter(p => p.params.slug !== undefined);
+  return entries
+    .filter(entry => entry.id !== 'index')
+    .map(entry => ({
+      params: { slug: entry.id },
+      props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
+const sourceFile = entry.data.sourceFile as string | undefined;
 ---
 
 <DocLayout title={entry.data.title} collection="examples" slug={entry.id} headings={headings}>
+  {sourceFile && <ModelSummary file={sourceFile} />}
   <Content />
 </DocLayout>
