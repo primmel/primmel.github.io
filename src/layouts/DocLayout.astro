@@ -12,9 +12,10 @@ interface Props {
   collection: string;
   slug: string;
   headings?: MarkdownHeading[];
+  readingTime?: string;
 }
 
-const { title, description, collection, slug, headings = [] } = Astro.props;
+const { title, description, collection, slug, headings = [], readingTime } = Astro.props;
 const sidebarGroups = await deriveSidebar(collection);
 const siblings = await getSiblings(collection, slug);
 const editUrl = `https://github.com/primmel/primmel.github.io/edit/main/src/content/${collection}/${slug}.md`;
@@ -24,6 +25,7 @@ const editUrl = `https://github.com/primmel/primmel.github.io/edit/main/src/cont
   <div class="doc-layout">
     <SideBar groups={sidebarGroups} activeHref={`/${collection}/${slug}`} />
     <main class="doc-main">
+      {readingTime && <p class="reading-time">{readingTime}</p>}
       <article class="prose">
         <slot />
       </article>
