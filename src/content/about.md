@@ -1,10 +1,3 @@
----
-layout: ../layouts/PageLayout.astro
-title: About Primmel
-description: Prime MMEL — the torch carried forward.
-wide: true
----
-
 # About Primmel
 
 <div class="about-hero">

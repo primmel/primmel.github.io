@@ -52,55 +52,55 @@ with invented content suitable for public distribution.
   <title id="pkg-title">How the four implementation-package files fit together</title>
   <defs>
     <marker id="pkg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" fill="var(--primmel-rule-strong)"/>
+      <path d="M0 0 L10 5 L0 10 z" style="fill: var(--c-rule-strong)"/>
     </marker>
   </defs>
 
   <!-- prd (top-left) -->
   <g transform="translate(40 40)">
-    <rect width="260" height="100" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-indigo)" stroke-width="1.5"/>
-    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PRD</text>
-    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">ocs-standard.prd</text>
-    <text x="20" y="75" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">The source standard.</text>
-    <text x="20" y="90" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Clause-level extracts.</text>
+    <rect width="260" height="100" rx="6" style="fill: var(--c-surface)" style="stroke: var(--c-indigo)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--font-mono)" font-size="11" font-weight="500" style="fill: var(--c-burgundy)" letter-spacing="1.5">.PRD</text>
+    <text x="20" y="52" font-family="var(--font-display)" font-size="18" font-weight="500" style="fill: var(--c-ink)">ocs-standard.prd</text>
+    <text x="20" y="75" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">The source standard.</text>
+    <text x="20" y="90" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">Clause-level extracts.</text>
   </g>
 
   <!-- prl (top-right) -->
   <g transform="translate(600 40)">
-    <rect width="260" height="100" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-indigo)" stroke-width="1.5"/>
-    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PRL</text>
-    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">acme-coffee-programme.prl</text>
-    <text x="20" y="75" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Acme's implementation.</text>
-    <text x="20" y="90" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Local + OCS# aliased elements.</text>
+    <rect width="260" height="100" rx="6" style="fill: var(--c-surface)" style="stroke: var(--c-indigo)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--font-mono)" font-size="11" font-weight="500" style="fill: var(--c-burgundy)" letter-spacing="1.5">.PRL</text>
+    <text x="20" y="52" font-family="var(--font-display)" font-size="18" font-weight="500" style="fill: var(--c-ink)">acme-coffee-programme.prl</text>
+    <text x="20" y="75" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">Acme's implementation.</text>
+    <text x="20" y="90" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">Local + OCS# aliased elements.</text>
   </g>
 
   <!-- arrow prd → middle (referenced via) -->
-  <path d="M 300 90 Q 380 90 420 175" fill="none" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
-  <text x="330" y="105" font-family="var(--primmel-body)" font-size="11" font-style="italic" fill="var(--primmel-text-3)">referenced</text>
+  <path d="M 300 90 Q 380 90 420 175" fill="none" style="stroke: var(--c-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
+  <text x="330" y="105" font-family="var(--font-body)" font-size="11" font-style="italic" style="fill: var(--c-text-3)">referenced</text>
 
   <!-- arrow prl → prm (maps via) -->
-  <path d="M 600 90 Q 540 130 460 175" fill="none" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
-  <text x="510" y="115" font-family="var(--primmel-body)" font-size="11" font-style="italic" fill="var(--primmel-text-3)">maps via</text>
+  <path d="M 600 90 Q 540 130 460 175" fill="none" style="stroke: var(--c-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
+  <text x="510" y="115" font-family="var(--font-body)" font-size="11" font-style="italic" style="fill: var(--c-text-3)">maps via</text>
 
   <!-- prm (middle) -->
   <g transform="translate(320 180)">
-    <rect width="260" height="100" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-burgundy)" stroke-width="1.5"/>
-    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PRM</text>
-    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">acme-to-ocs.prm</text>
-    <text x="20" y="75" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">The mapping JSON.</text>
-    <text x="20" y="90" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Each impl → reference element.</text>
+    <rect width="260" height="100" rx="6" style="fill: var(--c-surface)" style="stroke: var(--c-burgundy)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--font-mono)" font-size="11" font-weight="500" style="fill: var(--c-burgundy)" letter-spacing="1.5">.PRM</text>
+    <text x="20" y="52" font-family="var(--font-display)" font-size="18" font-weight="500" style="fill: var(--c-ink)">acme-to-ocs.prm</text>
+    <text x="20" y="75" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">The mapping JSON.</text>
+    <text x="20" y="90" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">Each impl → reference element.</text>
   </g>
 
   <!-- arrow prm → pws (validated against) -->
-  <line x1="450" y1="285" x2="450" y2="320" stroke="var(--primmel-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
-  <text x="460" y="305" font-family="var(--primmel-body)" font-size="11" font-style="italic" fill="var(--primmel-text-3)">validated against</text>
+  <line x1="450" y1="285" x2="450" y2="320" style="stroke: var(--c-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
+  <text x="460" y="305" font-family="var(--font-body)" font-size="11" font-style="italic" style="fill: var(--c-text-3)">validated against</text>
 
   <!-- pws (bottom) -->
   <g transform="translate(320 325)">
-    <rect width="260" height="80" rx="6" fill="var(--primmel-surface)" stroke="var(--primmel-olive)" stroke-width="1.5"/>
-    <text x="20" y="28" font-family="var(--primmel-mono)" font-size="11" font-weight="500" fill="var(--primmel-burgundy)" letter-spacing="1.5">.PWS/  (directory)</text>
-    <text x="20" y="52" font-family="var(--primmel-display)" font-size="18" font-weight="500" fill="var(--primmel-ink)">sample-workspace.pws/</text>
-    <text x="20" y="70" font-family="var(--primmel-body)" font-size="12" fill="var(--primmel-text-2)">Actual records. YAML, one file per record.</text>
+    <rect width="260" height="80" rx="6" style="fill: var(--c-surface)" style="stroke: var(--c-olive)" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="var(--font-mono)" font-size="11" font-weight="500" style="fill: var(--c-burgundy)" letter-spacing="1.5">.PWS/  (directory)</text>
+    <text x="20" y="52" font-family="var(--font-display)" font-size="18" font-weight="500" style="fill: var(--c-ink)">sample-workspace.pws/</text>
+    <text x="20" y="70" font-family="var(--font-body)" font-size="12" style="fill: var(--c-text-2)">Actual records. YAML, one file per record.</text>
   </g>
 </svg>
 </div>
