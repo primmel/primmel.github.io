@@ -5,107 +5,76 @@ This file provides guidance to Claude Code (claude.ai/code) for working with cod
 ## What this repo is
 
 The source content for **[primmel.org](https://www.primmel.org)** — the
-public website for **Primmel**, the second generation of the Multi-Modal
-Primmel modelling language. Built with [VitePress](https://vitepress.dev/).
-
-Primmel is a JSON-like syntax for modelling SMART standards in an
-executable form. It was developed by Ribose jointly with BSI for the
-BSI SMART program, was adopted as the basis of OIML SMART, and is now
-released as a public language for standards organizations to model
-their own standards.
-
-The repository holds:
-
-- The website (`index.md`, `about.md`, `.vitepress/`, `public/`)
-- The Primmel brand assets (logos, favicon, manifest)
-- Documentation stubs (`docs/`) — the full specification lives in a
-  separate repository and is published as a sub-site
-
-The full Primmel specification sources live in `../mmel/` (a sibling
-repo). Example models (private, Ribose-internal) live in
-`../../mn/mmel-models/`.
+public website for **Primmel**, a typed, machine-readable language for
+representing SMART standards (ISO, BSI, OIML) as executable programs.
+Built with [Astro 7](https://astro.build/).
 
 ## Build / develop
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
-npm run build    # output to .vitepress/dist
+npm run dev      # http://localhost:4321
+npm run build    # output to dist/
 npm run preview  # preview the production build
+npm run check    # TypeScript + Astro type checking
 ```
 
 ## Architecture
 
-Standard VitePress project. The non-obvious bits:
+Astro 7 static site with content collections, typed schemas, derived
+navigation, modular CSS, and component-based rendering.
 
-- `.vitepress/config.ts` — site config: nav, sidebar, logo (light/dark),
-  theme color, search.
-- `.vitepress/theme/index.ts` — extends the default theme and registers
-  the `<HomePage />` component globally.
-- `.vitepress/theme/custom.css` — brand variables and the components
-  used by the home and about pages. The Primmel palette is exposed as
-  CSS variables (`--primmel-foundation`, `--primmel-implementation`,
-  `--primmel-source`, `--primmel-flame`, `--primmel-flame-bright`,
-  `--primmel-flame-deep`). When restyling, change here, not per-page.
-- `.vitepress/theme/components/HomePage.vue` — the home page hero,
-  feature grid, and "From the legacy" section.
-- `about.md` — the about page. Includes the logo breakdown (single
-  mark, tonal shading, indigo brand colour), colour legend, origin
-  story, mission, use cases, primitives overview, and adoption list.
-- `public/` — logo set and favicon. The source logo
-  (`primmel-logo.svg`, 600×600, greyscale) is a designer-drawn
-  Primmel monogram with tonal shading. Light and dark variants
-  (`primmel-logo-light.svg`, `primmel-logo-dark.svg`) are generated
-  from it by mapping greys onto a brand-indigo ramp. A PDF version
-  (`primmel-logo.pdf`) and a simplified favicon (`favicon.svg`)
-  round out the set.
+### Directory structure
+
+```
+src/
+├── content/              Content collections (typed markdown)
+│   ├── architecture/     5 pillars + 5 audiences + overview
+│   ├── examples/         7 example walkthroughs
+│   └── docs/             7 language reference pages
+├── content.config.ts     Zod schemas for each collection
+├── layouts/              OCP layout hierarchy
+│   ├── BaseLayout.astro  Root: head, nav, footer, theme
+│   ├── DocLayout.astro   Adds sidebar + outline + pager
+│   └── PageLayout.astro  Content-only (home, about, 404)
+├── components/           Reusable UI (DRY)
+│   ├── nav/              NavBar, SideBar, Outline, Footer
+│   ├── ui/               ScrollProgress, ThemeToggle, Pager
+│   └── home/             Hero, PillarsList
+├── styles/               Modular CSS (MECE)
+│   ├── tokens.css        Variables only (colors, fonts, spacing)
+│   ├── base.css          Reset + element styles
+│   ├── code.css          Code blocks + Shiki tokens
+│   ├── tables.css        Table styling
+│   ├── components.css    Custom blocks, diagrams
+│   ├── print.css         Print stylesheet
+│   └── global.css        Imports all above
+├── lib/                  Business logic (encapsulation)
+│   └── navigation.ts     Derive sidebar/pager from collections
+├── pages/                File-based routes
+│   ├── index.astro       Home
+│   ├── about.md          About (Astro auto-routes .md)
+│   ├── 404.astro         Custom 404
+│   ├── architecture/     Dynamic [...slug] + index
+│   ├── examples/         Dynamic [...slug] + index
+│   └── docs/             Dynamic [...slug]
+└── consts.ts             Site-wide constants (SSoT)
+```
+
+### Key principles
+
+- **Content collections with Zod**: every markdown page has typed
+  frontmatter. Build fails on invalid content.
+- **Derived navigation**: sidebar generated from collection metadata
+  via `deriveSidebar()`. No hardcoded config arrays.
+- **OCP layouts**: BaseLayout → DocLayout → PageLayout. Open for
+  extension via slots; never modify base layouts directly.
+- **MECE CSS**: 6 files split by concern. No overlap. Each selector in
+  exactly one file.
+- **Single source of truth**: `src/consts.ts` for site config, pillars,
+  features. `src/lib/navigation.ts` for all nav logic.
 
 ## Deployment
 
 `.github/workflows/deploy-pages.yml` runs `npm run build` on push to
-`main`, uploads `.vitepress/dist/` as a GitHub Pages artifact, and
-deploys it.
-
-## Brand & logo
-
-The Primmel logo is a custom-drawn monogram with tonal shading,
-rendered in indigo. The same source SVG is tinted differently for
-light and dark themes:
-
-- **Light mode** (`primmel-logo-light.svg`): dark tonal values map to
-  deep indigo (`#1e3a8a`); light tonal values stay near white. The
-  mark reads as indigo on paper.
-- **Dark mode** (`primmel-logo-dark.svg`): tonal values are inverted
-  and tinted toward sky (`#93c5fd`); the darkest tones resolve to
-  slate (`#0f172a`) so they fade into the dark background.
-
-Both variants are generated from `primmel-logo.svg` by a Python script
-that walks every `fill:#XXXXXX` (and `fill:gray`/`fill:silver`) in the
-source and replaces it with the corresponding tinted value. To
-regenerate the variants after editing the source, rerun the script
-(see git history for the mapping logic).
-
-The brushstroke path is generated by `python3` (tapered width along an
-arc, 336° of sweep with the opening centered at the top). When editing
-logos, keep the icon and full-logo viewBox geometry consistent so the
-path coordinates can be copied between files. The favicon uses a
-simpler uniform-stroke arc &mdash; the tapered path doesn't read at
-16×16.
-
-## Things future agents trip on
-
-- `package-lock.json` is gitignored by project convention (matching the
-  lutaml.github.io pattern). Don't commit it.
-- The `docs/` directory holds the curated example corpus. Each
-  `.prl`/`.prd`/`.prm`/`.pws` file under `public/examples/files/` has a
-  dedicated walkthrough under `docs/examples/`. Don't duplicate spec
-  content here; link to it instead. Static file extensions
-  (`.prl`, `.prd`, `.prm`, `.pws`, `.yaml`, `.yml`) are whitelisted in
-  `ignoreDeadLinks` in `.vitepress/config.ts` so VitePress doesn't
-  flag them as dead.
-- The HomePage component is the only Vue component. If you add a
-  second one, register it in `.vitepress/theme/index.ts` the same way.
-- The about page uses inline `<style scoped>` blocks for some
-  components because VitePress compiles them per-section. The shared
-  styles in `custom.css` apply globally; the inline blocks are for
-  one-off layouts on that page.
+`main`, uploads `dist/` as a GitHub Pages artifact, and deploys it.
