@@ -29,7 +29,7 @@
   /* Ink */
   --color-ink: #1a1f2e;
   --color-text-2: #4d4d4d;
-  --color-text-3: #8a857a;
+  --color-text-3: #6b6659;
 
   /* Rules */
   --color-rule: #d8cfb6;
@@ -39,6 +39,11 @@
   --font-display: 'Hanken Grotesk', system-ui, sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
   --font-mono: 'Spline Sans Mono', 'SF Mono', Menlo, monospace;
+
+  /* Motion */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 350ms;
 }
 
 /* ── Dark mode token overrides ── */
@@ -50,7 +55,7 @@
 
   --color-ink: #ede4d0;
   --color-text-2: #b8b0a0;
-  --color-text-3: #807866;
+  --color-text-3: #a89e8a;
 
   --color-rule: #38342a;
   --color-rule-strong: #504a3c;
@@ -134,14 +139,14 @@ pre {
 }
 
 /* Shiki tokens → palette */
-.shiki, .shiki span { color: var(--color-ink) !important; background: transparent !important; }
-.shiki span[style*="color:#FF7B72"], .shiki span[style*="color:#ff7b72"] { color: var(--color-burgundy) !important; font-weight: 500; }
-.shiki span[style*="color:#A5D6FF"], .shiki span[style*="color:#a5d6ff"] { color: var(--color-olive) !important; }
-.shiki span[style*="color:#79C0FF"], .shiki span[style*="color:#79c0ff"] { color: var(--color-indigo) !important; }
-.dark .shiki span[style*="color:#79C0FF"], .dark .shiki span[style*="color:#79c0ff"] { color: var(--color-indigo-mid) !important; }
-.shiki span[style*="color:#D2A8FF"], .shiki span[style*="color:#d2a8ff"] { color: var(--color-ochre) !important; font-style: normal; }
-.shiki span[style*="color:#8B949E"], .shiki span[style*="color:#8b949e"] { color: var(--color-text-3) !important; font-style: italic; }
-.shiki span[style*="color:#7EE787"], .shiki span[style*="color:#7ee787"] { color: var(--color-olive) !important; }
+.astro-code, .shiki, .shiki span, .astro-code span { color: var(--color-ink) !important; background: transparent !important; }
+.astro-code span[style*="color:#FF7B72"], .astro-code span[style*="color:#ff7b72"], .shiki span[style*="color:#FF7B72"], .shiki span[style*="color:#ff7b72"] { color: var(--color-burgundy) !important; font-weight: 500; }
+.astro-code span[style*="color:#A5D6FF"], .astro-code span[style*="color:#a5d6ff"], .shiki span[style*="color:#A5D6FF"], .shiki span[style*="color:#a5d6ff"] { color: var(--color-olive) !important; }
+.astro-code span[style*="color:#79C0FF"], .astro-code span[style*="color:#79c0ff"], .shiki span[style*="color:#79C0FF"], .shiki span[style*="color:#79c0ff"] { color: var(--color-indigo) !important; }
+.dark .astro-code span[style*="color:#79C0FF"], .dark .astro-code span[style*="color:#79c0ff"], .dark .shiki span[style*="color:#79C0FF"], .dark .shiki span[style*="color:#79c0ff"] { color: var(--color-indigo-mid) !important; }
+.astro-code span[style*="color:#D2A8FF"], .astro-code span[style*="color:#d2a8ff"], .shiki span[style*="color:#D2A8FF"], .shiki span[style*="color:#d2a8ff"] { color: var(--color-ochre) !important; font-style: normal; }
+.astro-code span[style*="color:#8B949E"], .astro-code span[style*="color:#8b949e"], .shiki span[style*="color:#8B949E"], .shiki span[style*="color:#8b949e"] { color: var(--color-text-3) !important; font-style: italic; }
+.astro-code span[style*="color:#7EE787"], .astro-code span[style*="color:#7ee787"], .shiki span[style*="color:#7EE787"], .shiki span[style*="color:#7ee787"] { color: var(--color-olive) !important; }
 
 /* Tables */
 table { border-collapse: collapse; margin: 1.5rem 0; font-size: 0.93rem; }
@@ -170,6 +175,15 @@ blockquote {
 .header-anchor { opacity: 0 !important; text-decoration: none !important; }
 .header-anchor::before { display: none !important; content: '' !important; }
 h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor { opacity: 1 !important; }
+
+/* Inline links in body text — underline to distinguish from color alone */
+.prose a, article a, p a, li a {
+  text-decoration: underline;
+  transition: color var(--dur-fast) ease;
+}
+.prose a:hover, article a:hover, p a:hover, li a:hover {
+  text-decoration-thickness: 2px;
+}
 
 /* Copy button on code blocks */
 .copy-btn {
@@ -241,4 +255,34 @@ pre:hover .copy-btn { opacity: 1; }
   color: var(--color-indigo);
   font-weight: 500;
   border-left-color: var(--color-burgundy);
+}
+
+/* ── Mobile sidebar drawer ──
+   Cross-component: NavBar hamburger toggles `body.sidebar-open`,
+   SideBar slides in, DocLayout backdrop dims. Global so all three
+   components share one source of truth. */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 90;
+}
+body.sidebar-open .sidebar-backdrop { display: block; }
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    bottom: 0;
+    width: 260px;
+    z-index: 100;
+    background: var(--color-cream);
+    overflow-y: auto;
+    transition: left var(--dur-slow) ease;
+    padding-top: 60px;
+  }
+  body.sidebar-open .sidebar { left: 0; }
+  body.sidebar-open { overflow: hidden; }
 }

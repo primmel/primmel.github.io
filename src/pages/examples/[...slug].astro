@@ -1,8 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import { estimateReadingTime } from '../../lib/reading-time';
+import { parseModelFlows, parseModelTree } from '../../lib/model-parser';
 import DocLayout from '../../layouts/DocLayout.astro';
 import ModelSummary from '../../components/ui/ModelSummary.astro';
+import ProcessFlowDiagram from '../../components/diagrams/ProcessFlowDiagram.astro';
+import ModelBrowserVue from '../../components/ui/ModelBrowser.vue';
 
 export async function getStaticPaths() {
   const entries = await getCollection('examples');
@@ -18,10 +21,23 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const readingTime = entry.body ? estimateReadingTime(entry.body) : undefined;
 const sourceFile = entry.data.sourceFile as string | undefined;
+const flows = sourceFile ? await parseModelFlows(sourceFile) : [];
+const modelTree = sourceFile ? await parseModelTree(sourceFile) : null;
 ---
 
 <DocLayout title={entry.data.title} collection="examples" slug={entry.id} headings={headings}
   readingTime={readingTime}>
   {sourceFile && <ModelSummary file={sourceFile} />}
+  {flows.length > 0 && (
+    <section class="process-flows">
+      {flows.map(flow => <ProcessFlowDiagram flow={flow} />)}
+    </section>
+  )}
   <Content />
+  {modelTree && (
+    <section class="model-browser-section">
+      <h2 id="model-elements">Model elements</h2>
+      <ModelBrowserVue client:visible tree={modelTree} />
+    </section>
+  )}
 </DocLayout>

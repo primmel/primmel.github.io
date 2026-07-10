@@ -31,7 +31,7 @@ const { groups, activeHref } = Astro.props;
 <style>
   .sidebar {
     padding: 2rem 0;
-    border-right: 1px solid var(--c-rule);
+    border-right: 1px solid var(--color-rule);
     font-family: var(--font-body);
   }
   .sidebar-group { margin-bottom: 0.5rem; }
@@ -40,26 +40,26 @@ const { groups, activeHref } = Astro.props;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--c-burgundy);
+    color: var(--color-burgundy);
     padding: 0 1rem;
     margin: 1.75rem 0 0.5rem;
   }
-  :global(.dark) .sidebar-heading { color: var(--c-ochre); }
+  :global(.dark) .sidebar-heading { color: var(--color-ochre); }
   .sidebar ul { list-style: none; padding: 0; margin: 0; }
   .sidebar-link {
     display: block;
     padding: 0.3rem 1rem;
     font-size: 0.88rem;
-    color: var(--c-text-2);
+    color: var(--color-text-2);
     text-decoration: none;
     border-left: 2px solid transparent;
     transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
   }
-  .sidebar-link:hover { color: var(--c-ink); }
+  .sidebar-link:hover { color: var(--color-ink); }
   .sidebar-link.is-active {
-    color: var(--c-indigo);
+    color: var(--color-indigo);
     font-weight: 500;
-    border-left-color: var(--c-burgundy);
+    border-left-color: var(--color-burgundy);
   }
-  :global(.dark) .sidebar-link.is-active { color: var(--c-indigo); }
+  :global(.dark) .sidebar-link.is-active { color: var(--color-indigo); }
 </style>

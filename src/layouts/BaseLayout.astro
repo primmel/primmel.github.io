@@ -20,6 +20,8 @@ interface Props {
 
 const { title, description = SITE.description } = Astro.props;
 const fullTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
+const pagePath = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '-');
+const ogImage = pagePath ? `/og/${pagePath}.png` : '/og/index.png';
 ---
 
 <!DOCTYPE html>
@@ -37,6 +39,13 @@ const fullTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#1e3a8a" />
   <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content={SITE.title} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImage} />
   <script is:inline set:html={`{
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -56,5 +65,30 @@ const fullTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
   <NavBar />
   <slot />
   <Footer />
+<script is:inline>
+  function toggleSidebar() {
+    document.body.classList.toggle('sidebar-open');
+  }
+  function initSidebar() {
+    const hamburger = document.getElementById('hamburger');
+    if (!hamburger) return;
+    if (!document.querySelector('.sidebar')) {
+      hamburger.style.display = 'none';
+      return;
+    }
+    hamburger.addEventListener('click', toggleSidebar);
+  }
+  initSidebar();
+  document.addEventListener('astro:after-swap', initSidebar);
+  document.addEventListener('click', (e) => {
+    if (e.target.classList?.contains('sidebar-backdrop')) toggleSidebar();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.body.classList.remove('sidebar-open');
+  });
+  document.addEventListener('astro:after-swap', () => {
+    document.body.classList.remove('sidebar-open');
+  });
+</script>
 </body>
 </html>

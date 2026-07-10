@@ -1,0 +1,154 @@
+---
+import type { SubprocessFlow, FlowNode, NodeType } from '../../lib/model-parser';
+
+interface Props {
+  flow: SubprocessFlow;
+}
+
+const { flow } = Astro.props;
+
+const NODE_SIZE = 56;
+const NODE_HALF = NODE_SIZE / 2;
+
+const TYPE_STYLES: Record<NodeType, { fill: string; stroke: string; shape: 'circle' | 'rect' | 'diamond' }> = {
+  start:   { fill: 'var(--color-olive)',    stroke: 'var(--color-olive)',    shape: 'circle' },
+  end:     { fill: 'var(--color-burgundy)', stroke: 'var(--color-burgundy)', shape: 'circle' },
+  timer:   { fill: 'var(--color-ochre)',    stroke: 'var(--color-ochre)',    shape: 'circle' },
+  process: { fill: 'var(--color-surface)',  stroke: 'var(--color-indigo)',   shape: 'rect' },
+  gateway: { fill: 'var(--color-surface-2)',stroke: 'var(--color-ochre)',    shape: 'diamond' },
+  unknown: { fill: 'var(--color-surface-2)',stroke: 'var(--color-text-3)',   shape: 'rect' },
+};
+
+const xs = flow.nodes.map(n => n.x);
+const ys = flow.nodes.map(n => n.y);
+const minX = Math.min(0, ...xs) - NODE_SIZE;
+const maxX = Math.max(0, ...xs) + NODE_SIZE;
+const minY = Math.min(0, ...ys) - NODE_HALF;
+const maxY = Math.max(0, ...ys) + NODE_HALF;
+const width = maxX - minX + 200;
+const height = maxY - minY + 80;
+const offsetX = -minX + 100;
+const offsetY = -minY + 40;
+
+function nodePos(node: FlowNode) {
+  return { cx: node.x + offsetX, cy: node.y + offsetY };
+}
+
+function edgePath(from: FlowNode, to: FlowNode): string {
+  const p1 = nodePos(from);
+  const p2 = nodePos(to);
+  const dy = p2.cy - p1.cy;
+  if (Math.abs(dy) < 10) {
+    return `M ${p1.cx} ${p1.cy} L ${p2.cx} ${p2.cy}`;
+  }
+  const midY = p1.cy + dy * 0.5;
+  return `M ${p1.cx} ${p1.cy} C ${p1.cx} ${midY}, ${p2.cx} ${midY}, ${p2.cx} ${p2.cy}`;
+}
+
+function truncate(label: string, max = 18): string {
+  return label.length > max ? label.slice(0, max - 1) + '…' : label;
+}
+
+const nodeMap = new Map(flow.nodes.map(n => [n.id, n]));
+---
+
+<figure class="flow-diagram">
+  <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`Process flow diagram: ${flow.id}`}>
+    <defs>
+      <marker id={`arrow-${flow.id}`} markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M 0 0 L 8 4 L 0 8 z" fill="var(--color-text-3)" />
+      </marker>
+    </defs>
+
+    {flow.edges.map((edge, i) => {
+      const from = nodeMap.get(edge.from);
+      const to = nodeMap.get(edge.to);
+      if (!from || !to) return null;
+      const p1 = nodePos(from);
+      const p2 = nodePos(to);
+      const labelX = (p1.cx + p2.cx) / 2 + 8;
+      const labelY = (p1.cy + p2.cy) / 2;
+      return (
+        <g class="edge">
+          <path
+            d={edgePath(from, to)}
+            fill="none"
+            stroke="var(--color-rule-strong)"
+            stroke-width="1.5"
+            marker-end={`url(#arrow-${flow.id})`}
+          />
+          {edge.label && (
+            <text x={labelX} y={labelY} class="edge-label" dy="-4">
+              {truncate(edge.label, 22)}
+            </text>
+          )}
+        </g>
+      );
+    })}
+
+    {flow.nodes.map((node) => {
+      const { cx, cy } = nodePos(node);
+      const style = TYPE_STYLES[node.type];
+      return (
+        <g class="node">
+          {style.shape === 'circle' && (
+            <circle cx={cx} cy={cy} r={NODE_HALF - 6} style={`fill: ${style.fill}; stroke: ${style.stroke};`} stroke-width="2" />
+          )}
+          {style.shape === 'rect' && (
+            <rect x={cx - NODE_HALF} y={cy - NODE_HALF + 8} width={NODE_SIZE} height={NODE_SIZE - 16} rx="4" style={`fill: ${style.fill}; stroke: ${style.stroke};`} stroke-width="1.5" />
+          )}
+          {style.shape === 'diamond' && (
+            <polygon points={`${cx},${cy - NODE_HALF + 4} ${cx + NODE_HALF - 4},${cy} ${cx},${cy + NODE_HALF - 4} ${cx - NODE_HALF + 4},${cy}`} style={`fill: ${style.fill}; stroke: ${style.stroke};`} stroke-width="1.5" />
+          )}
+          <text x={cx} y={cy + NODE_HALF + 14} class="node-label" text-anchor="middle">
+            {truncate(node.label)}
+          </text>
+          <title>{node.label}</title>
+        </g>
+      );
+    })}
+  </svg>
+  {flow.id && <figcaption>Subprocess: <code>{flow.id}</code></figcaption>}
+</figure>
+
+<style>
+  .flow-diagram {
+    margin: 2rem 0;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    background: var(--color-surface);
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  .flow-diagram svg {
+    display: block;
+    min-width: 400px;
+    width: 100%;
+    height: auto;
+  }
+  :global(.dark) .flow-diagram { background: var(--color-surface); }
+  .node-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    fill: var(--color-ink);
+    font-weight: 500;
+  }
+  .edge-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    fill: var(--color-text-3);
+    font-style: italic;
+  }
+  figcaption {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--color-text-3);
+    margin-top: 0.5rem;
+  }
+  figcaption code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-burgundy);
+  }
+  :global(.dark) figcaption code { color: var(--color-ochre); }
+</style>

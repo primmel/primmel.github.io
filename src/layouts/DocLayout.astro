@@ -22,6 +22,7 @@ const editUrl = `https://github.com/primmel/primmel.github.io/edit/main/src/cont
 ---
 
 <BaseLayout title={title} description={description}>
+  <div class="sidebar-backdrop"></div>
   <div class="doc-layout">
     <SideBar groups={sidebarGroups} activeHref={`/${collection}/${slug}`} />
     <main class="doc-main" id="main-content">
@@ -55,22 +56,21 @@ const editUrl = `https://github.com/primmel/primmel.github.io/edit/main/src/cont
   .doc-footer {
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--c-rule);
+    border-top: 1px solid var(--color-rule);
   }
   .edit-link {
     font-size: 0.82rem;
     font-weight: 500;
-    color: var(--c-indigo);
+    color: var(--color-indigo);
     border-bottom: 1px solid transparent;
     transition: border-color var(--dur-fast) ease;
   }
-  .edit-link:hover { border-bottom-color: var(--c-indigo); }
+  .edit-link:hover { border-bottom-color: var(--color-indigo); }
   @media (max-width: 1024px) {
     .doc-layout { grid-template-columns: 260px minmax(0, 1fr); }
-    .outline { display: none; }
+    :global(.outline) { display: none; }
   }
   @media (max-width: 768px) {
     .doc-layout { grid-template-columns: 1fr; padding: 0 1.5rem; }
-    .sidebar { display: none; }
   }
 </style>

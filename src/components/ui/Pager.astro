@@ -35,14 +35,14 @@ const { prev, next } = Astro.props;
   .pager-link {
     display: block;
     padding: 0.9rem 1rem;
-    border: 1px solid var(--c-rule);
+    border: 1px solid var(--color-rule);
     border-radius: 4px;
     text-decoration: none;
     transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease;
   }
   .pager-link:hover {
-    border-color: var(--c-indigo-mid);
-    background: var(--c-surface-2);
+    border-color: var(--color-indigo-mid);
+    background: var(--color-surface-2);
   }
   .pager-link.next { text-align: right; }
   .label {
@@ -50,16 +50,16 @@ const { prev, next } = Astro.props;
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--c-burgundy);
+    color: var(--color-burgundy);
     font-weight: 500;
     margin-bottom: 0.2rem;
   }
-  :global(.dark) .label { color: var(--c-ochre); }
+  :global(.dark) .label { color: var(--color-ochre); }
   .title {
     display: block;
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 0.95rem;
-    color: var(--c-ink);
+    color: var(--color-ink);
   }
 </style>

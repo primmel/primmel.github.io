@@ -11,7 +11,10 @@ import SearchButtonVue from '../ui/SearchButton.vue';
       <img src="/primmel-logo-dark.svg" class="logo dark-only" alt="Primmel" width="28" height="28" />
       <span>{SITE.title}</span>
     </a>
-    <nav class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Toggle sidebar">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links">
       {SITE.nav.map(item => (
         <a href={item.href}>{item.text}</a>
       ))}
@@ -26,8 +29,8 @@ import SearchButtonVue from '../ui/SearchButton.vue';
 
 <style>
   .nav-bar {
-    border-bottom: 1px solid var(--c-rule);
-    background: var(--c-bg);
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-cream);
     backdrop-filter: saturate(140%) blur(6px);
     position: sticky;
     top: 0;
@@ -51,7 +54,7 @@ import SearchButtonVue from '../ui/SearchButton.vue';
     font-size: 1.1rem;
     letter-spacing: -0.02em;
     text-decoration: none;
-    color: var(--c-ink);
+    color: var(--color-ink);
   }
   .logo { width: 28px; height: 28px; }
   .light-only { display: inline; }
@@ -66,18 +69,18 @@ import SearchButtonVue from '../ui/SearchButton.vue';
   .nav-links a {
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--c-text-2);
+    color: var(--color-text-2);
     text-decoration: none;
     transition: color var(--dur-fast) ease;
   }
-  .nav-links a:hover { color: var(--c-ink); }
+  .nav-links a:hover { color: var(--color-ink); }
   .nav-actions {
     display: flex;
     align-items: center;
     gap: 0.75rem;
   }
   .nav-actions a {
-    color: var(--c-text-2);
+    color: var(--color-text-2);
     text-decoration: none;
     font-size: 1.1rem;
   }
@@ -85,4 +88,27 @@ import SearchButtonVue from '../ui/SearchButton.vue';
     .nav-links { display: none; }
     .nav-container { padding: 0 1.5rem; }
   }
+
+  /* Hamburger button — visual + animation only (drawer behavior in app.css) */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--color-ink);
+    border-radius: 1px;
+    transition: transform var(--dur-base) ease, opacity var(--dur-base) ease;
+  }
+  body.sidebar-open .hamburger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  body.sidebar-open .hamburger span:nth-child(2) { opacity: 0; }
+  body.sidebar-open .hamburger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  @media (max-width: 768px) { .hamburger { display: flex; } }
 </style>
