@@ -1,6 +1,7 @@
 ---
+import { render } from 'astro:content';
 import { COLLECTIONS } from '../../lib/collections';
-import { getCollectionSlugs, renderEntry } from '../../lib/page-helpers';
+import { getCollectionSlugs, computeReadingTime } from '../../lib/page-helpers';
 import DocLayout from '../../layouts/DocLayout.astro';
 
 export async function getStaticPaths() {
@@ -8,7 +9,8 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings, readingTime } = await renderEntry(entry);
+const { Content, headings } = await render(entry);
+const readingTime = computeReadingTime(entry.body);
 ---
 
 <DocLayout
