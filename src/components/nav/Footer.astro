@@ -11,8 +11,8 @@ import { SITE } from '../../consts';
 
 <style>
   .footer {
-    border-top: 1px solid var(--c-rule);
-    background: var(--c-bg);
+    border-top: 1px solid var(--color-rule);
+    background: var(--color-cream);
   }
   .footer-container {
     max-width: 1300px;
@@ -23,8 +23,13 @@ import { SITE } from '../../consts';
     align-items: center;
     font-size: 0.85rem;
   }
-  .footer-message a { color: var(--c-indigo); }
-  .footer-copyright { color: var(--c-text-3); }
+  .footer-message a {
+    color: var(--color-indigo);
+    text-decoration: underline;
+    text-decoration-color: var(--color-rule-strong);
+    text-underline-offset: 2px;
+  }
+  .footer-copyright { color: var(--color-text-3); }
   @media (max-width: 768px) {
     .footer-container { flex-direction: column; gap: 0.5rem; text-align: center; }
   }

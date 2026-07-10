@@ -1,15 +1,17 @@
 {
   "name": "primmel.github.io",
   "version": "2.0.0",
-  "description": "Primmel \u2014 executable standards modelling for SMART standards",
+  "description": "Primmel — executable standards modelling for SMART standards",
   "type": "module",
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build && pagefind --site dist && node scripts/generate-og.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "check:links": "node scripts/validate-links.mjs"
+    "check:links": "node scripts/validate-links.mjs",
+    "check:a11y": "node scripts/accessibility-audit.mjs",
+    "test:visual": "npx playwright test"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.2",
@@ -23,10 +25,13 @@
     "@vitejs/plugin-vue": "^6.0.7",
     "astro": "^7.0.7",
     "pagefind": "^1.5.2",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4.3.2",
     "vue": "^3.5.39"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1",
     "typescript": "^5.7.3"
   }
 }

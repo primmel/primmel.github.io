@@ -24,7 +24,7 @@ const h2s = headings.filter(h => h.depth === 2 || h.depth === 3);
 <style>
   .outline {
     padding: 2rem 0 2rem 1.5rem;
-    border-left: 1px solid var(--c-rule);
+    border-left: 1px solid var(--color-rule);
     font-family: var(--font-body);
   }
   .outline-heading {
@@ -32,22 +32,22 @@ const h2s = headings.filter(h => h.depth === 2 || h.depth === 3);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--c-burgundy);
+    color: var(--color-burgundy);
     padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--c-rule);
+    border-bottom: 1px solid var(--color-rule);
     margin-bottom: 0.5rem;
   }
-  :global(.dark) .outline-heading { color: var(--c-ochre); }
+  :global(.dark) .outline-heading { color: var(--color-ochre); }
   .outline ul { list-style: none; padding: 0; margin: 0; }
   .outline a {
     display: block;
     padding: 0.2rem 0;
     font-size: 0.83rem;
-    color: var(--c-text-2);
+    color: var(--color-text-2);
     text-decoration: none;
     line-height: 1.5;
     transition: color var(--dur-fast) ease;
   }
-  .outline a:hover { color: var(--c-ink); }
+  .outline a:hover { color: var(--color-ink); }
   .outline .nested a { padding-left: 1rem; font-size: 0.8rem; }
 </style>
