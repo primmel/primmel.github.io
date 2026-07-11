@@ -1,0 +1,77 @@
+---
+title: "Architecture"
+sidebar:
+  section: "Architecture"
+  order: 0
+  label: "Overview"
+---
+
+import ArchitectureFlowDiagram from '../../components/diagrams/ArchitectureFlowDiagram.astro';
+
+# Architecture
+
+Primmel has **two sides** branching off the published reference: a
+**Reference** side (read, interact, evaluate a standard) and an
+**Application** side (implement, operate, audit against a standard).
+The Publisher is upstream — they produce the reference both
+sides consume.
+
+## The flow
+
+<ArchitectureFlowDiagram />
+
+## The five pillars
+
+| Pillar | Audience | Side | Output artifact |
+| --- | --- | --- | --- |
+| [**Define**](/architecture/define) | [Publishers](/audiences/publishers) | upstream | reference `.prl` + `.prd` |
+| [**Reference**](/architecture/reference) | [Readers](/audiences/readers) | Reference | transient verdicts (read/interact/evaluate) |
+| [**Implement**](/architecture/implement) | [Implementers](/audiences/implementers) | Application | implementation `.prl` + `.prm` + Statement of Applicability |
+| [**Operate**](/architecture/operate) | [Operators](/audiences/operators) | Application | `.pws/` workspace directory (YAML records) |
+| [**Audit**](/architecture/audit) | [Auditors](/audiences/auditors) | Application | compliance verdict + evidence trace |
+
+The five pillars are **MECE** by output artifact — each pillar
+produces a distinct artefact, and every Primmel activity fits into one
+of them.
+
+## Cross-cutting: capability inheritance
+
+The Auditor role is notable because it **inherits capabilities** from
+both Readers and Operators:
+
+- Standard navigation — from Readers.
+- Evidence viewing — from Operators.
+- **Correlation via `.prm`** — the Auditor's own distinct skill.
+
+Tools built for Readers and Operators can be reused by Auditors
+without modification. The Auditor-specific tool is the mapping
+navigator. See [Auditors](/audiences/auditors) for the
+full breakdown.
+
+## Cross-cutting: Reference primitive
+
+A `reference { ... }` declaration in any `.prl` model cites an external
+source clause (typically a `.prd` extract of a source standard). It is
+a primitive type used by every pillar — by a publisher to cite
+the source standard, by an organisation to cite both standard and
+internal-policy clauses. It is not itself a phase; it is the mechanism
+every phase uses to point at things outside the local model.
+
+## File types
+
+| Extension | Kind | Purpose |
+| --- | --- | --- |
+| `.prl` | File | Primmel model — the core artifact. Plain text, UTF-8. |
+| `.prd` | File | Primmel Document — clause-level extracts of a source standard. |
+| `.prm` | File | Primmel Map — a JSON mapping between two models (e.g. implementation ↔ reference). |
+| `.pws` | Directory | Primmel Workspace — actual records produced when a model runs. One YAML file per record, organised into subdirectories per data registry, with a `manifest.yaml` at the root. |
+
+The same artifact can appear in multiple pillars:
+
+- A `.prl` is produced in **Define** (reference) or **Implement**
+  (implementation).
+- A `.prd` is produced in **Define** (from a source standard) and
+  consulted in **Reference** and **Implement**.
+- A `.prm` is produced in **Implement** (mapping) and consulted in
+  **Audit**.
+- A `.pws/` is produced in **Operate** and consulted in **Audit**.
