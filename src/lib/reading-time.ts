@@ -8,3 +8,15 @@ export function wordCount(text: string): number {
   if (trimmed === '') return 0;
   return trimmed.split(/\s+/).length;
 }
+
+export function makeExcerpt(text: string, maxLen = 200): string {
+  const plain = text
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/[#*`>\-]/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\n+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (plain.length <= maxLen) return plain;
+  return plain.slice(0, maxLen) + '…';
+}
