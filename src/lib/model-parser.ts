@@ -41,7 +41,7 @@ export interface FlowNode {
   y: number;
 }
 
-export interface FlowEdge {
+interface FlowEdge {
   from: string;
   to: string;
   label: string;
@@ -55,13 +55,13 @@ export interface SubprocessFlow {
 
 export type NodeType = 'start' | 'end' | 'timer' | 'process' | 'gateway' | 'unknown';
 
-export interface ModelTreeNode {
+interface ModelTreeNode {
   id: string;
   label: string;
   detail?: string;
 }
 
-export interface ModelTreeGroup {
+interface ModelTreeGroup {
   label: string;
   items: ModelTreeNode[];
 }

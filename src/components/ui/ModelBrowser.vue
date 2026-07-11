@@ -1,27 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { ModelTree } from '../../lib/model-parser'
 
 defineOptions({ inheritAttrs: false })
 
-export interface TreeNode {
-  id: string
-  label: string
-  detail?: string
-}
-
-export interface TreeGroup {
-  label: string
-  items: TreeNode[]
-}
-
-export interface ModelTreeData {
-  title: string
-  namespace: string
-  version: string
-  groups: TreeGroup[]
-}
-
-const props = defineProps<{ tree: ModelTreeData }>()
+const props = defineProps<{ tree: ModelTree }>()
 
 const collapsed = ref<Set<string>>(new Set())
 
