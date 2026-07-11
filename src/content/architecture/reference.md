@@ -11,14 +11,18 @@ sidebar:
 
 # Reference &mdash; read, interact, and evaluate a published standard
 
-::: tip WHO THIS IS FOR
+<div class="callout">
+
+**WHO THIS IS FOR**
+
 The **Reference** pillar is for **Readers** &mdash; anyone who needs to
 understand, test, or evaluate against a published standard: engineers
 checking product fit, test labs running standardised procedures,
 conformity assessors verifying requirements, students learning the
 domain, compliance researchers comparing standards. See
-[Readers](/architecture/audiences/readers).
-:::
+[Readers](/audiences/readers).
+
+</div>
 
 **Reference** is the consumption side of Primmel. Once a publisher has
 released a reference `.prl`, anyone can load it into a tool and do

@@ -11,11 +11,11 @@ sidebar:
 
 # Readers
 
-::: tip CORRESPONDING PILLAR
-[Readers](/architecture/audiences/readers) drive the
-[**Reference**](/architecture/reference) pillar. They consume a
-published reference model to read, interact, and evaluate.
-:::
+> **CORRESPONDING PILLAR**
+> [Readers](/audiences/readers) drive the
+> [**Reference**](/architecture/reference) pillar. They consume a
+> published reference model to read, interact, and evaluate.
+
 
 ## Who they are
 
@@ -85,20 +85,20 @@ transient, not part of the Primmel artifact set.
 
 - Maintain an implementation `.prl` of their own operations. That's
   the [Implement](/architecture/implement) pillar, for
-  [Implementers](/architecture/audiences/implementers).
+  [Implementers](/audiences/implementers).
 - Produce `.pws/` evidence of running operations. That's the
   [Operate](/architecture/operate) pillar, for
-  [Operators](/architecture/audiences/operators).
+  [Operators](/audiences/operators).
 - Audit implementations against the standard. That's the
   [Audit](/architecture/audit) pillar &mdash; but
-  [Auditors](/architecture/audiences/auditors) **inherit reader-style navigation**
+  [Auditors](/audiences/auditors) **inherit reader-style navigation**
   as one of their capabilities.
 
 ## See also
 
 - [**Reference** pillar](/architecture/reference) &mdash; the
   architectural activity this audience drives.
-- [Publishers](/architecture/audiences/publishers) &mdash; who produces what
+- [Publishers](/audiences/publishers) &mdash; who produces what
   Readers consume.
-- [Auditors](/architecture/audiences/auditors) &mdash; who inherit Reader
+- [Auditors](/audiences/auditors) &mdash; who inherit Reader
   capabilities and add correlation skill.

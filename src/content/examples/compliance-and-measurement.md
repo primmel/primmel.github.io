@@ -14,9 +14,9 @@ sidebar:
 
 # Compliance and measurement
 
-::: tip Source file
-[`04-compliance-and-measurement.prl`](/examples/files/04-compliance-and-measurement.prl)
-:::
+> **Source file**
+> [`04-compliance-and-measurement.prl`](/examples/files/04-compliance-and-measurement.prl)
+
 
 This example is where Primmel stops being just a flowchart tool and
 becomes a compliance engine. A fictional bean-freshness programme

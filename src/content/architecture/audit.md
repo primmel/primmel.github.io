@@ -11,15 +11,15 @@ sidebar:
 
 # Audit &mdash; verify conformance against a reference
 
-::: tip WHO THIS IS FOR
-The **Audit** pillar is for **Auditors** &mdash; external assessors,
-internal auditors, regulators, and customer auditors. Notably, the
-Auditor **inherits capabilities** from both
-[Readers](/architecture/audiences/readers) (navigate the standard) and
-[Operators](/architecture/audiences/operators) (view evidence), and
-adds the distinct skill of correlating across `.prm` mappings. See
-[Auditors](/architecture/audiences/auditors).
-:::
+> **WHO THIS IS FOR**
+> The **Audit** pillar is for **Auditors** &mdash; external assessors,
+> internal auditors, regulators, and customer auditors. Notably, the
+> Auditor **inherits capabilities** from both
+> [Readers](/audiences/readers) (navigate the standard) and
+> [Operators](/audiences/operators) (view evidence), and
+> adds the distinct skill of correlating across `.prm` mappings. See
+> [Auditors](/audiences/auditors).
+
 
 **Audit** is the verification step. An auditor takes a reference
 model, the organisation's implementation model, the mapping between

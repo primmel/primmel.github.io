@@ -15,9 +15,9 @@ sidebar:
 
 # Minimal model
 
-::: tip Source file
-[`01-minimal-model.prl`](/examples/files/01-minimal-model.prl)
-:::
+> **Source file**
+> [`01-minimal-model.prl`](/examples/files/01-minimal-model.prl)
+
 
 This is the smallest valid Primmel model that contains a real
 subprocess. It exists to show the language's skeleton with no

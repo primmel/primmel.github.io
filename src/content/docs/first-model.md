@@ -12,11 +12,15 @@ This page walks through the smallest meaningful Primmel model line by
 line. By the end, you will recognize every construct that appears in
 larger real-world models.
 
-::: tip You can follow along
+<div class="callout">
+
+**You can follow along**
+
 The complete file is in the examples corpus:
 [`01-minimal-model.prl`](/examples/files/01-minimal-model.prl).
 Open it in another tab.
-:::
+
+</div>
 
 ## The header
 

@@ -14,9 +14,9 @@ sidebar:
 
 # Approval workflow
 
-::: tip Source file
-[`05-approval-workflow.prl`](/examples/files/05-approval-workflow.prl)
-:::
+> **Source file**
+> [`05-approval-workflow.prl`](/examples/files/05-approval-workflow.prl)
+
 
 This example introduces the `approval` step &mdash; a specialised
 process that requires sign-off by a designated role and writes an

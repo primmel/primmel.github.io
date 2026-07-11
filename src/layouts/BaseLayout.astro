@@ -56,6 +56,13 @@ const seo = buildSeoData({ title, description, url: Astro.url, schemaType: schem
     const d = t === 'dark' || (t === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.classList.toggle('dark', d);
   </script>
+  <script is:inline>
+    document.addEventListener('astro:before-swap', (ev) => {
+      if (document.documentElement.classList.contains('dark')) {
+        ev.newDocument.documentElement.classList.add('dark');
+      }
+    });
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>

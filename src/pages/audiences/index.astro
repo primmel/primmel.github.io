@@ -1,0 +1,13 @@
+---
+import { render } from 'astro:content';
+import { COLLECTIONS } from '../../lib/collections';
+import { getCollectionIndexEntry } from '../../lib/navigation';
+import DocLayout from '../../layouts/DocLayout.astro';
+
+const entry = await getCollectionIndexEntry(COLLECTIONS.audiences);
+const { Content, headings } = await render(entry);
+---
+
+<DocLayout title={entry.data.title} collection={COLLECTIONS.audiences} slug="index" headings={headings}>
+  <Content />
+</DocLayout>

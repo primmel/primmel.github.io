@@ -11,13 +11,17 @@ sidebar:
 
 # Implement &mdash; maintain the digital twin, adopt, and map
 
-::: tip WHO THIS IS FOR
+<div class="callout">
+
+**WHO THIS IS FOR**
+
 The **Implement** pillar is for **Implementers** &mdash; the people who
 maintain an organisation's implementation `.prl`, take up reference
 models, customize the implementation to satisfy them, and declare the
 mappings that close a Statement of Applicability. See
-[Implementers](/architecture/audiences/implementers).
-:::
+[Implementers](/audiences/implementers).
+
+</div>
 
 **Implement** covers everything an organisation does to its own
 implementation model: maintaining the digital twin, adopting a

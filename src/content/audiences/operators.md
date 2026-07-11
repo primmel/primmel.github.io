@@ -11,12 +11,12 @@ sidebar:
 
 # Operators
 
-::: tip CORRESPONDING PILLAR
-[Operators](/architecture/audiences/operators) drive the
-[**Operate**](/architecture/operate) pillar. They run the
-implementation in production and produce the `.pws/` evidence that
-auditors will later follow.
-:::
+> **CORRESPONDING PILLAR**
+> [Operators](/audiences/operators) drive the
+> [**Operate**](/architecture/operate) pillar. They run the
+> implementation in production and produce the `.pws/` evidence that
+> auditors will later follow.
+
 
 ## Who they are
 
@@ -92,14 +92,14 @@ class the implementation declares. References between records
 (`lot: lot-2026-001` in a roast batch, pointing at a bean lot) match
 the `reference(BeanLot#data)` type declared on the `RoastBatch#data`
 class. This is the evidence trail that
-[Auditors](/architecture/audiences/auditors) will later follow.
+[Auditors](/audiences/auditors) will later follow.
 
 ## See also
 
 - [**Operate** pillar](/architecture/operate) &mdash; the
   architectural activity this audience drives.
-- [Implementers](/architecture/audiences/implementers) &mdash; who builds and
+- [Implementers](/audiences/implementers) &mdash; who builds and
   maintains what Operators run.
-- [Auditors](/architecture/audiences/auditors) &mdash; who view the evidence
+- [Auditors](/audiences/auditors) &mdash; who view the evidence
   Operators produce (Auditors inherit operator-style evidence viewing
   as one of their capabilities).

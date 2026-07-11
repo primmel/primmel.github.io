@@ -11,13 +11,13 @@ sidebar:
 
 # Implementers
 
-::: tip CORRESPONDING PILLAR
-[Implementers](/architecture/audiences/implementers) drive the
-[**Implement**](/architecture/implement) pillar. They maintain the
-organisation's digital twin, adopt references, customize to satisfy
-them, and declare the mappings that close a Statement of
-Applicability.
-:::
+> **CORRESPONDING PILLAR**
+> [Implementers](/audiences/implementers) drive the
+> [**Implement**](/architecture/implement) pillar. They maintain the
+> organisation's digital twin, adopt references, customize to satisfy
+> them, and declare the mappings that close a Statement of
+> Applicability.
+
 
 ## Who they are
 
@@ -95,9 +95,9 @@ this audience end-to-end. Acme's implementers:
 
 - [**Implement** pillar](/architecture/implement) &mdash; the full
   architectural activity, including the merged Adopt workflow.
-- [Publishers](/architecture/audiences/publishers) &mdash; who produces what
+- [Publishers](/audiences/publishers) &mdash; who produces what
   Implementers adopt.
-- [Operators](/architecture/audiences/operators) &mdash; who runs what Implementers
+- [Operators](/audiences/operators) &mdash; who runs what Implementers
   build.
 - [Mapping reference](/docs/mapping) &mdash; the dual forms of
   mapping in detail.

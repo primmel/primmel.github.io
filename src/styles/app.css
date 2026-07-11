@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-/* Dark mode via class on <html> */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── Primmel design tokens as Tailwind theme ── */
+/* ═══════════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════════ */
 @theme {
-  /* Brand palette: each color has a role */
   --color-indigo: #1e3a8a;
   --color-indigo-mid: #3b6ee6;
   --color-indigo-bright: #5b8def;
@@ -20,58 +20,53 @@
   --color-olive: #5a6b3f;
   --color-olive-mid: #7a8b5a;
 
-  /* Surfaces */
   --color-cream: #f7f2e7;
   --color-surface: #fdfaf2;
   --color-surface-2: #efe8d4;
   --color-surface-3: #e6dec5;
 
-  /* Ink */
   --color-ink: #1a1f2e;
   --color-text-2: #4d4d4d;
   --color-text-3: #6b6659;
 
-  /* Rules */
   --color-rule: #d8cfb6;
   --color-rule-strong: #b0a78a;
 
-  /* Typography */
   --font-display: 'Hanken Grotesk', system-ui, sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
   --font-mono: 'Spline Sans Mono', 'SF Mono', Menlo, monospace;
 
-  /* Motion */
   --dur-fast: 120ms;
   --dur-base: 200ms;
   --dur-slow: 350ms;
 }
 
-/* ── Dark mode token overrides ── */
+/* ── Dark mode ── */
 .dark {
   --color-cream: #1a1810;
   --color-surface: #22201a;
   --color-surface-2: #2a2620;
   --color-surface-3: #353025;
-
   --color-ink: #ede4d0;
   --color-text-2: #b8b0a0;
   --color-text-3: #a89e8a;
-
   --color-rule: #38342a;
   --color-rule-strong: #504a3c;
-
   --color-indigo: #8aabf5;
   --color-indigo-mid: #aac4f7;
   --color-indigo-light: #cdd9fa;
-
   --color-burgundy: #c87878;
   --color-ochre: #d9a544;
   --color-olive: #95a878;
 }
 
-/* ── Base styles ── */
+/* ═══════════════════════════════════════════════════
+   BASE — body, selection, focus
+   ═══════════════════════════════════════════════════ */
 body {
   font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
   font-feature-settings: 'ss01';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -98,14 +93,6 @@ body::before {
     radial-gradient(ellipse at 85% 80%, rgba(138, 171, 245, 0.06) 0, transparent 50%);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  color: var(--color-ink);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-}
-
 ::selection {
   background: rgba(125, 42, 42, 0.18);
   color: var(--color-ink);
@@ -114,8 +101,119 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(217, 165, 68, 0.25);
 }
 
-/* Code blocks */
-:not(pre) > code {
+:focus-visible {
+  outline: 2px solid var(--color-indigo);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════════════
+   PROSE — typography for all rendered markdown content
+   This is the core fix: Tailwind strips all element
+   styles; this section restores them comprehensively.
+   ═══════════════════════════════════════════════════ */
+.prose {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--color-ink);
+}
+
+/* Headings */
+.prose h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 2.5rem 0 1rem;
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+.prose h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+.prose h5, .prose h6 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+}
+
+/* Paragraphs */
+.prose p {
+  margin: 0 0 1.25rem;
+}
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Strong, em */
+.prose strong { font-weight: 600; color: var(--color-ink); }
+.prose em { font-style: italic; }
+
+/* Links */
+.prose a {
+  color: var(--color-indigo);
+  text-decoration: underline;
+  text-decoration-color: var(--color-rule-strong);
+  text-underline-offset: 2px;
+  transition: text-decoration-color var(--dur-fast) ease;
+}
+.prose a:hover {
+  text-decoration-color: var(--color-indigo);
+}
+
+/* Lists */
+.prose ul, .prose ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li { margin: 0.3rem 0; }
+.prose li::marker { color: var(--color-text-3); }
+
+/* Nested lists */
+.prose ul ul, .prose ol ol, .prose ul ol, .prose ol ul {
+  margin: 0.3rem 0;
+}
+
+/* Horizontal rule */
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: 2.5rem 0;
+}
+
+/* Images */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   CODE — inline + blocks + Shiki
+   ═══════════════════════════════════════════════════ */
+.prose code, :not(pre) > code {
   font-family: var(--font-mono);
   font-size: 0.85em;
   background: var(--color-surface-2);
@@ -124,21 +222,22 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 3px;
   color: var(--color-burgundy);
 }
-.dark :not(pre) > code { color: var(--color-ochre); }
+.dark .prose code, .dark :not(pre) > code { color: var(--color-ochre); }
 
 pre {
   font-family: var(--font-mono);
   border: 1px solid var(--color-rule);
-  border-radius: 4px;
+  border-radius: 6px;
   background: var(--color-surface) !important;
   margin: 1.5rem 0;
-  padding: 2.25rem 1.25rem 1rem;
+  padding: 1rem 1.25rem;
   overflow-x: auto;
   font-size: 0.82rem;
   line-height: 1.75;
+  position: relative;
 }
 
-/* Shiki tokens → palette */
+/* Shiki token palette */
 .astro-code, .shiki, .shiki span, .astro-code span { color: var(--color-ink) !important; background: transparent !important; }
 .astro-code span[style*="color:#FF7B72"], .astro-code span[style*="color:#ff7b72"], .shiki span[style*="color:#FF7B72"], .shiki span[style*="color:#ff7b72"] { color: var(--color-burgundy) !important; font-weight: 500; }
 .astro-code span[style*="color:#A5D6FF"], .astro-code span[style*="color:#a5d6ff"], .shiki span[style*="color:#A5D6FF"], .shiki span[style*="color:#a5d6ff"] { color: var(--color-olive) !important; }
@@ -148,44 +247,7 @@ pre {
 .astro-code span[style*="color:#8B949E"], .astro-code span[style*="color:#8b949e"], .shiki span[style*="color:#8B949E"], .shiki span[style*="color:#8b949e"] { color: var(--color-text-3) !important; font-style: italic; }
 .astro-code span[style*="color:#7EE787"], .astro-code span[style*="color:#7ee787"], .shiki span[style*="color:#7EE787"], .shiki span[style*="color:#7ee787"] { color: var(--color-olive) !important; }
 
-/* Tables */
-table { border-collapse: collapse; margin: 1.5rem 0; font-size: 0.93rem; }
-th { font-family: var(--font-display); font-weight: 600; text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--color-ink); }
-td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--color-rule); vertical-align: top; }
-tr:hover td { background: var(--color-surface-2); }
-
-/* Blockquote */
-blockquote {
-  border-left: 3px solid var(--color-burgundy);
-  padding: 0.5rem 0 0.5rem 1.5rem;
-  margin: 2rem 0;
-  color: var(--color-text-2);
-}
-
-/* Custom blocks */
-.custom-block {
-  border-radius: 4px;
-  border-left: 2px solid var(--color-indigo);
-  background: var(--color-surface);
-  padding: 1rem 1.25rem;
-  margin: 1.5rem 0;
-}
-
-/* Header anchors */
-.header-anchor { opacity: 0 !important; text-decoration: none !important; }
-.header-anchor::before { display: none !important; content: '' !important; }
-h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor { opacity: 1 !important; }
-
-/* Inline links in body text — underline to distinguish from color alone */
-.prose a, article a, p a, li a {
-  text-decoration: underline;
-  transition: color var(--dur-fast) ease;
-}
-.prose a:hover, article a:hover, p a:hover, li a:hover {
-  text-decoration-thickness: 2px;
-}
-
-/* Copy button on code blocks */
+/* Copy button */
 .copy-btn {
   position: absolute;
   top: 0.5rem;
@@ -199,24 +261,77 @@ h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor { opac
   border-radius: 3px;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.12s ease;
+  transition: opacity var(--dur-fast) ease;
 }
-pre { position: relative; }
 pre:hover .copy-btn { opacity: 1; }
 
-/* Outline active state */
-.outline a.is-active { color: var(--color-indigo) !important; font-weight: 500; }
-
-/* Print */
-@media print {
-  body { background: #fff !important; color: #000 !important; font-size: 10.5pt; }
-  body::before { display: none !important; }
-  .nav-bar, .sidebar, .outline, .footer, .scroll-progress { display: none !important; }
+/* ═══════════════════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════════════════ */
+.prose table, table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.93rem;
+  width: 100%;
 }
-/* CSS containment for render performance */
+.prose th, th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.7rem 1rem;
+  border-bottom: 2px solid var(--color-ink);
+}
+.dark .prose th, .dark th {
+  border-bottom-color: var(--color-ink);
+}
+.prose td, td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--color-rule);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.prose tr:hover td, tr:hover td {
+  background: var(--color-surface-2);
+}
+
+/* ═══════════════════════════════════════════════════
+   BLOCKQUOTES + CALLOUTS
+   ═══════════════════════════════════════════════════ */
+.prose blockquote, blockquote {
+  border-left: 3px solid var(--color-burgundy);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--color-text-2);
+  font-style: italic;
+}
+.dark .prose blockquote, .dark blockquote {
+  border-left-color: var(--color-ochre);
+}
+
+/* Callout/admonition boxes (for migrated ::: tip blocks) */
+.callout {
+  border-radius: 6px;
+  border-left: 3px solid var(--color-indigo);
+  background: var(--color-surface);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.dark .callout {
+  border-left-color: var(--color-indigo-mid);
+}
+
+/* ═══════════════════════════════════════════════════
+   HEADER ANCHORS
+   ═══════════════════════════════════════════════════ */
+.header-anchor { opacity: 0 !important; text-decoration: none !important; }
+.header-anchor::before { display: none !important; content: '' !important; }
+h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor { opacity: 1 !important; }
+
+/* ═══════════════════════════════════════════════════
+   LAYOUT HELPERS
+   ═══════════════════════════════════════════════════ */
 .doc-main, .sidebar, .outline { contain: layout; }
 
-/* Reading time */
 .reading-time {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -226,7 +341,11 @@ pre:hover .copy-btn { opacity: 1; }
   letter-spacing: 0.06em;
 }
 
-/* Skip link — accessibility */
+.outline a.is-active { color: var(--color-indigo) !important; font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════ */
 .skip-link {
   position: absolute;
   top: -100px;
@@ -239,33 +358,19 @@ pre:hover .copy-btn { opacity: 1; }
   border-radius: 0 0 4px 0;
   font-size: 0.85rem;
 }
-.skip-link:focus {
-  top: 0;
-}
+.skip-link:focus { top: 0; }
 
-/* Focus visible — accessibility */
-:focus-visible {
-  outline: 2px solid var(--color-indigo);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* Sidebar active link — ARIA */
 .sidebar-link[aria-current="page"] {
   color: var(--color-indigo);
   font-weight: 500;
   border-left-color: var(--color-burgundy);
 }
 
-/* ── Mobile sidebar drawer ──
-   Cross-component: NavBar hamburger toggles `body.sidebar-open`,
-   SideBar slides in, DocLayout backdrop dims. Global so all three
-   components share one source of truth.
-
-   Hamburger visibility: `body.has-sidebar` is set by initSidebar()
-   in BaseLayout. No inline styles — CSS controls visibility entirely. */
+/* ═══════════════════════════════════════════════════
+   MOBILE SIDEBAR DRAWER
+   ═══════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  body.has-sidebar .hamburger { display: flex !important; }
+  .hamburger { display: flex !important; }
 }
 
 .sidebar-backdrop {
@@ -292,4 +397,13 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   }
   body.sidebar-open .sidebar { left: 0; }
   body.sidebar-open { overflow: hidden; }
+}
+
+/* ═══════════════════════════════════════════════════
+   PRINT
+   ═══════════════════════════════════════════════════ */
+@media print {
+  body { background: #fff !important; color: #000 !important; font-size: 10.5pt; }
+  body::before { display: none !important; }
+  .nav-bar, .sidebar, .outline, .footer, .scroll-progress { display: none !important; }
 }
