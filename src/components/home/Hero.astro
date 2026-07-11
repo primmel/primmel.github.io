@@ -2,65 +2,75 @@
 ---
 
 <section class="hero">
-  <div class="hero-content">
-    <img src="/primmel-logo-light.svg" class="logo light-only" alt="Primmel" width="80" height="80" />
-    <img src="/primmel-logo-dark.svg" class="logo dark-only" alt="Primmel" width="80" height="80" />
+  <div class="hero-left">
+    <p class="eyebrow">Executable standards modelling</p>
 
-    <p class="eyebrow">An executable language for SMART standards</p>
-
-    <h1>Standards,<br /><em>instantly</em> executable.</h1>
+    <h1>Standards are<br /><em>programs</em>, not PDFs.</h1>
 
     <p class="tagline">
-      Primmel is a typed, machine-readable language for representing
-      ISO, BSI, and OIML standards as <strong>runnable programs</strong>.
-      Process flows, data requirements, and evidential hooks in one
-      plain-text file.
+      Primmel turns ISO, BSI, and OIML standards into typed, machine-readable
+      <strong>runnable models</strong>. Process flows, data requirements,
+      and evidence — in one plain-text <code>.prl</code> file.
     </p>
 
     <div class="actions">
-      <a href="/docs/introduction" class="btn-brand">Read the introduction</a>
-      <a href="/examples/" class="btn-alt">Browse the examples</a>
+      <a href="/docs/first-model" class="btn-primary">Get started →</a>
+      <a href="/examples/" class="btn-secondary">See examples</a>
+    </div>
+
+    <div class="social-proof">
+      <span>Developed with</span>
+      <strong>BSI</strong>
+      <span>·</span>
+      <strong>OIML SMART</strong>
+      <span>·</span>
+      <a href="/about">Ribose</a>
     </div>
   </div>
 
-  <div class="hero-visual">
-    <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Primmel lifecycle: five pillars circling the central Primmel logo, illustrating how everything ties together">
-      <defs>
-        <linearGradient id="g-bg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="var(--color-surface)" />
-          <stop offset="100%" stop-color="var(--color-surface-2)" />
-        </linearGradient>
-        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0 0 L10 5 L0 10 z" style="fill: var(--color-rule-strong)" />
-        </marker>
-      </defs>
+  <div class="hero-right">
+    <div class="code-window">
+      <div class="code-header">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="code-filename">hello-world.prl</span>
+      </div>
+      <pre class="code-body"><code><span class="tok-kw">root</span> HelloWorld
+<span class="tok-kw">metadata</span> &#123;
+  <span class="tok-prop">title</span> <span class="tok-str">"Hello World"</span>
+  <span class="tok-prop">namespace</span> <span class="tok-str">"HelloWorld"</span>
+&#125;
 
-      <!-- Background card -->
-      <rect x="8" y="8" width="464" height="464" rx="8" fill="url(#g-bg)" style="stroke: var(--color-rule)" stroke-width="1" />
+<span class="tok-kw">role</span> Greeter &#123; <span class="tok-prop">name</span> <span class="tok-str">"Greeter"</span> &#125;
 
-      <!-- Central logo: the Primmel brand at the center of everything -->
-      <circle cx="240" cy="240" r="58" fill="none" style="stroke: var(--color-rule-strong)" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" />
-      <image href="/primmel-logo-light.svg" x="200" y="200" width="80" height="80" class="light-only" />
-      <image href="/primmel-logo-dark.svg" x="200" y="200" width="80" height="80" class="dark-only" />
+<span class="tok-kw">start_event</span> Start &#123; &#125;
+<span class="tok-kw">end_event</span> Done &#123; &#125;
 
-      <!-- Lifecycle arc arrows (connecting the 5 pillars in a circle) -->
-      <g style="stroke: var(--color-rule-strong)" stroke-width="1" fill="none" marker-end="url(#arr)">
-        <path d="M 275 75 Q 350 95 374 135" />
-        <path d="M 405 200 Q 410 285 354 335" />
-        <path d="M 294 380 Q 240 395 186 380" />
-        <path d="M 126 335 Q 70 285 75 200" />
-        <path d="M 106 135 Q 130 95 205 75" />
-      </g>
+<span class="tok-kw">process</span> Greet &#123;
+  <span class="tok-prop">name</span> <span class="tok-str">"Greet the world"</span>
+  <span class="tok-prop">actor</span> Greeter
+&#125;
 
-      <!-- 5 Pillars circling the logo -->
-      <g style="font-family: var(--font-display)" font-weight="400">
-        <g transform="translate(240 70)"><circle r="36" style="fill: var(--color-surface-2); stroke: var(--color-indigo)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" style="fill: var(--color-burgundy); font-family: var(--font-mono)">01</text><text y="14" text-anchor="middle" font-size="14" style="fill: var(--color-ink)">Define</text></g>
-        <g transform="translate(385 165)"><circle r="36" style="fill: var(--color-surface-2); stroke: var(--color-indigo)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" style="fill: var(--color-burgundy); font-family: var(--font-mono)">02</text><text y="14" text-anchor="middle" font-size="13" style="fill: var(--color-ink)">Reference</text></g>
-        <g transform="translate(330 360)"><circle r="36" style="fill: var(--color-surface-2); stroke: var(--color-burgundy)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" style="fill: var(--color-burgundy); font-family: var(--font-mono)">03</text><text y="14" text-anchor="middle" font-size="15" style="fill: var(--color-ink)">Implement</text></g>
-        <g transform="translate(150 360)"><circle r="36" style="fill: var(--color-surface-2); stroke: var(--color-olive)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" style="fill: var(--color-burgundy); font-family: var(--font-mono)">04</text><text y="14" text-anchor="middle" font-size="13" style="fill: var(--color-ink)">Operate</text></g>
-        <g transform="translate(95 165)"><circle r="36" style="fill: var(--color-surface-2); stroke: var(--color-ochre)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" style="fill: var(--color-burgundy); font-family: var(--font-mono)">05</text><text y="14" text-anchor="middle" font-size="15" style="fill: var(--color-ink)">Audit</text></g>
-      </g>
-    </svg>
+<span class="tok-kw">subprocess</span> Root &#123;
+  <span class="tok-kw">elements</span> &#123;
+    Start &#123; <span class="tok-prop">x</span> 0 <span class="tok-prop">y</span> 0 &#125;
+    Greet &#123; <span class="tok-prop">x</span> 0 <span class="tok-prop">y</span> 100 &#125;
+    Done  &#123; <span class="tok-prop">x</span> 0 <span class="tok-prop">y</span> 200 &#125;
+  &#125;
+  <span class="tok-kw">process_flow</span> &#123;
+    E1 &#123; <span class="tok-kw">from</span> Start <span class="tok-kw">to</span> Greet &#125;
+    E2 &#123; <span class="tok-kw">from</span> Greet <span class="tok-kw">to</span> Done &#125;
+  &#125;
+&#125;</code></pre>
+    </div>
+
+    <div class="hero-diagram-mini">
+      <img src="/primmel-logo-light.svg" class="logo-mini light-only" alt="" width="24" height="24" />
+      <img src="/primmel-logo-dark.svg" class="logo-mini dark-only" alt="" width="24" height="24" />
+      <span class="diagram-label">One model. Five pillars. Full lifecycle.</span>
+      <a href="/architecture/" class="diagram-link">Understand the architecture →</a>
+    </div>
   </div>
 </section>
 
@@ -68,60 +78,72 @@
   .hero {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 5rem 2rem 3rem;
+    padding: 4rem 2rem 2rem;
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 3rem;
     align-items: center;
   }
-  .logo { width: 80px; height: 80px; margin-bottom: 2rem; display: block; }
-  .light-only { display: inline; }
-  .dark-only { display: none; }
-  :global(.dark) .light-only { display: none; }
-  :global(.dark) .dark-only { display: inline; }
   .eyebrow {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--color-burgundy);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
   :global(.dark) .eyebrow { color: var(--color-ochre); }
   h1 {
-    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-    font-weight: 400;
-    line-height: 1.02;
-    letter-spacing: -0.045em;
-    margin: 0 0 1.5rem;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin: 0 0 1.25rem;
   }
-  h1 em { font-style: italic; font-weight: 300; color: var(--color-indigo); }
-  :global(.dark) h1 em { color: var(--color-indigo); }
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-indigo);
+  }
   .tagline {
-    font-size: clamp(1.05rem, 1.4vw, 1.15rem);
-    line-height: 1.55;
+    font-size: 1.05rem;
+    line-height: 1.6;
     color: var(--color-text-2);
-    max-width: 500px;
-    margin: 0 0 2rem;
+    max-width: 480px;
+    margin: 0 0 1.75rem;
   }
   .tagline strong { font-weight: 600; color: var(--color-ink); }
-  .actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .btn-brand {
-    padding: 0.55rem 1.15rem;
-    border-radius: 4px;
-    background: var(--color-ink);
-    color: var(--color-surface);
-    font-size: 0.92rem;
-    font-weight: 500;
-    text-decoration: none;
-    border: 1px solid var(--color-ink);
-    transition: all var(--dur-fast) ease;
+  .tagline code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-rule);
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+    color: var(--color-burgundy);
   }
-  .btn-brand:hover { background: var(--color-indigo); border-color: var(--color-indigo); }
-  :global(.dark) .btn-brand { background: var(--color-indigo); border-color: var(--color-indigo); color: var(--color-cream); }
-  .btn-alt {
-    padding: 0.55rem 1.15rem;
-    border-radius: 4px;
+  :global(.dark) .tagline code { color: var(--color-ochre); }
+  .actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .btn-primary {
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
+    background: var(--color-indigo);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    transition: background var(--dur-fast) ease;
+  }
+  .btn-primary:hover { background: var(--color-indigo-mid); }
+  .btn-secondary {
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
     border: 1px solid var(--color-rule-strong);
     color: var(--color-ink);
     font-size: 0.92rem;
@@ -129,10 +151,98 @@
     text-decoration: none;
     transition: border-color var(--dur-fast) ease;
   }
-  .btn-alt:hover { border-color: var(--color-ink); }
-  .hero-visual svg { width: 100%; height: auto; }
+  .btn-secondary:hover { border-color: var(--color-ink); }
+  .social-proof {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--color-text-3);
+  }
+  .social-proof strong { color: var(--color-text-2); font-weight: 600; }
+  .social-proof a { color: var(--color-indigo); text-decoration: none; }
+  .social-proof a:hover { text-decoration: underline; }
+
+  /* Code window */
+  .code-window {
+    border: 1px solid var(--color-rule);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
+  .code-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 0.85rem;
+    background: var(--color-surface-2);
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+  .code-filename {
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-3);
+  }
+  .code-body {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.75;
+    overflow-x: auto;
+    background: var(--color-surface) !important;
+    border: none;
+    border-radius: 0;
+  }
+  .tok-kw { color: var(--color-burgundy); font-weight: 500; }
+  :global(.dark) .tok-kw { color: var(--color-ochre); }
+  .tok-prop { color: var(--color-indigo); }
+  :global(.dark) .tok-prop { color: var(--color-indigo-mid); }
+  .tok-str { color: var(--color-olive); }
+
+  /* Mini diagram link */
+  .hero-diagram-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+  }
+  .logo-mini { width: 24px; height: 24px; }
+  .diagram-label {
+    font-size: 0.82rem;
+    color: var(--color-text-2);
+    font-weight: 500;
+  }
+  .diagram-link {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--color-indigo);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .diagram-link:hover { text-decoration: underline; }
+
+  .light-only { display: inline; }
+  .dark-only { display: none; }
+  :global(.dark) .light-only { display: none; }
+  :global(.dark) .dark-only { display: inline; }
+
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; }
-    .hero-visual { order: -1; }
+    .hero { grid-template-columns: 1fr; padding: 2.5rem 1.5rem 1.5rem; }
+    .hero-right { order: -1; }
+    .code-body { font-size: 0.72rem; }
   }
 </style>

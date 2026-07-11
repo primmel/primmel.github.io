@@ -8,48 +8,150 @@ interface Props {
 const { pillars } = Astro.props;
 ---
 
+<!-- Problem / Solution -->
+<section class="compare">
+  <div class="compare-grid">
+    <div class="compare-col compare-before">
+      <p class="compare-label">Today</p>
+      <h3>Standards as documents</h3>
+      <ul>
+        <li>PDFs that humans must read and interpret manually</li>
+        <li>Compliance checked by hand — slow, error-prone, subjective</li>
+        <li>Evidence scattered across systems, hard to trace</li>
+        <li>Updates require re-distributing hundreds of pages</li>
+      </ul>
+    </div>
+    <div class="compare-col compare-after">
+      <p class="compare-label">With Primmel</p>
+      <h3>Standards as programs</h3>
+      <ul>
+        <li>Typed <code>.prl</code> models a computer can parse and run</li>
+        <li>Process flows execute — automatic, deterministic, repeatable</li>
+        <li>Evidence built in — every requirement carries hooks</li>
+        <li>One source file: update once, everyone sees the change</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Pillars -->
 <section class="section">
   <p class="eyebrow">Architecture</p>
-  <h2 class="section-title">Five activities, one lifecycle.</h2>
+  <h2 class="section-title">Five pillars, one lifecycle.</h2>
   <p class="section-desc">
     From the moment a reference model is published to the moment an
-    auditor hands down a verdict — each activity has a distinct actor
+    auditor hands down a verdict — each pillar has a distinct actor
     and a distinct artifact.
   </p>
-  <nav class="pillars-list">
+  <nav class="pillars-grid">
     {pillars.map(p => (
-      <a href={p.href} class="pillar">
+      <a href={p.href} class="pillar-card">
         <span class="num">{p.num}</span>
         <span class="name">{p.name}</span>
         <span class="desc">{p.desc}</span>
-        <span class="arrow">→</span>
       </a>
     ))}
   </nav>
 </section>
 
+<!-- Features as cards -->
 <section class="section">
   <p class="eyebrow">Why Primmel</p>
-  <h2 class="section-title">A modelling language built for the work standards actually do.</h2>
-  <div class="features-list">
+  <h2 class="section-title">Built for the work standards actually do.</h2>
+  <div class="features-grid">
     {FEATURES.map(f => (
-      <article class="feature">
-        <span class="num">{f.num}</span>
-        <div>
-          <h3>{f.title}</h3>
-          <p>{f.body}</p>
-        </div>
+      <article class="feature-card">
+        <span class="feature-num">{f.num}</span>
+        <h3>{f.title}</h3>
+        <p>{f.body}</p>
       </article>
     ))}
   </div>
 </section>
 
-<section class="footer-cta">
-  <h2>From BSI SMART and OIML SMART, into the public record.</h2>
-  <a href="/about" class="cta-button">Read the story →</a>
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Start modelling your standard in minutes.</h2>
+    <p>Read the introduction, then build your first <code>.prl</code> model.</p>
+    <div class="cta-actions">
+      <a href="/docs/first-model" class="btn-primary">Get started →</a>
+      <a href="/examples/" class="btn-secondary">Browse examples</a>
+    </div>
+  </div>
 </section>
 
 <style>
+  /* Problem / Solution */
+  .compare {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .compare-col {
+    border-radius: 8px;
+    padding: 2rem;
+  }
+  .compare-before {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-rule);
+  }
+  .compare-after {
+    background: var(--color-surface);
+    border: 1px solid var(--color-indigo);
+  }
+  .compare-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .compare-before .compare-label { color: var(--color-text-3); }
+  .compare-after .compare-label { color: var(--color-indigo); }
+  .compare-col h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  .compare-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .compare-col li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-2);
+    padding: 0.4rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .compare-col li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-3);
+  }
+  .compare-after li::before { color: var(--color-indigo); }
+  .compare-col code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--color-surface-2);
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+    color: var(--color-burgundy);
+  }
+  @media (max-width: 768px) {
+    .compare-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Sections */
   .section {
     max-width: 1200px;
     margin: 0 auto;
@@ -57,108 +159,155 @@ const { pillars } = Astro.props;
     border-top: 1px solid var(--color-rule);
   }
   .eyebrow {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--color-burgundy);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
   :global(.dark) .eyebrow { color: var(--color-ochre); }
   .section-title {
-    font-size: clamp(1.85rem, 3.4vw, 2.6rem);
-    font-weight: 400;
-    margin: 0 0 1.25rem;
-    max-width: 720px;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 600;
+    margin: 0 0 1rem;
+    max-width: 680px;
   }
   .section-desc {
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: var(--color-text-2);
-    max-width: 620px;
+    max-width: 600px;
     margin: 0 0 2.5rem;
   }
-  .pillars-list { margin-top: 1rem; border-top: 1px solid var(--color-rule); }
-  .pillar {
+
+  /* Pillars as cards */
+  .pillars-grid {
     display: grid;
-    grid-template-columns: 100px 200px 1fr auto;
-    gap: 2rem;
-    align-items: baseline;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--color-rule);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .pillar-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface);
     text-decoration: none;
     color: inherit;
+    transition: border-color var(--dur-fast) ease, transform var(--dur-fast) ease;
+  }
+  .pillar-card:hover {
+    border-color: var(--color-indigo);
+    transform: translateY(-2px);
+  }
+  .pillar-card .num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-burgundy);
+    font-weight: 600;
+  }
+  :global(.dark) .pillar-card .num { color: var(--color-ochre); }
+  .pillar-card .name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .pillar-card .desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--color-text-2);
+  }
+
+  /* Features as cards */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .feature-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-rule);
+    background: var(--color-surface);
+  }
+  .feature-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-burgundy);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  :global(.dark) .feature-num { color: var(--color-ochre); }
+  .feature-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+  }
+  .feature-card p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--color-text-2);
+    margin: 0;
+  }
+
+  /* CTA */
+  .cta-section {
+    border-top: 1px solid var(--color-rule);
+    padding: 4rem 2rem 5rem;
+    text-align: center;
+  }
+  .cta-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .cta-section h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+  }
+  .cta-section p {
+    font-size: 1rem;
+    color: var(--color-text-2);
+    margin: 0 0 1.75rem;
+  }
+  .cta-section code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--color-surface-2);
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
+    background: var(--color-indigo);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
     transition: background var(--dur-fast) ease;
   }
-  .pillar:hover { background: var(--color-surface-2); }
-  .pillar:hover .name { color: var(--color-indigo); }
-  .pillar:hover .arrow { transform: translateX(4px); color: var(--color-burgundy); }
-  .num {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--color-burgundy);
-    line-height: 1;
-  }
-  .name {
-    font-size: 1.65rem;
-    font-weight: 400;
-    color: var(--color-ink);
-    transition: color var(--dur-fast) ease;
-  }
-  .desc { font-size: 0.97rem; color: var(--color-text-2); line-height: 1.6; }
-  .arrow {
-    font-size: 1.4rem;
-    color: var(--color-text-3);
-    transition: transform var(--dur-fast) ease, color var(--dur-fast) ease;
-  }
-  @media (max-width: 900px) {
-    .pillar { grid-template-columns: 60px 1fr; gap: 1.25rem; }
-    .num { font-size: 2rem; }
-    .name { font-size: 1.3rem; grid-column: 2; }
-    .desc { grid-column: 2; }
-    .arrow { display: none; }
-  }
-  .features-list { margin-top: 1rem; }
-  .feature {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 2rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--color-rule);
-  }
-  .feature:first-child { border-top: 1px solid var(--color-rule); }
-  .feature .num {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--color-burgundy);
-    padding-top: 0.1rem;
-  }
-  .feature h3 { font-size: 1.15rem; margin: 0 0 0.4rem; }
-  .feature p { font-size: 0.95rem; color: var(--color-text-2); margin: 0; }
-  .footer-cta {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 2rem 5rem;
-    border-top: 1px solid var(--color-rule);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
-    align-items: center;
-  }
-  .footer-cta h2 { font-size: clamp(1.65rem, 3vw, 2.25rem); font-weight: 400; margin: 0; max-width: 640px; }
-  .cta-button {
-    padding: 0.55rem 1.15rem;
+  .btn-primary:hover { background: var(--color-indigo-mid); }
+  .btn-secondary {
+    padding: 0.6rem 1.3rem;
+    border-radius: 6px;
     border: 1px solid var(--color-rule-strong);
-    border-radius: 4px;
+    color: var(--color-ink);
     font-size: 0.92rem;
     font-weight: 500;
     text-decoration: none;
-    color: var(--color-ink);
     transition: border-color var(--dur-fast) ease;
   }
-  .cta-button:hover { border-color: var(--color-ink); }
-  @media (max-width: 720px) {
-    .footer-cta { grid-template-columns: 1fr; }
-  }
+  .btn-secondary:hover { border-color: var(--color-ink); }
 </style>

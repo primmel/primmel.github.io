@@ -5,11 +5,11 @@ export const SITE = {
   github: 'https://github.com/primmel',
   author: 'Ribose',
   nav: [
+    { text: 'Get Started', href: '/docs/first-model' },
     { text: 'Architecture', href: '/architecture/' },
     { text: 'Audiences', href: '/audiences/' },
     { text: 'Examples', href: '/examples/' },
     { text: 'Docs', href: '/docs/introduction' },
-    { text: 'Specification', href: '/spec/' },
     { text: 'About', href: '/about' },
   ],
 } as const;
