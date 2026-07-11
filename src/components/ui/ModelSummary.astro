@@ -1,37 +1,55 @@
 ---
 import type { ModelStats } from '../../lib/model-parser';
 
+interface StatDescriptor {
+  key: keyof ModelStats;
+  label: string;
+  always?: boolean;
+}
+
+const STAT_DESCRIPTORS: StatDescriptor[] = [
+  { key: 'roles', label: 'roles', always: true },
+  { key: 'processes', label: 'processes', always: true },
+  { key: 'provisions', label: 'provisions' },
+  { key: 'dataClasses', label: 'data classes' },
+  { key: 'registries', label: 'registries' },
+  { key: 'events', label: 'events' },
+  { key: 'gateways', label: 'gateways' },
+  { key: 'measurements', label: 'measurements' },
+  { key: 'references', label: 'references' },
+  { key: 'approvals', label: 'approvals' },
+  { key: 'enums', label: 'enums' },
+  { key: 'subprocesses', label: 'subprocesses' },
+  { key: 'forms', label: 'forms' },
+  { key: 'subforms', label: 'subforms' },
+  { key: 'symbols', label: 'symbols' },
+  { key: 'calculations', label: 'calculations' },
+  { key: 'stateMachines', label: 'state machines' },
+  { key: 'terms', label: 'terms' },
+  { key: 'mapProfiles', label: 'map profiles' },
+  { key: 'tables', label: 'tables' },
+  { key: 'figures', label: 'figures' },
+];
+
 interface Props {
   stats: ModelStats | null;
 }
 const { stats } = Astro.props;
+const visibleStats = stats
+  ? STAT_DESCRIPTORS.filter(d => d.always || (stats[d.key] as number) > 0)
+  : [];
 ---
 
 {stats && (
   <div class="model-summary">
     <h4>Model summary</h4>
     <div class="stats-grid">
-      <div class="stat"><span class="stat-num">{stats.roles}</span><span class="stat-label">roles</span></div>
-      <div class="stat"><span class="stat-num">{stats.processes}</span><span class="stat-label">processes</span></div>
-      {stats.provisions > 0 && <div class="stat"><span class="stat-num">{stats.provisions}</span><span class="stat-label">provisions</span></div>}
-      {stats.dataClasses > 0 && <div class="stat"><span class="stat-num">{stats.dataClasses}</span><span class="stat-label">data classes</span></div>}
-      {stats.registries > 0 && <div class="stat"><span class="stat-num">{stats.registries}</span><span class="stat-label">registries</span></div>}
-      {stats.events > 0 && <div class="stat"><span class="stat-num">{stats.events}</span><span class="stat-label">events</span></div>}
-      {stats.gateways > 0 && <div class="stat"><span class="stat-num">{stats.gateways}</span><span class="stat-label">gateways</span></div>}
-      {stats.measurements > 0 && <div class="stat"><span class="stat-num">{stats.measurements}</span><span class="stat-label">measurements</span></div>}
-      {stats.references > 0 && <div class="stat"><span class="stat-num">{stats.references}</span><span class="stat-label">references</span></div>}
-      {stats.approvals > 0 && <div class="stat"><span class="stat-num">{stats.approvals}</span><span class="stat-label">approvals</span></div>}
-      {stats.enums > 0 && <div class="stat"><span class="stat-num">{stats.enums}</span><span class="stat-label">enums</span></div>}
-      {stats.subprocesses > 0 && <div class="stat"><span class="stat-num">{stats.subprocesses}</span><span class="stat-label">subprocesses</span></div>}
-      {stats.forms > 0 && <div class="stat"><span class="stat-num">{stats.forms}</span><span class="stat-label">forms</span></div>}
-      {stats.subforms > 0 && <div class="stat"><span class="stat-num">{stats.subforms}</span><span class="stat-label">subforms</span></div>}
-      {stats.symbols > 0 && <div class="stat"><span class="stat-num">{stats.symbols}</span><span class="stat-label">symbols</span></div>}
-      {stats.calculations > 0 && <div class="stat"><span class="stat-num">{stats.calculations}</span><span class="stat-label">calculations</span></div>}
-      {stats.stateMachines > 0 && <div class="stat"><span class="stat-num">{stats.stateMachines}</span><span class="stat-label">state machines</span></div>}
-      {stats.terms > 0 && <div class="stat"><span class="stat-num">{stats.terms}</span><span class="stat-label">terms</span></div>}
-      {stats.mapProfiles > 0 && <div class="stat"><span class="stat-num">{stats.mapProfiles}</span><span class="stat-label">map profiles</span></div>}
-      {stats.tables > 0 && <div class="stat"><span class="stat-num">{stats.tables}</span><span class="stat-label">tables</span></div>}
-      {stats.figures > 0 && <div class="stat"><span class="stat-num">{stats.figures}</span><span class="stat-label">figures</span></div>}
+      {visibleStats.map(d => (
+        <div class="stat">
+          <span class="stat-num">{stats[d.key]}</span>
+          <span class="stat-label">{d.label}</span>
+        </div>
+      ))}
     </div>
     <dl class="model-meta">
       <dt>root</dt><dd><code>{stats.root}</code></dd>

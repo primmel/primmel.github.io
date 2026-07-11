@@ -1,15 +1,13 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { COLLECTIONS } from '../../lib/collections';
+import { getCollectionIndexEntry } from '../../lib/navigation';
 import DocLayout from '../../layouts/DocLayout.astro';
 
-const entries = await getCollection('architecture');
-const entry = entries.find(e => e.id === 'index');
-if (!entry) {
-  throw new Error('architecture/index.md not found');
-}
+const entry = await getCollectionIndexEntry(COLLECTIONS.architecture);
 const { Content, headings } = await render(entry);
 ---
 
-<DocLayout title={entry.data.title} collection="architecture" slug="index" headings={headings}>
+<DocLayout title={entry.data.title} collection={COLLECTIONS.architecture} slug="index" headings={headings}>
   <Content />
 </DocLayout>
