@@ -21,10 +21,3 @@ export const FEATURES = [
   { num: '05', title: 'Evidence built in', body: 'Every requirement carries evidential hooks. Auditors locate compliance evidence by following the model.' },
   { num: '06', title: 'Open and vendor-neutral', body: 'A public language, available for any standards organisation to adopt.' },
 ] as const;
-
-export const EXTENSIONS = {
-  prl: { name: 'Primmel Model',          ext: '.prl',  kind: 'File' },
-  prd: { name: 'Primmel Document',       ext: '.prd',  kind: 'File' },
-  prm: { name: 'Primmel Map',            ext: '.prm',  kind: 'File' },
-  pws: { name: 'Primmel Workspace',      ext: '.pws',  kind: 'Directory' },
-} as const;
