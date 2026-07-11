@@ -1,15 +1,150 @@
 ---
 import { COLLECTIONS } from '../../lib/collections';
 import { getCollectionIndexEntry } from '../../lib/navigation';
-import { render } from 'astro:content';
 import DocLayout from '../../layouts/DocLayout.astro';
 import ArchitectureFlowDiagram from '../../components/diagrams/ArchitectureFlowDiagram.astro';
 
 const entry = await getCollectionIndexEntry(COLLECTIONS.architecture);
-const { Content, headings } = await render(entry);
 ---
 
-<DocLayout title={entry.data.title} collection={COLLECTIONS.architecture} slug="index" headings={headings}>
-  <Content />
+<DocLayout title={entry.data.title} collection={COLLECTIONS.architecture} slug="index">
+  <article class="prose">
+    <h1>Architecture</h1>
+
+    <p>
+      Primmel has <strong>two sides</strong> branching off the published reference: a
+      <strong>Reference</strong> side (read, interact, evaluate a standard) and an
+      <strong>Application</strong> side (implement, operate, audit against a standard).
+      The Publisher is upstream — they produce the reference both sides consume.
+    </p>
+
+    <h2>The flow</h2>
+  </article>
+
   <ArchitectureFlowDiagram />
+
+  <article class="prose">
+    <h2>The five pillars</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Pillar</th>
+          <th>Audience</th>
+          <th>Side</th>
+          <th>Output artifact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="/architecture/define"><strong>Define</strong></a></td>
+          <td><a href="/audiences/publishers">Publishers</a></td>
+          <td>upstream</td>
+          <td>reference <code>.prl</code> + <code>.prd</code></td>
+        </tr>
+        <tr>
+          <td><a href="/architecture/reference"><strong>Reference</strong></a></td>
+          <td><a href="/audiences/readers">Readers</a></td>
+          <td>Reference</td>
+          <td>transient verdicts (read/interact/evaluate)</td>
+        </tr>
+        <tr>
+          <td><a href="/architecture/implement"><strong>Implement</strong></a></td>
+          <td><a href="/audiences/implementers">Implementers</a></td>
+          <td>Application</td>
+          <td>implementation <code>.prl</code> + <code>.prm</code> + Statement of Applicability</td>
+        </tr>
+        <tr>
+          <td><a href="/architecture/operate"><strong>Operate</strong></a></td>
+          <td><a href="/audiences/operators">Operators</a></td>
+          <td>Application</td>
+          <td><code>.pws/</code> workspace directory (YAML records)</td>
+        </tr>
+        <tr>
+          <td><a href="/architecture/audit"><strong>Audit</strong></a></td>
+          <td><a href="/audiences/auditors">Auditors</a></td>
+          <td>Application</td>
+          <td>compliance verdict + evidence trace</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The five pillars are <strong>MECE</strong> by output artifact — each pillar
+      produces a distinct artefact, and every Primmel activity fits into one of them.
+    </p>
+
+    <h2>Cross-cutting: capability inheritance</h2>
+
+    <p>
+      The Auditor role is notable because it <strong>inherits capabilities</strong> from
+      both Readers and Operators:
+    </p>
+
+    <ul>
+      <li>Standard navigation — from Readers.</li>
+      <li>Evidence viewing — from Operators.</li>
+      <li><strong>Correlation via <code>.prm</code></strong> — the Auditor's own distinct skill.</li>
+    </ul>
+
+    <p>
+      Tools built for Readers and Operators can be reused by Auditors
+      without modification. The Auditor-specific tool is the mapping
+      navigator. See <a href="/audiences/auditors">Auditors</a> for the full breakdown.
+    </p>
+
+    <h2>Cross-cutting: Reference primitive</h2>
+
+    <p>
+      A <code>reference &#123; ... &#125;</code> declaration in any <code>.prl</code> model cites an external
+      source clause (typically a <code>.prd</code> extract of a source standard). It is
+      a primitive type used by every pillar — by a publisher to cite
+      the source standard, by an organisation to cite both standard and
+      internal-policy clauses. It is not itself a phase; it is the mechanism
+      every phase uses to point at things outside the local model.
+    </p>
+
+    <h2>File types</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Extension</th>
+          <th>Kind</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>.prl</code></td>
+          <td>File</td>
+          <td>Primmel model — the core artifact. Plain text, UTF-8.</td>
+        </tr>
+        <tr>
+          <td><code>.prd</code></td>
+          <td>File</td>
+          <td>Primmel Document — clause-level extracts of a source standard.</td>
+        </tr>
+        <tr>
+          <td><code>.prm</code></td>
+          <td>File</td>
+          <td>Primmel Map — a JSON mapping between two models (e.g. implementation ↔ reference).</td>
+        </tr>
+        <tr>
+          <td><code>.pws</code></td>
+          <td>Directory</td>
+          <td>Primmel Workspace — actual records produced when a model runs. One YAML file per record, organised into subdirectories per data registry, with a <code>manifest.yaml</code> at the root.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The same artifact can appear in multiple pillars:</p>
+
+    <ul>
+      <li>A <code>.prl</code> is produced in <strong>Define</strong> (reference) or <strong>Implement</strong> (implementation).</li>
+      <li>A <code>.prd</code> is produced in <strong>Define</strong> (from a source standard) and consulted in <strong>Reference</strong> and <strong>Implement</strong>.</li>
+      <li>A <code>.prm</code> is produced in <strong>Implement</strong> (mapping) and consulted in <strong>Audit</strong>.</li>
+      <li>A <code>.pws/</code> is produced in <strong>Operate</strong> and consulted in <strong>Audit</strong>.</li>
+    </ul>
+  </article>
 </DocLayout>
