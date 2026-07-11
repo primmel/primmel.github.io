@@ -11,12 +11,12 @@ sidebar:
 
 # Operate &mdash; run the implementation, produce evidence
 
-::: tip WHO THIS IS FOR
-The **Operate** pillar is for **Operators** &mdash; operations staff,
-production teams, and record-keepers who run the implementation in
-production and produce the `.pws/` evidence that auditors will later
-follow. See [Operators](/architecture/audiences/operators).
-:::
+> **WHO THIS IS FOR**
+> The **Operate** pillar is for **Operators** &mdash; operations staff,
+> production teams, and record-keepers who run the implementation in
+> production and produce the `.pws/` evidence that auditors will later
+> follow. See [Operators](/audiences/operators).
+
 
 **Operate** is the continuous production of evidence. The
 implementation model, possibly extended by adopted mappings, is

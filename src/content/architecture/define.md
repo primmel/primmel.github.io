@@ -10,12 +10,12 @@ sidebar:
 
 # Define &mdash; author a reference model
 
-::: tip WHO THIS IS FOR
-The **Define** pillar is for **Publishers** &mdash; standards bodies,
-industry consortia, regulators, or any organisation that publishes a
-model for others to consume. See
-[Publishers](/architecture/audiences/publishers).
-:::
+> **WHO THIS IS FOR**
+> The **Define** pillar is for **Publishers** &mdash; standards bodies,
+> industry consortia, regulators, or any organisation that publishes a
+> model for others to consume. See
+> [Publishers](/audiences/publishers).
+
 
 **Define** is the act of authoring a reference model: a published
 Primmel model that other organisations may adopt and map their

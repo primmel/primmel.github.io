@@ -4,6 +4,9 @@ import { join } from 'node:path';
 const distDir = 'dist';
 const broken = [];
 
+// Paths served by a different system (not part of the Astro build)
+const EXTERNAL_PATHS = new Set(['/spec/']);
+
 function getHtmlFiles(dir) {
   const results = [];
   for (const entry of readdirSync(dir)) {
@@ -37,7 +40,7 @@ for (const file of htmlFiles) {
     const norm = basePath.replace(/\/index\.html$/, '/').replace(/\.html$/, '/');
     const noSlash = norm.replace(/\/$/, '');
 
-    if (!knownPaths.has(norm) && !knownPaths.has(noSlash) && !knownPaths.has(href)) {
+    if (!knownPaths.has(norm) && !knownPaths.has(noSlash) && !knownPaths.has(href) && !EXTERNAL_PATHS.has(norm)) {
       broken.push(`${file.replace(distDir + '/', '')} → ${href}`);
     }
   }

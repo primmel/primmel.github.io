@@ -1,0 +1,31 @@
+---
+title: "Audiences"
+sidebar:
+  section: "Audiences"
+  order: 0
+  label: "Overview"
+---
+
+# Audiences
+
+Primmel serves five distinct audiences. Each has a different
+relationship to the standard, different tools, and different goals.
+
+## The five audiences
+
+| Audience | Role | What they do |
+| --- | --- | --- |
+| [**Publishers**](/audiences/publishers) | Standards bodies, consortia, regulators | Author and publish reference models |
+| [**Readers**](/audiences/readers) | Consumers, evaluators | Read, interact with, and evaluate a published standard |
+| [**Implementers**](/audiences/implementers) | Organisations | Adopt, import, customize, and map an implementation |
+| [**Operators**](/audiences/operators) | Production users | Run the implementation and store evidence |
+| [**Auditors**](/audiences/auditors) | Compliance verifiers | Navigate the standard, correlate via maps, view evidence |
+
+## How they relate
+
+The Auditor role is notable: it **inherits capabilities** from both
+Readers (standard navigation) and Operators (evidence viewing), and
+adds its own distinct skill — **correlating across `.prm` mappings**.
+
+Tools built for Readers and Operators can be reused by Auditors
+without modification.

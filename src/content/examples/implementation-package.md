@@ -13,19 +13,19 @@ sidebar:
 
 # Implementation package
 
-::: tip Where this fits
-The implementation package is a concrete demonstration of the
-[**Adopt**](/architecture/implement) pillar in the Primmel
-architecture. It is the activity of taking up a reference model (the
-OCS standard, defined by [Define](/architecture/define)) by
-modifying an existing implementation model (already maintained under
-[Implement](/architecture/implement)), and building the mapping
-that closes with a Statement of Applicability. The accompanying
-`sample-workspace.pws/` shows what the
-[**Operate**](/architecture/operate) pillar produces; together
-with the mapping it is what an
-[**Audit**](/architecture/audit) consumes.
-:::
+> **Where this fits**
+> The implementation package is a concrete demonstration of the
+> [**Adopt**](/architecture/implement) pillar in the Primmel
+> architecture. It is the activity of taking up a reference model (the
+> OCS standard, defined by [Define](/architecture/define)) by
+> modifying an existing implementation model (already maintained under
+> [Implement](/architecture/implement)), and building the mapping
+> that closes with a Statement of Applicability. The accompanying
+> `sample-workspace.pws/` shows what the
+> [**Operate**](/architecture/operate) pillar produces; together
+> with the mapping it is what an
+> [**Audit**](/architecture/audit) consumes.
+
 
 This is the showcase example. A fictional **Acme Corporation**
 implements a fictional **Office Coffee Standard (OCS)** using every
@@ -47,63 +47,7 @@ with invented content suitable for public distribution.
 
 ## How the four files fit together
 
-<div class="diagram">
-<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pkg-title">
-  <title id="pkg-title">How the four implementation-package files fit together</title>
-  <defs>
-    <marker id="pkg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0 0 L10 5 L0 10 z" style="fill: var(--color-rule-strong)"/>
-    </marker>
-  </defs>
 
-  <!-- prd (top-left) -->
-  <g transform="translate(40 40)">
-    <rect width="260" height="100" rx="6" style="fill: var(--color-surface); stroke: var(--color-indigo)" stroke-width="1.5"/>
-    <text style="font-family: var(--font-mono); fill: var(--color-burgundy)" x="20" y="28" font-size="11" font-weight="500" letter-spacing="1.5">.PRD</text>
-    <text style="font-family: var(--font-display); fill: var(--color-ink)" x="20" y="52" font-size="18" font-weight="500">ocs-standard.prd</text>
-    <text style="font-family: var(--font-body); fill: var(--color-text-2)" x="20" y="75" font-size="12">The source standard.</text>
-    <text style="font-family: var(--font-body); fill: var(--color-text-2)" x="20" y="90" font-size="12">Clause-level extracts.</text>
-  </g>
-
-  <!-- prl (top-right) -->
-  <g transform="translate(600 40)">
-    <rect width="260" height="100" rx="6" style="fill: var(--color-surface); stroke: var(--color-indigo)" stroke-width="1.5"/>
-    <text style="font-family: var(--font-mono); fill: var(--color-burgundy)" x="20" y="28" font-size="11" font-weight="500" letter-spacing="1.5">.PRL</text>
-    <text style="font-family: var(--font-display); fill: var(--color-ink)" x="20" y="52" font-size="18" font-weight="500">acme-coffee-programme.prl</text>
-    <text style="font-family: var(--font-body); fill: var(--color-text-2)" x="20" y="75" font-size="12">Acme's implementation.</text>
-    <text style="font-family: var(--font-body); fill: var(--color-text-2)" x="20" y="90" font-size="12">Local + OCS# aliased elements.</text>
-  </g>
-
-  <!-- arrow prd → middle (referenced via) -->
-  <path d="M 300 90 Q 380 90 420 175" fill="none" style="stroke: var(--color-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
-  <text style="font-family: var(--font-body); font-style: italic; fill: var(--color-text-3)" x="330" y="105" font-size="11" font->referenced</text>
-
-  <!-- arrow prl → prm (maps via) -->
-  <path d="M 600 90 Q 540 130 460 175" fill="none" style="stroke: var(--color-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
-  <text style="font-family: var(--font-body); font-style: italic; fill: var(--color-text-3)" x="510" y="115" font-size="11" font->maps via</text>
-
-  <!-- prm (middle) -->
-  <g transform="translate(320 180)">
-    <rect width="260" height="100" rx="6" style="fill: var(--color-surface); stroke: var(--color-burgundy)" stroke-width="1.5"/>
-    <text style="font-family: var(--font-mono); fill: var(--color-burgundy)" x="20" y="28" font-size="11" font-weight="500" letter-spacing="1.5">.PRM</text>
-    <text style="font-family: var(--font-display); fill: var(--color-ink)" x="20" y="52" font-size="18" font-weight="500">acme-to-ocs.prm</text>
-    <text style="font-family: var(--font-body); fill: var(--color-text-2)" x="20" y="75" font-size="12">The mapping JSON.</text>
-    <text style="font-family: var(--font-body); fill: var(--color-text-2)" x="20" y="90" font-size="12">Each impl → reference element.</text>
-  </g>
-
-  <!-- arrow prm → pws (validated against) -->
-  <line x1="450" y1="285" x2="450" y2="320" style="stroke: var(--color-rule-strong)" stroke-width="1.5" marker-end="url(#pkg-arrow)"/>
-  <text style="font-family: var(--font-body); font-style: italic; fill: var(--color-text-3)" x="460" y="305" font-size="11" font->validated against</text>
-
-  <!-- pws (bottom) -->
-  <g transform="translate(320 325)">
-    <rect width="260" height="80" rx="6" style="fill: var(--color-surface); stroke: var(--color-olive)" stroke-width="1.5"/>
-    <text style="font-family: var(--font-mono); fill: var(--color-burgundy)" x="20" y="28" font-size="11" font-weight="500" letter-spacing="1.5">.PWS/  (directory)</text>
-    <text style="font-family: var(--font-display); fill: var(--color-ink)" x="20" y="52" font-size="18" font-weight="500">sample-workspace.pws/</text>
-    <text style="font-family: var(--font-body); fill: var(--color-text-2)" x="20" y="70" font-size="12">Actual records. YAML, one file per record.</text>
-  </g>
-</svg>
-</div>
 
 The four file types each play a distinct role:
 

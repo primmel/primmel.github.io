@@ -11,13 +11,13 @@ sidebar:
 
 # Auditors
 
-::: tip CORRESPONDING PILLAR
-[Auditors](/architecture/audiences/auditors) drive the
-[**Audit**](/architecture/audit) pillar. They verify conformance by
-navigating the standard like readers, correlating through `.prm`
-mappings to find implementation elements, and viewing `.pws/`
-evidence like operators.
-:::
+> **CORRESPONDING PILLAR**
+> [Auditors](/audiences/auditors) drive the
+> [**Audit**](/architecture/audit) pillar. They verify conformance by
+> navigating the standard like readers, correlating through `.prm`
+> mappings to find implementation elements, and viewing `.pws/`
+> evidence like operators.
+
 
 ## Who they are
 
@@ -63,8 +63,8 @@ one distinct skill:
 
 | Capability | Source | What it lets the auditor do |
 | --- | --- | --- |
-| Standard navigation | [Readers](/architecture/audiences/readers) | Find provisions, processes, and references in the published `.prl` |
-| Evidence viewing | [Operators](/architecture/audiences/operators) | Read `.pws/` records; follow references between them |
+| Standard navigation | [Readers](/audiences/readers) | Find provisions, processes, and references in the published `.prl` |
+| Evidence viewing | [Operators](/audiences/operators) | Read `.pws/` records; follow references between them |
 | **Correlation via `.prm`** | **Auditor's own** | **Follow the mapping from a reference element to its implementation element(s)** |
 
 Tools built for Readers and Operators can be **reused** by Auditors
@@ -124,9 +124,9 @@ the auditor's distinct skill &mdash; correlates via the `.prm`.
 
 - [**Audit** pillar](/architecture/audit) &mdash; the architectural
   activity this audience drives.
-- [Readers](/architecture/audiences/readers) &mdash; whose capability set Auditors
+- [Readers](/audiences/readers) &mdash; whose capability set Auditors
   inherit (standard navigation).
-- [Operators](/architecture/audiences/operators) &mdash; whose capability set
+- [Operators](/audiences/operators) &mdash; whose capability set
   Auditors inherit (evidence viewing).
-- [Implementers](/architecture/audiences/implementers) &mdash; who built the
+- [Implementers](/audiences/implementers) &mdash; who built the
   implementation and mapping Auditors verify.

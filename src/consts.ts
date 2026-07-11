@@ -6,9 +6,10 @@ export const SITE = {
   author: 'Ribose',
   nav: [
     { text: 'Architecture', href: '/architecture/' },
+    { text: 'Audiences', href: '/audiences/' },
     { text: 'Examples', href: '/examples/' },
     { text: 'Docs', href: '/docs/introduction' },
-    { text: 'Specification', href: 'https://www.primmel.org/spec/' },
+    { text: 'Specification', href: '/spec/' },
     { text: 'About', href: '/about' },
   ],
 } as const;

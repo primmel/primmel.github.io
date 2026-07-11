@@ -14,9 +14,9 @@ sidebar:
 
 # Process flow
 
-::: tip Source file
-[`03-process-flow.prl`](/examples/files/03-process-flow.prl)
-:::
+> **Source file**
+> [`03-process-flow.prl`](/examples/files/03-process-flow.prl)
+
 
 This example models an order-fulfillment flow with two **subprocess
 diagrams on the same model**: a main order flow and a recurring restock

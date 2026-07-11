@@ -10,11 +10,11 @@ sidebar:
 
 # Publishers
 
-::: tip CORRESPONDING PILLAR
-[Publishers](/architecture/audiences/publishers) drive the
-[**Define**](/architecture/define) pillar. They author and publish the
-reference models that everyone else consumes.
-:::
+> **CORRESPONDING PILLAR**
+> [Publishers](/audiences/publishers) drive the
+> [**Define**](/architecture/define) pillar. They author and publish the
+> reference models that everyone else consumes.
+
 
 ## Who they are
 
@@ -84,7 +84,7 @@ simply imports them via the `OCS#` namespace prefix.
 
 - [**Define** pillar](/architecture/define) &mdash; the architectural
   activity this audience drives.
-- [Readers](/architecture/audiences/readers) &mdash; the next audience downstream,
+- [Readers](/audiences/readers) &mdash; the next audience downstream,
   who consume what Publishers produce.
-- [Implementers](/architecture/audiences/implementers) &mdash; the audience that
+- [Implementers](/audiences/implementers) &mdash; the audience that
   adopts and maps to the published reference.

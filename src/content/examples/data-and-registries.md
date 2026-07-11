@@ -14,9 +14,9 @@ sidebar:
 
 # Data and registries
 
-::: tip Source file
-[`02-data-and-registries.prl`](/examples/files/02-data-and-registries.prl)
-:::
+> **Source file**
+> [`02-data-and-registries.prl`](/examples/files/02-data-and-registries.prl)
+
 
 This example introduces the data side of Primmel. It models a small
 roastery logbook &mdash; bean lots received at the dock, batches

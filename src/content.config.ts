@@ -39,4 +39,13 @@ const docs = defineCollection({
   }),
 });
 
-export const collections = { architecture, examples, docs };
+const audiences = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/audiences' }),
+  schema: z.object({
+    title: z.string(),
+    audience: z.enum(['publishers', 'readers', 'implementers', 'operators', 'auditors']).optional(),
+    sidebar: sidebarSchema,
+  }),
+});
+
+export const collections = { architecture, examples, docs, audiences };
