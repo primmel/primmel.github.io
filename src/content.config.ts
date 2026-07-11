@@ -9,7 +9,7 @@ const sidebarSchema = z.object({
 }).optional();
 
 const architecture = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/architecture' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/architecture' }),
   schema: z.object({
     title: z.string(),
     pillar: z.enum(['define', 'reference', 'implement', 'operate', 'audit']).optional(),
@@ -21,7 +21,7 @@ const architecture = defineCollection({
 });
 
 const examples = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/examples' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/examples' }),
   schema: z.object({
     title: z.string(),
     order: z.number().optional(),
@@ -32,7 +32,7 @@ const examples = defineCollection({
 });
 
 const docs = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/docs' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/docs' }),
   schema: z.object({
     title: z.string(),
     sidebar: sidebarSchema,
@@ -40,7 +40,7 @@ const docs = defineCollection({
 });
 
 const audiences = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/audiences' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/audiences' }),
   schema: z.object({
     title: z.string(),
     audience: z.enum(['publishers', 'readers', 'implementers', 'operators', 'auditors']).optional(),
