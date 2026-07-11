@@ -70,6 +70,13 @@ export async function getCollectionSlugs(collection: CollectionName) {
     }));
 }
 
+export async function getCollectionIndexEntry(collection: CollectionName) {
+  const entries = await getCollection(collection);
+  const entry = entries.find(e => e.id === 'index');
+  if (!entry) throw new Error(`${collection}/index.md not found`);
+  return entry;
+}
+
 export interface PillarInfo {
   num: string;
   name: string;
