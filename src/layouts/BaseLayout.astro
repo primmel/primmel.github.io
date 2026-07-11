@@ -71,11 +71,11 @@ const seo = buildSeoData({ title, description, url: Astro.url, schemaType: schem
   function initSidebar() {
     const hamburger = document.getElementById('hamburger');
     if (!hamburger) return;
-    if (!document.querySelector('.sidebar')) {
-      hamburger.style.display = 'none';
-      return;
+    const hasSidebar = !!document.querySelector('.sidebar');
+    document.body.classList.toggle('has-sidebar', hasSidebar);
+    if (hasSidebar) {
+      hamburger.addEventListener('click', toggleSidebar);
     }
-    hamburger.addEventListener('click', toggleSidebar);
   }
   initSidebar();
   document.addEventListener('astro:after-swap', initSidebar);

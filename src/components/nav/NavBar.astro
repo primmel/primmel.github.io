@@ -95,7 +95,7 @@ import SearchButtonVue from '../ui/SearchButton.vue';
     .nav-container { padding: 0 1.5rem; }
   }
 
-  /* Hamburger button — visual + animation only (drawer behavior in app.css) */
+  /* Hamburger button — visual + animation only (visibility in app.css) */
   .hamburger {
     display: none;
     flex-direction: column;
@@ -116,5 +116,4 @@ import SearchButtonVue from '../ui/SearchButton.vue';
   body.sidebar-open .hamburger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   body.sidebar-open .hamburger span:nth-child(2) { opacity: 0; }
   body.sidebar-open .hamburger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-  @media (max-width: 768px) { .hamburger { display: flex; } }
 </style>

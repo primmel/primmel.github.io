@@ -24,7 +24,7 @@
   </div>
 
   <div class="hero-visual">
-    <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The five-pillar lifecycle">
+    <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Primmel lifecycle: five pillars circling the central Primmel logo, illustrating how everything ties together">
       <defs>
         <linearGradient id="g-bg" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="var(--color-surface)" />
@@ -34,10 +34,16 @@
           <path d="M0 0 L10 5 L0 10 z" style="fill: var(--color-rule-strong)" />
         </marker>
       </defs>
+
+      <!-- Background card -->
       <rect x="8" y="8" width="464" height="464" rx="8" fill="url(#g-bg)" style="stroke: var(--color-rule)" stroke-width="1" />
-      <circle cx="240" cy="240" r="48" fill="none" style="stroke: var(--color-rule-strong)" stroke-width="1" stroke-dasharray="3 3" />
-      <text x="240" y="232" text-anchor="middle" font-size="14" style="font-family: var(--font-display); font-style: italic; fill: var(--color-text-3)">lifecycle</text>
-      <text x="240" y="254" text-anchor="middle" font-size="9" style="font-family: var(--font-mono); fill: var(--color-text-3)" letter-spacing="1.5">5 PILLARS</text>
+
+      <!-- Central logo: the Primmel brand at the center of everything -->
+      <circle cx="240" cy="240" r="58" fill="none" style="stroke: var(--color-rule-strong)" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" />
+      <image href="/primmel-logo-light.svg" x="200" y="200" width="80" height="80" class="light-only" />
+      <image href="/primmel-logo-dark.svg" x="200" y="200" width="80" height="80" class="dark-only" />
+
+      <!-- Lifecycle arc arrows (connecting the 5 pillars in a circle) -->
       <g style="stroke: var(--color-rule-strong)" stroke-width="1" fill="none" marker-end="url(#arr)">
         <path d="M 275 75 Q 350 95 374 135" />
         <path d="M 405 200 Q 410 285 354 335" />
@@ -45,6 +51,8 @@
         <path d="M 126 335 Q 70 285 75 200" />
         <path d="M 106 135 Q 130 95 205 75" />
       </g>
+
+      <!-- 5 Pillars circling the logo -->
       <g style="font-family: var(--font-display)" font-weight="400">
         <g transform="translate(240 70)"><circle r="36" style="fill: var(--color-surface-2); stroke: var(--color-indigo)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" style="fill: var(--color-burgundy); font-family: var(--font-mono)">01</text><text y="14" text-anchor="middle" font-size="14" style="fill: var(--color-ink)">Define</text></g>
         <g transform="translate(385 165)"><circle r="36" style="fill: var(--color-surface-2); stroke: var(--color-indigo)" stroke-width="1.5" /><text y="-2" text-anchor="middle" font-size="10" style="fill: var(--color-burgundy); font-family: var(--font-mono)">02</text><text y="14" text-anchor="middle" font-size="13" style="fill: var(--color-ink)">Reference</text></g>

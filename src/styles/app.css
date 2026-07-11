@@ -260,7 +260,14 @@ pre:hover .copy-btn { opacity: 1; }
 /* ── Mobile sidebar drawer ──
    Cross-component: NavBar hamburger toggles `body.sidebar-open`,
    SideBar slides in, DocLayout backdrop dims. Global so all three
-   components share one source of truth. */
+   components share one source of truth.
+
+   Hamburger visibility: `body.has-sidebar` is set by initSidebar()
+   in BaseLayout. No inline styles — CSS controls visibility entirely. */
+@media (max-width: 768px) {
+  body.has-sidebar .hamburger { display: flex !important; }
+}
+
 .sidebar-backdrop {
   display: none;
   position: fixed;
