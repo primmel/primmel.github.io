@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { execSync } from 'node:child_process';
 import { SITE } from '../consts';
 import { COLLECTIONS } from '../lib/collections';
+import { makeExcerpt } from '../lib/reading-time';
 
 function getGitDate(collection: string, id: string): Date {
   const filePath = `src/content/${collection}/${id}.md`;
@@ -28,9 +29,7 @@ export async function GET(context: { site: URL }) {
     site: context.site,
     items: all.map(entry => ({
       title: entry.data.title,
-      description: entry.body
-        ? entry.body.replace(/[#*`>\-]/g, '').replace(/\n+/g, ' ').trim().slice(0, 200) + '…'
-        : undefined,
+      description: entry.body ? makeExcerpt(entry.body) : undefined,
       pubDate: getGitDate(entry.collection, entry.id),
       link: `/${entry.collection}/${entry.id}/`,
     })),
