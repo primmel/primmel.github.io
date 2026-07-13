@@ -1,5 +1,9 @@
 # 12 — Deploy primmel/editor to a public URL
 
+> **Status: DONE** — Editor deployed to `primmel.org/editor/` via
+> GitHub Pages. Deploy workflow at `.github/workflows/deploy-pages.yml`
+> runs on push to main. Uses `base: './'` for subpath hosting.
+
 ## What
 
 The editor MVP at `primmel/editor` builds successfully but is not
