@@ -1,5 +1,22 @@
 # 09 — Support nested processes (processes within processes)
 
+> **Status: PARTIALLY DONE — parser has `parent` field, but true
+> nesting not yet implemented**
+>
+> What exists:
+> - `Process.parent: string` field in the type (primmel-ts)
+> - `parent <Name>` keyword accepted in process body
+> - `canvas <Name>` keyword accepted in process body (binds process
+>   to a canvas)
+>
+> What's missing:
+> - `process <Child>` keyword inside a process body (recursive nesting)
+> - `children: Process[]` on the Process type
+> - Recursive resolution in the resolver
+> - Dumper emitting nested blocks
+>
+> See "Remaining work" section below for the implementation plan.
+
 ## What
 
 Currently, Primmel flattens all processes at the top level. A

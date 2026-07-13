@@ -1,5 +1,16 @@
 # 03 — Build primmel/editor: browser-based model editor/viewer
 
+> **Status: MVP COMPLETE** — `primmel/editor` has a functional browser
+> editor with visual SVG process canvas, model tree, code editor,
+> element inspector, and compliance panel. Builds to 43KB JS gzipped.
+>
+> **Remaining for full Paneron parity:**
+> - Monaco Editor integration (syntax highlighting, autocomplete)
+> - Data registry CRUD (add/edit/delete .pws records)
+> - Mapping view (visual .prm editor)
+> - Two-way sync (drag element → code updates)
+> - Deploy to a public URL (editor.primmel.org or embedded)
+
 ## What
 
 A browser-based editor/viewer that replaces the Paneron SMART

@@ -1,5 +1,9 @@
 # 07 — Convert .sdc → .prd format
 
+> **Status: DONE** — Converter script at
+> `private-models/scripts/convert-sdc-to-prd.mjs`. DPTM model converted
+> to `reference/bsi/dptm.prd` (structured YAML with clause hierarchy).
+
 ## What
 
 The old `.sdc` (Supplementary Document Content) format uses a custom

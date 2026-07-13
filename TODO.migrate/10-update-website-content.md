@@ -1,5 +1,10 @@
 # 10 — Update website content for canvas + real models
 
+> **Status: DONE** — All website content migrated to use `canvas`
+> keyword (PR #32 merged, deployed). Hero code sample, docs, examples,
+> architecture pages, model-parser types, and test fixtures all
+> updated. No remaining `subprocess` references in source.
+
 ## What
 
 After the language changes (canvas keyword, nested processes) and

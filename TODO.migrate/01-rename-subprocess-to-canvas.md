@@ -1,5 +1,9 @@
 # 01 — Rename `subprocess` → `canvas` in primmel-ts parser
 
+> **Status: DONE** — Published in `@primmel/primmel@1.3.0`. Parser accepts
+> both `canvas` (preferred) and `subprocess` (legacy alias). Dumper emits
+> `canvas`. All website content and private-models migrated.
+
 ## What
 
 The keyword `subprocess` implies "a process within a process" — a
