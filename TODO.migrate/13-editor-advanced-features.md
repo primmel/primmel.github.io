@@ -1,5 +1,16 @@
 # 13 — Editor: Monaco integration + advanced features
 
+> **Status: P1 DONE (Monaco)** — Monaco Editor integrated with
+> Primmel language definition, custom theme, inline parse error
+> markers. Loads async (~590KB gzipped chunk, only when Code tab
+> is active).
+>
+> **Remaining (P2-P5):**
+> - P2: Two-way sync (drag element → code updates)
+> - P3: Data registry CRUD
+> - P4: Mapping view (visual .prm editor)
+> - P5: File System Access API
+
 ## What
 
 The editor MVP uses a plain `<textarea>` for code editing. Upgrade to
