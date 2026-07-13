@@ -30,7 +30,7 @@ process Greet {
   actor Greeter
 }
 
-canvas Root {
+subprocess Root {
   elements {
     Start1 {
       x 0

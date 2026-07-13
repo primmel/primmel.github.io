@@ -348,7 +348,7 @@ reference OCS#Ref4-4 {
   title "Quality checks"
 }
 
-canvas Root {
+subprocess Root {
   elements {
     Start1 {
       x 0
@@ -397,7 +397,7 @@ canvas Root {
   }
 }
 
-canvas BeanSourcingFlow {
+subprocess BeanSourcingFlow {
   elements {
     Start2 {
       x 0
@@ -426,7 +426,7 @@ canvas BeanSourcingFlow {
   }
 }
 
-canvas QualityCheckFlow {
+subprocess QualityCheckFlow {
   elements {
     Start3 {
       x 0
@@ -459,7 +459,7 @@ canvas QualityCheckFlow {
   }
 }
 
-canvas SupplierReviewFlow {
+subprocess SupplierReviewFlow {
   elements {
     OCS#Start1 {
       x 0

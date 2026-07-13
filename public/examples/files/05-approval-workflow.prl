@@ -71,7 +71,7 @@ approval ApproveNewRoast {
 end_event End1 {
 }
 
-canvas Root {
+subprocess Root {
   elements {
     Start1 {
       x 0
