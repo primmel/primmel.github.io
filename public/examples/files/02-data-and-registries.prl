@@ -136,7 +136,7 @@ process InspectBatch {
   }
 }
 
-canvas Root {
+subprocess Root {
   elements {
     Start1 {
       x 0
