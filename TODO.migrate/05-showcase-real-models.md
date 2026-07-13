@@ -1,5 +1,15 @@
 # 05 — Website: showcase real-world models
 
+> **Status: BLOCKED — needs user clearance**
+>
+> User said: "A PRIVATE REPO IS A PRIVATE REPO, CANNOT BE PUBLIC.
+> However we can take snippets from real examples and place them on
+> the website as demonstration. Clear with me first."
+>
+> Cannot proceed without explicit approval on which models/snippets
+> can be publicly displayed (ISO standards are copyrighted; the models
+> may be Ribose's IP).
+
 ## What
 
 Replace the 6 fictional example models on primmel.org with real-world

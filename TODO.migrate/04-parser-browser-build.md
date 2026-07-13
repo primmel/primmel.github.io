@@ -1,5 +1,14 @@
 # 04 — Parser: browser-compatible ESM build
 
+> **Status: DONE (pending npm 1.3.1)** — PR merged to primmel-ts fixing
+> three bugs: wrong export extension (`.js`→`.mjs`), `dist-browser/`
+> missing from `files`, and `prepublishOnly` not building the browser
+> bundle. **Needs `v1.3.1` tag + GitHub Release to publish.**
+>
+> Current workaround: website and editor both alias
+> `@primmel/primmel` to `dist/index.js` (Node build) which works for
+> `load()`/`dump()` since those are pure JS.
+
 ## What
 
 The `@primmel/primmel` parser currently uses Node.js APIs (`fs`,

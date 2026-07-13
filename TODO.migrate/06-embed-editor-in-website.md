@@ -1,5 +1,14 @@
 # 06 — Embed editor in website as "Try it" experience
 
+> **Status: DONE** — The `/playground` page now features a split-pane
+> live editor: code on the left, visual SVG process canvas on the
+> right. Uses `client:only="vue"` (PlaygroundApp.vue) with
+> `@primmel/primmel` parsing entirely client-side.
+>
+> The standalone editor at `primmel/editor` can additionally be
+> deployed to `editor.primmel.org` for a full-screen experience
+> (separate TODO).
+
 ## What
 
 Add a "Try it" button to primmel.org that opens the Primmel editor

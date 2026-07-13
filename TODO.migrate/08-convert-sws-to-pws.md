@@ -1,5 +1,11 @@
 # 08 — Convert .sws → .pws workspace format
 
+> **Status: DONE** — Converter script at
+> `private-models/scripts/convert-sws-to-pws.mjs`. Ribose Crimson
+> implementation converted to
+> `implementations/ribose/ribose-crimson.pws/` (directory with
+> `manifest.yaml` + per-record YAML files). Old `.sws` file removed.
+
 ## What
 
 The old `.sws` format is a single JSON blob containing all data

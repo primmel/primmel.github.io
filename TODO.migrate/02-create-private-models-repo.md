@@ -1,5 +1,11 @@
 # 02 — Create primmel/private-models repo
 
+> **Status: DONE** — `primmel/private-models` created with 14 real-world
+> models (ISO 27001, ISO 14971, MDSAP, BS 20400, BS 44003, BS 16341,
+> BS 202000, DPTM, HLS, plus 5 implementation models). All load
+> successfully via `@primmel/primmel@1.3.0`. All use `canvas` keyword
+> and `schema "Primmel 0.1"`.
+
 ## What
 
 Create a new private GitHub repository `primmel/private-models` and
