@@ -32,7 +32,7 @@ start_event Start1 { }
 end_event   End1   { }
 ```
 
-The boundaries of a flow. A model with multiple subprocess diagrams
+The boundaries of a flow. A model with multiple canvas diagrams
 typically has multiple `start_event`s &mdash; one per diagram. There
 can be more `end_event`s than `start_event`s &mdash; a flow can
 terminate in multiple outcomes.
@@ -90,7 +90,7 @@ process also carries:
   that must hold.
 - `reference_data_registry { ... }` &mdash; registries it reads from.
 - `output { ... }` &mdash; registries it writes to.
-- `subprocess <Name>` &mdash; binds the process to a named diagram.
+- `canvas <Name>` &mdash; binds the process to a named diagram.
 
 ### `approval`
 
@@ -108,10 +108,10 @@ A specialised process that requires sign-off. Distinct from `process`
 because it carries an `approve_by` clause and an `approval_record`
 registry. See [approval workflow](/examples/approval-workflow).
 
-### `subprocess`
+### `canvas`
 
 ```text
-subprocess OrderFlow {
+canvas OrderFlow {
   elements {
     OrderStart  { x 0 y 0 }
     StockCheck  { x 0 y 100 }
@@ -133,16 +133,16 @@ A container that lays out a flow on one diagram. Has three blocks:
 | `process_flow { ... }` | Directed edges between nodes. Each edge has `from`, `to`, optional `description` and `condition`. |
 | `data { ... }` | Data registries visible on this diagram, with coordinates. |
 
-The header's `root <Name>` declaration names the top-level subprocess.
-A model with multiple subprocesses names them like pages.
+The header's `root <Name>` declaration names the top-level canvas.
+A model with multiple canvases names them like pages.
 
 ## Where to see it in action
 
 - [Example 01: Minimal model](/examples/minimal-model) &mdash; the
-  smallest valid subprocess.
+  smallest valid canvas.
 - [Example 03: Process flow](/examples/process-flow) &mdash;
-  gateways, timers, multi-page subprocesses.
+  gateways, timers, multi-page canvases.
 - [Example 05: Approval workflow](/examples/approval-workflow) &mdash;
   the `approval` primitive.
 - [Implementation package](/examples/implementation-package) &mdash;
-  four subprocesses on one model, with a recurring timer loop.
+  four canvases on one model, with a recurring timer loop.

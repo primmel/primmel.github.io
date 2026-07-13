@@ -16,7 +16,7 @@ export interface ModelStats {
   approvals: number;
   enums: number;
   measurements: number;
-  subprocesses: number;
+  canvases: number;
   forms: number;
   subforms: number;
   symbols: number;
@@ -47,7 +47,7 @@ interface FlowEdge {
   label: string;
 }
 
-export interface SubprocessFlow {
+export interface CanvasFlow {
   id: string;
   nodes: FlowNode[];
   edges: FlowEdge[];
@@ -75,7 +75,7 @@ export interface ModelTree {
 
 export interface ParsedModel {
   stats: ModelStats;
-  flows: SubprocessFlow[];
+  flows: CanvasFlow[];
   tree: ModelTree;
 }
 
@@ -103,23 +103,23 @@ interface GatewayElement extends ElementBase {
 
 type ModelElement = ElementBase | EventElement | ProcessElement | GatewayElement;
 
-interface SubprocessComponent {
+interface CanvasComponent {
   name: string;
   element: ModelElement | null;
   x: number;
   y: number;
 }
 
-interface SubprocessEdge {
-  from: SubprocessComponent | null;
-  to: SubprocessComponent | null;
+interface CanvasEdge {
+  from: CanvasComponent | null;
+  to: CanvasComponent | null;
   description: string;
 }
 
-interface SubprocessPage {
+interface CanvasPage {
   id: string;
-  childs: SubprocessComponent[];
-  edges: SubprocessEdge[];
+  childs: CanvasComponent[];
+  edges: CanvasEdge[];
 }
 
 interface UnifiedModel {
@@ -136,7 +136,7 @@ interface UnifiedModel {
   approvals: ElementBase[];
   enums: ElementBase[];
   vars: ElementBase[];
-  pages: SubprocessPage[];
+  pages: CanvasPage[];
   forms: ElementBase[];
   subforms: ElementBase[];
   symbols: ElementBase[];
@@ -197,7 +197,7 @@ function mapResolvedModel(raw: Record<string, unknown>): UnifiedModel {
     approvals: arr<ElementBase>('approvals'),
     enums: arr<ElementBase>('enums'),
     vars: arr<ElementBase>('vars'),
-    pages: (raw.pages as SubprocessPage[]) ?? [],
+    pages: (raw.pages as CanvasPage[]) ?? [],
     forms: arr<ElementBase>('forms'),
     subforms: arr<ElementBase>('subforms'),
     symbols: arr<ElementBase>('symbols'),
@@ -228,10 +228,10 @@ interface RawParseContext {
   provisions?: Record<string, ElementBase>;
   approvals?: Record<string, ElementBase>;
   variables?: Record<string, ElementBase>;
-  pages?: Record<string, RawSubprocessPage>;
+  pages?: Record<string, RawCanvasPage>;
 }
 
-interface RawSubprocessPage {
+interface RawCanvasPage {
   id: string;
   _relations?: { childs: RawComponent[]; edges: RawEdge[] };
 }
@@ -310,11 +310,11 @@ function normalizeRawContext(ctx: RawParseContext): UnifiedModel {
   };
 }
 
-function normalizeRawPage(page: RawSubprocessPage, lookup: Record<string, ModelElement>): SubprocessPage {
+function normalizeRawPage(page: RawCanvasPage, lookup: Record<string, ModelElement>): CanvasPage {
   const rawChilds = page._relations?.childs ?? [];
   const rawEdges = page._relations?.edges ?? [];
 
-  const components: SubprocessComponent[] = rawChilds.map((c) => ({
+  const components: CanvasComponent[] = rawChilds.map((c) => ({
     name: c.name,
     element: c._relations?.element ? lookup[c._relations.element] ?? null : null,
     x: c.x ?? 0,
@@ -322,7 +322,7 @@ function normalizeRawPage(page: RawSubprocessPage, lookup: Record<string, ModelE
   }));
 
   const compMap = new Map(components.map((c) => [c.name, c]));
-  const edges: SubprocessEdge[] = rawEdges
+  const edges: CanvasEdge[] = rawEdges
     .filter((e) => e._relations?.from && e._relations?.to)
     .map((e) => ({
       from: compMap.get(e._relations!.from) ?? null,
@@ -366,7 +366,7 @@ function extractStats(model: UnifiedModel): ModelStats {
     registries: len(model.regs), events: len(model.events),
     gateways: len(model.gateways), references: len(model.refs),
     approvals: len(model.approvals), enums: len(model.enums),
-    measurements: len(model.vars), subprocesses: len(model.pages),
+    measurements: len(model.vars), canvases: len(model.pages),
     forms: len(model.forms), subforms: len(model.subforms),
     symbols: len(model.symbols), calculations: len(model.calculations),
     stateMachines: len(model.stateMachines), terms: len(model.terms),
@@ -377,7 +377,7 @@ function extractStats(model: UnifiedModel): ModelStats {
   };
 }
 
-function extractFlows(model: UnifiedModel): SubprocessFlow[] {
+function extractFlows(model: UnifiedModel): CanvasFlow[] {
   return model.pages
     .filter((p) => p.childs.length > 0)
     .map((page) => {

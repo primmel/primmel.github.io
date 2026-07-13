@@ -44,7 +44,7 @@ metadata {
 
 | Field | Meaning |
 | --- | --- |
-| `root HelloWorld` | Names the top-level subprocess &mdash; the entry point of the model. |
+| `root HelloWorld` | Names the top-level canvas &mdash; the entry point of the model. |
 | `version "v1.0.0-dev1"` | Semantic version of the model itself. |
 | `metadata.schema` | The DSL schema identifier. `"Primmel 0.1"` is the current value. |
 | `metadata.namespace` | The model's namespace. Used when **other** models import this model's elements with the `Namespace#ElementID` pattern (see [the implementation package](/examples/implementation-package)). |
@@ -76,8 +76,8 @@ start_event Start1 { }
 end_event   End1   { }
 ```
 
-A model with multiple subprocess diagrams has multiple `start_event`s
-&mdash; one per subprocess. This is normal: each diagram needs its own
+A model with multiple canvas diagrams has multiple `start_event`s
+&mdash; one per canvas. This is normal: each diagram needs its own
 entry point.
 
 ## Processes
@@ -104,13 +104,13 @@ A real-world process usually also has:
   reads from.
 - `output { ... }` &mdash; data registries this process writes to.
 
-## The subprocess
+## The canvas
 
-A `subprocess` is a container that lays out a flow. The
+A `canvas` is a container that lays out a flow. The
 [header](#the-header) named `HelloWorld` as the root; now we define it:
 
 ```text
-subprocess Root {
+canvas Root {
   elements {
     Start1 { x 0  y 0 }
     Greet  { x 0  y 100 }
@@ -124,7 +124,7 @@ subprocess Root {
 }
 ```
 
-A subprocess has three blocks:
+A canvas has three blocks:
 
 | Block | Purpose |
 | --- | --- |
@@ -132,8 +132,8 @@ A subprocess has three blocks:
 | `process_flow { ... }` | The directed edges between elements. Each `Edge` has a `from` and a `to`. |
 | `data { ... }` | The data registries visible on this diagram, with `x`/`y` coordinates. |
 
-The `Root` subprocess is the top-level flow. A model with multiple
-subprocesses names them like pages (`OrderFlow`, `QualityCheckFlow`,
+The `Root` canvas is the top-level flow. A model with multiple
+canvases names them like pages (`OrderFlow`, `QualityCheckFlow`,
 `SupplierReviewFlow`) &mdash; see [example 03](/examples/process-flow)
 and the [implementation package](/examples/implementation-package).
 

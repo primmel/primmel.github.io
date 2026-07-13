@@ -31,7 +31,7 @@ A Primmel model combines four kinds of primitives in one file:
 | Pillar | What it describes | Closest cousin |
 | --- | --- | --- |
 | **Data** | Records, fields, references, registries | UML class diagrams |
-| **Process** | Start/end events, gateways, subprocesses | BPMN |
+| **Process** | Start/end events, gateways, canvases | BPMN |
 | **Compliance** | Requirements with RFC 2119 modality | ISO compliance language |
 | **Measurement** | Numeric, datalist, derived values | KPI dashboards |
 
@@ -74,12 +74,12 @@ metadata {
 }
 ```
 
-The `root` declaration names the top-level subprocess. The `metadata`
+The `root` declaration names the top-level canvas. The `metadata`
 block identifies the model. After the header, declarations follow in any
 order &mdash; `role`, `process`, `provision`, `class`, `data_registry`,
 `measurement`, `reference`, `note`, `link`, `table`, `figure`,
 `approval`, `start_event`, `end_event`, `exclusive_gateway`,
-`subprocess`, `map_profile`.
+`canvas`, `map_profile`.
 
 Here is the smallest valid model:
 
@@ -107,7 +107,7 @@ process Greet {
   actor Greeter
 }
 
-subprocess Root {
+canvas Root {
   elements {
     Start1 { x 0  y 0 }
     Greet  { x 0  y 100 }
@@ -134,7 +134,7 @@ subprocess Root {
 A `.prl` file is plain text. Open it in any editor. But because it is
 *structured*, tooling can extract:
 
-- **A diagram** &mdash; render the subprocess as a flowchart using the
+- **A diagram** &mdash; render the canvas as a flowchart using the
   `x`/`y` coordinates and the `process_flow` edges.
 - **A data schema** &mdash; compile every `class#data` and its fields
   into a form a database or API can validate against.

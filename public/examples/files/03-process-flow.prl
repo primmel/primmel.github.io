@@ -85,7 +85,7 @@ process OrderNewInventory {
   actor CustomerService
 }
 
-subprocess OrderFlow {
+canvas OrderFlow {
   elements {
     OrderStart {
       x 0
@@ -170,7 +170,7 @@ subprocess OrderFlow {
   }
 }
 
-subprocess RestockFlow {
+canvas RestockFlow {
   elements {
     RestockStart {
       x 0
