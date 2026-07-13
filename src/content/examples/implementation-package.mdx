@@ -114,7 +114,7 @@ process SourceBeans {
   output {
     BeanLotRegistry
   }
-  subprocess BeanSourcingFlow
+  canvas BeanSourcingFlow
 }
 ```
 
@@ -123,18 +123,18 @@ This says: *Acme's `SourceBeans` process satisfies both Acme's local
 `OCS#Provision4-2-1` provision*. The standard's text is in the `.prd`
 file; the binding to that text is via the `reference` declaration.
 
-## Pattern: multi-page subprocesses
+## Pattern: multi-page canvases
 
-The model has four subprocesses:
+The model has four canvases:
 
-| Subprocess | Diagram contents |
+| Canvas | Diagram contents |
 | --- | --- |
 | `Root` | The top-level Acme flow: `SourceBeans → AcmeRoastAndLog → TestBatchMoisture`. |
 | `BeanSourcingFlow` | A close-up of bean sourcing. |
 | `QualityCheckFlow` | A close-up of moisture testing with its gateway. |
 | `SupplierReviewFlow` | The recurring supplier-review loop, drawn with `OCS#Start1` as its entry point. |
 
-Each subprocess is a separate diagram with its own `start_event`. The
+Each canvas is a separate diagram with its own `start_event`. The
 pattern mirrors how real-world implementation models decompose a large
 flow into multiple pages for readability.
 
@@ -143,7 +143,7 @@ flow into multiple pages for readability.
 `SupplierReviewFlow` is the recurring-process pattern:
 
 ```text
-subprocess SupplierReviewFlow {
+canvas SupplierReviewFlow {
   elements {
     OCS#Start1          { x 0 y 0 }
     ReviewSuppliers     { x 0 y 100 }

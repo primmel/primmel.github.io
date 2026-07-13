@@ -17,7 +17,7 @@ describe('parseModel', () => {
       expect(result).not.toBeNull();
       expect(result!.stats.roles).toBe(2);
       expect(result!.stats.processes).toBe(1);
-      expect(result!.stats.subprocesses).toBe(1);
+      expect(result!.stats.canvases).toBe(1);
       expect(result!.stats.namespace).toBe('HelloWorld');
     });
 

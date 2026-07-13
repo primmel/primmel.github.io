@@ -5,7 +5,7 @@ demonstrates:
   - model header
   - role
   - process
-  - subprocess
+  - canvas
 sourceFile: "/examples/files/01-minimal-model.prl"
 sidebar:
   section: "Examples"
@@ -20,7 +20,7 @@ sidebar:
 
 
 This is the smallest valid Primmel model that contains a real
-subprocess. It exists to show the language's skeleton with no
+canvas. It exists to show the language's skeleton with no
 distractions &mdash; no data, no compliance, no branching.
 
 If you read only one example file, read this one. Every larger model
@@ -61,7 +61,7 @@ process Greet {
   actor Greeter
 }
 
-subprocess Root {
+canvas Root {
   elements {
     Start1 {
       x 0
@@ -95,7 +95,7 @@ subprocess Root {
 
 ### Header
 
-The `root` declaration names the entry-point subprocess. The `version`
+The `root` declaration names the entry-point canvas. The `version`
 identifies this model revision. The `metadata` block gives tooling what
 it needs: `schema "Primmel 0.1"` declares the DSL schema (used by
 parsers), and `namespace` is the prefix other models use to import this
@@ -119,16 +119,16 @@ to a role. In a real model it would also carry `modality`,
 `validate_provision`, and `reference_data_registry` clauses; this
 minimal version omits them.
 
-### Subprocess
+### Canvas
 
-`subprocess Root` is the diagram. The header's `root HelloWorld` would
-normally point to a subprocess named `HelloWorld`; here, the root name
-is `HelloWorld` but the subprocess defined is `Root`. **In practice the
-root subprocess is conventionally named `Root`** &mdash; real-world
+`canvas Root` is the diagram. The header's `root HelloWorld` would
+normally point to a canvas named `HelloWorld`; here, the root name
+is `HelloWorld` but the canvas defined is `Root`. **In practice the
+root canvas is conventionally named `Root`** &mdash; real-world
 models follow this pattern, and the `root` line uses the model's
 *namespace* name to keep things readable.
 
-The subprocess has three blocks:
+The canvas has three blocks:
 
 - `elements { ... }` &mdash; every node on this diagram, each with `x`
   and `y` layout coordinates.

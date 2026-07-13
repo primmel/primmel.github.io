@@ -1,8 +1,8 @@
 ---
-import type { SubprocessFlow, FlowNode, NodeType } from '../../lib/model-parser';
+import type { CanvasFlow, FlowNode, NodeType } from '../../lib/model-parser';
 
 interface Props {
-  flow: SubprocessFlow;
+  flow: CanvasFlow;
 }
 
 const { flow } = Astro.props;
@@ -108,7 +108,7 @@ const nodeMap = new Map(flow.nodes.map(n => [n.id, n]));
       );
     })}
   </svg>
-  {flow.id && <figcaption>Subprocess: <code>{flow.id}</code></figcaption>}
+  {flow.id && <figcaption>Canvas: <code>{flow.id}</code></figcaption>}
 </figure>
 
 <style>

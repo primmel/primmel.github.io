@@ -13,7 +13,7 @@ The Primmel examples corpus is a set of small, self-contained models
 that introduce the language one primitive group at a time. Every file
 is **entirely fictional** &mdash; no real standards, organisations, or
 proprietary content appears anywhere. The patterns the examples
-exercise (cross-model aliasing, multi-page subprocesses, subject
+exercise (cross-model aliasing, multi-page canvases, subject
 bindings, dual mapping) are the same ones used in real-world Primmel
 models for standards like ISO 14971, ISO 13485, BS 20400, and MDSAP.
 
@@ -28,7 +28,7 @@ roles, one process, start/end events, a single-page diagram. Nothing
 else.
 
 - Demonstrates: model header, `role`, `start_event`, `end_event`,
-  `process`, `subprocess`, `process_flow`.
+  `process`, `canvas`, `process_flow`.
 - File: [`01-minimal-model.prl`](/examples/files/01-minimal-model.prl)
 
 ### 2. [Data and registries](/examples/data-and-registries)
@@ -44,11 +44,11 @@ and a *helper class* (no suffix, embedded inside other classes).
 
 ### 3. [Process flow](/examples/process-flow)
 
-An order-fulfillment flow with two subprocess diagrams on the same
+An order-fulfillment flow with two canvas diagrams on the same
 model. Shows how `start_event`s, `timer_event`s, and
 `exclusive_gateway`s combine with the `"default"` fallback edge.
 
-- Demonstrates: multi-page subprocesses, multiple `start_event`s,
+- Demonstrates: multi-page canvases, multiple `start_event`s,
   `timer_event` (`WAIT` and `REPEAT`), self-connection loop,
   `exclusive_gateway` with labelled branches and `"default"` fallback.
 - File: [`03-process-flow.prl`](/examples/files/03-process-flow.prl)
@@ -96,7 +96,7 @@ always:
 2. Declarations in any order: `role`, `process`, `provision`, `class`,
    `data_registry`, `measurement`, `reference`, `note`, `link`,
    `table`, `figure`, `approval`, `start_event`, `end_event`,
-   `exclusive_gateway`, `subprocess`, `map_profile`.
+   `exclusive_gateway`, `canvas`, `map_profile`.
 3. Comments with `//` for inline notes and section dividers.
 
 Real-world models commonly group declarations by type with comment
@@ -211,9 +211,9 @@ See [data and registries](/examples/data-and-registries).
 - Roles use `PascalCase` (`Roaster`, `QA`) or short lowercase IDs
   (`Org`).
 - Processes use descriptive IDs (`SourceBeans`, `TestBatchMoisture`).
-- Subprocesses are named `Root` (the top-level flow) plus page-style
+- Canvases are named `Root` (the top-level flow) plus page-style
   names (`BeanSourcingFlow`, `QualityCheckFlow`).
-- Multiple `start_event`s are normal &mdash; one per subprocess diagram.
+- Multiple `start_event`s are normal &mdash; one per canvas diagram.
 - Diagram coordinates are integers for readability.
 - All clauses, references, provisions, standards, organisations, and
   suppliers are invented for teaching.

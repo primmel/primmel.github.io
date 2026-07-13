@@ -4,7 +4,7 @@ order: 3
 demonstrates:
   - timer_event
   - exclusive_gateway
-  - multi-page subprocess
+  - multi-page canvas
 sourceFile: "/examples/files/03-process-flow.prl"
 sidebar:
   section: "Examples"
@@ -18,23 +18,23 @@ sidebar:
 > [`03-process-flow.prl`](/examples/files/03-process-flow.prl)
 
 
-This example models an order-fulfillment flow with two **subprocess
+This example models an order-fulfillment flow with two **canvas
 diagrams on the same model**: a main order flow and a recurring restock
 flow. It introduces branching (`exclusive_gateway`), timed waits
-(`timer_event`), and the multi-page subprocess pattern that real-world
+(`timer_event`), and the multi-page canvas pattern that real-world
 models rely on.
 
 ## Primitives introduced
 
 | Primitive | Purpose |
 | --- | --- |
-| Multiple `start_event`s | One entry point per subprocess diagram. |
+| Multiple `start_event`s | One entry point per canvas diagram. |
 | Multiple `end_event`s | Different terminal states (e.g. shipped vs cancelled). |
 | `timer_event` (`WAIT`) | Wait for a fixed period (e.g. "72 hours after order placed"). |
 | `timer_event` (`REPEAT`) | Fire on a recurring schedule (e.g. "first of every month"). |
 | `exclusive_gateway` | Branch the flow based on a condition. |
 | `"default"` edge | The fallback edge when no other gateway condition matches. |
-| Multi-page subprocess | One model, multiple subprocess diagrams, each with its own start. |
+| Multi-page canvas | One model, multiple canvas diagrams, each with its own start. |
 
 ## Multiple starts and ends
 
@@ -46,7 +46,7 @@ end_event OrderShipped   { }
 end_event OrderCancelled { }
 ```
 
-A model with *N* subprocess diagrams typically has *N* `start_event`s.
+A model with *N* canvas diagrams typically has *N* `start_event`s.
 Each diagram has exactly one entry point. There can be more
 `end_event`s than `start_event`s &mdash; a single flow can terminate in
 multiple outcomes (here: shipped vs cancelled).
@@ -88,32 +88,32 @@ exclusive_gateway PaymentConfirmed {
 An `exclusive_gateway` is a decision point. Its outgoing edges are
 label-led with mutually exclusive descriptions; exactly one is taken.
 
-## Processes with subprocess references
+## Processes with canvas references
 
 ```text
 process FulfillOrder {
   name "Fulfill a customer order"
   actor Warehouse
-  subprocess OrderFlow
+  canvas OrderFlow
 }
 
 process ScheduleRestock {
   name "Schedule restock for next cycle"
   actor CustomerService
-  subprocess RestockFlow
+  canvas RestockFlow
 }
 ```
 
-The `subprocess OrderFlow` clause binds the process to a named diagram.
-This is how a model declares which subprocess a process "lives on" when
+The `canvas OrderFlow` clause binds the process to a named diagram.
+This is how a model declares which canvas a process "lives on" when
 there are multiple diagrams.
 
-## The two subprocess diagrams
+## The two canvas diagrams
 
 ### OrderFlow: branching with default fallback
 
 ```text
-subprocess OrderFlow {
+canvas OrderFlow {
   elements {
     OrderStart        { x 0    y 0 }
     StockCheck        { x 0    y 100 }
@@ -159,7 +159,7 @@ gateway edges with machine-readable `condition` expressions.)
 ### RestockFlow: the timer loop
 
 ```text
-subprocess RestockFlow {
+canvas RestockFlow {
   elements {
     RestockStart      { x 0 y 0 }
     OrderNewInventory { x 0 y 100 }
