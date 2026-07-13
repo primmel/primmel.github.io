@@ -1,0 +1,167 @@
+---
+title: "Real-world scale"
+order: 8
+demonstrates:
+  - large process trees
+  - multi-canvas models
+  - compliance at scale
+sidebar:
+  section: "Examples"
+  order: 8
+  label: "8. Real-world Scale"
+---
+
+# Real-world scale
+
+The examples so far use fictional models (HelloWorld, Roastery) to
+teach the language. Real standards models are far larger and more
+complex. This page shows the **structural scale** of models built
+with Primmel, without displaying the standards' copyrighted content.
+
+Primmel is used to model real ISO, BSI, and OIML standards in a
+private repository. Here is what those models look like at a glance.
+
+## Model sizes
+
+| Standard | Roles | Processes | Provisions | Canvases |
+| --- | ---: | ---: | ---: | ---: |
+| ISO 27001 | 4 | 262 | 320 | 77 |
+| ISO 14971 | 2 | 59 | 84 | 18 |
+| MDSAP | 0 | 15 | 9 | 7 |
+| BS 20400 | 3 | 126 | 323 | 29 |
+| BS 44003 | 11 | 237 | 560 | 56 |
+| BS 16341 | 2 | 23 | 32 | 1 |
+| BS 202000 | 9 | 138 | 303 | 32 |
+| DPTM | 4 | 51 | 26 | 16 |
+
+BS 44003 is the densest: **560 provisions** across **56 canvases**.
+ISO 27001 has the deepest process tree: **262 processes** on **77
+canvases**.
+
+## What a large model looks like
+
+A typical large standard model has this overall shape (IDs anonymized):
+
+```text
+root StandardRoot
+
+metadata {
+  title "…"
+  schema "Primmel 0.1"
+  namespace "StandardNS"
+}
+
+role Management { name "Management" }
+role Operator   { name "Operator" }
+role Auditor    { name "Auditor" }
+
+process Process_001 { name "…" actor Management }
+process Process_002 { name "…" actor Operator }
+// … 100+ more …
+
+provision Prov_001 {
+  modality SHALL
+  condition "…"
+  reference { StandardDoc#Clause-1.2.3 }
+}
+// … 300+ more …
+
+canvas Page_001 {
+  elements { … }
+  process_flow { … }
+}
+// … 50+ more canvases, one per diagram page
+```
+
+## Structural patterns at scale
+
+### Multi-canvas layout
+
+Large standards have dozens of canvases. Each canvas is a "page" of
+the flow diagram, linked by edges that cross page boundaries:
+
+```text
+canvas Overview {
+  elements {
+    Start    { x 0 y 0 }
+    ProcessA { x 0 y 100 }
+    ProcessB { x 200 y 100 }
+    End      { x 100 y 200 }
+  }
+  process_flow {
+    E1 { from Start to ProcessA }
+    E2 { from Start to ProcessB }
+    E3 { from ProcessA to End }
+    E4 { from ProcessB to End }
+  }
+}
+
+canvas ProcessA_Detail {
+  // Expanded view of ProcessA's subprocesses
+}
+```
+
+### Nested processes
+
+Complex processes decompose into children:
+
+```text
+process Manufacturing {
+  name "Manufacture product"
+
+  process Assembly {
+    name "Assemble components"
+  }
+
+  process QualityControl {
+    name "Inspect quality"
+  }
+}
+```
+
+The `children` field records the hierarchy. Auditors can navigate from
+a high-level process down to its detailed steps.
+
+### Compliance density
+
+A model with 300+ provisions is navigated by modality:
+
+```text
+provision P_001 {
+  modality SHALL
+  condition "measurement >= threshold"
+}
+provision P_002 {
+  modality SHOULD
+  condition "…"
+}
+provision P_003 {
+  modality MAY
+  condition "…"
+}
+```
+
+The Primmel editor and viewer provide compliance dashboards that
+filter by `SHALL` / `SHOULD` / `MAY`, group by process, and link each
+provision to its reference clause.
+
+## Accessing the full models
+
+The real-world models live in a **private repository** because
+standards text is copyrighted by the respective standards bodies
+(ISO, BSI). The models — the Primmel representations — may be
+Ribose's intellectual property.
+
+To request access to the full models for evaluation or
+implementation, contact the Primmel project.
+
+## What you can do now
+
+Without the real models, you can still:
+
+1. **Try the playground** at `/playground` — edit a live model and
+   see the visual diagram
+2. **Study the examples** — the fictional models in this section
+   demonstrate every language feature
+3. **Build your own** — use the patterns shown here to model your
+   own processes and provisions
