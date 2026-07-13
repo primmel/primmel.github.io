@@ -9,7 +9,7 @@ import '../styles/app.css';
 import { ClientRouter } from 'astro:transitions';
 import { SITE } from '../consts';
 import { buildSeoData, type SchemaType } from '../lib/structured-data';
-import NavBar from '../components/nav/NavBar.astro';
+import NavBarVue from '../components/ui/NavBar.vue';
 import Footer from '../components/nav/Footer.astro';
 import ScrollProgressVue from '../components/ui/ScrollProgress.vue';
 import CodeEnhancementsVue from '../components/ui/CodeEnhancements.vue';
@@ -68,7 +68,12 @@ const seo = buildSeoData({ title, description, url: Astro.url, schemaType: schem
   <a href="#main-content" class="skip-link">Skip to content</a>
   <ScrollProgressVue client:load />
   <CodeEnhancementsVue client:idle />
-  <NavBar />
+  <NavBarVue
+    client:load
+    navItems={[...SITE.nav]}
+    siteTitle={SITE.title}
+    githubUrl={SITE.github}
+  />
   <slot />
   <Footer />
 <script is:inline>
@@ -76,24 +81,18 @@ const seo = buildSeoData({ title, description, url: Astro.url, schemaType: schem
     document.body.classList.toggle('sidebar-open');
   }
   function initSidebar() {
-    const hamburger = document.getElementById('hamburger');
-    if (!hamburger) return;
-    const hasSidebar = !!document.querySelector('.sidebar');
-    document.body.classList.toggle('has-sidebar', hasSidebar);
-    if (hasSidebar) {
-      hamburger.addEventListener('click', toggleSidebar);
-    }
+    const docSidebar = document.querySelector('.sidebar');
+    if (!docSidebar) return;
+    docSidebar.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link) document.body.classList.remove('sidebar-open');
+    });
   }
-  initSidebar();
-  document.addEventListener('astro:after-swap', initSidebar);
-  document.addEventListener('click', (e) => {
-    if (e.target.classList?.contains('sidebar-backdrop')) toggleSidebar();
+  document.addEventListener('astro:after-swap', () => {
+    document.body.classList.remove('sidebar-open');
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') document.body.classList.remove('sidebar-open');
-  });
-  document.addEventListener('astro:after-swap', () => {
-    document.body.classList.remove('sidebar-open');
   });
 </script>
 </body>
