@@ -16,8 +16,10 @@
 | 10 | Update website content | **DONE** (all canvas, deployed) |
 | 11 | Publish 1.3.1 | **PENDING** (user must tag) |
 | 12 | Deploy editor | **DONE** (live at primmel.org/editor/) |
-| 13 | Editor advanced features | **P1 DONE** (Monaco). P2-P5 pending |
+| 13 | Editor advanced features | **P1+P2+P5 DONE** (Monaco, two-way sync, File System Access). P3-P4 pending |
 | 14 | Parser nested processes | **DONE** (merged as PR #38) |
+| 15 | Data registry CRUD | **PENDING** (see TODO 15) |
+| 16 | Mapping view | **PENDING** (see TODO 16) |
 
 ## All original tasks (01-10) COMPLETE
 

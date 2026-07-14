@@ -92,6 +92,44 @@ process also carries:
 - `output { ... }` &mdash; registries it writes to.
 - `canvas <Name>` &mdash; binds the process to a named diagram.
 
+### Nested processes
+
+A process can contain child processes, forming a hierarchy. This is
+useful for decomposing a high-level activity into its sub-steps:
+
+```text
+process Manufacturing {
+  name "Manufacture product"
+  actor Factory
+
+  process Assembly {
+    name "Assemble components"
+    actor AssemblyLine
+  }
+
+  process QualityControl {
+    name "Inspect quality"
+    actor QA
+  }
+}
+```
+
+Child processes are defined inside the parent's body. The parser sets
+each child's `parent` field automatically to the parent's ID.
+
+On the parsed model:
+
+- `process.parent` &mdash; the ID of the parent process (empty string
+  for top-level processes)
+- `process.children` &mdash; an array of child process IDs
+
+Nesting is **additive** &mdash; existing flat models still work. A
+model with no nesting simply has empty `children` arrays and empty
+`parent` strings.
+
+The dumper preserves nesting: `dump(load(content))` emits child
+processes inside their parent, indented for readability.
+
 ### `approval`
 
 ```text
