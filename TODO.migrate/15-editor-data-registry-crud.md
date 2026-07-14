@@ -1,5 +1,10 @@
 # 15 — Editor: data registry CRUD (TODO 13 P3)
 
+> **Status: DONE** — Implemented in primmel/editor PR #7. Three-pane
+> DataRegistry component with registry list, record list, and record
+> form. Pinia store (registry.ts) manages records with add/edit/delete
+> and YAML export. Uses js-yaml for serialization.
+
 ## What
 
 Add a data registry browser to the editor that lets users view, add,
