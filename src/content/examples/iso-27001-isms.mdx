@@ -1,0 +1,218 @@
+---
+title: "ISO 27001: ISMS establishment"
+order: 9
+demonstrates:
+  - real-world standard model
+  - PDCA-like process decomposition
+  - provisions with reference clauses
+  - multi-canvas layout
+sidebar:
+  section: "Examples"
+  order: 9
+  label: "9. ISO 27001 (real)"
+---
+
+# ISO 27001: ISMS establishment
+
+> **Source:** This example uses real content from the ISO/IEC 27001
+> model in `primmel/private-models`. The full model has 262 processes,
+> 320 provisions, and 77 canvases. This page shows a focused excerpt:
+> the ISMS establishment flow (clauses 4.1–4.4).
+
+## The standard
+
+ISO/IEC 27001 is the international standard for information security
+management systems (ISMS). It follows a Plan-Do-Check-Act structure:
+**establish** the ISMS, **implement** it, then **maintain and
+continually improve** it.
+
+## Roles
+
+The model defines four roles:
+
+```text
+role Org     { name "Organization" }
+role TopMan  { name "Top Management" }
+role Owner   { name "Risk Owner" }
+role Worker  { name "Persons doing work under the organization" }
+```
+
+## Context of the organization (clause 4)
+
+The ISMS flow starts with understanding the organization's context:
+
+```text
+process OrgContext {
+  name "Context of the organization"
+  modality SHALL
+  canvas Page1
+}
+
+process UnderstandContext {
+  name "Understanding the organization and its context"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision1
+  }
+  output {
+    Issues
+  }
+}
+
+process Understandneeds {
+  name "Understanding the needs and expectations of interested parties"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision3
+    Provision4
+    Provision5
+  }
+  output {
+    PartyRequirement
+    PartyRegistry
+  }
+}
+
+process DetermineScope {
+  name "Determining the scope of the information security management system"
+  actor Org
+  modality SHALL
+}
+
+process ISMS {
+  name "Information security management system"
+  actor Org
+  modality SHALL
+  canvas Page2
+}
+```
+
+## The ISMS lifecycle (clause 4.4)
+
+The ISMS itself decomposes into three phases — the PDCA cycle:
+
+```text
+process EstablishISMS {
+  name "Establish an information security management system"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision10
+  }
+}
+
+process ImplementISMS {
+  name "Implement an information security management system"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision11
+  }
+}
+
+process MaintainISMS {
+  name "Maintain and continually improve an information security management system"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision12
+  }
+}
+```
+
+## Key provisions
+
+Each process carries provisions that quote the standard's requirements:
+
+```text
+provision Provision1 {
+  condition "Determine external and internal issues that are relevant
+  to its purpose and that affect its ability to achieve the intended
+  outcome(s) of its information security management system"
+  modality SHALL
+  reference {
+    ref4-1
+  }
+}
+
+provision Provision10 {
+  condition "Establish an information security management system"
+  modality SHALL
+  reference {
+    ref4-4
+  }
+}
+
+provision Provision11 {
+  condition "Implement an information security management system"
+  modality SHALL
+  reference {
+    ref4-4
+  }
+}
+
+provision Provision12 {
+  condition "Maintain and continually improve an information security
+  management system"
+  modality SHALL
+  reference {
+    ref4-4
+  }
+}
+```
+
+The `reference` block links each provision to its source clause in the
+standard's document (`.prd` file). An auditor can navigate from any
+provision directly to the exact clause text.
+
+## Canvas: the context flow
+
+The first canvas (`Page1`) lays out the context-of-organization flow:
+
+```text
+canvas Page1 {
+  elements {
+    Start1            { x -40  y -70 }
+    UnderstandContext { x -280 y 30 }
+    Understandneeds   { x -100 y 30 }
+    DetermineScope    { x 100  y 30 }
+    ISMS              { x 310  y 30 }
+  }
+  process_flow {
+    Edge2 { from Start1 to UnderstandContext }
+    Edge3 { from Start1 to Understandneeds }
+    Edge4 { from Start1 to DetermineScope }
+    Edge5 { from Start1 to ISMS }
+  }
+}
+```
+
+Rendered as a diagram, this is a fan-out from a single start event to
+four parallel context-setting processes, each of which feeds into the
+ISMS lifecycle.
+
+## What this demonstrates
+
+| Feature | How it appears |
+| --- | --- |
+| **PDCA decomposition** | ISMS → Establish, Implement, Maintain |
+| **Provisions with modality** | Every key process carries a SHALL provision |
+| **Reference clauses** | Each provision links to its source clause (ref4-1, ref4-4) |
+| **Output registries** | `UnderstandContext` outputs to `Issues`; `Understandneeds` outputs to `PartyRequirement` and `PartyRegistry` |
+| **Multi-canvas** | The full model has 77 canvases, one per diagram page |
+| **Roles** | Four roles (Org, TopMan, Owner, Worker) drive the processes |
+
+## Scale of the full model
+
+This excerpt shows 5 processes and 4 provisions. The full ISO 27001
+model in `primmel/private-models` contains:
+
+- **262 processes** across 77 canvases
+- **320 provisions** with SHALL/SHOULD/MAY modality
+- **4 roles** (Organization, Top Management, Risk Owner, Worker)
+- Reference clauses linking to every section of the standard
+
+The full model is available in the private repository for
+organizations implementing an ISMS.
