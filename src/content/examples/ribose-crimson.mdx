@@ -1,0 +1,153 @@
+---
+title: "Ribose Crimson: ISO 27001 implementation package"
+order: 12
+demonstrates:
+  - full implementation package
+  - model + mapping + evidence
+  - multi-canvas layout
+  - workspace records
+sidebar:
+  section: "Examples"
+  order: 12
+  label: "12. Ribose Crimson"
+---
+
+# Ribose Crimson: ISO 27001 implementation package
+
+> **Source:** `primmel/private-models/implementations/ribose/`. A
+> complete implementation package: `.prl` model + `.prm` mapping +
+> `.pws/` evidence workspace. Shows how Ribose implemented its
+> "Crimson" ISMS against ISO 27001.
+
+## What a full package looks like
+
+An implementation package has three artifacts:
+
+| File | Purpose |
+| --- | --- |
+| `ribose-crimson.prl` | Implementation model — Ribose's actual ISMS processes |
+| `ribose-crimson.prm` | Mapping — links Crimson processes to ISO 27001 reference elements |
+| `ribose-crimson.pws/` | Workspace — evidence records (one YAML file per record) |
+
+Together, these three files constitute an auditable implementation.
+An auditor can trace from any ISO 27001 requirement → the Crimson
+process that satisfies it → the evidence record that proves it.
+
+## The Crimson model
+
+The implementation model defines Ribose's ISMS as a hierarchy of
+documentation categories:
+
+```text
+process Crimson {
+  name "Crimson"
+  validate_provision {
+    Provision1
+    Provision2
+  }
+  canvas Page1
+}
+
+process CrimsonRequirements {
+  name "Crimson Requirements"
+  validate_provision {
+    Provision3
+  }
+}
+
+process CrimsonPolicies {
+  name "Crimson Policies"
+  validate_provision {
+    Provision4
+  }
+}
+
+process CrimsonProcedures {
+  name "Crimson Procedures"
+  validate_provision {
+    Provision5
+  }
+}
+
+process CrimsonGuidelines {
+  name "Crimson Guidelines"
+  validate_provision {
+    Provision6
+  }
+}
+
+process CrimsonPlans {
+  name "Crimson Plans"
+  validate_provision {
+    Provision7
+  }
+}
+```
+
+Each process represents a documentation tier in the ISMS hierarchy:
+Requirements at the top, then Policies, Procedures, Guidelines, and
+Plans. Every process carries provisions inherited from ISO 27001.
+
+## Scale
+
+| Metric | Count |
+| --- | --- |
+| Processes | 43 |
+| Provisions | 17 |
+| Canvases | 9 |
+| Evidence records | in `.pws/` workspace |
+
+## Multi-canvas layout
+
+The model has 9 canvases — one per documentation section. The root
+canvas (`Root`) provides the overview; pages 1–8 drill into specific
+areas:
+
+```text
+canvas Root { ... }
+canvas Page1 { ... }
+canvas Page2 { ... }
+// ...
+canvas Page8 { ... }
+```
+
+Each canvas is a separate diagram with its own start event and flow,
+allowing the ISMS to be navigated at different levels of detail.
+
+## The evidence workspace
+
+The `.pws/` directory stores evidence as one YAML file per record:
+
+```yaml
+# ribose-crimson.pws/manifest.yaml
+version: v1.0.0-dev1
+model: RiboseCrimson
+registries:
+  - TestingRegistry
+```
+
+```yaml
+# ribose-crimson.pws/TestingRegistry/6400790380169285.yaml
+id: 6400790380169285
+name: "Happy first document"
+attributes:
+  string: "yes"
+  empty: "also yes"
+  boolean: false
+regid: TestingRegistry
+```
+
+Each record lives in its own file, making the workspace git-friendly:
+evidence updates produce readable diffs, individual records can be
+added/modified/removed without touching others.
+
+## What this demonstrates
+
+| Feature | How it appears |
+| --- | --- |
+| **Full implementation package** | `.prl` + `.prm` + `.pws/` together |
+| **Documentation hierarchy** | Requirements → Policies → Procedures → Guidelines → Plans |
+| **Inherited provisions** | Every Crimson process carries ISO 27001 provisions |
+| **Multi-canvas** | 9 canvases for different ISMS sections |
+| **Evidence workspace** | YAML records in a git-friendly directory structure |
+| **Auditable trail** | Reference → implementation → evidence |

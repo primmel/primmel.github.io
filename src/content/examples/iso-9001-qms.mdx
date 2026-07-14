@@ -1,0 +1,248 @@
+---
+title: "ISO 9001: QMS and PDCA"
+order: 10
+demonstrates:
+  - real-world standard model
+  - Plan-Do-Check-Act cycle
+  - quality management processes
+  - risk-based thinking
+sidebar:
+  section: "Examples"
+  order: 10
+  label: "10. ISO 9001 (real)"
+---
+
+# ISO 9001: QMS and PDCA
+
+> **Source:** ISO 9001:2015 — Quality management systems — Requirements.
+> This page models the real standard content from clause 4 (Context of
+> the organization) and the PDCA cycle described in the Introduction.
+
+## The standard
+
+ISO 9001 is the world's most widely used quality management standard.
+It defines a process-based QMS built on the **Plan-Do-Check-Act**
+(PDCA) cycle and **risk-based thinking**.
+
+The PDCA cycle applies to all processes and to the QMS as a whole:
+
+- **Plan**: establish the objectives of the system and its processes,
+  and the resources needed to deliver results
+- **Do**: implement what was planned
+- **Check**: monitor and (where applicable) measure processes and the
+  resulting products and services against policies, objectives,
+  requirements and planned activities
+- **Act**: take actions to improve performance
+
+## Roles
+
+```text
+role Org             { name "Organization" }
+role TopManagement   { name "Top management" }
+role QualityManager  { name "Quality manager" }
+role ProductionDept  { name "Production department" }
+```
+
+## Context of the organization (Clause 4)
+
+### 4.1 Understanding the organization and its context
+
+```text
+process DetermineContext {
+  name "Understanding the organization and its context"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision_4_1_a
+    Provision_4_1_b
+  }
+}
+
+provision Provision_4_1_a {
+  condition "The organization shall determine external and internal
+  issues that are relevant to its purpose and its strategic direction
+  and that affect its ability to achieve the intended result(s) of its
+  quality management system"
+  modality SHALL
+  reference { ISO9001-doc#4.1a }
+}
+
+provision Provision_4_1_b {
+  condition "The organization shall monitor and review information
+  about these external and internal issues"
+  modality SHALL
+  reference { ISO9001-doc#4.1b }
+}
+```
+
+### 4.2 Understanding the needs and expectations of interested parties
+
+```text
+process DetermineInterestedParties {
+  name "Understanding the needs and expectations of interested parties"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision_4_2
+  }
+}
+
+provision Provision_4_2 {
+  condition "Due to their effect or potential effect on the
+  organization's ability to consistently provide products and services
+  that meet customer and applicable statutory and regulatory
+  requirements, the organization shall determine: (a) the interested
+  parties that are relevant to the quality management system; (b) the
+  requirements of these interested parties that are relevant to the
+  quality management system"
+  modality SHALL
+  reference { ISO9001-doc#4.2 }
+}
+```
+
+### 4.3 Determining the scope of the QMS
+
+```text
+process DetermineScope {
+  name "Determining the scope of the quality management system"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision_4_3
+  }
+  output {
+    ScopeDocument
+  }
+}
+
+provision Provision_4_3 {
+  condition "The organization shall determine the boundaries and
+  applicability of the quality management system to establish its
+  scope"
+  modality SHALL
+  reference { ISO9001-doc#4.3 }
+}
+```
+
+### 4.4 QMS and its processes
+
+```text
+process EstablishQMS {
+  name "Quality management system and its processes"
+  actor Org
+  modality SHALL
+  validate_provision {
+    Provision_4_4_1
+    Provision_4_4_2
+  }
+}
+
+provision Provision_4_4_1 {
+  condition "The organization shall establish, implement, maintain and
+  continually improve a quality management system, including the
+  processes needed and their interactions, in accordance with the
+  requirements of this International Standard"
+  modality SHALL
+  reference { ISO9001-doc#4.4.1 }
+}
+
+provision Provision_4_4_2 {
+  condition "The organization shall: (a) determine the inputs required
+  and the outputs expected from these processes; (b) determine the
+  sequence and interaction of these processes; (c) determine and apply
+  the criteria and methods needed to ensure the effective operation and
+  control of these processes"
+  modality SHALL
+  reference { ISO9001-doc#4.4.2 }
+}
+```
+
+## The PDCA cycle as nested processes
+
+```text
+process QMS {
+  name "Quality management system"
+  actor Org
+  modality SHALL
+
+  process Plan {
+    name "Plan: establish objectives and resources"
+    actor TopManagement
+
+    process DetermineContext {
+      name "Determine external and internal issues"
+      actor Org
+    }
+
+    process AddressRisks {
+      name "Address risks and opportunities"
+      actor QualityManager
+    }
+
+    process SetObjectives {
+      name "Establish quality objectives"
+      actor QualityManager
+    }
+  }
+
+  process Do {
+    name "Do: implement what was planned"
+    actor ProductionDept
+
+    process ControlProduction {
+      name "Control production and service provision"
+      actor ProductionDept
+    }
+  }
+
+  process Check {
+    name "Check: monitor and measure processes"
+    actor QualityManager
+
+    process AuditResults {
+      name "Evaluate performance and effectiveness"
+      actor QualityManager
+    }
+  }
+
+  process Act {
+    name "Act: take actions to improve performance"
+    actor TopManagement
+
+    process ContinualImprovement {
+      name "Continually improve the QMS"
+      actor TopManagement
+    }
+  }
+}
+```
+
+## Risk-based thinking
+
+Risk-based thinking is essential for achieving an effective QMS. The
+standard requires organizations to plan and implement actions to
+address risks and opportunities:
+
+```text
+provision Provision_6_1 {
+  condition "When planning for the quality management system, the
+  organization shall consider the issues referred to in 4.1 and the
+  requirements referred to in 4.2 and determine the risks and
+  opportunities that need to be addressed to: (a) give assurance that
+  the QMS can achieve its intended result(s); (b) enhance desirable
+  effects; (c) prevent, or reduce, undesired effects; (d) achieve
+  improvement"
+  modality SHALL
+  reference { ISO9001-doc#6.1 }
+}
+```
+
+## What this demonstrates
+
+| Feature | How it appears |
+| --- | --- |
+| **PDCA decomposition** | QMS → Plan, Do, Check, Act (nested processes) |
+| **Process approach** | Clause 4.4 requires determining process inputs, outputs, sequence |
+| **Risk-based thinking** | Clause 6.1 provisions for addressing risks and opportunities |
+| **Documented information** | Scope (4.3) is an output registry |
+| **Nested processes** | PDCA phases contain their own sub-processes |

@@ -1,0 +1,179 @@
+---
+title: "Acme Pharmaceuticals: ISO 13485 implementation"
+order: 11
+demonstrates:
+  - real implementation model
+  - mapping to reference standard
+  - data registries
+  - approval workflow
+sidebar:
+  section: "Examples"
+  order: 11
+  label: "11. Acme (implementation)"
+---
+
+# Acme Pharmaceuticals: ISO 13485 implementation
+
+> **Source:** `primmel/private-models/implementations/acme/`. A real
+> implementation model showing how Acme Pharmaceuticals maps its QMS
+> processes to ISO 13485 (medical devices — quality management).
+
+## What an implementation model is
+
+A **reference model** (like ISO 27001 or ISO 9001) defines what a
+standard requires. An **implementation model** defines how a specific
+organization meets those requirements. The two are linked by a
+**mapping** (`.prm` file).
+
+Acme Pharmaceuticals is a fictional medical device manufacturer. Its
+implementation model shows:
+
+- 6 roles (Org, R&D, Production, Testing, Management Committee, Top Management)
+- 14 processes (QMS activities mapped to ISO 13485)
+- Data registries for risk management files, quality policies, procedures
+- An approval workflow for the quality policy
+
+## Roles
+
+```text
+role Org                { name "Organization" }
+role ProductTeam        { name "R&D Department" }
+role Production         { name "Production Department" }
+role Testing            { name "Testing department" }
+role ManagementCommittee { name "Management Committee" }
+role TopMan             { name "Top Management" }
+```
+
+## Key processes
+
+### Risk management file
+
+```text
+process RiskManagementFile1 {
+  name "Manage Risk management file"
+  actor Org
+  validate_provision {
+    Provision1
+  }
+  output {
+    RiskManagementFile
+  }
+}
+```
+
+This process manages the organization's risk management documentation.
+The `validate_provision` clause links it to the reference standard's
+requirement (Provision1 maps to ISO 13485's risk management clause).
+
+### Documented QMS
+
+```text
+process DocumentQMS {
+  name "Quality management system"
+  actor Org
+  validate_provision {
+    Provision2
+    Provision3
+    Provision4
+  }
+  output {
+    Procedure
+  }
+  canvas Page1
+}
+```
+
+Three provisions validate this process — it must satisfy multiple
+ISO 13485 requirements simultaneously.
+
+### Quality policy with approval
+
+```text
+process DocumentQualityPolicy {
+  name "Establish Quality Policy"
+  actor Org
+  output {
+    QualityPolicy
+  }
+}
+
+approval Approval1 {
+  name "Approve quality policy statement"
+  modality SHALL
+  approve_by ManagementCommittee
+}
+```
+
+The quality policy requires formal approval by the Management
+Committee before it takes effect.
+
+## Data registries
+
+```text
+class Procedure#data {
+  Process    { definition "Processes" }
+  Procedures { definition "Procedures" }
+}
+
+data_registry Procedure {
+  title "QMS Manual"
+  data_class Procedure#data
+}
+
+class QualityPolicy#data {
+  content { definition "Quality Policy Content" }
+}
+
+data_registry QualityPolicy {
+  title "Quality Policy"
+  data_class QualityPolicy#data
+}
+```
+
+Each `data_registry` is a typed collection of records. The `Procedure`
+registry holds the QMS manual entries; `QualityPolicy` holds policy
+text. Both are outputs of the processes above.
+
+## Mapping to the reference standard
+
+The `.prm` file maps Acme's implementation processes to ISO 13485
+reference model elements:
+
+```json
+{
+  "@context": "https://bsi-ribose-smart.org",
+  "@type": "MMEL_MAP",
+  "mapSet": {
+    "BS13485": {
+      "mappings": {
+        "Process5": {
+          "Improvement": { "description": "", "justification": "" },
+          "FeedbackProcess": { "description": "", "justification": "" },
+          "PostProductionReview": { "description": "", "justification": "" },
+          "GatherInformation": { "description": "", "justification": "" }
+        }
+      }
+    }
+  }
+}
+```
+
+Each mapping entry says: "Acme's `Process5` satisfies ISO 13485's
+`Improvement`, `FeedbackProcess`, `PostProductionReview`, and
+`GatherInformation` processes." The `description` and `justification`
+fields document **why** the implementation element satisfies the
+reference element.
+
+An auditor opens this mapping to verify that every reference
+requirement has at least one implementation element mapped to it.
+
+## What this demonstrates
+
+| Feature | How it appears |
+| --- | --- |
+| **Implementation model** | Acme's QMS processes (not the standard's) |
+| **Reference mapping** | `.prm` file links implementation → reference |
+| **Data registries** | Typed collections for QMS manual, quality policy |
+| **Approval workflow** | Quality policy requires Management Committee approval |
+| **Multiple provisions** | `DocumentQMS` carries 3 provisions from the reference |
+| **Roles** | 6 organization-specific roles (R&D, Production, Testing, etc.) |
