@@ -80,17 +80,6 @@ const seo = buildSeoData({ title, description, url: Astro.url, schemaType: schem
   <slot />
   <Footer />
 <script is:inline>
-  function toggleSidebar() {
-    document.body.classList.toggle('sidebar-open');
-  }
-  function initSidebar() {
-    const docSidebar = document.querySelector('.sidebar');
-    if (!docSidebar) return;
-    docSidebar.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (link) document.body.classList.remove('sidebar-open');
-    });
-  }
   document.addEventListener('astro:after-swap', () => {
     document.body.classList.remove('sidebar-open');
   });

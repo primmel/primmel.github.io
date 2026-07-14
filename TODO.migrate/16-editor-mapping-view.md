@@ -1,5 +1,11 @@
 # 16 — Editor: visual mapping view (TODO 13 P4)
 
+> **Status: DONE** — Implemented in primmel/editor PR #7. MappingView
+> component with side-by-side process trees, SVG mapping lines, click-
+> to-map interaction, coverage percentage, and .prm JSON export in the
+> standard MMEL_MAP format. Unmapped reference elements shown dimmed
+> (Statement of Applicability gap visualization).
+
 ## What
 
 A visual `.prm` mapping editor that lets users draw lines between
