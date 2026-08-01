@@ -17,6 +17,44 @@ sidebar:
 > implementation in production and produce the `.pws/` evidence that
 > auditors will later follow.
 
+## The pitch &mdash; for scheme owners, certification bodies, and operations teams
+
+**The world today.** Certification is episodic: an application, an
+audit event, a report, a framed certificate &mdash; then silence until
+the next cycle. Between audits you are blind. The certificate claims
+something about the past, and everyone in the chain &mdash; scheme
+owner, body, lab, customer &mdash; re-enters the same data into their
+own systems, with transcription errors as the only thing truly
+integrated.
+
+**What changes.** The scheme itself becomes a model, and certification
+becomes a runtime. The monitor probes the governed aspects on a
+schedule; the verdict engine re-judges as evidence arrives; every
+judgment lands in an append-only evidence stream. **Continuous
+compliance replaces point-in-time compliance** &mdash; and the
+certificate stops being a photograph: it is a living CNML document
+whose every claim names its evidence, signed over a
+threshold-cryptography PKI (Confium) that no single party can forge or
+lose.
+
+**What it looks like in practice.** The OIML Certification System is
+modelled end to end on B 18:2025 &mdash; applications, test dispatch,
+laboratory work, type evaluation, issuance &mdash; on top of the
+ISO/IEC 17000-series chain it normatively references. One verdict
+engine serves the portal, the lab workbench, the issuing authority, and
+the twin monitor; evidence is captured once, at the moment of work, and
+flows everywhere it is needed.
+
+**The proof.** The platform's integration gate proves twelve contracts
+live, including certificate issuance and CNML verification against the
+real PKI. The twin-cert demo issues a certificate for a simulated
+instrument you can interrogate yourself.
+
+**Your next step.** Read the
+[platform volume](https://primmel.github.io/primmel-oiml-smart/platform/)
+for the runtime, or the
+[OIML-CS scheme volume](https://primmel.github.io/primmel-oiml-smart/oiml-cs/)
+for a certification system already modelled this way.
 
 ## Who they are
 
