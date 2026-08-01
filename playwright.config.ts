@@ -2,6 +2,9 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
+  // tests/unit/ is vitest's home (`vitest run`) — the Playwright gate
+  // owns the contract + visual specs at the tests root.
+  testIgnore: ['**/unit/**'],
   outputDir: './tests/results',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

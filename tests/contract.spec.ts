@@ -10,11 +10,14 @@ const ALL_PAGES = [
   '/architecture/implement/',
   '/architecture/operate/',
   '/architecture/audit/',
-  '/architecture/audiences/publishers/',
-  '/architecture/audiences/readers/',
-  '/architecture/audiences/implementers/',
-  '/architecture/audiences/operators/',
-  '/architecture/audiences/auditors/',
+  '/architecture/platform/',
+  '/audiences/',
+  '/audiences/publishers/',
+  '/audiences/readers/',
+  '/audiences/implementers/',
+  '/audiences/operators/',
+  '/audiences/auditors/',
+  '/programs/',
   '/examples/',
   '/examples/minimal-model/',
   '/examples/data-and-registries/',
@@ -40,7 +43,7 @@ test.describe('Page contracts', () => {
 
     test(`${path} has title and meta description`, async ({ page }) => {
       await page.goto(path);
-      await expect(page.locator('title')).not.toBeEmpty();
+      await expect(page.locator('head title')).not.toBeEmpty();
       const desc = await page.locator('meta[name="description"]').getAttribute('content');
       expect(desc).toBeTruthy();
     });

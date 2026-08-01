@@ -1,0 +1,117 @@
+---
+// The ladder in one diagram (TODO.integration/27): Primmel → Primmel
+// SMART → the programs → Confium — the site's own vector mark for the
+// platform story (shared diagrams ride the pipeline; this one is home).
+const rungs = [
+  {
+    name: 'Primmel',
+    detail: 'the typed, executable modelling language — models that run',
+    href: '/docs/introduction',
+    tone: 'var(--color-primary-600, #2563eb)',
+  },
+  {
+    name: 'Primmel SMART',
+    detail: 'the platform: methodology, app framework, twin runtime, SST, twin certification',
+    href: '/architecture/platform',
+    tone: 'var(--color-primary-500, #3b82f6)',
+  },
+  {
+    name: 'OIML SMART',
+    detail: 'the program: R 60/91/129/144, the OIML-CS, CNML, the instrument SST',
+    href: 'https://www.oimlsmart.org',
+    external: true,
+    tone: 'var(--color-primary-400, #60a5fa)',
+  },
+  {
+    name: '〈scope〉 SMART',
+    detail: 'the open slots — accreditation, MSS certification, lab programs (zero forks)',
+    href: '/programs',
+    tone: 'var(--color-primary-300, #93c5fd)',
+  },
+  {
+    name: 'Confium',
+    detail: 'the Ribose sibling: the threshold-cryptography PKI the certificates ride',
+    href: 'https://www.confium.org',
+    external: true,
+    tone: 'var(--color-primary-700, #1d4ed8)',
+  },
+];
+---
+
+<section class="ladder-section" aria-label="The Primmel ladder">
+  <h2>The ladder it powers</h2>
+  <p class="ladder-intro">
+    One language, one platform, a ladder of programs — each rung real
+    today or honestly marked as a slot.
+  </p>
+  <ol class="ladder">
+    {rungs.map((rung, i) => (
+      <li class="rung">
+        <span class="rung-index">{i + 1}</span>
+        <div class="rung-body">
+          <a href={rung.href} {...(rung.external ? { target: '_blank', rel: 'noopener' } : {})} class="rung-name" style={`--rung-tone: ${rung.tone}`}>
+            {rung.name}
+          </a>
+          <p class="rung-detail">{rung.detail}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .ladder-section {
+    margin: 3rem auto 0;
+    max-width: 56rem;
+  }
+  .ladder-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .ladder-intro {
+    color: var(--color-muted-foreground, #64748b);
+    margin-bottom: 1.5rem;
+  }
+  .ladder {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .rung {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: 0.75rem;
+    padding: 0.875rem 1rem;
+  }
+  .rung-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    background: var(--color-primary-50, #eff6ff);
+    color: var(--color-primary-700, #1d4ed8);
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+  .rung-name {
+    font-weight: 700;
+    color: var(--rung-tone);
+    text-decoration: none;
+  }
+  .rung-name:hover {
+    text-decoration: underline;
+  }
+  .rung-detail {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground, #64748b);
+  }
+</style>

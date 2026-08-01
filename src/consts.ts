@@ -8,6 +8,7 @@ export const SITE = {
     { text: 'Get Started', href: '/docs/first-model' },
     { text: 'Try It', href: '/playground' },
     { text: 'Architecture', href: '/architecture/' },
+    { text: 'Programs', href: '/programs/' },
     { text: 'Audiences', href: '/audiences/' },
     { text: 'Examples', href: '/examples/' },
     { text: 'Docs', href: '/docs/introduction' },

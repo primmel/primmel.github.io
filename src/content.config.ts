@@ -48,4 +48,13 @@ const audiences = defineCollection({
   }),
 });
 
-export const collections = { architecture, examples, docs, audiences };
+const programs = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/programs' }),
+  schema: z.object({
+    title: z.string(),
+    status: z.enum(['live', 'slot', 'planned']).optional(),
+    sidebar: sidebarSchema,
+  }),
+});
+
+export const collections = { architecture, examples, docs, audiences, programs };

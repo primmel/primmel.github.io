@@ -2,6 +2,9 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import PlaygroundApp from '../components/ui/PlaygroundApp.vue';
 
+// NOTE (TODO.integration/27): the playground parses the v2 core today;
+// the v3 superset constructs (endpoint/serve, composed_of, monitor)
+// run through the same kernel — the parser is @primmel/primmel ≥ 1.3.1.
 const sampleModel = `root HelloWorld
 
 version "v1.0.0-dev1"

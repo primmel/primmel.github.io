@@ -48,7 +48,7 @@ for (const page of PAGES) {
   });
 }
 
-test('mobile sidebar drawer opens on architecture page', async ({ browser }) => {
+test('mobile navigation drawer opens on architecture page', async ({ browser }) => {
   const context = await browser.newContext({
     viewport: { width: 375, height: 812 },
   });
@@ -56,13 +56,15 @@ test('mobile sidebar drawer opens on architecture page', async ({ browser }) => 
   await page.goto('/architecture/define/');
   await page.waitForLoadState('networkidle');
 
-  const hamburger = page.locator('#hamburger');
+  // The current contract (ui/NavBar.vue): the hamburger toggles the
+  // Vue mobile drawer (.mobile-drawer), not the legacy body.sidebar-open.
+  const hamburger = page.locator('button.hamburger');
   await hamburger.click();
   await page.waitForTimeout(300);
 
-  const sidebar = page.locator('.sidebar');
-  await expect(sidebar).toBeVisible();
-  await expect(page.locator('body')).toHaveClass(/sidebar-open/);
+  const drawer = page.locator('.mobile-drawer');
+  await expect(drawer).toBeVisible();
+  await expect(hamburger).toHaveAttribute('aria-expanded', 'true');
 
   await context.close();
 });
