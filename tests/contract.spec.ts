@@ -4,6 +4,8 @@ const ALL_PAGES = [
   '/',
   '/about/',
   '/404/',
+  '/confium/',
+  '/sst/',
   '/architecture/',
   '/architecture/define/',
   '/architecture/reference/',
