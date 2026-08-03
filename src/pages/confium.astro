@@ -1,0 +1,18 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ConfiumContent from '../content/confium.mdx';
+---
+
+<PageLayout title="Confium" description="Confium — the threshold-cryptography PKI the Primmel SMART platform's certificates ride." wide>
+  <div class="confium-content prose">
+    <ConfiumContent />
+  </div>
+</PageLayout>
+
+<style>
+  .confium-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+</style>

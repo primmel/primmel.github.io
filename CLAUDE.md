@@ -18,8 +18,8 @@ npm run build        # build + pagefind + OG images → dist/
 npm run preview      # preview the production build
 npm run check        # TypeScript + Astro type checking (0 errors expected)
 npm test             # Vitest unit specs (12 tests)
-npm run check:links  # validate all internal links (28 pages)
-npm run check:a11y   # axe-core WCAG 2 AA audit (28 pages)
+npm run check:links  # validate all internal links (40 pages)
+npm run check:a11y   # axe-core WCAG 2 AA audit (40 pages)
 npm run test:visual  # Playwright visual regression
 ```
 
@@ -54,7 +54,7 @@ src/
 ├── components/
 │   ├── nav/              NavBar, SideBar, Outline, Footer
 │   ├── ui/               Vue islands + Astro UI components
-│   ├── home/             Hero, PillarsList
+│   ├── home/             Hero, PillarsList, PlatformSection
 │   └── diagrams/         ProcessFlowDiagram (model-driven SVG)
 ├── styles/
 │   └── app.css           Single CSS entry: Tailwind 4 @theme + global styles
@@ -101,8 +101,8 @@ Astro scoped-style `data-astro-cid-*` attributes from leaking into Vue props.
 | Layer | Tool | Coverage |
 |---|---|---|
 | Unit | Vitest | `model-parser.ts` (12 tests) |
-| Contract | Playwright | 28 pages × 3 checks (status, title, OG) |
-| Accessibility | axe-core | 28 pages, WCAG 2 AA compliant |
+| Contract | Playwright | 30 pages × 3 checks (status, title, OG) |
+| Accessibility | axe-core | 40 pages, WCAG 2 AA compliant |
 | Link integrity | Custom script | All internal links validated |
 | Visual regression | Playwright | 10 pages × light/dark baselines |
 

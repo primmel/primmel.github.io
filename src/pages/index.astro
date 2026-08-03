@@ -2,7 +2,7 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/home/Hero.astro';
 import PillarsList from '../components/home/PillarsList.astro';
-import LadderSection from '../components/home/LadderSection.astro';
+import PlatformSection from '../components/home/PlatformSection.astro';
 import { derivePillars } from '../lib/navigation';
 
 const pillars = await derivePillars();
@@ -11,5 +11,5 @@ const pillars = await derivePillars();
 <PageLayout title="Primmel" description="Executable standards modelling for SMART standards." wide>
   <Hero />
   <PillarsList pillars={pillars} />
-  <LadderSection />
+  <PlatformSection />
 </PageLayout>

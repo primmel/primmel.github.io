@@ -177,6 +177,7 @@ watch(model, (m) => {
         @input="onInput"
         spellcheck="false"
         class="pg-code"
+        aria-label="Primmel model source"
       ></textarea>
     </div>
     <div class="pg-output">
