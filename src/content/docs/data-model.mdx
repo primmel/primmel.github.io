@@ -15,7 +15,7 @@ against.
 
 ## Primitives
 
-### `enum` &mdash; closed value set
+### `enum` , closed value set
 
 ```text
 enum RoastLevel {
@@ -28,7 +28,7 @@ enum RoastLevel {
 A closed set of named values, each with a definition. Use enums for
 any field whose value comes from a fixed list.
 
-### `class#data` &mdash; registerable record
+### `class#data` , registerable record
 
 ```text
 class BeanLot#data {
@@ -44,7 +44,7 @@ appear in a `data_registry`. Each field has a name, a type, and a block
 with at least a `definition` and a `modality` (`SHALL`/`SHOULD`/`MAY`/
 `CAN`/`MUST`).
 
-### Helper `class` &mdash; embedded complex type
+### Helper `class` , embedded complex type
 
 ```text
 class RoastProfile {
@@ -54,11 +54,11 @@ class RoastProfile {
 }
 ```
 
-A class without the `#data` suffix is a *helper class* &mdash; a
+A class without the `#data` suffix is a *helper class* , a
 reusable complex type that lives as a field inside other data classes.
 It cannot be registered directly.
 
-### `reference(Target#data)` &mdash; typed foreign key
+### `reference(Target#data)` , typed foreign key
 
 ```text
 class RoastBatch#data {
@@ -72,7 +72,7 @@ class RoastBatch#data {
 A typed pointer to another record in another registry. At evaluation
 time, tooling follows these references to traverse the data graph.
 
-### `data_registry` &mdash; named store of records
+### `data_registry` , named store of records
 
 ```text
 data_registry BeanLotRegistry {
@@ -119,7 +119,7 @@ process RoastBatch {
 
 ## Where to see it in action
 
-- [Example 02: Data and registries](/examples/data-and-registries) &mdash;
+- [Example 02: Data and registries](/examples/data-and-registries) ,
   the dedicated walkthrough.
-- [Implementation package](/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) ,
   data classes and registries at production scale.

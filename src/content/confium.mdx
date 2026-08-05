@@ -1,31 +1,31 @@
-# Confium — the PKI the certificates ride
+# Confium, the PKI the certificates ride
 
 **Confium** is the threshold-cryptography PKI the Primmel SMART
 platform's certificates ride: a certificate's signing key exists only
 as shares held by multiple stakeholders, so no single party can sign
-— or forge, or lose — a certificate alone. It is a component of the
+,  or forge, or lose, a certificate alone. It is a component of the
 platform, adopted for its certificate operations.
 
 ## What threshold cryptography buys
 
 A conventional PKI concentrates trust in one CA key: whoever holds it
-*is* the authority, and losing it — to theft, to failure, to a single
-compelled signer — breaks every certificate it ever issued. Confium
+*is* the authority, and losing it, to theft, to failure, to a single
+compelled signer, breaks every certificate it ever issued. Confium
 splits the key across stakeholders and requires a threshold of them to
 sign:
 
-- **No single point of compromise** — an attacker who breaches one
+- **No single point of compromise**, an attacker who breaches one
   party holds shares, not a key.
-- **No single point of loss** — the key survives losing a share
+- **No single point of loss**, the key survives losing a share
   holder; the threshold still signs.
-- **No unilateral issuance** — a certificate exists only because the
+- **No unilateral issuance**, a certificate exists only because the
   declared quorum produced it, which is precisely the property a
   certification scheme wants its certificates to have.
 
 Confium is Ribose's multi-stakeholder threshold-cryptography
 framework, program-agnostic by design. Its three modes cover
 peer-to-peer threshold operations, a threshold replacement for
-conventional PKI, and threshold-certificate PKI — the mode the
+conventional PKI, and threshold-certificate PKI, the mode the
 platform's certificate machinery uses.
 
 ## How the platform uses it
@@ -33,14 +33,14 @@ platform's certificate machinery uses.
 The platform's certificates are machine-readable documents whose every
 claim names its evidence, signed over Confium (ECDSA P-256 XMLDSig,
 with a check pipeline any verifier can run). Each program names its
-own certificate format on Confium — OIML SMART's is **CNML**, the
+own certificate format on Confium, OIML SMART's is **CNML**, the
 *Certificat Numérique de Métrologie Légale* an issuing authority
 issues for a certified measuring instrument. The format belongs to
 the program; the threshold PKI underneath it is Confium.
 
 ## Links
 
-- **The Confium site** — [www.confium.org](https://www.confium.org).
-- **The platform page** — [the Primmel SMART
+- **The Confium site**, [www.confium.org](https://www.confium.org).
+- **The platform page**, [the Primmel SMART
   platform](/architecture/platform), where Confium sits among the
   platform's components.

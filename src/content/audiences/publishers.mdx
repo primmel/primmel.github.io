@@ -15,13 +15,13 @@ sidebar:
 > [**Define**](/architecture/define) pillar. They author and publish the
 > reference models that everyone else consumes.
 
-## The pitch &mdash; for standards developers and SDOs
+## The pitch , for standards developers and SDOs
 
 **The world today.** A standard ships as a PDF and immediately begins
 to die. Ambiguities surface years later, in implementers' inboxes, one
 interpretation at a time. Every conformance regime built on the text is
 a bespoke lab exercise. Errata wait for the next revision cycle. Your
-authority ends at publication &mdash; what industry does with the prose
+authority ends at publication , what industry does with the prose
 after that is folklore you cannot see, measure, or correct.
 
 **What changes.** In Primmel, the standard *is* the executable model.
@@ -29,22 +29,22 @@ Requirements are constraints over a subject's IS/HAS/DOES; tests are
 processes that probe those aspects; report forms are the evidence
 interfaces. Ambiguity stops being a lawsuit risk and becomes a compile
 error. Every provision carries clause-level provenance back to the
-source document, and an edition transition is a model diff &mdash;
-computed, reviewed, and published &mdash; never a re-keying exercise.
+source document, and an edition transition is a model diff ,
+computed, reviewed, and published , never a re-keying exercise.
 
 **What it looks like in practice.** You author a `.prl` package; the
-kernel's linter (C1&ndash;C99) grades it; the coverage calculus proves
+kernel's linter (C1-C99) grades it; the coverage calculus proves
 your tests actually cover your requirements before you publish. OIML
 does this today: 28 packages spanning four Recommendations, the OIML-CS
-scheme, and the shared CASCO foundations &mdash; all lint-clean, all
+scheme, and the shared CASCO foundations , all lint-clean, all
 generated artifacts byte-proven against the source of truth.
 
 **The proof.** The kernel suite runs 1,062 tests; the OIML SMART
 program runs the full certification chain end to end (57/57 browser
 e2e). The living example is [OIML SMART](https://www.oimlsmart.org)
-&mdash; a whole standards program already built on the platform.
+, a whole standards program already built on the platform.
 
-**The tool.** Author with [Primmel Studio](/docs/studio) — the canvas,
+**The tool.** Author with [Primmel Studio](/docs/studio), the canvas,
 the inspectors, the doc map back to the source document's statements,
 and the validation badge that never sleeps. When the badge is green
 and the coverage is full, the standard is ready to publish.
@@ -57,27 +57,27 @@ for the full language surface, or build
 ## Who they are
 
 Publishers are the **originating authors** of a Primmel reference
-model. The defining feature isn't who they are &mdash; it's *what they
+model. The defining feature isn't who they are , it's *what they
 do*: they release a model for others to consume. Common publisher
 types:
 
-- **Standards bodies** &mdash; BSI, OIML, ISO, IEC and other national
+- **Standards bodies** , BSI, OIML, ISO, IEC and other national
   or international standards organisations.
-- **Industry consortia** &mdash; sector-specific groups publishing
+- **Industry consortia** , sector-specific groups publishing
   reference frameworks for their members.
-- **Regulators** &mdash; government or quasi-government bodies
+- **Regulators** , government or quasi-government bodies
   publishing compliance frameworks they enforce.
-- **Large organisations** &mdash; companies publishing internal
+- **Large organisations** , companies publishing internal
   frameworks intended for their subsidiaries, suppliers, or business
   partners to map to.
-- **Tooling vendors** &mdash; occasionally, vendors publish reference
+- **Tooling vendors** , occasionally, vendors publish reference
   models as templates that customers can extend.
 
 ## What they're trying to accomplish
 
 - Express a standard's provisions, processes, and data requirements in
   a typed, machine-readable form.
-- Make the standard **instantly available** &mdash; not just as a PDF,
+- Make the standard **instantly available** , not just as a PDF,
   but as an executable artefact.
 - Provide a stable, versioned namespace (`OCS#`, `ISO13485#`, etc.)
   that downstream implementers can alias in their own models.
@@ -90,21 +90,21 @@ types:
 
 | Artifact | Role |
 | --- | --- |
-| Source standard document (PDF, Word) | Consumed &mdash; the human-readable source |
-| `.prd` extract | Produced &mdash; clause-level extracts of the source |
-| Reference `.prl` | Produced &mdash; the executable model itself |
+| Source standard document (PDF, Word) | Consumed , the human-readable source |
+| `.prd` extract | Produced , clause-level extracts of the source |
+| Reference `.prl` | Produced , the executable model itself |
 
 ## Tools they use
 
-- **Authoring editors** &mdash; purpose-built Primmel editors (e.g.
+- **Authoring editors** , purpose-built Primmel editors (e.g.
   the Paneron extension) for structuring models.
-- **Validation tooling** &mdash; structural checks on the model before
+- **Validation tooling** , structural checks on the model before
   publication: parse errors, broken cross-references, missing
   declarations.
-- **`.prd` extractors** &mdash; tools that turn a source PDF or
+- **`.prd` extractors** , tools that turn a source PDF or
   document into a clause-level extract aligned with the reference
   model's provisions.
-- **Publication registries** &mdash; versioned distribution points
+- **Publication registries** , versioned distribution points
   where adopters can fetch the published `.prl`.
 
 ## A worked example
@@ -115,14 +115,14 @@ artefacts are [`ocs-standard.prd`](/examples/files/06-implementation-package/ocs
 (the clause extract) and the `OCS#`-prefixed declarations inside
 [`acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl)
 (which mirror what the published reference would declare). Acme, as
-the adopter, doesn't author these &mdash; the publisher does. Acme
-simply imports them via the `OCS#` namespace prefix.
+the adopter, doesn't author these , the publisher does. Acme
+imports them via the `OCS#` namespace prefix.
 
 ## See also
 
-- [**Define** pillar](/architecture/define) &mdash; the architectural
+- [**Define** pillar](/architecture/define) , the architectural
   activity this audience drives.
-- [Readers](/audiences/readers) &mdash; the next audience downstream,
+- [Readers](/audiences/readers) , the next audience downstream,
   who consume what Publishers produce.
-- [Implementers](/audiences/implementers) &mdash; the audience that
+- [Implementers](/audiences/implementers) , the audience that
   adopts and maps to the published reference.

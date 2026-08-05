@@ -16,27 +16,27 @@ sidebar:
 > [**Reference**](/architecture/reference) pillar. They consume a
 > published reference model to read, interact, and evaluate.
 
-## The pitch &mdash; for everyone, starting here
+## The pitch , for everyone, starting here
 
 **The world today.** Standards are the operating system of the
-physical economy &mdash; every scale in a shop, every gas meter on a
-wall, every certificate on a factory wall runs on them &mdash; and they
+physical economy , every scale in a shop, every gas meter on a
+wall, every certificate on a factory wall runs on them , and they
 are distributed as photographs of text. Unsearchable without a
 specialist. Uncomputable without a consultant. Unverifiable without a
 lab. Whole industries spend billions re-reading the same prose.
 
-**What changes.** Eight words: **is, has, does** &mdash; and
+**What changes.** Eight words: **is, has, does** , and
 **object, property, value, transition, process**. Three relations and
 five sorts, closed under composition. With exactly that vocabulary, any
 standard becomes a model that is simultaneously human-readable and
-machine-executable &mdash; the same artifact for the committee member,
+machine-executable , the same artifact for the committee member,
 the engineer, the auditor, and the runtime. This is not a claim; it is
-proved &mdash; the system is closed (nothing escapes the eight terms),
+proved , the system is closed (nothing escapes the eight terms),
 complete (every descriptive claim factors through them), and extensible
 (it grows by content, never by new primitives).
 
 **What it looks like in practice.** You open a modelled standard and
-*read* it &mdash; requirements with their tests attached, tests with
+*read* it , requirements with their tests attached, tests with
 their evidence forms attached, every node one click from the clause it
 came from. No install, no training: reading is the first step, and it
 is genuinely readable.
@@ -44,9 +44,9 @@ is genuinely readable.
 **The proof.** The
 [foundation volume](https://primmel.github.io/primmel-smart-docs/foundation/)
 carries the three theorems and their proofs, written to be checked by a
-patient reader &mdash; no category theory required.
+patient reader , no category theory required.
 
-**Your next step.** Build [a first model](/docs/first-model) &mdash;
+**Your next step.** Build [a first model](/docs/first-model) ,
 fifteen minutes, start to a running artifact.
 
 ## Who they are
@@ -55,29 +55,29 @@ Readers are anyone who **consumes a published reference model** without
 modifying it and without producing long-lived operational evidence.
 They use the standard to answer a question. Common reader types:
 
-- **Engineers** &mdash; checking whether their product or process
+- **Engineers** , checking whether their product or process
   meets a standard's requirements.
-- **Test laboratories** &mdash; running the standardised test
+- **Test laboratories** , running the standardised test
   procedures the model declares.
-- **Conformity assessors** &mdash; verifying that a product, process,
+- **Conformity assessors** , verifying that a product, process,
   or dataset satisfies the applicable provisions.
-- **Students and researchers** &mdash; learning the domain, comparing
+- **Students and researchers** , learning the domain, comparing
   standards, tracking their evolution.
-- **Compliance officers** &mdash; researching what a standard requires
+- **Compliance officers** , researching what a standard requires
   before recommending adoption.
-- **Tooling vendors (reference side)** &mdash; building tools that
+- **Tooling vendors (reference side)** , building tools that
   consume standard models: browsers, harnesses, simulators,
   validators.
 
 ## What they're trying to accomplish
 
-- **Read** &mdash; navigate the standard's structure: provisions,
+- **Read** , navigate the standard's structure: provisions,
   processes, data classes, references. Find what a clause requires,
   where it lives, what it traces back to in the source document.
-- **Interact** &mdash; exercise the standard dynamically: run its test
+- **Interact** , exercise the standard dynamically: run its test
   processes against sample inputs, follow its process flows, evaluate
   its `validate_measurement` expressions and gateway `condition`s.
-- **Evaluate** &mdash; check whether a specific product, process, or
+- **Evaluate** , check whether a specific product, process, or
   dataset meets the standard: dimensional checks, formula evaluation,
   applicable-requirement checks.
 
@@ -85,22 +85,22 @@ They use the standard to answer a question. Common reader types:
 
 | Artifact | Role |
 | --- | --- |
-| Published reference `.prl` | Consumed &mdash; the standard itself |
-| Optional `.prd` extract | Consumed &mdash; the source clause text, for cross-checking |
-| Test reports / evaluation verdicts | Produced (transient) &mdash; not part of the long-lived Primmel artifact set |
+| Published reference `.prl` | Consumed , the standard itself |
+| Optional `.prd` extract | Consumed , the source clause text, for cross-checking |
+| Test reports / evaluation verdicts | Produced (transient) , not part of the long-lived Primmel artifact set |
 
 ## Tools they use
 
-- **Spec browsers** &mdash; navigate the model: tree view, full-text
+- **Spec browsers** , navigate the model: tree view, full-text
   search, cross-reference jumps, dependency graphs.
-- **Test harnesses** &mdash; execute the standard's declared test
+- **Test harnesses** , execute the standard's declared test
   processes; produce pass/fail verdicts per step.
-- **Formula evaluators** &mdash; run the standard's `validate_measurement`
+- **Formula evaluators** , run the standard's `validate_measurement`
   expressions and `condition`s against provided values.
-- **Dimensional checkers** &mdash; verify whether a product's
+- **Dimensional checkers** , verify whether a product's
   dimensions, weights, or measurable properties fall within declared
   ranges.
-- **Applicability checkers** &mdash; given a context (product type,
+- **Applicability checkers** , given a context (product type,
   use case, jurisdiction), determine which provisions apply.
 
 ## A worked example
@@ -110,7 +110,7 @@ Office Coffee Standard would load `ocs-standard.prd` into a spec
 browser. They'd navigate to clause 4.4 (*Quality checks*), find the
 `MaxMoisture <= 12` expression in the model, and run a formula
 evaluator against the actual measured moisture reading from the
-roaster under test. The output is a pass/fail verdict &mdash;
+roaster under test. The output is a pass/fail verdict ,
 transient, not part of the Primmel artifact set.
 
 ## What Readers do *not* do
@@ -122,15 +122,15 @@ transient, not part of the Primmel artifact set.
   [Operate](/architecture/operate) pillar, for
   [Operators](/audiences/operators).
 - Audit implementations against the standard. That's the
-  [Audit](/architecture/audit) pillar &mdash; but
+  [Audit](/architecture/audit) pillar , but
   [Auditors](/audiences/auditors) **inherit reader-style navigation**
   as one of their capabilities.
 
 ## See also
 
-- [**Reference** pillar](/architecture/reference) &mdash; the
+- [**Reference** pillar](/architecture/reference) , the
   architectural activity this audience drives.
-- [Publishers](/audiences/publishers) &mdash; who produces what
+- [Publishers](/audiences/publishers) , who produces what
   Readers consume.
-- [Auditors](/audiences/auditors) &mdash; who inherit Reader
+- [Auditors](/audiences/auditors) , who inherit Reader
   capabilities and add correlation skill.

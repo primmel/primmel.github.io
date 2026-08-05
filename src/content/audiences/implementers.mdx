@@ -18,7 +18,7 @@ sidebar:
 > them, and declare the mappings that close a Statement of
 > Applicability.
 
-## The pitch &mdash; for manufacturers and product owners
+## The pitch , for manufacturers and product owners
 
 **The world today.** You read a 200-page standard, distill it into a
 compliance spreadsheet, and hope. Your product's conformity lives in
@@ -28,26 +28,26 @@ costume; every certificate is a photograph of how things looked on one
 day last year.
 
 **What changes.** You describe *your* product in the same language the
-standard is written in &mdash; its identity, its holdings, its behavior
-&mdash; and map your model's nodes directly onto the reference model's
+standard is written in , its identity, its holdings, its behavior
+, and map your model's nodes directly onto the reference model's
 nodes. The mapping is explicit, checkable, versioned data: your
 Statement of Applicability stops being a document and becomes a
 computation. And you can go further: ship a **SMART twin** of your
-product &mdash; a model-native Digital Product Passport that serves the
+product , a model-native Digital Product Passport that serves the
 aspects the standard governs, live, to anyone authorized to ask.
 
 **What it looks like in practice.** A load-cell manufacturer publishes
 a reference model whose every node maps onto OIML R 60's requirements.
-A customer imports that model as an abstract promise &mdash; or plugs
+A customer imports that model as an abstract promise , or plugs
 the instrument's live twin straight into their own implementation
 model, where the compliance engine watches it continuously. Reference
 and implementation compose in any number of layers; one implementation
 model can satisfy several reference standards at once, with shared
 processes counted exactly once.
 
-**The proof.** The ACME LC-500 pilot walks the whole chain &mdash;
+**The proof.** The ACME LC-500 pilot walks the whole chain ,
 manufacturer reference model, customer import, live twin, certified
-fidelity &mdash; and the twin-certification program exists precisely to
+fidelity , and the twin-certification program exists precisely to
 certify that a served twin stays faithful to the physical device.
 
 **Your next step.** Work through the
@@ -60,30 +60,30 @@ Implementers are the people who **build and maintain the
 organisation's implementation model**, take up reference models, and
 wire the two together with mappings. Common implementer types:
 
-- **Implementation authors** &mdash; consultants or internal teams
+- **Implementation authors** , consultants or internal teams
   who build the initial digital twin of the org's operations.
-- **Engineering teams** &mdash; staff who refine the implementation
+- **Engineering teams** , staff who refine the implementation
   over time as the org's actual processes change.
-- **Compliance teams** &mdash; staff who decide which standards to
+- **Compliance teams** , staff who decide which standards to
   adopt and shepherd the mapping process per standard.
-- **Quality teams** &mdash; staff who ensure the implementation
+- **Quality teams** , staff who ensure the implementation
   continues to satisfy the mapped-to references between audits.
-- **Consultants** &mdash; external specialists who help an org adopt
+- **Consultants** , external specialists who help an org adopt
   a specific standard end-to-end.
 
 ## What they're trying to accomplish
 
-- **Maintain** &mdash; keep the implementation `.prl` synchronised
+- **Maintain** , keep the implementation `.prl` synchronised
   with how the org actually operates. The model is a standing
   artifact, not a one-off project.
-- **Adopt / import / customize** &mdash; when the org decides to take
+- **Adopt / import / customize** , when the org decides to take
   up a reference, import the reference's elements (via `Namespace#ID`
   aliasing), customize the implementation as needed (add processes,
   change data fields, refine approvals), and bind the org's processes
   to the reference's provisions via `validate_provision`.
-- **Map** &mdash; declare mappings from implementation elements to
+- **Map** , declare mappings from implementation elements to
   reference elements, in `.prm` files and/or `map_profile` blocks.
-- **Close** &mdash; iterate until the mapping satisfies the
+- **Close** , iterate until the mapping satisfies the
   Statement of Applicability: every reference element → ≥1
   implementation element.
 
@@ -91,23 +91,23 @@ wire the two together with mappings. Common implementer types:
 
 | Artifact | Role |
 | --- | --- |
-| Published reference `.prl` | Consumed &mdash; the standard being adopted |
-| Optional `.prd` extract | Consumed &mdash; for cross-checking provisions against source clauses |
-| Implementation `.prl` | Produced and maintained &mdash; the org's digital twin |
-| `.prm` JSON mapping | Produced per adoption &mdash; the alignment between impl and reference |
-| `map_profile` block (inside `.prl`) | Produced &mdash; in-model form of the mapping |
+| Published reference `.prl` | Consumed , the standard being adopted |
+| Optional `.prd` extract | Consumed , for cross-checking provisions against source clauses |
+| Implementation `.prl` | Produced and maintained , the org's digital twin |
+| `.prm` JSON mapping | Produced per adoption , the alignment between impl and reference |
+| `map_profile` block (inside `.prl`) | Produced , in-model form of the mapping |
 
 ## Tools they use
 
-- **Primmel editors** &mdash; authoring tools for the implementation
+- **Primmel editors** , authoring tools for the implementation
   `.prl` and `map_profile` blocks.
-- **Mapping editors** &mdash; tools that help build `.prm` files
+- **Mapping editors** , tools that help build `.prm` files
   side-by-side with the reference and implementation models, with
   description/justification fields per pair.
-- **Coverage checkers** &mdash; tooling that reports on Statement of
+- **Coverage checkers** , tooling that reports on Statement of
   Applicability progress: which reference elements are mapped, which
   are not, which are excluded with justification.
-- **Diff tools** &mdash; compare implementation revisions; compare
+- **Diff tools** , compare implementation revisions; compare
   mappings across reference-model version upgrades.
 
 ## A worked example
@@ -116,26 +116,26 @@ The [implementation package](/examples/implementation-package) shows
 this audience end-to-end. Acme's implementers:
 
 1. Maintain [`acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl)
-   &mdash; the digital twin of Acme's coffee operations.
+   , the digital twin of Acme's coffee operations.
 2. Decide to adopt the fictional Office Coffee Standard (OCS).
 3. Import OCS elements via `OCS#` aliases (e.g. `process OCS#SourceBeans`,
    `provision OCS#Provision4-2-1`).
 4. Bind Acme processes to OCS provisions via `validate_provision`.
 5. Declare the mapping in [`acme-to-ocs.prm`](/examples/files/06-implementation-package/acme-to-ocs.prm)
    with description and justification per pair.
-6. Iterate until the mapping closes &mdash; every OCS requirement has
+6. Iterate until the mapping closes , every OCS requirement has
    at least one Acme process implementing it.
 
 ## See also
 
-- [Primmel Studio](/docs/studio) &mdash; the mapper with the kernel's
+- [Primmel Studio](/docs/studio) , the mapper with the kernel's
   coverage calculus as tints, the multi-reference lens, and automap
   (suggestions with provenance, never silent assertions).
-- [**Implement** pillar](/architecture/implement) &mdash; the full
+- [**Implement** pillar](/architecture/implement) , the full
   architectural activity, including the merged Adopt workflow.
-- [Publishers](/audiences/publishers) &mdash; who produces what
+- [Publishers](/audiences/publishers) , who produces what
   Implementers adopt.
-- [Operators](/audiences/operators) &mdash; who runs what Implementers
+- [Operators](/audiences/operators) , who runs what Implementers
   build.
-- [Mapping reference](/docs/mapping) &mdash; the dual forms of
+- [Mapping reference](/docs/mapping) , the dual forms of
   mapping in detail.

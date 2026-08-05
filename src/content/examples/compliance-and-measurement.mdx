@@ -92,10 +92,10 @@ provision MoistureWithinRange {
 
 A provision has:
 
-- A `condition` &mdash; the human-readable requirement.
-- A `modality` &mdash; `SHALL`, `SHOULD`, `MAY`, `CAN`, or `MUST` (RFC
+- A `condition` , the human-readable requirement.
+- A `modality` , `SHALL`, `SHOULD`, `MAY`, `CAN`, or `MUST` (RFC
   2119).
-- A `reference { ... }` block &mdash; the clauses this provision
+- A `reference { ... }` block , the clauses this provision
   derives from.
 
 ### Subject bindings
@@ -281,8 +281,8 @@ process_flow {
 
 Each gateway edge can carry both:
 
-- A `description` &mdash; what a human reads on the diagram.
-- A `condition` &mdash; a measurement expression that the runtime
+- A `description` , what a human reads on the diagram.
+- A `condition` , a measurement expression that the runtime
   evaluates to decide whether this edge is taken.
 
 The edge marked `description "default"` is the fallback when none of the
@@ -293,11 +293,11 @@ auditor or test harness can replay against real data.
 
 ## What this example leaves out
 
-- **Cross-model aliasing** &mdash; provisions live entirely inside this
+- **Cross-model aliasing** , provisions live entirely inside this
   file. Cross-model aliasing is added in the
   [implementation package](/examples/implementation-package).
-- **Workspace data** &mdash; the model declares measurements but does
+- **Workspace data** , the model declares measurements but does
   not carry any actual readings. Workspace data is added in the
   [implementation package](/examples/implementation-package).
-- **Approval steps** &mdash; see
+- **Approval steps** , see
   [approval workflow](/examples/approval-workflow).

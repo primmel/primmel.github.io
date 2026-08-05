@@ -1,5 +1,5 @@
 ---
-title: "Implement — maintain the digital twin, adopt, and map"
+title: "Implement, maintain the digital twin, adopt, and map"
 pillar: "implement"
 summary: "Maintain the digital twin, take up a reference, customize to satisfy it, declare mappings. Close when every reference element maps to >=1 impl element."
 side: "application"
@@ -9,13 +9,13 @@ sidebar:
   label: "Implement"
 ---
 
-# Implement &mdash; maintain the digital twin, adopt, and map
+# Implement , maintain the digital twin, adopt, and map
 
 <div class="callout">
 
 **WHO THIS IS FOR**
 
-The **Implement** pillar is for **Implementers** &mdash; the people who
+The **Implement** pillar is for **Implementers** , the people who
 maintain an organisation's implementation `.prl`, take up reference
 models, customize the implementation to satisfy them, and declare the
 mappings that close a Statement of Applicability. See
@@ -40,16 +40,16 @@ valuable on its own:
 - It gives audit and compliance a structural place to start.
 
 When the organisation later decides to adopt a standard, the
-implementation model is the *starting point* &mdash; not a blank slate.
+implementation model is the *starting point* , not a blank slate.
 
 ## Output artifact (standing)
 
-An implementation `.prl` &mdash; structurally identical to a reference
+An implementation `.prl` , structurally identical to a reference
 `.prl`, with two distinguishing conventions:
 
-- **Local namespace** &mdash; `metadata.namespace` is the organisation's
+- **Local namespace** , `metadata.namespace` is the organisation's
   own (e.g. `AcmeCoffeeProgramme`), not the standard's.
-- **Local processes and data** &mdash; processes, classes, registries
+- **Local processes and data** , processes, classes, registries
   describe the org's actual operations. Roles like `Org`, `Roaster`,
   `QA` are the org's own.
 
@@ -75,7 +75,7 @@ role QA      { name "Quality assurance" }
 ```
 
 The model describes Acme's own operations: bean receiving, roasting,
-quality testing. There is no reference to any standard here yet &mdash;
+quality testing. There is no reference to any standard here yet ,
 this is the digital twin, in isolation.
 
 The implementation model is **not** rebuilt per standard adoption. If
@@ -90,13 +90,13 @@ that touches this model but does not replace it.
 
 When the organisation takes up a reference model, three things happen:
 
-1. **Adopt / import / customize** &mdash; modify the implementation
+1. **Adopt / import / customize** , modify the implementation
    `.prl` as needed (adding processes, changing data fields, refining
    approvals) so it can satisfy the reference's provisions.
-2. **Map** &mdash; declare mappings from implementation elements to
+2. **Map** , declare mappings from implementation elements to
    reference elements, in a `.prm` file (or a `map_profile` block
    inside the implementation `.prl`).
-3. **Close** &mdash; iterate until every reference element maps to at
+3. **Close** , iterate until every reference element maps to at
    least one implementation element. When that holds, the
    implementation has stated its conformance toward that reference:
    a **Statement of Applicability**.
@@ -106,7 +106,7 @@ When the organisation takes up a reference model, three things happen:
 - The implementation `.prl`, modified as needed.
 - A `.prm` JSON mapping (and/or a `map_profile` block).
 - Implicit: a Statement of Applicability, derivable from the mapping by
-  tooling &mdash; "every reference element → ≥1 implementation element".
+  tooling , "every reference element → ≥1 implementation element".
 
 ### How the mapping closes
 
@@ -160,25 +160,25 @@ The same mapping can be expressed in two equivalent places:
 - **As a standalone `.prm` JSON file**: easier to version independently
   and to carry richer per-pair metadata.
 
-Both forms are used in tandem in practice &mdash; the `.prm` is the
+Both forms are used in tandem in practice , the `.prm` is the
 canonical artefact submitted to auditors.
 
 ## Where to see it in action
 
 - [Example 02: Data and registries](/examples/data-and-registries)
-  &mdash; a small org's implementation of a roastery logbook, with no
+  , a small org's implementation of a roastery logbook, with no
   reference to any standard.
 - [Implementation package walkthrough](/examples/implementation-package)
-  &mdash; the showcase. Acme adopts the OCS standard, modifies its
+  , the showcase. Acme adopts the OCS standard, modifies its
   implementation as needed, builds the mapping, and closes it.
-- [Implementation package &mdash; `acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl)
-  &mdash; Acme's full digital twin, before/after adopting the OCS
+- [Implementation package , `acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl)
+  , Acme's full digital twin, before/after adopting the OCS
   standard.
-- [Mapping](/docs/mapping) &mdash; the dual forms of mapping in detail.
+- [Mapping](/docs/mapping) , the dual forms of mapping in detail.
 
 ## After implementing
 
-The implementation model is maintained continuously &mdash; whenever
+The implementation model is maintained continuously , whenever
 the org's actual processes change, the implementation changes too, and
 new adoptions add mappings without disturbing the underlying twin.
 Day-to-day running of the implementation is the

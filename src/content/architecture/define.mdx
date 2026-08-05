@@ -1,5 +1,5 @@
 ---
-title: "Define — author a reference model"
+title: "Define, author a reference model"
 pillar: "define"
 summary: "A reference publisher authors a reference model and publishes it for others to consume."
 sidebar:
@@ -8,10 +8,10 @@ sidebar:
   label: "Define"
 ---
 
-# Define &mdash; author a reference model
+# Define , author a reference model
 
 > **WHO THIS IS FOR**
-> The **Define** pillar is for **Publishers** &mdash; standards bodies,
+> The **Define** pillar is for **Publishers** , standards bodies,
 > industry consortia, regulators, or any organisation that publishes a
 > model for others to consume. See
 > [Publishers](/audiences/publishers).
@@ -27,13 +27,13 @@ Reference-model publishing is **not** exclusive to standards bodies.
 The defining feature of a reference model is that it is *published for
 others to map to*, not who published it. Common publishers include:
 
-- **Standards bodies** (BSI, OIML, ISO, IEC, etc.) &mdash; publish
+- **Standards bodies** (BSI, OIML, ISO, IEC, etc.) , publish
   reference models for their published standards.
-- **Industry consortia** &mdash; publish reference models for sector-wide
+- **Industry consortia** , publish reference models for sector-wide
   best practices.
-- **Regulators** &mdash; publish reference models for compliance
+- **Regulators** , publish reference models for compliance
   frameworks they enforce.
-- **Large organisations** &mdash; publish reference models for internal
+- **Large organisations** , publish reference models for internal
   frameworks, intended for their subsidiaries, suppliers, or business
   partners to map to.
 
@@ -41,14 +41,14 @@ others to map to*, not who published it. Common publishers include:
 
 A Define pillar produces:
 
-- A reference `.prl` model &mdash; the core artifact. Contains the
+- A reference `.prl` model , the core artifact. Contains the
   reference processes, data classes, provisions, and references.
-- An optional `.prd` extract &mdash; clause-level content from the
+- An optional `.prd` extract , clause-level content from the
   source standard document. Useful for tooling that needs the original
   normative text.
 
 The reference `.prl` is what adopters actually consume. The `.prd` is
-supporting material &mdash; it lets adopters follow a provision back to
+supporting material , it lets adopters follow a provision back to
 the literal text it derives from.
 
 ## What goes in a reference `.prl`
@@ -85,18 +85,18 @@ provision Provision4-2-1 {
 The conventions in a reference model are slightly different from an
 implementation model:
 
-- **Namespace discipline** &mdash; the `metadata.namespace` value is the
+- **Namespace discipline** , the `metadata.namespace` value is the
   namespace prefix other models use to import this model's elements
   (e.g. `OCS#SourceBeans`).
-- **No `validate_provision`** &mdash; a reference model declares
+- **No `validate_provision`** , a reference model declares
   requirements; it doesn't bind any process to them. That binding is
   the adopter's job.
-- **`reference { ... }` everywhere** &mdash; every provision cites the
+- **`reference { ... }` everywhere** , every provision cites the
   source standard clause it derives from.
 
 ## Where to see it in action
 
-- [Example 06: Implementation package &mdash; `ocs-standard.prd`](/examples/files/06-implementation-package/ocs-standard.prd)
+- [Example 06: Implementation package , `ocs-standard.prd`](/examples/files/06-implementation-package/ocs-standard.prd)
   is the source standard's `.prd` extract. The matching `acme-coffee-programme.prl`
   (in the same directory) shows how the standard's namespace is
   imported by an adopter.
