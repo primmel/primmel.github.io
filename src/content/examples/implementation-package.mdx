@@ -35,7 +35,7 @@ file type Primmel defines, working together. If you read only one
 example in detail, read this one.
 
 It mirrors the patterns used in real implementation models for ISO
-13485, ISO 14971, ISO 27001, MDSAP, and other major standards &mdash;
+13485, ISO 14971, ISO 27001, MDSAP, and other major standards ,
 with invented content suitable for public distribution.
 
 <ImplementationPackageDiagram />
@@ -55,10 +55,10 @@ with invented content suitable for public distribution.
 
 The four file types each play a distinct role:
 
-- `.prd` &mdash; the *source of truth* for what the standard says.
-- `.prl` &mdash; the *implementation* model.
-- `.prm` &mdash; the *alignment* between implementation and standard.
-- `.pws` &mdash; the *evidence* &mdash; actual records produced when
+- `.prd` , the *source of truth* for what the standard says.
+- `.prl` , the *implementation* model.
+- `.prm` , the *alignment* between implementation and standard.
+- `.pws` , the *evidence* , actual records produced when
   the implementation runs.
 
 ## Pattern: cross-model aliasing (`Namespace#ElementID`)
@@ -162,7 +162,7 @@ canvas SupplierReviewFlow {
 
 `SupplierReviewTimer` is a `REPEAT` timer. Every time it fires, the
 flow loops back to `ReviewSuppliers`. This models *"review suppliers,
-wait 12 months, review again"* &mdash; indefinitely.
+wait 12 months, review again"* , indefinitely.
 
 ## Pattern: dual mapping (`.prl` and `.prm`)
 
@@ -228,7 +228,7 @@ versioned independently, and to carry richer metadata (`description`
 and `justification` per pair).
 
 Notice that `SourceBeans` → `OCS#SourceBeans` has empty
-description/justification in the `.prm` file &mdash; this is normal
+description/justification in the `.prm` file , this is normal
 during mapping authoring, where some entries are still being drafted.
 
 ## Pattern: subject bindings
@@ -342,7 +342,7 @@ the result is a structural compliance verdict.
 If you are reading the package files for the first time:
 
 1. Start with [`ocs-standard.prd`](/examples/files/06-implementation-package/ocs-standard.prd).
-   Note the clause numbers (`4.1`, `4.2`, `4.3`, `4.4`) &mdash; these
+   Note the clause numbers (`4.1`, `4.2`, `4.3`, `4.4`) , these
    are what everything else traces back to.
 2. Open [`acme-coffee-programme.prl`](/examples/files/06-implementation-package/acme-coffee-programme.prl).
    Find each `reference OCS-doc-4-N` declaration and match it to a `.prd`
@@ -358,7 +358,7 @@ If you are reading the package files for the first time:
 6. Open [`sample-workspace.pws/`](/examples/files/06-implementation-package/sample-workspace.pws/manifest.yaml).
    It's a directory. Pick any batch file (e.g.
    [`RoastBatchRegistry/b-2026-001.yaml`](/examples/files/06-implementation-package/sample-workspace.pws/RoastBatchRegistry/b-2026-001.yaml)).
-   Its `attributes` map onto the fields of `class RoastBatch#data` &mdash;
+   Its `attributes` map onto the fields of `class RoastBatch#data` ,
    that is the record shape `LogEveryRoastBatch` requires Acme to maintain.
 
 ## What is fictional here

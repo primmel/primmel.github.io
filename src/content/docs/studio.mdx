@@ -8,7 +8,7 @@ sidebar:
 
 # Primmel Studio
 
-**Primmel Studio** is the authoring tool for the Primmel language — a
+**Primmel Studio** is the authoring tool for the Primmel language, a
 browser application for creating, editing, mapping, reviewing, and
 validating `.prl` models. It is the full port of the Paneron MMEL
 Editor/Viewer/Mapper lineage onto the Primmel v3 kernel, and the first
@@ -17,7 +17,7 @@ program-layer host (OIML SMART plugs in as a plugin).
 The repository is
 [`primmel/editor`](https://github.com/primmel/editor); the full manual
 is its [user
-guide](https://github.com/primmel/editor/tree/main/docs) — organized
+guide](https://github.com/primmel/editor/tree/main/docs), organized
 by audience, with diagrams for every surface.
 
 ## The three laws it shares with the platform
@@ -26,7 +26,7 @@ by audience, with diagrams for every surface.
    command (apply + revert); undo/redo is exact. Tree, canvas, code,
    inspector, mapper, and diff are projections of one store.
 2. **The kernel owns the semantics.** Parsing, the coverage calculus,
-   model-diff, and the type vocabulary come from `@primmel/primmel` —
+   model-diff, and the type vocabulary come from `@primmel/primmel` , 
    the Studio bridges, never reimplements, so it cannot drift from the
    runtime.
 3. **Programs plug in, they don't branch the kernel.** The OIML SMART
@@ -36,27 +36,27 @@ by audience, with diagrams for every surface.
 
 ## The surfaces
 
-- **The model workspace** — the canvas (drag/connect with the
+- **The model workspace**, the canvas (drag/connect with the
   connection discipline, refused out loud), the element palette,
   per-type inspectors, subprocess pages with breadcrumbs, the Monaco
   code editor with completion from the live model and inline kernel
   markers, comment threads, the measurement harness, and the process
-  simulation (a token walk with registers — ephemeral, never model
+  simulation (a token walk with registers, ephemeral, never model
   content).
-- **The mapper** — reference⇄implementation pairs over the v3
+- **The mapper**, reference⇄implementation pairs over the v3
   MapProfile: multi-target pairs with description/justification/
   coverage, the KERNEL's coverage calculus as canvas tints with the
   C23 conflict marker, the multi-reference lens with seed review
   lists, document mapping with clause URNs, and automap (ranked
   suggestions with provenance; the kernel's closure proposals
   flagged, never asserted).
-- **Review** — the model-diff view (the kernel's diffStandards with
+- **Review**, the model-diff view (the kernel's diffStandards with
   facet-level before/after and a status-tinted canvas), the save
   review (validation + change preview before any write; download or
   write-to-file with a `.bak`), and the validation surface that is
   always on (the topbar badge, the Validate tab, editor markers,
   import report, save review).
-- **Migration** — the legacy MMEL import: the v1/v2 corpus (PAS2060,
+- **Migration**, the legacy MMEL import: the v1/v2 corpus (PAS2060,
   ISO 27001, BS 13485, ISO 14971, BS 6004, BS 16341, acme) converts
   natively with the honest report (constructs converted, the canonical
   renames, the v2 comment forms inverted, anything with no v3 home
@@ -75,17 +75,17 @@ The e2e suite walks the real workflows: create→edit→serialize, the
 mapper with coverage, multi-reference seeding, document mapping,
 automap confirm/reject, the diff view, simulation, comments,
 measurements, the legacy import, the plugin layer, and the save with
-its preview — plus the nine-leg capability walk in a single session.
+its preview, plus the nine-leg capability walk in a single session.
 
 ## Where it plugs in
 
-- **Upstream:** the kernel (`primmel-ts`) — the Studio pins the local
+- **Upstream:** the kernel (`primmel-ts`), the Studio pins the local
   package; upstream rebuilds refresh it.
-- **Programs:** the plugin registry — OIML SMART is the first layer;
+- **Programs:** the plugin registry, OIML SMART is the first layer;
   see [the platform volume's Studio
   chapter](https://primmel.github.io/primmel-smart-docs/platform/08-primmel-studio/).
-- **Education:** [Tier 5 — the dual
+- **Education:** [Tier 5, the dual
   demo](https://primmel.github.io/primmel-smart-docs/learn/05-the-dual-demo/)
-  teaches modelling OIML R 7 (clinical thermometers) with the Studio —
+  teaches modelling OIML R 7 (clinical thermometers) with the Studio , 
   the methodology applied to a second instrument after the r60
   classroom.

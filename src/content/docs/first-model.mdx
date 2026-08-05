@@ -44,7 +44,7 @@ metadata {
 
 | Field | Meaning |
 | --- | --- |
-| `root HelloWorld` | Names the top-level canvas &mdash; the entry point of the model. |
+| `root HelloWorld` | Names the top-level canvas , the entry point of the model. |
 | `version "v1.0.0-dev1"` | Semantic version of the model itself. |
 | `metadata.schema` | The DSL schema identifier. `"Primmel 0.1"` is the current value. |
 | `metadata.namespace` | The model's namespace. Used when **other** models import this model's elements with the `Namespace#ElementID` pattern (see [the implementation package](/examples/implementation-package)). |
@@ -77,7 +77,7 @@ end_event   End1   { }
 ```
 
 A model with multiple canvas diagrams has multiple `start_event`s
-&mdash; one per canvas. This is normal: each diagram needs its own
+, one per canvas. This is normal: each diagram needs its own
 entry point.
 
 ## Processes
@@ -96,13 +96,13 @@ is how tooling determines whose responsibility the step is.
 
 A real-world process usually also has:
 
-- `modality SHALL` / `SHOULD` / `MAY` &mdash; the compliance weight of
+- `modality SHALL` / `SHOULD` / `MAY` , the compliance weight of
   the step.
-- `validate_provision { ... }` &mdash; the provisions this process must
+- `validate_provision { ... }` , the provisions this process must
   satisfy. See [example 04](/examples/compliance-and-measurement).
-- `reference_data_registry { ... }` &mdash; data registries this process
+- `reference_data_registry { ... }` , data registries this process
   reads from.
-- `output { ... }` &mdash; data registries this process writes to.
+- `output { ... }` , data registries this process writes to.
 
 ## The canvas
 
@@ -134,20 +134,20 @@ A canvas has three blocks:
 
 The `Root` canvas is the top-level flow. A model with multiple
 canvases names them like pages (`OrderFlow`, `QualityCheckFlow`,
-`SupplierReviewFlow`) &mdash; see [example 03](/examples/process-flow)
+`SupplierReviewFlow`) , see [example 03](/examples/process-flow)
 and the [implementation package](/examples/implementation-package).
 
 ## What this model lacks
 
 The minimal model is correct Primmel, but it does not exercise:
 
-- **Data** &mdash; no `class`, `enum`, or `data_registry`. Added in
+- **Data** , no `class`, `enum`, or `data_registry`. Added in
   [example 02](/examples/data-and-registries).
-- **Compliance** &mdash; no `provision` or `reference`. Added in
+- **Compliance** , no `provision` or `reference`. Added in
   [example 04](/examples/compliance-and-measurement).
-- **Branching** &mdash; no `exclusive_gateway`. Added in
+- **Branching** , no `exclusive_gateway`. Added in
   [example 03](/examples/process-flow).
-- **Mapping** &mdash; no `map_profile` or `.prm` file. Added in the
+- **Mapping** , no `map_profile` or `.prm` file. Added in the
   [implementation package](/examples/implementation-package).
 
 That is what the rest of the example corpus adds, one primitive at a

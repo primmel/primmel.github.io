@@ -21,7 +21,7 @@ sidebar:
 
 This is the smallest valid Primmel model that contains a real
 canvas. It exists to show the language's skeleton with no
-distractions &mdash; no data, no compliance, no branching.
+distractions , no data, no compliance, no branching.
 
 If you read only one example file, read this one. Every larger model
 extends the patterns here.
@@ -110,7 +110,7 @@ the `Greet` process below.
 ### Events
 
 `start_event Start1` and `end_event End1` are the boundaries of the
-flow. Both are empty declarations &mdash; an ID is all they need.
+flow. Both are empty declarations , an ID is all they need.
 
 ### Process
 
@@ -124,16 +124,16 @@ minimal version omits them.
 `canvas Root` is the diagram. The header's `root HelloWorld` would
 normally point to a canvas named `HelloWorld`; here, the root name
 is `HelloWorld` but the canvas defined is `Root`. **In practice the
-root canvas is conventionally named `Root`** &mdash; real-world
+root canvas is conventionally named `Root`** , real-world
 models follow this pattern, and the `root` line uses the model's
 *namespace* name to keep things readable.
 
 The canvas has three blocks:
 
-- `elements { ... }` &mdash; every node on this diagram, each with `x`
+- `elements { ... }` , every node on this diagram, each with `x`
   and `y` layout coordinates.
-- `process_flow { ... }` &mdash; the directed edges between nodes.
-- `data { ... }` &mdash; empty in this minimal example. In a real model
+- `process_flow { ... }` , the directed edges between nodes.
+- `data { ... }` , empty in this minimal example. In a real model
   it would list the data registries visible on the diagram with their
   coordinates.
 

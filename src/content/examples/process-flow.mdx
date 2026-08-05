@@ -48,7 +48,7 @@ end_event OrderCancelled { }
 
 A model with *N* canvas diagrams typically has *N* `start_event`s.
 Each diagram has exactly one entry point. There can be more
-`end_event`s than `start_event`s &mdash; a single flow can terminate in
+`end_event`s than `start_event`s , a single flow can terminate in
 multiple outcomes (here: shipped vs cancelled).
 
 ## Timer events
@@ -70,7 +70,7 @@ timer_event RestockTimer {
 | `WAIT` | Pause the flow until the specified time elapses. |
 | `REPEAT` | Fire on a recurring schedule, regardless of flow position. |
 
-A `REPEAT` timer is the engine of recurring processes &mdash; see
+A `REPEAT` timer is the engine of recurring processes , see
 [the timer loop pattern](#timer-loops) below.
 
 ## Exclusive gateways
@@ -146,9 +146,9 @@ canvas OrderFlow {
 
 Two gateways, each with a labelled branch and a `"default"` branch:
 
-- **`StockCheck`** &mdash; in stock goes left to payment; out of stock
+- **`StockCheck`** , in stock goes left to payment; out of stock
   goes right to cancellation.
-- **`PaymentConfirmed`** &mdash; paid goes left to fulfilment; unpaid
+- **`PaymentConfirmed`** , paid goes left to fulfilment; unpaid
   goes right to refund.
 
 The `"default"` description marks the edge taken when no other condition
@@ -209,10 +209,10 @@ fallback.
 
 ## What this example leaves out
 
-- **Compliance** &mdash; no `provision` or `modality`. Added in
+- **Compliance** , no `provision` or `modality`. Added in
   [compliance and measurement](/examples/compliance-and-measurement).
-- **Data** &mdash; the `data { }` blocks are empty. Data appears in
+- **Data** , the `data { }` blocks are empty. Data appears in
   [data and registries](/examples/data-and-registries).
-- **Machine-readable conditions** &mdash; edges use only `description`.
+- **Machine-readable conditions** , edges use only `description`.
   Conditions are added in
   [compliance and measurement](/examples/compliance-and-measurement).

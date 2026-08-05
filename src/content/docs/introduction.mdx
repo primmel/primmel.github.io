@@ -8,7 +8,7 @@ sidebar:
 
 # Introduction
 
-## What is Primmel?
+## What Primmel is
 
 **Primmel** is a domain-specific language for representing SMART
 standards in an **executable** form.
@@ -37,11 +37,11 @@ A Primmel model combines four kinds of primitives in one file:
 
 And three kinds of cross-cutting artifacts:
 
-- **Mappings** &mdash; declare how an implementation model aligns to a
+- **Mappings** , declare how an implementation model aligns to a
   reference model, element by element.
-- **References** &mdash; cite external document clauses (`.prd` extracts,
+- **References** , cite external document clauses (`.prd` extracts,
   PDF clauses, etc.) that provisions trace back to.
-- **Approvals** &mdash; bind a step to an approver role and an approval
+- **Approvals** , bind a step to an approver role and an approval
   record registry.
 
 ## File types
@@ -50,10 +50,10 @@ A Primmel workspace is made of four kinds of artifacts:
 
 | Extension | Kind | Purpose |
 | --- | --- | --- |
-| `.prl` | File | A model &mdash; the core artifact. Plain text, UTF-8. |
-| `.prd` | File | Primmel Document &mdash; clause-level extracts of a source standard. |
-| `.prm` | File | Primmel Map &mdash; a JSON mapping between two models (e.g. implementation ↔ reference). |
-| `.pws` | Directory | Primmel Workspace &mdash; actual records produced when a model runs. One YAML file per record, organised into subdirectories per data registry, with a `manifest.yaml` at the root. |
+| `.prl` | File | A model , the core artifact. Plain text, UTF-8. |
+| `.prd` | File | Primmel Document , clause-level extracts of a source standard. |
+| `.prm` | File | Primmel Map , a JSON mapping between two models (e.g. implementation ↔ reference). |
+| `.pws` | Directory | Primmel Workspace , actual records produced when a model runs. One YAML file per record, organised into subdirectories per data registry, with a `manifest.yaml` at the root. |
 
 ## Anatomy of a model
 
@@ -76,7 +76,7 @@ metadata {
 
 The `root` declaration names the top-level canvas. The `metadata`
 block identifies the model. After the header, declarations follow in any
-order &mdash; `role`, `process`, `provision`, `class`, `data_registry`,
+order , `role`, `process`, `provision`, `class`, `data_registry`,
 `measurement`, `reference`, `note`, `link`, `table`, `figure`,
 `approval`, `start_event`, `end_event`, `exclusive_gateway`,
 `canvas`, `map_profile`.
@@ -134,16 +134,16 @@ canvas Root {
 A `.prl` file is plain text. Open it in any editor. But because it is
 *structured*, tooling can extract:
 
-- **A diagram** &mdash; render the canvas as a flowchart using the
+- **A diagram** , render the canvas as a flowchart using the
   `x`/`y` coordinates and the `process_flow` edges.
-- **A data schema** &mdash; compile every `class#data` and its fields
+- **A data schema** , compile every `class#data` and its fields
   into a form a database or API can validate against.
-- **A compliance matrix** &mdash; list every `provision`, its
+- **A compliance matrix** , list every `provision`, its
   `modality`, the `reference` it traces back to, and the processes that
   `validate_provision` it.
-- **A test harness** &mdash; evaluate `validate_measurement` expressions
+- **A test harness** , evaluate `validate_measurement` expressions
   against actual records in a `.pws` workspace file.
-- **A mapping table** &mdash; given a `.prm` file, render a side-by-side
+- **A mapping table** , given a `.prm` file, render a side-by-side
   view of an implementation model and its parent standard.
 
 This is what *executable standard* means in practice.
@@ -153,28 +153,28 @@ This is what *executable standard* means in practice.
 The full volumes live in the shared docs site
 ([primmel.github.io/primmel-smart-docs](https://primmel.github.io/primmel-smart-docs/)):
 
-- **the foundation volume** — the eight terms and the closure rules,
+- **the foundation volume**, the eight terms and the closure rules,
   proved;
-- **the Primmel kernel volume** — the language's full surface (v3:
+- **the Primmel kernel volume**, the language's full surface (v3:
   subjects, processes, mappings, packages, live twins, the model
   supply chain, views and lenses, twin certification);
-- **the platform runtime chapters** — the SMART platform, the twin
+- **the platform runtime chapters**, the SMART platform, the twin
   lab, multi-standard projection, the composite twin, the CNML
   bridge, the program config;
-- **the program volumes** — OIML Core, authoring Recommendations, the
+- **the program volumes**, OIML Core, authoring Recommendations, the
   OIML-CS scheme, CNML, the NMI section, the operator guides, the
   layered curriculum (learn/ tiers 0–4).
 
-One home per kind — the pages here are the language quickstart; those
+One home per kind, the pages here are the language quickstart; those
 are the deep reference.
 
 ## Where to go next
 
-- [A First Model](/docs/first-model) &mdash; build the minimal model
+- [A First Model](/docs/first-model) , build the minimal model
   from scratch, line by line.
-- [Examples](/examples/) &mdash; the curated example corpus, each
+- [Examples](/examples/) , the curated example corpus, each
   file dissected.
 - [Data primitives](/docs/data-model), [process primitives](/docs/process-model),
   [compliance](/docs/compliance), [measurement](/docs/measurement),
-  [mapping](/docs/mapping) &mdash; focused reference for each pillar.
-- The canonical specification &mdash; [primmel.org/spec](https://www.primmel.org/spec/).
+  [mapping](/docs/mapping) , focused reference for each pillar.
+- The canonical specification , [primmel.org/spec](https://www.primmel.org/spec/).

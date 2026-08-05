@@ -1,5 +1,5 @@
 ---
-title: "Reference — read, interact, and evaluate"
+title: "Reference, read, interact, and evaluate"
 pillar: "reference"
 summary: "Readers consume the published model: navigate the standard, run test procedures, check dimensional and formula requirements."
 side: "reference"
@@ -9,13 +9,13 @@ sidebar:
   label: "Reference"
 ---
 
-# Reference &mdash; read, interact, and evaluate a published standard
+# Reference , read, interact, and evaluate a published standard
 
 <div class="callout">
 
 **WHO THIS IS FOR**
 
-The **Reference** pillar is for **Readers** &mdash; anyone who needs to
+The **Reference** pillar is for **Readers** , anyone who needs to
 understand, test, or evaluate against a published standard: engineers
 checking product fit, test labs running standardised procedures,
 conformity assessors verifying requirements, students learning the
@@ -28,13 +28,13 @@ domain, compliance researchers comparing standards. See
 released a reference `.prl`, anyone can load it into a tool and do
 three kinds of work:
 
-- **Read** &mdash; navigate the standard's structure: provisions,
+- **Read** , navigate the standard's structure: provisions,
   processes, data classes, references. Find what a clause requires,
   where it lives, what it traces back to.
-- **Interact** &mdash; exercise the standard dynamically: run the test
+- **Interact** , exercise the standard dynamically: run the test
   processes it declares, follow its process flows, evaluate its
   measurement expressions against sample inputs.
-- **Evaluate** &mdash; check whether a product, process, or dataset
+- **Evaluate** , check whether a product, process, or dataset
   meets the standard: dimensional checks, formula evaluation,
   applicable-requirement checks.
 
@@ -51,7 +51,7 @@ Reference use produces **transient verdicts**, not standing artifacts:
 | Activity | Typical output |
 | --- | --- |
 | Read | A navigated view of the standard (in a browser/editor) |
-| Interact | A test run &mdash; executed process flows, evaluated formulas |
+| Interact | A test run , executed process flows, evaluated formulas |
 | Evaluate | A pass/fail verdict for a specific product, process, or dataset |
 
 These outputs may be saved as test reports or evaluation records, but
@@ -62,21 +62,21 @@ they are not part of the Primmel artifact set the way `.prl`,
 
 | Artifact | Purpose |
 | --- | --- |
-| Published reference `.prl` | The standard itself &mdash; provisions, processes, data classes, references |
+| Published reference `.prl` | The standard itself , provisions, processes, data classes, references |
 | Optional `.prd` | Source clause text, for cross-checking provisions against the underlying standard document |
 
 ## Tools Readers use
 
-- **Spec browsers** &mdash; navigate the model: tree view, full-text
+- **Spec browsers** , navigate the model: tree view, full-text
   search, cross-reference jumps, dependency graphs.
-- **Test harnesses** &mdash; execute the standard's test processes
+- **Test harnesses** , execute the standard's test processes
   against sample or real inputs; produce pass/fail verdicts per step.
-- **Formula evaluators** &mdash; run the standard's `validate_measurement`
+- **Formula evaluators** , run the standard's `validate_measurement`
   expressions and `condition`s against provided values.
-- **Dimensional checkers** &mdash; verify whether a product's
+- **Dimensional checkers** , verify whether a product's
   dimensions, weights, or other measurable properties fall within the
   ranges the standard declares.
-- **Applicability checkers** &mdash; given a context (product type,
+- **Applicability checkers** , given a context (product type,
   use case, jurisdiction), determine which provisions apply and which
   do not.
 
@@ -87,7 +87,7 @@ they are not part of the Primmel artifact set the way `.prl`,
 - They do not produce `.pws/` evidence of running operations. That's
   the [Operate](/architecture/operate) pillar.
 - They do not audit implementations against the standard. That's the
-  [Audit](/architecture/audit) pillar &mdash; which *uses* reader-style
+  [Audit](/architecture/audit) pillar , which *uses* reader-style
   navigation as one of its capabilities.
 
 ## Where to see it in action
@@ -98,7 +98,7 @@ they are not part of the Primmel artifact set the way `.prl`,
   is exactly what a Reader would load into a tool to navigate, test, or
   evaluate against.
 - [Compliance and measurement example](/examples/compliance-and-measurement)
-  &mdash; the gateway edges with `condition` expressions and the
+  , the gateway edges with `condition` expressions and the
   `validate_measurement` blocks are precisely what a Reader's formula
   evaluator would run.
 
@@ -107,5 +107,5 @@ they are not part of the Primmel artifact set the way `.prl`,
 A Reader's verdict may feed into other pillars: a conformity assessor's
 evaluation can become the basis for a certification (which a Publisher
 then records); a test lab's run can become evidence a Regulator
-reviews. But the Reader activity itself stops at the verdict &mdash;
+reviews. But the Reader activity itself stops at the verdict ,
 the verdict's downstream use is someone else's pillar.

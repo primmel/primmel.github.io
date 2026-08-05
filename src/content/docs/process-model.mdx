@@ -33,8 +33,8 @@ end_event   End1   { }
 ```
 
 The boundaries of a flow. A model with multiple canvas diagrams
-typically has multiple `start_event`s &mdash; one per diagram. There
-can be more `end_event`s than `start_event`s &mdash; a flow can
+typically has multiple `start_event`s , one per diagram. There
+can be more `end_event`s than `start_event`s , a flow can
 terminate in multiple outcomes.
 
 ### `timer_event`
@@ -83,14 +83,14 @@ process Greet {
 A unit of work. The `actor` clause binds it to a role. A real-world
 process also carries:
 
-- `modality SHALL` / `SHOULD` / `MAY` &mdash; the compliance weight.
-- `validate_provision { ... }` &mdash; the provisions it must satisfy.
+- `modality SHALL` / `SHOULD` / `MAY` , the compliance weight.
+- `validate_provision { ... }` , the provisions it must satisfy.
   See [compliance](/docs/compliance).
-- `validate_measurement { ... }` &mdash; the measurement expressions
+- `validate_measurement { ... }` , the measurement expressions
   that must hold.
-- `reference_data_registry { ... }` &mdash; registries it reads from.
-- `output { ... }` &mdash; registries it writes to.
-- `canvas <Name>` &mdash; binds the process to a named diagram.
+- `reference_data_registry { ... }` , registries it reads from.
+- `output { ... }` , registries it writes to.
+- `canvas <Name>` , binds the process to a named diagram.
 
 ### Nested processes
 
@@ -119,12 +119,12 @@ each child's `parent` field automatically to the parent's ID.
 
 On the parsed model:
 
-- `process.parent` &mdash; the ID of the parent process (empty string
+- `process.parent` , the ID of the parent process (empty string
   for top-level processes)
-- `process.children` &mdash; an array of child process IDs
+- `process.children` , an array of child process IDs
 
-Nesting is **additive** &mdash; existing flat models still work. A
-model with no nesting simply has empty `children` arrays and empty
+Nesting is **additive** , existing flat models still work. A
+model with no nesting has empty `children` arrays and empty
 `parent` strings.
 
 The dumper preserves nesting: `dump(load(content))` emits child
@@ -176,11 +176,11 @@ A model with multiple canvases names them like pages.
 
 ## Where to see it in action
 
-- [Example 01: Minimal model](/examples/minimal-model) &mdash; the
+- [Example 01: Minimal model](/examples/minimal-model) , the
   smallest valid canvas.
-- [Example 03: Process flow](/examples/process-flow) &mdash;
+- [Example 03: Process flow](/examples/process-flow) ,
   gateways, timers, multi-page canvases.
-- [Example 05: Approval workflow](/examples/approval-workflow) &mdash;
+- [Example 05: Approval workflow](/examples/approval-workflow) ,
   the `approval` primitive.
-- [Implementation package](/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) ,
   four canvases on one model, with a recurring timer loop.

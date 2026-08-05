@@ -18,7 +18,7 @@ sidebar:
 > [`05-approval-workflow.prl`](/examples/files/05-approval-workflow.prl)
 
 
-This example introduces the `approval` step &mdash; a specialised
+This example introduces the `approval` step , a specialised
 process that requires sign-off by a designated role and writes an
 approval record to a registry when signed.
 
@@ -59,7 +59,7 @@ class for that registry typically carries:
 - The approver (`approved_by: role`).
 - Optional notes.
 
-The `role` type for `approved_by` is a *role-typed field* &mdash; it
+The `role` type for `approved_by` is a *role-typed field* , it
 holds the identity of the person who filled the role at the time of the
 approval.
 
@@ -131,7 +131,7 @@ When the approval is signed, a new record lands in
 `RoastProfileApprovalRegistry` with the profile name, target bean,
 approval timestamp, and the operations manager who signed.
 
-## Why a separate primitive?
+## The reason for a separate primitive
 
 You could model the same thing with a `process` plus a `role` field on
 an output record. The `approval` primitive exists because approvals are
@@ -140,7 +140,7 @@ own first-class treatment:
 
 - Tooling can scan for `approval` declarations specifically and render
   an *approval matrix* across the whole model.
-- The `approve_by` clause is distinct from the `actor` clause &mdash;
+- The `approve_by` clause is distinct from the `actor` clause ,
   one initiates, one signs. Folding both into a single role would lose
   that distinction.
 - The `approval_record` registry is structurally tied to the approval,
@@ -149,8 +149,8 @@ own first-class treatment:
 
 ## What this example leaves out
 
-- **Compliance** &mdash; no `provision` or `modality` on the approval.
+- **Compliance** , no `provision` or `modality` on the approval.
   Combined with `validate_provision` in
   [compliance and measurement](/examples/compliance-and-measurement).
-- **Cross-model aliasing** &mdash; see the
+- **Cross-model aliasing** , see the
   [implementation package](/examples/implementation-package).

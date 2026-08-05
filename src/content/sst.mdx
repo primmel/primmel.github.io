@@ -1,9 +1,9 @@
-# Primmel SST — the simulated SMART twin
+# Primmel SST, the simulated SMART twin
 
 **Primmel SST** is the simulated-SMART-twin framework of the Primmel
 SMART platform: simulated instruments, servers, and clients of a SMART
 twin endpoint. It gives certification software an instrument that
-*behaves* like a real one — its indication emerges from constitutive
+*behaves* like a real one, its indication emerges from constitutive
 laws (elastic strain, thermal coefficients, creep, quantization), so a
 test protocol run against it succeeds or fails for physical reasons.
 
@@ -15,29 +15,29 @@ runtime, the shell, the bench, and the specs are the framework.
 
 One process serves two GraphQL surfaces, kept apart by construction:
 
-- **`/twin` — the governed projection.** What a real instrument could
+- **`/twin`, the governed projection.** What a real instrument could
   legally answer: its indication, its state, its served registers, its
   instrument-legal operations. The schema is *generated* from the
   instrument's Primmel product reference package (its `serve`
   declarations), and a startup conformance check (schema ≡ serves ≡
-  promises) refuses to boot on any diff — the twin can never drift
+  promises) refuses to boot on any diff, the twin can never drift
   from its declared contract.
-- **`/world` — the physics.** Applied load, environment, time, ground
-  truth. Nothing from `/world` may leak into `/twin` — a real
+- **`/world`, the physics.** Applied load, environment, time, ground
+  truth. Nothing from `/world` may leak into `/twin`, a real
   instrument cannot report ground truth, so certification software is
   wired to `/twin` only.
 
 The stream surface rides `/twin`: point queries for pollers, command
 mutations for operations, and watch subscriptions (GraphQL over SSE)
 that deliver the current value at subscribe and on every clock
-advance — a stream that ends or breaks delivers `unavailable`, never a
+advance, a stream that ends or breaks delivers `unavailable`, never a
 silent close.
 
 ## The console and the bench
 
 The **console** is a teaching shell modelled on network-gear IOS:
 user exec (`sim>`) for observation, `enable` into privileged (`sim#`)
-for world mutation. The epistemic split is grammatical — `show
+for world mutation. The epistemic split is grammatical, `show
 indication` queries `/twin`, `show ground-truth` queries `/world`, and
 the privileged verbs (`place load`, `set temperature`, `play profile`,
 `advance`, `scenario`) are all world-side.
@@ -54,25 +54,25 @@ git clone … && npm install && npm start
 ```
 
 boots a simulated instrument with its console, both GraphQL channels
-(with playgrounds), and the bench at `http://localhost:5290/` — no
+(with playgrounds), and the bench at `http://localhost:5290/`, no
 SMART checkout, no Primmel knowledge required.
 
 ## The instrument library
 
 The framework ships no instruments; kinds and instances live in
-libraries. The OIML instrument library — load cells (R 60), radar
+libraries. The OIML instrument library, load cells (R 60), radar
 speed meters (R 91), dimensioners (R 129), gas analyzers (R 144), and
-the ACME LC-500 reference instance — belongs to the OIML SMART
+the ACME LC-500 reference instance, belongs to the OIML SMART
 program: **[www.oimlsmart.org/sst](https://www.oimlsmart.org/sst)**.
 
 ## Links
 
-- **The framework repo** —
+- **The framework repo** , 
   [github.com/primmel/sst](https://github.com/primmel/sst): the
   kind-agnostic runtime, the shell, the bench, the specs.
-- **The instrument library** —
+- **The instrument library** , 
   [www.oimlsmart.org/sst](https://www.oimlsmart.org/sst) (the OIML
   SMART program's library).
-- **The full chapter** —
-  [Simulated Instruments — the Wind Tunnel](https://primmel.github.io/primmel-smart-docs/platform/02-simulated-instruments/)
+- **The full chapter** , 
+  [Simulated Instruments, the Wind Tunnel](https://primmel.github.io/primmel-smart-docs/platform/02-simulated-instruments/)
   in the platform docs.

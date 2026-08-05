@@ -8,13 +8,13 @@ sidebar:
 
 # Compliance
 
-Compliance in Primmel is built on **provisions** &mdash; statements of
-requirement using the RFC 2119 modality vocabulary &mdash; bound to
+Compliance in Primmel is built on **provisions** , statements of
+requirement using the RFC 2119 modality vocabulary , bound to
 data and traceable to source standard clauses via **references**.
 
 ## Primitives
 
-### `reference` &mdash; cite a source clause
+### `reference` , cite a source clause
 
 ```text
 reference BFS-4-2 {
@@ -28,7 +28,7 @@ A pointer to a clause in an external document (typically a `.prd`
 extract of a source standard). Provisions cite references to justify
 their existence.
 
-### `provision` &mdash; a requirement
+### `provision` , a requirement
 
 ```text
 provision MoistureRecorded {
@@ -42,13 +42,13 @@ provision MoistureRecorded {
 
 A provision has:
 
-- A `condition` &mdash; the human-readable requirement.
-- A `modality` &mdash; `SHALL`, `SHOULD`, `MAY`, `CAN`, or `MUST` (RFC
+- A `condition` , the human-readable requirement.
+- A `modality` , `SHALL`, `SHOULD`, `MAY`, `CAN`, or `MUST` (RFC
   2119 vocabulary).
-- A `reference { ... }` block &mdash; the clauses this provision
+- A `reference { ... }` block , the clauses this provision
   derives from.
 
-### `subject#N` &mdash; data-aware provisions
+### `subject#N` , data-aware provisions
 
 ```text
 provision StandardMeetFreshness {
@@ -69,7 +69,7 @@ records at evaluation time.
 A provision can have multiple subject bindings (`subject#1`,
 `subject#2`, ...), each bound to a different registry.
 
-### `note` &mdash; an annotation
+### `note` , an annotation
 
 ```text
 note MoistureNote {
@@ -85,7 +85,7 @@ note MoistureNote {
 vocabulary of formal standards documents. Notes are attached to
 processes via `note { ... }`.
 
-### `table` &mdash; a lookup table
+### `table` , a lookup table
 
 ```text
 table FreshnessGradeTable {
@@ -156,8 +156,8 @@ process TestMoisture {
 
 ## Where to see it in action
 
-- [Example 04: Compliance and measurement](/examples/compliance-and-measurement) &mdash;
+- [Example 04: Compliance and measurement](/examples/compliance-and-measurement) ,
   the dedicated walkthrough, including gateway conditions.
-- [Implementation package](/examples/implementation-package) &mdash;
+- [Implementation package](/examples/implementation-package) ,
   provisions cross-referenced across standard (`OCS#`) and implementation
   namespaces, plus a `.prd` source extract.
