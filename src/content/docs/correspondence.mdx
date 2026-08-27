@@ -1,0 +1,94 @@
+---
+title: "Correspondence"
+sidebar:
+  section: "Language Reference"
+  order: 7
+  label: "Correspondence"
+---
+
+# Correspondence
+
+A Primmel model is the single source of truth for its own semantics, and
+it never imports an external standard's meaning. Alignment with the
+outside world is declared, once, as **correspondence**: this element
+*maps to* that external concept. Correspondence (maps-to) is not import
+(is-defined-by).
+
+v3.1 generalizes the pattern that attribute definitions already had for
+the IEC Common Data Dictionary (the `irdi` facet) into a per-node
+annotation every construct accepts:
+
+```text
+attribute_definition e_max {
+  name "Maximum capacity"
+  irdi "0172-a/123"
+  corresponds iec-cdd "0172-a/123"
+  corresponds dpp "attr:eMax" {
+    projection dpp-attribute { path "identity.eMax" }
+    projection vc-claim { claim "maxCapacity" }
+  }
+}
+```
+
+## `corresponds` , a correspondence entry
+
+The shape is `corresponds <scheme> "<concept>"`, with an optional block:
+
+- **scheme** names the external register the concept identifier belongs
+  to (`iec-cdd`, `dpp`, `vc-claims`, and so on). The scheme vocabulary
+  is the program's data: the language carries the token untyped, and
+  declaring a scheme never imports the register's semantics.
+- **concept** is the concept identifier in the scheme's own addressing:
+  an IRDI, a URI, a claim name. It is an opaque string. The model asserts
+  the correspondence; it does not restate the concept's definition.
+- **the block** carries the projection-steering declarations:
+  `projection <codec-id> { <key> <value> ... }` entries, one per
+  expression codec the element projects through. The payload is the
+  codec's input, authored once in the model and validated by the codec at
+  export time, never by the language.
+
+The `irdi` facet remains as the legacy single-scheme spelling of
+`corresponds iec-cdd`. When both are present on one element they must
+name the same concept (the checker warns, `C108`). Two entries on one
+element never name the same scheme: one element has at most one
+correspondence per scheme, so every bridge reads an unambiguous mapping
+(`C108`, an error).
+
+## The expression layer
+
+Correspondences are the input of the **expression layer**: the
+projection codecs a toolchain ships. Each codec turns model content into
+the document a third-party ecosystem consumes:
+
+- an ODRL policy document, from a [policy](/docs/dataspaces) construct,
+  for the dataspace wire;
+- a catalog dataset, from a dataspace definition, for a dataspace
+  protocol;
+- an AAS submodel, a Digital Product Passport attribute set, a
+  verifiable-credential claim set, or a concept-register reference, from
+  the annotated elements.
+
+Every codec is an output format, exactly the shape of the ReqIF and RDF
+exports, and no codec's semantics flow back into the language. A program
+declares its correspondences once, in the model, and every bridge
+consumes them instead of maintaining its own hand mapping.
+
+## Where the facet is accepted
+
+Like `ref`, `corresponds` is accepted on every construct. It is recorded
+on the projection-bearing kinds: the subject chain (instruments,
+attribute definitions, capabilities, behaviors, condition sets),
+requirements, conformance tests, forms and their fields, tables,
+symbols, calculations, terms, artifact definitions, verdicts, processes,
+the dataspace and policy constructs, and the package manifest. A parser
+that predates v3.1 tolerates the facet through the multi-token skip
+discipline; a document that uses the facet on the older constructs wants
+a v3.1 reader (the toolchain at `@primmel/primmel` 1.8.0 or later).
+
+## Where to next
+
+- [Dataspaces and Policies](/docs/dataspaces) , the v3.1 dataspace
+  constructs whose artifact classes and policies these annotations
+  align.
+- [Mapping](/docs/mapping) , the element-by-element alignment between an
+  implementation model and a reference model.
