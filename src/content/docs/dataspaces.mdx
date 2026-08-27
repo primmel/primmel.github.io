@@ -1,0 +1,159 @@
+---
+title: "Dataspaces and Policies"
+sidebar:
+  section: "Language Reference"
+  order: 6
+  label: "Dataspaces and Policies"
+---
+
+# Dataspaces and Policies
+
+Primmel v3.1 adds the dataspace as model content. A `dataspace`
+construct declares the dataspace itself (who may join, what moves, under
+which policies, anchored to which trust), and a `policy` construct
+declares a usage-policy set in Primmel's own policy grammar.
+
+Two boundaries shape both constructs:
+
+- **Self-contained semantics.** A reader understands a dataspace and its
+  policies completely, with no external standard open. The dataspace
+  protocols and policy expression languages (the Dataspace Protocol
+  family, ODRL 2.2) are *output formats*: a toolchain projects a Primmel
+  policy into an ODRL document for the wire, the same shape as the ReqIF
+  and RDF exports. The semantics never flow back.
+- **Declaration, not enforcement.** The language declares the rules as
+  scheme content. The exchange machinery and the permission system's
+  realization (roles, grants, tokens) belong to the runtime platform.
+  No construct on this page is a permission mechanism.
+
+## `dataspace` , the dataspace definition
+
+```text
+dataspace bfs-exchange {
+  name "Bean freshness exchange"
+  description "The scheme-operated dataspace for freshness-evaluation evidence."
+
+  participant_class certification-body {
+    label "Certification body"
+    description "A body operating a freshness certification program."
+  }
+
+  artifact_class evaluation-report {
+    label "Evaluation report"
+    element /art/evaluation-report
+    policy restricted-exchange
+  }
+
+  policies { public-access restricted-exchange }
+  default_policy restricted-exchange
+
+  trust_anchor scheme-registry {
+    trust_ref bfs-scheme-op key bfs-2026-root
+    role registry
+  }
+
+  compatible_with { allied-scheme-exchange }
+
+  ref derives-from "urn:example:bfs:2026#clause-5.1"
+}
+```
+
+A dataspace declares:
+
+- **`participant_class <id>`**, one per organisation kind the dataspace
+  admits. The class is declared here, not referenced.
+- **`artifact_class <id>`**, one per kind of content the dataspace
+  exchanges. `element` names the model element that defines the class's
+  content (an artifact definition, a form, or a data class); `policy`
+  overrides the default policy for this one class.
+- **`policies { ... }`**, the policy register: the policy sets the
+  dataspace carries, by identifier.
+- **`default_policy`**, the standing policy every artifact class
+  inherits. The platform's negotiation never widens past the default
+  without the holder's explicit act.
+- **`trust_anchor <id>`**, the trust-plane identities the exchanges root
+  in (see `trust_ref` below).
+- **`compatible_with { ... }`**, the explicit compatibility register.
+  Compatibility between two schemes' dataspaces is always declared,
+  never inferred.
+- **governance citations**, in the ordinary provenance machinery:
+  `ref derives-from` lines citing the scheme documents' clauses the
+  definition interprets.
+
+A dataspace is published and versioned as part of its package. The
+checker verifies that every reference resolves (`C104`), that every
+trust anchor carries its trust reference (`C105`), and that the
+governance citations are present (`C106`, a warning).
+
+## `policy` , a usage-policy set
+
+```text
+policy restricted-exchange {
+  name "Restricted exchange"
+  description "Restricted artifact classes exchange under an active agreement only."
+  default_posture true
+  governs { evaluation-report }
+
+  rule read-under-agreement {
+    kind permission
+    action read
+    artifact evaluation-report
+    constraint "ocl{agreement.state = #active}"
+  }
+  rule retain-nothing { kind prohibition action retain }
+  rule log-every-access { kind obligation action log }
+
+  ref derives-from "urn:example:bfs:2026#clause-6.2"
+}
+```
+
+A policy is a set of **rules**. Each rule has a `kind` (a closed
+vocabulary, parse-enforced: `permission`, `obligation`, `prohibition`),
+an `action` from the program's action register (`read`, `exchange`,
+`retain`, `log`, and so on), an optional `artifact` naming one governed
+class (absent means every governed class), and any number of
+`constraint` expressions in the language's embedded expression dialect.
+
+The policy's own identity facets:
+
+- **`governs { ... }`**, the artifact classes the policy governs.
+- **`default_posture true|false`**, whether the policy applies by
+  default to every class it governs (the standing rule) or attaches only
+  by explicit reference (an offer). Two default-posture policies never
+  govern the same class.
+- **provenance**, the clause the policy interprets.
+
+The checker enforces the shape (`C107`): at least one rule, every rule
+with its action, rule artifacts inside the `governs` register, governed
+classes resolving.
+
+## `trust_ref` , the trust-plane reference
+
+```text
+trust_ref bfs-scheme-op
+trust_ref bfs-scheme-op key bfs-2026-root
+```
+
+A trust reference names an organisation by its registry identifier,
+optionally with one of the organisation's published keys by key id. The
+resolution contract:
+
+1. The reference is **opaque to the model**. It carries addressing only,
+   never key material, endpoints, or credentials.
+2. Resolution is the consumer's, at runtime. The platform resolves the
+   organisation identifier against the trust registry it is configured
+   with. The registry's endpoint shape is the platform's contract, never
+   the language's.
+3. A conforming checker **never resolves** a trust reference. An
+   organisation no package declares is not a finding, because the trust
+   plane's membership at any moment is runtime fact, not model content.
+
+In v3.1 the form is admitted on the dataspace's trust anchors. Later
+revisions may admit it on further constructs.
+
+## Where to next
+
+- [Correspondence](/docs/correspondence) declares how model elements
+  map to external concept registers and steers the expression codecs.
+- [Mapping](/docs/mapping) covers model-to-model alignment, the
+  compliance relation between an implementation and a reference model.
